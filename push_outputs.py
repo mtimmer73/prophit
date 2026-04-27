@@ -8,7 +8,7 @@ repo = "prophit"
 branch = "main"
 remote_url = f"https://{username}:{token}@github.com/{username}/{repo}.git"
 
-json_path = "public/data/prophit_latest.json"
+json_path = "data/prophit_latest.json"
 
 def run(cmd, check=True):
     print("Running:", " ".join(cmd))
