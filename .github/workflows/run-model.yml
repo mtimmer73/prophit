@@ -3,7 +3,7 @@ name: Run PropHit Model
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 14 * * *"
+    - cron: "0 15 * * *"
 
 permissions:
   contents: write
@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -23,17 +25,46 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install -r requirements.txt
-          pip install openpyxl
+          pip install requests pandas numpy openpyxl
 
       - name: Run model
-        run: python prophit_model_full_day_freeze_update.py
+        run: |
+          python prophit_model_full_day_freeze_update.py
+
+      - name: Verify output files
+        run: |
+          echo "Checking data folder..."
+          ls -lah data || true
+
+          echo "Preview prophit_latest.json..."
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          p = Path("data/prophit_latest.json")
+          print("Exists:", p.exists())
+          print("Size:", p.stat().st_size if p.exists() else "missing")
+
+          if p.exists():
+              data = json.loads(p.read_text())
+              print("Type:", type(data).__name__)
+              print("Rows:", len(data) if isinstance(data, list) else len(data.get("players", [])) if isinstance(data, dict) else "unknown")
+              print("Preview:", str(data)[:500])
+          PY
 
       - name: Commit updated JSON
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add proppulse-ui-app/public/data/prophit_latest.json
-          git add proppulse-ui-app/public/data/prophit_performance_summary.json
-          git commit -m "Auto update model" || echo "No changes to commit"
+
+          git status
+
+          git add data/prophit_latest.json
+          git add data/prophit_all_players.json || true
+          git add data/prophit_schema.json || true
+          git add data/prophit_performance_summary.json || true
+
+          git status
+
+          git commit -m "Auto update PropHit data" || echo "No changes to commit"
           git push
