@@ -5,7 +5,7 @@ export default function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const url = `${import.meta.env.BASE_URL}data/prophit_latest.json`;
+  const url = "/data/prophit_latest.json";
 
     fetch(url)
       .then((res) => {
