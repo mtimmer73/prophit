@@ -5,6 +5,9 @@ on:
   schedule:
     - cron: "0 14 * * *"
 
+permissions:
+  contents: write
+
 jobs:
   run-model:
     runs-on: ubuntu-latest
@@ -18,8 +21,10 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install deps
-        run: pip install requests pandas numpy
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install openpyxl
 
       - name: Run model
         run: python prophit_model_full_day_freeze_update.py
@@ -28,6 +33,7 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add data/prophit_latest.json
-          git commit -m "Auto update model" || echo "No changes"
+          git add prophit-ui-app/public/data/prophit_latest.json
+          git add prophit-ui-app/public/data/prophit_performance_summary.json
+          git commit -m "Auto update model" || echo "No changes to commit"
           git push
