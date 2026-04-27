@@ -163,9 +163,8 @@ PROP_HIT_SCHEMA = {
 # Core utils
 # ----------------------------
 def ensure_dirs() -> None:
-for folder in [OUTPUT_DIR, SNAPSHOT_DIR, CACHE_DIR, UI_DATA_DIR]:
-    folder.mkdir(parents=True, exist_ok=True)
-
+    for folder in [OUTPUT_DIR, SNAPSHOT_DIR, CACHE_DIR, UI_DATA_DIR]:
+        folder.mkdir(parents=True, exist_ok=True)
 
 def now_et() -> datetime:
     return datetime.now(ET)
