@@ -33,7 +33,7 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add prophit-ui-app/public/data/prophit_latest.json
-          git add prophit-ui-app/public/data/prophit_performance_summary.json
+          git add proppulse-ui-app/public/data/prophit_latest.json
+          git add proppulse-ui-app/public/data/prophit_performance_summary.json
           git commit -m "Auto update model" || echo "No changes to commit"
           git push
