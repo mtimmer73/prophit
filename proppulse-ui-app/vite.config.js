@@ -5,6 +5,9 @@ export default defineConfig({
   plugins: [react()],
   preview: {
     host: "0.0.0.0",
-    allowedHosts: ["prophit.onrender.com"],
+    allowedHosts: [
+      "prophit.onrender.com",
+      "prophit.onrender.com"
+    ],
   },
 });
