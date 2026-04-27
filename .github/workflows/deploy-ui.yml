@@ -1,9 +1,10 @@
 name: Deploy PropHit UI
 
 on:
-  push:
-    branches: ["main"]
   workflow_dispatch:
+  push:
+    branches:
+      - main
 
 permissions:
   contents: read
@@ -22,30 +23,27 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-
-      - name: Install dependencies
-        working-directory: proppulse-ui-app
-        run: npm install
-
-      - name: Build site
-        working-directory: proppulse-ui-app
-        run: npm run build
+      - name: Build static site folder
+        run: |
+          rm -rf site
+          mkdir site
+          cp index.html site/index.html
+          cp -r data site/data
 
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
+        uses: actions/upload-pages-artifact@v4
         with:
-          path: proppulse-ui-app/dist
+          path: site
 
   deploy:
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
     needs: build
 
     steps:
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
