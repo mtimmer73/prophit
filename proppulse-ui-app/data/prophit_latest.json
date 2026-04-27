@@ -1,0 +1,33 @@
+[
+  {
+    "player": "Sample Player",
+    "team": "NYM",
+    "opp": "ATL",
+    "game_time_et": "7:10 PM",
+    "lineup_spot_num": 2,
+    "bats": "L",
+    "opp_pitcher": "Pitcher A",
+    "opp_pitcher_hand": "R",
+    "projected_ab": 4.2,
+    "hits_per_ab_3yr": 0.275,
+    "season_hits_per_ab": 0.29,
+    "last100_hits_per_ab": 0.285,
+    "last50_hits_per_ab": 0.3,
+    "last30_hits_per_ab": 0.31,
+    "last15_hits_per_ab": 0.32,
+    "last7_hits_per_ab": 0.35,
+    "split_hits_per_ab_3yr_vs_opp_hand": 0.29,
+    "split_hits_per_ab_season_vs_opp_hand": 0.305,
+    "split_hits_per_ab_last100_vs_opp_hand": 0.295,
+    "split_ab_3yr_vs_opp_hand": 400,
+    "pitcher_hits_allowed_boost": 0.1,
+    "park_factor_boost": 0.05,
+    "pitcher_k_penalty": 0.05,
+    "deep_skill": 0.28075,
+    "projected_hits": 1.224263271,
+    "one_plus_hit_probability": 0.7060258001187066,
+    "fair_odds_american": -240,
+    "hit_score": 161.21156284474827,
+    "confidence_score": 90.0
+  }
+]
