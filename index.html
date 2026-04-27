@@ -105,7 +105,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 1100px;
+      min-width: 1150px;
       background: #081225;
     }
 
@@ -127,6 +127,7 @@
       border-bottom: 1px solid #102c4a;
       color: #dbeafe;
       font-size: 14px;
+      white-space: nowrap;
     }
 
     tr:hover {
@@ -211,9 +212,9 @@
               <th>Team</th>
               <th>Opp</th>
               <th>Pitcher</th>
-              <th>Probability</th>
+              <th>Prob</th>
               <th>Score</th>
-              <th>Confidence</th>
+              <th>Conf</th>
               <th>Grade</th>
               <th>AVG vs Hand</th>
               <th>Pitcher BAA</th>
@@ -288,6 +289,43 @@
       return "bad";
     }
 
+    function probabilityValue(row) {
+      return getValue(row, [
+        "probability",
+        "hit_probability",
+        "top_prob",
+        "prob",
+        "one_plus_hit_prob",
+        "one_plus_hit_probability",
+        "one_plus_hit_rate",
+        "one_plus_hit_rate_3yr",
+        "projected_one_plus_hit_prob",
+        "proj_one_plus_hit_prob"
+      ], 0);
+    }
+
+    function scoreValue(row) {
+      return getValue(row, [
+        "score",
+        "hit_score",
+        "prophit_score",
+        "prop_hit_score",
+        "model_score",
+        "launch_score",
+        "prophit_launch_score"
+      ], 0);
+    }
+
+    function confidenceValue(row) {
+      return getValue(row, [
+        "confidence",
+        "confidence_score",
+        "model_confidence",
+        "projection_confidence",
+        "confidence_grade_score"
+      ], 0);
+    }
+
     async function loadData() {
       const errorBox = document.getElementById("errorBox");
       const tableBody = document.getElementById("tableBody");
@@ -335,11 +373,11 @@
           const player = String(getValue(row, ["player", "player_name", "name"])).toLowerCase();
           const team = String(getValue(row, ["team"])).toLowerCase();
           const opp = String(getValue(row, ["opp", "opponent"])).toLowerCase();
-          const pitcher = String(getValue(row, ["pitcher", "opposing_pitcher"])).toLowerCase();
+          const pitcher = String(getValue(row, ["pitcher", "opposing_pitcher", "opp_pitcher"])).toLowerCase();
 
-          const prob = num(getValue(row, ["probability", "hit_probability", "top_prob", "prob"]));
-          const score = num(getValue(row, ["score", "hit_score", "prophit_score"]));
-          const conf = num(getValue(row, ["confidence", "confidence_score"]));
+          const prob = num(probabilityValue(row));
+          const score = num(scoreValue(row));
+          const conf = num(confidenceValue(row));
 
           const haystack = `${player} ${team} ${opp} ${pitcher}`;
 
@@ -351,9 +389,13 @@
           return true;
         })
         .sort((a, b) => {
-          const scoreA = num(getValue(a, ["score", "hit_score", "prophit_score"]));
-          const scoreB = num(getValue(b, ["score", "hit_score", "prophit_score"]));
-          return scoreB - scoreA;
+          const scoreA = num(scoreValue(a));
+          const scoreB = num(scoreValue(b));
+          const probA = num(probabilityValue(a));
+          const probB = num(probabilityValue(b));
+
+          if (scoreB !== scoreA) return scoreB - scoreA;
+          return probB - probA;
         });
 
       document.getElementById("visiblePlays").textContent = filtered.length;
@@ -370,20 +412,32 @@
           const player = getValue(row, ["player", "player_name", "name"], "Unknown");
           const team = getValue(row, ["team"], "—");
           const opp = getValue(row, ["opp", "opponent"], "—");
-          const pitcher = getValue(row, ["pitcher", "opposing_pitcher"], "—");
+          const pitcher = getValue(row, ["pitcher", "opposing_pitcher", "opp_pitcher"], "—");
 
-          const prob = getValue(row, ["probability", "hit_probability", "top_prob", "prob"]);
-          const score = getValue(row, ["score", "hit_score", "prophit_score"]);
-          const conf = getValue(row, ["confidence", "confidence_score"]);
+          const prob = probabilityValue(row);
+          const score = scoreValue(row);
+          const conf = confidenceValue(row);
 
-          const avgVsHand = getValue(row, ["avg_vs_hand", "batter_avg_vs_hand"]);
+          const avgVsHand = getValue(row, [
+            "avg_vs_hand",
+            "batter_avg_vs_hand",
+            "hits_per_ab_3yr",
+            "season_avg_vs_hand"
+          ]);
+
           const pitcherBaa = getValue(row, [
             "pitcher_baa_vs_batter_hand",
             "pitcher_season_baa_allowed_vs_batter_hand",
-            "pitcher_baa"
+            "pitcher_baa",
+            "opp_pitcher_baa",
+            "pitcher_avg_allowed"
           ]);
 
-          const fairOdds = getValue(row, ["fair_odds"], "—");
+          const fairOdds = getValue(row, [
+            "fair_odds",
+            "fair_odds_hit",
+            "one_plus_hit_fair_odds"
+          ], "—");
 
           return `
             <tr>
