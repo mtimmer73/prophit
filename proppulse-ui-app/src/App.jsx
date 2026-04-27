@@ -5,19 +5,20 @@ export default function App() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-  const url = "/data/prophit_latest.json";
+  const dataUrl = `${import.meta.env.BASE_URL}data/prophit_latest.json`;
 
-    fetch(url)
-      .then((res) => {
-        if (!res.ok) throw new Error("Failed to load JSON");
-        return res.json();
-      })
-      .then((json) => setData(json))
-      .catch((err) => {
-        console.error(err);
-        setError("Unable to load model data");
-      });
-  }, []);
+fetch(dataUrl)
+  .then((res) => {
+    if (!res.ok) throw new Error(`Failed to load: ${dataUrl}`);
+    return res.json();
+  })
+  .then((data) => {
+    setRows(Array.isArray(data) ? data : data.players || []);
+  })
+  .catch((err) => {
+    console.error(err);
+    setError(err.message);
+  });
 
   return (
     <div style={{ padding: "20px", color: "white" }}>
