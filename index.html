@@ -6,85 +6,278 @@
   <title>PropHit MLB Board</title>
 
   <style>
+    :root {
+      --bg: #050b18;
+      --panel: #0d172b;
+      --panel2: #081225;
+      --border: #14365c;
+      --border2: #1f8bc0;
+      --text: #ffffff;
+      --muted: #9fb3d9;
+      --blue: #7dd3fc;
+      --green: #4ade80;
+      --yellow: #facc15;
+      --red: #fb7185;
+      --purple: #c4b5fd;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
-      background: #050b18;
-      color: #ffffff;
+      background:
+        radial-gradient(circle at top left, rgba(14, 165, 233, 0.16), transparent 34%),
+        radial-gradient(circle at top right, rgba(168, 85, 247, 0.12), transparent 30%),
+        var(--bg);
+      color: var(--text);
       font-family: Arial, sans-serif;
     }
 
     .page {
       padding: 24px;
+      max-width: 1500px;
+      margin: 0 auto;
     }
 
     .hero {
       display: flex;
       justify-content: space-between;
-      gap: 16px;
+      gap: 20px;
       align-items: center;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #07395a, #0ea5e9);
+      box-shadow: 0 0 24px rgba(14, 165, 233, 0.24);
+      font-size: 28px;
     }
 
     h1 {
       margin: 0;
-      font-size: 34px;
+      font-size: 38px;
+      line-height: 1;
+      letter-spacing: -1px;
     }
 
     .subtitle {
-      color: #9fb3d9;
+      color: var(--muted);
       margin-top: 8px;
+      font-size: 15px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
     }
 
     .panel {
-      background: #0d172b;
-      border: 1px solid #14365c;
-      border-radius: 16px;
+      background: rgba(13, 23, 43, 0.92);
+      border: 1px solid var(--border);
+      border-radius: 18px;
       padding: 16px;
       margin-bottom: 18px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    }
+
+    .top-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: 18px;
     }
 
     .summary {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(150px, 1fr));
       gap: 14px;
     }
 
-    .summary div {
+    .stat-card {
       background: #071020;
-      border: 1px solid #15527d;
-      border-radius: 12px;
-      padding: 12px 16px;
-      min-width: 150px;
+      border: 1px solid var(--border2);
+      border-radius: 16px;
+      padding: 14px 16px;
+      min-height: 82px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .stat-value {
+      font-size: 26px;
+      font-weight: 800;
+    }
+
+    .confidence-key h3,
+    .filters-panel h3,
+    .why-panel h3 {
+      margin: 0 0 12px;
+      color: #dbeafe;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 2px;
+    }
+
+    .grade-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+    }
+
+    .grade-pill {
+      background: #071020;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 10px 6px;
+      text-align: center;
+    }
+
+    .grade-pill strong {
+      display: inline-grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      margin-bottom: 6px;
+      color: #020617;
+      font-size: 14px;
+    }
+
+    .grade-a strong { background: var(--green); }
+    .grade-b strong { background: #60a5fa; }
+    .grade-c strong { background: var(--yellow); }
+    .grade-d strong { background: #fb7185; }
+    .grade-f strong { background: #f87171; }
+
+    .grade-pill span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.25;
+    }
+
+    .middle-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 360px;
+      gap: 18px;
     }
 
     .filters {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: 1.4fr repeat(3, 0.8fr);
       gap: 12px;
-      align-items: center;
+      align-items: end;
+    }
+
+    label {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 700;
     }
 
     input {
+      width: 100%;
+      margin-top: 8px;
       background: #071020;
       color: white;
       border: 1px solid #15527d;
-      border-radius: 12px;
-      padding: 12px;
-      min-width: 160px;
+      border-radius: 14px;
+      padding: 12px 14px;
+      min-height: 44px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.12);
     }
 
     button {
       background: #07395a;
       color: white;
-      border: 1px solid #1f8bc0;
-      border-radius: 12px;
+      border: 1px solid var(--border2);
+      border-radius: 14px;
       padding: 12px 16px;
       font-weight: bold;
       cursor: pointer;
+      min-height: 44px;
     }
 
     button:hover {
       background: #0a4d7a;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+      justify-content: center;
+    }
+
+    .why-panel {
+      min-height: 155px;
+    }
+
+    .why-panel p {
+      margin: 0;
+      color: #c7d2fe;
+      line-height: 1.55;
+      font-size: 14px;
+    }
+
+    .board {
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .board-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 18px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(8, 18, 37, 0.7);
+    }
+
+    .board-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .board-title h2 {
+      margin: 0;
+      font-size: 21px;
+    }
+
+    .board-note {
+      color: var(--muted);
+      font-size: 13px;
     }
 
     .error {
@@ -93,33 +286,35 @@
       border: 1px solid #5f1d35;
       padding: 14px;
       border-radius: 12px;
-      margin-bottom: 18px;
+      margin: 16px;
     }
 
     .table-wrap {
-      overflow-x: auto;
-      border-radius: 14px;
-      border: 1px solid #14365c;
+      overflow: auto;
+      max-height: 680px;
     }
 
     table {
       width: 100%;
-      border-collapse: collapse;
-      min-width: 1150px;
-      background: #081225;
+      border-collapse: separate;
+      border-spacing: 0;
+      min-width: 1180px;
+      background: var(--panel2);
     }
 
     th {
       position: sticky;
       top: 0;
+      z-index: 5;
       background: #0b1d34;
       color: #b9d7ff;
       text-align: left;
       font-size: 12px;
       letter-spacing: 1px;
       text-transform: uppercase;
-      padding: 12px;
-      border-bottom: 1px solid #14365c;
+      padding: 13px 12px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
     }
 
     td {
@@ -134,30 +329,171 @@
       background: #0f2138;
     }
 
-    .player {
-      color: #7dd3fc;
-      font-weight: bold;
+    .player-btn {
+      color: var(--blue);
+      font-weight: 800;
+      background: none;
+      border: 0;
+      padding: 0;
+      min-height: 0;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .player-btn:hover {
+      color: white;
+      text-decoration: underline;
+      background: none;
     }
 
     .grade {
-      font-weight: bold;
+      font-weight: 900;
     }
 
-    .good {
-      color: #4ade80;
-    }
+    .good { color: var(--green); }
+    .mid { color: var(--yellow); }
+    .bad { color: var(--red); }
 
-    .mid {
-      color: #facc15;
-    }
-
-    .bad {
-      color: #fb7185;
-    }
-
-    .small {
-      color: #9fb3d9;
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 5px 9px;
       font-size: 12px;
+      color: #dbeafe;
+      background: #071020;
+    }
+
+    .drawer-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.45);
+      z-index: 20;
+    }
+
+    .drawer {
+      position: fixed;
+      top: 0;
+      right: -460px;
+      width: 440px;
+      max-width: 92vw;
+      height: 100vh;
+      background: #071020;
+      border-left: 1px solid var(--border2);
+      z-index: 21;
+      transition: right 0.22s ease;
+      padding: 20px;
+      overflow-y: auto;
+      box-shadow: -16px 0 50px rgba(0,0,0,0.35);
+    }
+
+    .drawer.open {
+      right: 0;
+    }
+
+    .drawer-backdrop.open {
+      display: block;
+    }
+
+    .drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: start;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .drawer h2 {
+      margin: 0;
+      font-size: 25px;
+    }
+
+    .drawer .sub {
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    .drawer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .drawer-card {
+      background: #0d172b;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 12px;
+      min-height: 72px;
+    }
+
+    .drawer-card small {
+      display: block;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 10px;
+      margin-bottom: 8px;
+    }
+
+    .drawer-card strong {
+      color: white;
+      overflow-wrap: anywhere;
+    }
+
+    .links {
+      display: flex;
+      gap: 10px;
+      margin: 14px 0 18px;
+      flex-wrap: wrap;
+    }
+
+    .links a {
+      color: white;
+      text-decoration: none;
+      border: 1px solid var(--border2);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: #07395a;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    @media (max-width: 1000px) {
+      .top-grid,
+      .middle-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .summary {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .filters {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .page {
+        padding: 14px;
+      }
+
+      h1 {
+        font-size: 30px;
+      }
+
+      .summary,
+      .filters {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -165,45 +501,105 @@
 <body>
   <div class="page">
     <div class="hero">
-      <div>
-        <h1>🔥 PropHit MLB Board</h1>
-        <div class="subtitle">Live board reading from <strong>data/prophit_latest.json</strong></div>
+      <div class="brand">
+        <div class="logo">⚾</div>
+        <div>
+          <h1>PropHit MLB Board</h1>
+          <div class="subtitle">Live hitter board powered by matchup probability, confidence, and split quality.</div>
+        </div>
       </div>
-    </div>
 
-    <div class="panel summary">
-      <div>
-        <div class="small">Total Loaded</div>
-        <strong id="totalLoaded">0</strong>
-      </div>
-      <div>
-        <div class="small">Visible Plays</div>
-        <strong id="visiblePlays">0</strong>
-      </div>
-      <div>
-        <div class="small">Data Source</div>
-        <strong>prophit_latest.json</strong>
-      </div>
-    </div>
-
-    <div class="panel">
-      <div class="filters">
-        <input id="searchInput" placeholder="Search player, team, pitcher..." />
-
-        <input id="minProb" type="number" step="0.01" value="0.58" placeholder="Min Prob" />
-
-        <input id="minScore" type="number" step="1" value="70" placeholder="Min Score" />
-
-        <input id="minConf" type="number" step="1" value="60" placeholder="Min Confidence" />
-
-        <button onclick="clearFilters()">Clear Filters</button>
+      <div class="hero-actions">
         <button onclick="loadData()">Reload Data</button>
+        <button onclick="exportCSV()">Export Excel</button>
+      </div>
+    </div>
+
+    <div class="top-grid">
+      <div class="panel">
+        <div class="summary">
+          <div class="stat-card">
+            <div class="stat-label">Total Loaded</div>
+            <div class="stat-value" id="totalLoaded">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Visible Plays</div>
+            <div class="stat-value" id="visiblePlays">0</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Avg Visible Prob</div>
+            <div class="stat-value" id="avgProb">—</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-label">Data Source</div>
+            <div style="font-weight:800;">prophit_latest.json</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel confidence-key">
+        <h3>Confidence Key</h3>
+        <div class="grade-row">
+          <div class="grade-pill grade-a"><strong>A</strong><span>80+<br>Highest</span></div>
+          <div class="grade-pill grade-b"><strong>B</strong><span>70-79<br>Strong</span></div>
+          <div class="grade-pill grade-c"><strong>C</strong><span>60-69<br>Playable</span></div>
+          <div class="grade-pill grade-d"><strong>D</strong><span>45-59<br>Lower</span></div>
+          <div class="grade-pill grade-f"><strong>F</strong><span>&lt;45<br>Avoid</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="middle-grid">
+      <div class="panel filters-panel">
+        <h3>Filters</h3>
+        <div class="filters">
+          <label>
+            Search
+            <input id="searchInput" placeholder="Player, team, pitcher..." />
+          </label>
+
+          <label>
+            Min Prob
+            <input id="minProb" type="number" step="0.01" value="0.58" />
+          </label>
+
+          <label>
+            Min Score
+            <input id="minScore" type="number" step="1" value="70" />
+          </label>
+
+          <label>
+            Min Confidence
+            <input id="minConf" type="number" step="1" value="60" />
+          </label>
+        </div>
+
+        <div class="button-row">
+          <button onclick="setStrong()">Strong Only</button>
+          <button onclick="setElite()">Elite Only</button>
+          <button onclick="clearFilters()">Clear Filters</button>
+        </div>
+      </div>
+
+      <div class="panel why-panel">
+        <h3>Why These Plays</h3>
+        <p id="whyText">
+          Showing hitters that meet your probability, score, and confidence thresholds. Click any player for a right-side drilldown.
+        </p>
       </div>
     </div>
 
     <div id="errorBox"></div>
 
-    <div class="panel">
+    <div class="panel board">
+      <div class="board-header">
+        <div class="board-title">
+          <h2>PropHit Board</h2>
+          <span class="tag">Click player for drawer</span>
+        </div>
+        <div class="board-note">Header row stays frozen • Model reruns from GitHub Actions</div>
+      </div>
+
       <div class="table-wrap">
         <table>
           <thead>
@@ -217,13 +613,14 @@
               <th>Conf</th>
               <th>Grade</th>
               <th>AVG vs Hand</th>
-              <th>Pitcher BAA</th>
               <th>Fair Odds</th>
+              <th>Lineup</th>
+              <th>Game Time</th>
             </tr>
           </thead>
           <tbody id="tableBody">
             <tr>
-              <td colspan="11">Loading PropHit data...</td>
+              <td colspan="12">Loading PropHit data...</td>
             </tr>
           </tbody>
         </table>
@@ -231,10 +628,24 @@
     </div>
   </div>
 
+  <div id="drawerBackdrop" class="drawer-backdrop" onclick="closeDrawer()"></div>
+  <aside id="drawer" class="drawer">
+    <div class="drawer-header">
+      <div>
+        <h2 id="drawerName">Player</h2>
+        <div class="sub" id="drawerSub">Team vs Opp</div>
+      </div>
+      <button onclick="closeDrawer()">×</button>
+    </div>
+
+    <div class="links" id="drawerLinks"></div>
+    <div class="drawer-grid" id="drawerGrid"></div>
+  </aside>
+
   <script>
     const DATA_URL = "./data/prophit_latest.json";
-
     let allRows = [];
+    let currentFiltered = [];
 
     const searchInput = document.getElementById("searchInput");
     const minProb = document.getElementById("minProb");
@@ -326,12 +737,29 @@
       ], 0);
     }
 
+    function avgVsHandValue(row) {
+      return getValue(row, [
+        "avg_vs_hand",
+        "batter_avg_vs_hand",
+        "hits_per_ab_3yr",
+        "season_avg_vs_hand"
+      ]);
+    }
+
+    function fairOddsValue(row) {
+      return getValue(row, [
+        "fair_odds",
+        "fair_odds_hit",
+        "one_plus_hit_fair_odds"
+      ], "—");
+    }
+
     async function loadData() {
       const errorBox = document.getElementById("errorBox");
       const tableBody = document.getElementById("tableBody");
 
       errorBox.innerHTML = "";
-      tableBody.innerHTML = `<tr><td colspan="11">Loading PropHit data...</td></tr>`;
+      tableBody.innerHTML = `<tr><td colspan="12">Loading PropHit data...</td></tr>`;
 
       try {
         const res = await fetch(DATA_URL + "?t=" + Date.now(), { cache: "no-store" });
@@ -353,12 +781,11 @@
           : [];
 
         document.getElementById("totalLoaded").textContent = allRows.length;
-
         renderTable();
       } catch (err) {
         console.error(err);
         errorBox.innerHTML = `<div class="error">${err.message}</div>`;
-        tableBody.innerHTML = `<tr><td colspan="11">No data loaded.</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="12">No data loaded.</td></tr>`;
       }
     }
 
@@ -398,17 +825,30 @@
           return probB - probA;
         });
 
+      currentFiltered = filtered;
+
       document.getElementById("visiblePlays").textContent = filtered.length;
+
+      const avg = filtered.length
+        ? filtered.reduce((sum, row) => sum + num(probabilityValue(row)), 0) / filtered.length
+        : 0;
+
+      document.getElementById("avgProb").textContent = filtered.length ? pct(avg) : "—";
+
+      const whyText = document.getElementById("whyText");
+      whyText.textContent = filtered.length
+        ? `Showing ${filtered.length} hitters meeting your current thresholds, sorted by score then probability.`
+        : "No visible plays meet the current filters. Clear filters or lower thresholds.";
 
       const tableBody = document.getElementById("tableBody");
 
       if (!filtered.length) {
-        tableBody.innerHTML = `<tr><td colspan="11">No visible plays meet the current filters.</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="12">No visible plays meet the current filters.</td></tr>`;
         return;
       }
 
       tableBody.innerHTML = filtered
-        .map((row) => {
+        .map((row, index) => {
           const player = getValue(row, ["player", "player_name", "name"], "Unknown");
           const team = getValue(row, ["team"], "—");
           const opp = getValue(row, ["opp", "opponent"], "—");
@@ -417,31 +857,14 @@
           const prob = probabilityValue(row);
           const score = scoreValue(row);
           const conf = confidenceValue(row);
-
-          const avgVsHand = getValue(row, [
-            "avg_vs_hand",
-            "batter_avg_vs_hand",
-            "hits_per_ab_3yr",
-            "season_avg_vs_hand"
-          ]);
-
-          const pitcherBaa = getValue(row, [
-            "pitcher_baa_vs_batter_hand",
-            "pitcher_season_baa_allowed_vs_batter_hand",
-            "pitcher_baa",
-            "opp_pitcher_baa",
-            "pitcher_avg_allowed"
-          ]);
-
-          const fairOdds = getValue(row, [
-            "fair_odds",
-            "fair_odds_hit",
-            "one_plus_hit_fair_odds"
-          ], "—");
+          const avgVsHand = avgVsHandValue(row);
+          const fairOdds = fairOddsValue(row);
+          const lineup = getValue(row, ["lineup_spot_num", "batting_order", "lineup_position"], "—");
+          const gameTime = getValue(row, ["game_time_et", "game_time", "start_time"], "—");
 
           return `
             <tr>
-              <td class="player">${player}</td>
+              <td><button class="player-btn" onclick="openDrawer(${index})">${player}</button></td>
               <td>${team}</td>
               <td>${opp}</td>
               <td>${pitcher}</td>
@@ -450,8 +873,9 @@
               <td>${fixed(conf, 1)}</td>
               <td class="grade ${gradeClass(conf)}">${grade(conf)}</td>
               <td>${fixed(avgVsHand, 3)}</td>
-              <td>${fixed(pitcherBaa, 3)}</td>
               <td>${fairOdds}</td>
+              <td>${lineup}</td>
+              <td>${gameTime}</td>
             </tr>
           `;
         })
@@ -464,6 +888,123 @@
       minScore.value = "0";
       minConf.value = "0";
       renderTable();
+    }
+
+    function setStrong() {
+      minProb.value = "0.58";
+      minScore.value = "70";
+      minConf.value = "60";
+      renderTable();
+    }
+
+    function setElite() {
+      minProb.value = "0.64";
+      minScore.value = "78";
+      minConf.value = "75";
+      renderTable();
+    }
+
+    function openDrawer(index) {
+      const row = currentFiltered[index];
+      if (!row) return;
+
+      const player = getValue(row, ["player", "player_name", "name"], "Unknown");
+      const team = getValue(row, ["team"], "—");
+      const opp = getValue(row, ["opp", "opponent"], "—");
+      const pitcher = getValue(row, ["pitcher", "opposing_pitcher", "opp_pitcher"], "—");
+
+      document.getElementById("drawerName").textContent = player;
+      document.getElementById("drawerSub").textContent = `${team} vs ${opp} • Opp Pitcher: ${pitcher}`;
+
+      const links = [];
+
+      const mlb = getValue(row, ["player_mlb_url"]);
+      const bref = getValue(row, ["player_baseball_reference_url"]);
+      const pMlb = getValue(row, ["opp_pitcher_mlb_url"]);
+      const pBref = getValue(row, ["opp_pitcher_baseball_reference_url"]);
+
+      if (mlb) links.push(`<a href="${mlb}" target="_blank">Player MLB</a>`);
+      if (bref) links.push(`<a href="${bref}" target="_blank">Player BRef</a>`);
+      if (pMlb) links.push(`<a href="${pMlb}" target="_blank">Pitcher MLB</a>`);
+      if (pBref) links.push(`<a href="${pBref}" target="_blank">Pitcher BRef</a>`);
+
+      document.getElementById("drawerLinks").innerHTML = links.join("");
+
+      const items = [
+        ["Probability", pct(probabilityValue(row))],
+        ["Score", fixed(scoreValue(row), 1)],
+        ["Confidence", fixed(confidenceValue(row), 1)],
+        ["Grade", grade(confidenceValue(row))],
+        ["AVG vs Hand", fixed(avgVsHandValue(row), 3)],
+        ["Fair Odds", fairOddsValue(row)],
+        ["Bats", getValue(row, ["bats"], "—")],
+        ["Position", getValue(row, ["position"], "—")],
+        ["Lineup", getValue(row, ["lineup_spot_num", "batting_order"], "—")],
+        ["Game Time ET", getValue(row, ["game_time_et"], "—")],
+        ["Venue", getValue(row, ["venue"], "—")],
+        ["Lineup Source", getValue(row, ["lineup_source"], "—")],
+        ["Confirmed Starter", getValue(row, ["is_confirmed_starter"], "—")],
+        ["AB 3YR", getValue(row, ["ab_3yr"], "—")],
+        ["Hits 3YR", getValue(row, ["hits_3yr"], "—")],
+        ["Hits / AB 3YR", fixed(getValue(row, ["hits_per_ab_3yr"]), 3)]
+      ];
+
+      document.getElementById("drawerGrid").innerHTML = items
+        .map(([label, value]) => `
+          <div class="drawer-card">
+            <small>${label}</small>
+            <strong>${value}</strong>
+          </div>
+        `)
+        .join("");
+
+      document.getElementById("drawer").classList.add("open");
+      document.getElementById("drawerBackdrop").classList.add("open");
+    }
+
+    function closeDrawer() {
+      document.getElementById("drawer").classList.remove("open");
+      document.getElementById("drawerBackdrop").classList.remove("open");
+    }
+
+    function exportCSV() {
+      const rows = currentFiltered.length ? currentFiltered : allRows;
+
+      const headers = [
+        "Player", "Team", "Opp", "Pitcher", "Probability", "Score",
+        "Confidence", "Grade", "AVG vs Hand", "Fair Odds", "Lineup", "Game Time"
+      ];
+
+      const lines = [headers.join(",")];
+
+      rows.forEach(row => {
+        const values = [
+          getValue(row, ["player", "player_name", "name"], ""),
+          getValue(row, ["team"], ""),
+          getValue(row, ["opp", "opponent"], ""),
+          getValue(row, ["pitcher", "opposing_pitcher", "opp_pitcher"], ""),
+          probabilityValue(row),
+          scoreValue(row),
+          confidenceValue(row),
+          grade(confidenceValue(row)),
+          avgVsHandValue(row),
+          fairOddsValue(row),
+          getValue(row, ["lineup_spot_num", "batting_order"], ""),
+          getValue(row, ["game_time_et"], "")
+        ];
+
+        lines.push(values.map(v => `"${String(v).replaceAll('"', '""')}"`).join(","));
+      });
+
+      const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "prophit_board.csv";
+      a.click();
+
+      URL.revokeObjectURL(url);
     }
 
     loadData();
