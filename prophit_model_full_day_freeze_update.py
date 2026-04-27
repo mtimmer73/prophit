@@ -2051,7 +2051,7 @@ def write_outputs(df: pd.DataFrame) -> None:
 
     write_json(records, LATEST_JSON)
     write_json(records, LATEST_ALL_PLAYERS_JSON)
-    write_json(PROP_HIT_SCHEMA, _SCHEMA_JSON)
+    write_json(PROP_HIT_SCHEMA, SCHEMA_JSON)
     write_json(build_performance_summary(df), PERFORMANCE_JSON)
 
     snap_json = SNAPSHOT_DIR / f"prophit_snapshot_{timestamp_slug()}.json"
@@ -2061,7 +2061,7 @@ def write_outputs(df: pd.DataFrame) -> None:
 
     log(f"UI JSON written to: {LATEST_JSON}")
     log(f"All players JSON written to: {LATEST_ALL_PLAYERS_JSON}")
-    log(f"Schema JSON written to: {_SCHEMA_JSON}")
+    log(f"Schema JSON written to: {SCHEMA_JSON}")
     log(f"Performance summary written to: {PERFORMANCE_JSON}")
     log(f"Snapshot JSON written to: {snap_json}")
     log(f"Snapshot Excel written to: {snap_xlsx}")
