@@ -1,0 +1,257 @@
+{
+  "generated_at": "2026-04-06T23:16:20.843177",
+  "model_version": "V6",
+  "sport": "MLB",
+  "top_plays": [
+    {
+      "rank": 1,
+      "player": "Ryan O'Hearn",
+      "team": "PIT",
+      "opp": "SD",
+      "projected_hits": 1.953,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.505,
+      "lineup_spot": 4.0
+    },
+    {
+      "rank": 2,
+      "player": "Christian Yelich",
+      "team": "MIL",
+      "opp": "BOS",
+      "projected_hits": 1.844,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.186,
+      "lineup_spot": 3.0
+    },
+    {
+      "rank": 3,
+      "player": "Xavier Edwards",
+      "team": "MIA",
+      "opp": "CIN",
+      "projected_hits": 1.828,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.168,
+      "lineup_spot": 7.0
+    },
+    {
+      "rank": 4,
+      "player": "Nick Gonzales",
+      "team": "PIT",
+      "opp": "SD",
+      "projected_hits": 1.808,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.005,
+      "lineup_spot": 6.0
+    },
+    {
+      "rank": 5,
+      "player": "Brandon Nimmo",
+      "team": "TEX",
+      "opp": "SEA",
+      "projected_hits": 1.803,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.097,
+      "lineup_spot": 1.0
+    },
+    {
+      "rank": 6,
+      "player": "Brice Turang",
+      "team": "MIL",
+      "opp": "BOS",
+      "projected_hits": 1.722,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.197,
+      "lineup_spot": 1.0
+    },
+    {
+      "rank": 7,
+      "player": "Wilyer Abreu",
+      "team": "BOS",
+      "opp": "MIL",
+      "projected_hits": 1.722,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.389,
+      "lineup_spot": 4.0
+    },
+    {
+      "rank": 8,
+      "player": "Andy Pages",
+      "team": "LAD",
+      "opp": "TOR",
+      "projected_hits": 1.625,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.335,
+      "lineup_spot": 6.0
+    },
+    {
+      "rank": 9,
+      "player": "Brandon Lowe",
+      "team": "PIT",
+      "opp": "SD",
+      "projected_hits": 1.603,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.52,
+      "lineup_spot": 2.0
+    },
+    {
+      "rank": 10,
+      "player": "Javier Sanoja",
+      "team": "MIA",
+      "opp": "CIN",
+      "projected_hits": 1.536,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.005,
+      "lineup_spot": 9.0
+    },
+    {
+      "rank": 11,
+      "player": "Brendan Donovan",
+      "team": "SEA",
+      "opp": "TEX",
+      "projected_hits": 1.524,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.387,
+      "lineup_spot": 1.0
+    },
+    {
+      "rank": 12,
+      "player": "Otto Lopez",
+      "team": "MIA",
+      "opp": "CIN",
+      "projected_hits": 1.517,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.186,
+      "lineup_spot": 4.0
+    },
+    {
+      "rank": 13,
+      "player": "Oneil Cruz",
+      "team": "PIT",
+      "opp": "SD",
+      "projected_hits": 1.504,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.503,
+      "lineup_spot": 1.0
+    },
+    {
+      "rank": 14,
+      "player": "Jake Burger",
+      "team": "TEX",
+      "opp": "SEA",
+      "projected_hits": 1.472,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.239,
+      "lineup_spot": 4.0
+    },
+    {
+      "rank": 15,
+      "player": "Kyle Isbel",
+      "team": "KC",
+      "opp": "CLE",
+      "projected_hits": 1.448,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.296,
+      "lineup_spot": 9.0
+    },
+    {
+      "rank": 16,
+      "player": "JJ Wetherholt",
+      "team": "STL",
+      "opp": "WSH",
+      "projected_hits": 1.418,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.19,
+      "lineup_spot": 1.0
+    },
+    {
+      "rank": 17,
+      "player": "Myles Straw",
+      "team": "TOR",
+      "opp": "LAD",
+      "projected_hits": 1.398,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.005,
+      "lineup_spot": 7.0
+    },
+    {
+      "rank": 18,
+      "player": "Ernie Clement",
+      "team": "TOR",
+      "opp": "LAD",
+      "projected_hits": 1.393,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.005,
+      "lineup_spot": 5.0
+    },
+    {
+      "rank": 19,
+      "player": "Leo Jim\u00e9nez",
+      "team": "MIA",
+      "opp": "CIN",
+      "projected_hits": 1.388,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.005,
+      "lineup_spot": 8.0
+    },
+    {
+      "rank": 20,
+      "player": "Colt Keith",
+      "team": "DET",
+      "opp": "MIN",
+      "projected_hits": 1.386,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.005,
+      "lineup_spot": 3.0
+    },
+    {
+      "rank": 21,
+      "player": "William Contreras",
+      "team": "MIL",
+      "opp": "BOS",
+      "projected_hits": 1.382,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.213,
+      "lineup_spot": 2.0
+    },
+    {
+      "rank": 22,
+      "player": "Yandy D\u00edaz",
+      "team": "TB",
+      "opp": "CHC",
+      "projected_hits": 1.376,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.166,
+      "lineup_spot": 1.0
+    },
+    {
+      "rank": 23,
+      "player": "Jordan Walker",
+      "team": "STL",
+      "opp": "WSH",
+      "projected_hits": 1.303,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.283,
+      "lineup_spot": 4.0
+    },
+    {
+      "rank": 24,
+      "player": "Maikel Garcia",
+      "team": "KC",
+      "opp": "CLE",
+      "projected_hits": 1.293,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.091,
+      "lineup_spot": 1.0
+    },
+    {
+      "rank": 25,
+      "player": "Bryan Reynolds",
+      "team": "PIT",
+      "opp": "SD",
+      "projected_hits": 1.249,
+      "projected_total_bases": 0.0,
+      "projected_hr": 0.307,
+      "lineup_spot": 3.0
+    }
+  ]
+}

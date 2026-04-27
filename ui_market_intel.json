@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "source": "Covers",
+    "player": "Juan Soto",
+    "prop": "Total Bases Over 1.5",
+    "modelVerdict": "nan",
+    "shortlisted": true
+  },
+  {
+    "id": 2,
+    "source": "Action Network",
+    "player": "Zack Wheeler",
+    "prop": "Strikeouts Over 6.5",
+    "modelVerdict": "nan",
+    "shortlisted": false
+  },
+  {
+    "id": 3,
+    "source": "Covers",
+    "player": "Shohei Ohtani",
+    "prop": "Home Runs Over 0.5",
+    "modelVerdict": "nan",
+    "shortlisted": true
+  },
+  {
+    "id": 4,
+    "source": "Editorial Feed",
+    "player": "Freddie Freeman",
+    "prop": "Hits Over 1.5",
+    "modelVerdict": "nan",
+    "shortlisted": false
+  },
+  {
+    "id": 5,
+    "source": "Consensus Feed",
+    "player": "Tarik Skubal",
+    "prop": "Earned Runs Under 2.5",
+    "modelVerdict": "nan",
+    "shortlisted": true
+  }
+]
