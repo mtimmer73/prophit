@@ -1,0 +1,35 @@
+name: Run PropHit Model
+
+on:
+  workflow_dispatch:   # manual run button
+  schedule:
+    - cron: "0 14 * * *"   # runs daily at 10AM EST
+
+jobs:
+  run-model:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install requests pandas numpy
+
+      - name: Run model
+        run: |
+          python prophit_model_full_day_freeze_update.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add data/prophit_latest.json
+          git commit -m "Auto update model data" || echo "No changes"
+          git push
