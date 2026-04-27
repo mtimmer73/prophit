@@ -37,7 +37,7 @@
 
     .page {
       padding: 24px;
-      max-width: 1500px;
+      max-width: 1700px;
       margin: 0 auto;
     }
 
@@ -291,14 +291,14 @@
 
     .table-wrap {
       overflow: auto;
-      max-height: 680px;
+      max-height: 720px;
     }
 
     table {
       width: 100%;
       border-collapse: separate;
       border-spacing: 0;
-      min-width: 1180px;
+      min-width: 2200px;
       background: var(--panel2);
     }
 
@@ -327,6 +327,19 @@
 
     tr:hover {
       background: #0f2138;
+    }
+
+    .sticky-player {
+      position: sticky;
+      left: 0;
+      z-index: 4;
+      background: #081225;
+      min-width: 170px;
+    }
+
+    th.sticky-player {
+      z-index: 8;
+      background: #0b1d34;
     }
 
     .player-btn {
@@ -365,6 +378,37 @@
       background: #071020;
     }
 
+    .link-cell {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .link-cell a {
+      color: #7dd3fc;
+      text-decoration: none;
+      border: 1px solid #15527d;
+      border-radius: 8px;
+      padding: 4px 7px;
+      font-size: 12px;
+      background: #071020;
+    }
+
+    .link-cell a:hover {
+      color: white;
+      border-color: #7dd3fc;
+    }
+
+    .yes {
+      color: var(--green);
+      font-weight: 800;
+    }
+
+    .no {
+      color: var(--red);
+      font-weight: 800;
+    }
+
     .drawer-backdrop {
       display: none;
       position: fixed;
@@ -376,9 +420,9 @@
     .drawer {
       position: fixed;
       top: 0;
-      right: -460px;
-      width: 440px;
-      max-width: 92vw;
+      right: -520px;
+      width: 500px;
+      max-width: 94vw;
       height: 100vh;
       background: #071020;
       border-left: 1px solid var(--border2);
@@ -597,30 +641,40 @@
           <h2>PropHit Board</h2>
           <span class="tag">Click player for drawer</span>
         </div>
-        <div class="board-note">Header row stays frozen • Model reruns from GitHub Actions</div>
+        <div class="board-note">Header row stays frozen • Model reruns from GitHub Actions • No Edge yet</div>
       </div>
 
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>Player</th>
+              <th class="sticky-player">Player</th>
               <th>Team</th>
               <th>Opp</th>
+              <th>H/A</th>
+              <th>Game Time</th>
+              <th>Lineup</th>
+              <th>Source</th>
+              <th>Confirmed</th>
+              <th>Bats</th>
+              <th>Pos</th>
               <th>Pitcher</th>
+              <th>P Hand</th>
               <th>Prob</th>
               <th>Score</th>
               <th>Conf</th>
               <th>Grade</th>
               <th>AVG vs Hand</th>
-              <th>Fair Odds</th>
-              <th>Lineup</th>
-              <th>Game Time</th>
+              <th>1+ Hit Rate</th>
+              <th>AB 3YR</th>
+              <th>Hits 3YR</th>
+              <th>Venue</th>
+              <th>Links</th>
             </tr>
           </thead>
           <tbody id="tableBody">
             <tr>
-              <td colspan="12">Loading PropHit data...</td>
+              <td colspan="22">Loading PropHit data...</td>
             </tr>
           </tbody>
         </table>
@@ -682,6 +736,10 @@
       const n = Number(value);
       if (!Number.isFinite(n)) return "—";
       return n.toFixed(decimals);
+    }
+
+    function yesNo(value) {
+      return value === true || value === "true" || value === "Yes" || value === 1 ? "Yes" : "No";
     }
 
     function grade(confidence) {
@@ -746,12 +804,14 @@
       ]);
     }
 
-    function fairOddsValue(row) {
+    function onePlusRateValue(row) {
       return getValue(row, [
-        "fair_odds",
-        "fair_odds_hit",
-        "one_plus_hit_fair_odds"
-      ], "—");
+        "one_plus_hit_rate_3yr",
+        "one_plus_hit_rate",
+        "one_plus_hit_prob",
+        "hit_probability",
+        "probability"
+      ], probabilityValue(row));
     }
 
     async function loadData() {
@@ -759,7 +819,7 @@
       const tableBody = document.getElementById("tableBody");
 
       errorBox.innerHTML = "";
-      tableBody.innerHTML = `<tr><td colspan="12">Loading PropHit data...</td></tr>`;
+      tableBody.innerHTML = `<tr><td colspan="22">Loading PropHit data...</td></tr>`;
 
       try {
         const res = await fetch(DATA_URL + "?t=" + Date.now(), { cache: "no-store" });
@@ -785,7 +845,7 @@
       } catch (err) {
         console.error(err);
         errorBox.innerHTML = `<div class="error">${err.message}</div>`;
-        tableBody.innerHTML = `<tr><td colspan="12">No data loaded.</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="22">No data loaded.</td></tr>`;
       }
     }
 
@@ -843,7 +903,7 @@
       const tableBody = document.getElementById("tableBody");
 
       if (!filtered.length) {
-        tableBody.innerHTML = `<tr><td colspan="12">No visible plays meet the current filters.</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="22">No visible plays meet the current filters.</td></tr>`;
         return;
       }
 
@@ -852,30 +912,61 @@
           const player = getValue(row, ["player", "player_name", "name"], "Unknown");
           const team = getValue(row, ["team"], "—");
           const opp = getValue(row, ["opp", "opponent"], "—");
+          const homeAway = getValue(row, ["home_away"], "—");
+          const gameTime = getValue(row, ["game_time_et", "game_time", "start_time"], "—");
+          const lineup = getValue(row, ["lineup_spot_num", "batting_order", "lineup_position"], "—");
+          const lineupSource = getValue(row, ["lineup_source"], "—");
+          const confirmed = getValue(row, ["is_confirmed_starter"], false);
+          const bats = getValue(row, ["bats"], "—");
+          const position = getValue(row, ["position"], "—");
           const pitcher = getValue(row, ["pitcher", "opposing_pitcher", "opp_pitcher"], "—");
+          const pitcherHand = getValue(row, ["opp_pitcher_hand", "pitcher_hand"], "—");
 
           const prob = probabilityValue(row);
           const score = scoreValue(row);
           const conf = confidenceValue(row);
           const avgVsHand = avgVsHandValue(row);
-          const fairOdds = fairOddsValue(row);
-          const lineup = getValue(row, ["lineup_spot_num", "batting_order", "lineup_position"], "—");
-          const gameTime = getValue(row, ["game_time_et", "game_time", "start_time"], "—");
+          const onePlusRate = onePlusRateValue(row);
+          const ab3yr = getValue(row, ["ab_3yr"], "—");
+          const hits3yr = getValue(row, ["hits_3yr"], "—");
+          const venue = getValue(row, ["venue"], "—");
+
+          const playerMlb = getValue(row, ["player_mlb_url"]);
+          const playerBref = getValue(row, ["player_baseball_reference_url"]);
+          const pitcherMlb = getValue(row, ["opp_pitcher_mlb_url"]);
+          const pitcherBref = getValue(row, ["opp_pitcher_baseball_reference_url"]);
+
+          const links = `
+            ${playerMlb ? `<a href="${playerMlb}" target="_blank">MLB</a>` : ""}
+            ${playerBref ? `<a href="${playerBref}" target="_blank">BRef</a>` : ""}
+            ${pitcherMlb ? `<a href="${pitcherMlb}" target="_blank">P MLB</a>` : ""}
+            ${pitcherBref ? `<a href="${pitcherBref}" target="_blank">P BRef</a>` : ""}
+          `;
 
           return `
             <tr>
-              <td><button class="player-btn" onclick="openDrawer(${index})">${player}</button></td>
+              <td class="sticky-player"><button class="player-btn" onclick="openDrawer(${index})">${player}</button></td>
               <td>${team}</td>
               <td>${opp}</td>
+              <td>${homeAway}</td>
+              <td>${gameTime}</td>
+              <td>${lineup}</td>
+              <td>${lineupSource}</td>
+              <td class="${yesNo(confirmed) === "Yes" ? "yes" : "no"}">${yesNo(confirmed)}</td>
+              <td>${bats}</td>
+              <td>${position}</td>
               <td>${pitcher}</td>
+              <td>${pitcherHand}</td>
               <td>${pct(prob)}</td>
               <td>${fixed(score, 1)}</td>
               <td>${fixed(conf, 1)}</td>
               <td class="grade ${gradeClass(conf)}">${grade(conf)}</td>
               <td>${fixed(avgVsHand, 3)}</td>
-              <td>${fairOdds}</td>
-              <td>${lineup}</td>
-              <td>${gameTime}</td>
+              <td>${pct(onePlusRate)}</td>
+              <td>${ab3yr}</td>
+              <td>${hits3yr}</td>
+              <td>${venue}</td>
+              <td class="link-cell">${links}</td>
             </tr>
           `;
         })
@@ -936,17 +1027,19 @@
         ["Confidence", fixed(confidenceValue(row), 1)],
         ["Grade", grade(confidenceValue(row))],
         ["AVG vs Hand", fixed(avgVsHandValue(row), 3)],
-        ["Fair Odds", fairOddsValue(row)],
+        ["1+ Hit Rate", pct(onePlusRateValue(row))],
         ["Bats", getValue(row, ["bats"], "—")],
         ["Position", getValue(row, ["position"], "—")],
         ["Lineup", getValue(row, ["lineup_spot_num", "batting_order"], "—")],
         ["Game Time ET", getValue(row, ["game_time_et"], "—")],
         ["Venue", getValue(row, ["venue"], "—")],
         ["Lineup Source", getValue(row, ["lineup_source"], "—")],
-        ["Confirmed Starter", getValue(row, ["is_confirmed_starter"], "—")],
+        ["Confirmed Starter", yesNo(getValue(row, ["is_confirmed_starter"], false))],
         ["AB 3YR", getValue(row, ["ab_3yr"], "—")],
         ["Hits 3YR", getValue(row, ["hits_3yr"], "—")],
-        ["Hits / AB 3YR", fixed(getValue(row, ["hits_per_ab_3yr"]), 3)]
+        ["Hits / AB 3YR", fixed(getValue(row, ["hits_per_ab_3yr"]), 3)],
+        ["Home/Away", getValue(row, ["home_away"], "—")],
+        ["Pitcher Hand", getValue(row, ["opp_pitcher_hand", "pitcher_hand"], "—")]
       ];
 
       document.getElementById("drawerGrid").innerHTML = items
@@ -971,8 +1064,10 @@
       const rows = currentFiltered.length ? currentFiltered : allRows;
 
       const headers = [
-        "Player", "Team", "Opp", "Pitcher", "Probability", "Score",
-        "Confidence", "Grade", "AVG vs Hand", "Fair Odds", "Lineup", "Game Time"
+        "Player", "Team", "Opp", "Home/Away", "Game Time", "Lineup",
+        "Lineup Source", "Confirmed", "Bats", "Position", "Pitcher",
+        "Pitcher Hand", "Probability", "Score", "Confidence", "Grade",
+        "AVG vs Hand", "1+ Hit Rate", "AB 3YR", "Hits 3YR", "Venue"
       ];
 
       const lines = [headers.join(",")];
@@ -982,15 +1077,24 @@
           getValue(row, ["player", "player_name", "name"], ""),
           getValue(row, ["team"], ""),
           getValue(row, ["opp", "opponent"], ""),
+          getValue(row, ["home_away"], ""),
+          getValue(row, ["game_time_et"], ""),
+          getValue(row, ["lineup_spot_num", "batting_order"], ""),
+          getValue(row, ["lineup_source"], ""),
+          yesNo(getValue(row, ["is_confirmed_starter"], false)),
+          getValue(row, ["bats"], ""),
+          getValue(row, ["position"], ""),
           getValue(row, ["pitcher", "opposing_pitcher", "opp_pitcher"], ""),
+          getValue(row, ["opp_pitcher_hand", "pitcher_hand"], ""),
           probabilityValue(row),
           scoreValue(row),
           confidenceValue(row),
           grade(confidenceValue(row)),
           avgVsHandValue(row),
-          fairOddsValue(row),
-          getValue(row, ["lineup_spot_num", "batting_order"], ""),
-          getValue(row, ["game_time_et"], "")
+          onePlusRateValue(row),
+          getValue(row, ["ab_3yr"], ""),
+          getValue(row, ["hits_3yr"], ""),
+          getValue(row, ["venue"], "")
         ];
 
         lines.push(values.map(v => `"${String(v).replaceAll('"', '""')}"`).join(","));
