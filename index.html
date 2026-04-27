@@ -1,14 +1,418 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/prophit/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>proppulse-ui-app</title>
-    <script type="module" crossorigin src="/prophit/assets/index-Cl7iukkG.js"></script>
-    <link rel="stylesheet" crossorigin href="/prophit/assets/index-nqMpL4T3.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PropHit MLB Board</title>
+
+  <style>
+    body {
+      margin: 0;
+      background: #050b18;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+    }
+
+    .page {
+      padding: 24px;
+    }
+
+    .hero {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 34px;
+    }
+
+    .subtitle {
+      color: #9fb3d9;
+      margin-top: 8px;
+    }
+
+    .panel {
+      background: #0d172b;
+      border: 1px solid #14365c;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
+    .summary {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .summary div {
+      background: #071020;
+      border: 1px solid #15527d;
+      border-radius: 12px;
+      padding: 12px 16px;
+      min-width: 150px;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    input {
+      background: #071020;
+      color: white;
+      border: 1px solid #15527d;
+      border-radius: 12px;
+      padding: 12px;
+      min-width: 160px;
+    }
+
+    button {
+      background: #07395a;
+      color: white;
+      border: 1px solid #1f8bc0;
+      border-radius: 12px;
+      padding: 12px 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0a4d7a;
+    }
+
+    .error {
+      color: #ff4d6d;
+      background: #160814;
+      border: 1px solid #5f1d35;
+      padding: 14px;
+      border-radius: 12px;
+      margin-bottom: 18px;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 14px;
+      border: 1px solid #14365c;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1100px;
+      background: #081225;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      background: #0b1d34;
+      color: #b9d7ff;
+      text-align: left;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 12px;
+      border-bottom: 1px solid #14365c;
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #102c4a;
+      color: #dbeafe;
+      font-size: 14px;
+    }
+
+    tr:hover {
+      background: #0f2138;
+    }
+
+    .player {
+      color: #7dd3fc;
+      font-weight: bold;
+    }
+
+    .grade {
+      font-weight: bold;
+    }
+
+    .good {
+      color: #4ade80;
+    }
+
+    .mid {
+      color: #facc15;
+    }
+
+    .bad {
+      color: #fb7185;
+    }
+
+    .small {
+      color: #9fb3d9;
+      font-size: 12px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="hero">
+      <div>
+        <h1>🔥 PropHit MLB Board</h1>
+        <div class="subtitle">Live board reading from <strong>data/prophit_latest.json</strong></div>
+      </div>
+    </div>
+
+    <div class="panel summary">
+      <div>
+        <div class="small">Total Loaded</div>
+        <strong id="totalLoaded">0</strong>
+      </div>
+      <div>
+        <div class="small">Visible Plays</div>
+        <strong id="visiblePlays">0</strong>
+      </div>
+      <div>
+        <div class="small">Data Source</div>
+        <strong>prophit_latest.json</strong>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="filters">
+        <input id="searchInput" placeholder="Search player, team, pitcher..." />
+
+        <input id="minProb" type="number" step="0.01" value="0.58" placeholder="Min Prob" />
+
+        <input id="minScore" type="number" step="1" value="70" placeholder="Min Score" />
+
+        <input id="minConf" type="number" step="1" value="60" placeholder="Min Confidence" />
+
+        <button onclick="clearFilters()">Clear Filters</button>
+        <button onclick="loadData()">Reload Data</button>
+      </div>
+    </div>
+
+    <div id="errorBox"></div>
+
+    <div class="panel">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Player</th>
+              <th>Team</th>
+              <th>Opp</th>
+              <th>Pitcher</th>
+              <th>Probability</th>
+              <th>Score</th>
+              <th>Confidence</th>
+              <th>Grade</th>
+              <th>AVG vs Hand</th>
+              <th>Pitcher BAA</th>
+              <th>Fair Odds</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <tr>
+              <td colspan="11">Loading PropHit data...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const DATA_URL = "./data/prophit_latest.json";
+
+    let allRows = [];
+
+    const searchInput = document.getElementById("searchInput");
+    const minProb = document.getElementById("minProb");
+    const minScore = document.getElementById("minScore");
+    const minConf = document.getElementById("minConf");
+
+    searchInput.addEventListener("input", renderTable);
+    minProb.addEventListener("input", renderTable);
+    minScore.addEventListener("input", renderTable);
+    minConf.addEventListener("input", renderTable);
+
+    function num(value) {
+      const n = Number(value);
+      return Number.isFinite(n) ? n : 0;
+    }
+
+    function getValue(row, keys, fallback = "") {
+      for (const key of keys) {
+        if (row[key] !== undefined && row[key] !== null && row[key] !== "") {
+          return row[key];
+        }
+      }
+      return fallback;
+    }
+
+    function pct(value) {
+      const n = num(value);
+      if (n <= 1) return `${(n * 100).toFixed(1)}%`;
+      return `${n.toFixed(1)}%`;
+    }
+
+    function fixed(value, decimals = 3) {
+      if (value === undefined || value === null || value === "") return "—";
+      const n = Number(value);
+      if (!Number.isFinite(n)) return "—";
+      return n.toFixed(decimals);
+    }
+
+    function grade(confidence) {
+      const n = num(confidence);
+      if (n >= 80) return "A";
+      if (n >= 70) return "B";
+      if (n >= 60) return "C";
+      if (n >= 45) return "D";
+      return "F";
+    }
+
+    function gradeClass(confidence) {
+      const n = num(confidence);
+      if (n >= 70) return "good";
+      if (n >= 60) return "mid";
+      return "bad";
+    }
+
+    async function loadData() {
+      const errorBox = document.getElementById("errorBox");
+      const tableBody = document.getElementById("tableBody");
+
+      errorBox.innerHTML = "";
+      tableBody.innerHTML = `<tr><td colspan="11">Loading PropHit data...</td></tr>`;
+
+      try {
+        const res = await fetch(DATA_URL + "?t=" + Date.now(), { cache: "no-store" });
+
+        if (!res.ok) {
+          throw new Error(`Unable to load ${DATA_URL}. Status: ${res.status}`);
+        }
+
+        const json = await res.json();
+
+        allRows = Array.isArray(json)
+          ? json
+          : Array.isArray(json.players)
+          ? json.players
+          : Array.isArray(json.rows)
+          ? json.rows
+          : Array.isArray(json.data)
+          ? json.data
+          : [];
+
+        document.getElementById("totalLoaded").textContent = allRows.length;
+
+        renderTable();
+      } catch (err) {
+        console.error(err);
+        errorBox.innerHTML = `<div class="error">${err.message}</div>`;
+        tableBody.innerHTML = `<tr><td colspan="11">No data loaded.</td></tr>`;
+      }
+    }
+
+    function renderTable() {
+      const q = searchInput.value.toLowerCase().trim();
+      const probMin = num(minProb.value);
+      const scoreMin = num(minScore.value);
+      const confMin = num(minConf.value);
+
+      const filtered = allRows
+        .filter((row) => {
+          const player = String(getValue(row, ["player", "player_name", "name"])).toLowerCase();
+          const team = String(getValue(row, ["team"])).toLowerCase();
+          const opp = String(getValue(row, ["opp", "opponent"])).toLowerCase();
+          const pitcher = String(getValue(row, ["pitcher", "opposing_pitcher"])).toLowerCase();
+
+          const prob = num(getValue(row, ["probability", "hit_probability", "top_prob", "prob"]));
+          const score = num(getValue(row, ["score", "hit_score", "prophit_score"]));
+          const conf = num(getValue(row, ["confidence", "confidence_score"]));
+
+          const haystack = `${player} ${team} ${opp} ${pitcher}`;
+
+          if (q && !haystack.includes(q)) return false;
+          if (prob < probMin) return false;
+          if (score < scoreMin) return false;
+          if (conf < confMin) return false;
+
+          return true;
+        })
+        .sort((a, b) => {
+          const scoreA = num(getValue(a, ["score", "hit_score", "prophit_score"]));
+          const scoreB = num(getValue(b, ["score", "hit_score", "prophit_score"]));
+          return scoreB - scoreA;
+        });
+
+      document.getElementById("visiblePlays").textContent = filtered.length;
+
+      const tableBody = document.getElementById("tableBody");
+
+      if (!filtered.length) {
+        tableBody.innerHTML = `<tr><td colspan="11">No visible plays meet the current filters.</td></tr>`;
+        return;
+      }
+
+      tableBody.innerHTML = filtered
+        .map((row) => {
+          const player = getValue(row, ["player", "player_name", "name"], "Unknown");
+          const team = getValue(row, ["team"], "—");
+          const opp = getValue(row, ["opp", "opponent"], "—");
+          const pitcher = getValue(row, ["pitcher", "opposing_pitcher"], "—");
+
+          const prob = getValue(row, ["probability", "hit_probability", "top_prob", "prob"]);
+          const score = getValue(row, ["score", "hit_score", "prophit_score"]);
+          const conf = getValue(row, ["confidence", "confidence_score"]);
+
+          const avgVsHand = getValue(row, ["avg_vs_hand", "batter_avg_vs_hand"]);
+          const pitcherBaa = getValue(row, [
+            "pitcher_baa_vs_batter_hand",
+            "pitcher_season_baa_allowed_vs_batter_hand",
+            "pitcher_baa"
+          ]);
+
+          const fairOdds = getValue(row, ["fair_odds"], "—");
+
+          return `
+            <tr>
+              <td class="player">${player}</td>
+              <td>${team}</td>
+              <td>${opp}</td>
+              <td>${pitcher}</td>
+              <td>${pct(prob)}</td>
+              <td>${fixed(score, 1)}</td>
+              <td>${fixed(conf, 1)}</td>
+              <td class="grade ${gradeClass(conf)}">${grade(conf)}</td>
+              <td>${fixed(avgVsHand, 3)}</td>
+              <td>${fixed(pitcherBaa, 3)}</td>
+              <td>${fairOdds}</td>
+            </tr>
+          `;
+        })
+        .join("");
+    }
+
+    function clearFilters() {
+      searchInput.value = "";
+      minProb.value = "0";
+      minScore.value = "0";
+      minConf.value = "0";
+      renderTable();
+    }
+
+    loadData();
+  </script>
+</body>
 </html>
