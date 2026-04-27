@@ -32,21 +32,22 @@ import requests
 # ============================================================
 
 
-BASE_DIR = Path(r"C:\Users\jklmx\OneDrive\Desktop\PropPulse")
+BASE_DIR = Path.cwd()
 OUTPUT_DIR = BASE_DIR / "outputs"
 SNAPSHOT_DIR = OUTPUT_DIR / "snapshots"
 CACHE_DIR = OUTPUT_DIR / "cache"
-UI_PUBLIC_DIR = BASE_DIR / "proppulse-ui-app" / "public"
-UI_DATA_DIR = UI_PUBLIC_DIR / "data"
+
+# GitHub Pages reads JSON from /data
+UI_DATA_DIR = BASE_DIR / "data"
 
 EXCEL_OUTPUT = OUTPUT_DIR / "prophit_today.xlsx"
 FREEZE_STATE_JSON = OUTPUT_DIR / "prophit_freeze_state.json"
 RUN_LOG_JSON = OUTPUT_DIR / "prophit_run_log.json"
 
 LATEST_JSON = UI_DATA_DIR / "prophit_latest.json"
-LATEST_ALL_PLAYERS_JSON = UI_PUBLIC_DIR / "prophit_all_players.json"
-LATEST_SCHEMA_JSON = UI_DATA_DIR / "prophit_schema.json"
-PERFORMANCE_JSON = UI_DATA_DIR / "prophit_performance_summary.json"
+LATEST_ALL_PLAYERS_JSON = UI_DATA_DIR / "prophit_all_players.json"
+SCHEMA_JSON = UI_DATA_DIR / "prophit_schema.json"
+PERFORMANCE_SUMMARY_JSON = UI_DATA_DIR / "prophit_performance_summary.json"
 
 ET = ZoneInfo("America/New_York")
 TARGET_DATE = datetime.now(ET).date()
@@ -162,8 +163,8 @@ PROP_HIT_SCHEMA = {
 # Core utils
 # ----------------------------
 def ensure_dirs() -> None:
-    for p in [OUTPUT_DIR, SNAPSHOT_DIR, CACHE_DIR, UI_PUBLIC_DIR, UI_DATA_DIR]:
-        p.mkdir(parents=True, exist_ok=True)
+for folder in [OUTPUT_DIR, SNAPSHOT_DIR, CACHE_DIR, UI_DATA_DIR]:
+    folder.mkdir(parents=True, exist_ok=True)
 
 
 def now_et() -> datetime:
