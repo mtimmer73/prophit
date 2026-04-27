@@ -1,0 +1,22 @@
+__pycache__/
+*.pyc
+
+venv/
+.env/
+
+node_modules/
+proppulse-ui-app/node_modules/
+proppulse-ui-app/dist/
+
+outputs/
+*.csv
+*.xlsx
+
+# keep UI data file
+!proppulse-ui-app/public/data/prophit_latest.json
+
+.DS_Store
+Thumbs.db
+
+.vscode/
+.idea/
