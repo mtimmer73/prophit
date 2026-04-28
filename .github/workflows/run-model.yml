@@ -3,7 +3,9 @@ name: Run PropHit Model
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 15 * * *"
+    # GitHub cron uses UTC.
+    # 15-23 UTC = roughly 11 AM-7 PM Eastern during daylight time.
+    - cron: "0 15-23 * * *"
 
 permissions:
   contents: write
@@ -47,8 +49,15 @@ jobs:
 
           if p.exists():
               data = json.loads(p.read_text())
+              if isinstance(data, list):
+                  rows = len(data)
+              elif isinstance(data, dict):
+                  rows = len(data.get("players", []))
+              else:
+                  rows = "unknown"
+
               print("Type:", type(data).__name__)
-              print("Rows:", len(data) if isinstance(data, list) else len(data.get("players", [])) if isinstance(data, dict) else "unknown")
+              print("Rows:", rows)
               print("Preview:", str(data)[:500])
           PY
 
