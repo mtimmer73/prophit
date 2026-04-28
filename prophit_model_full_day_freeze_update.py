@@ -2049,7 +2049,22 @@ def write_outputs(df: pd.DataFrame) -> None:
         df.to_excel(fallback, index=False)
         log(f"Excel was locked. Saved fallback: {fallback}")
 
-    write_json(records, LATEST_JSON)
+       # Add model run stamp for UI header
+    eastern = ZoneInfo("America/New_York")
+    run_now = datetime.now(eastern)
+
+    latest_payload = {
+        "meta": {
+            "model_name": "PropHit",
+            "last_model_run_et": run_now.strftime("%m/%d/%Y %I:%M %p ET"),
+            "last_model_run_iso": run_now.isoformat(),
+            "run_type": "manual_or_scheduled",
+            "freeze_rule": "Started games remain frozen at their pregame projection."
+        },
+        "players": records
+    }
+
+    write_json(latest_payload, LATEST_JSON)
     write_json(records, LATEST_ALL_PLAYERS_JSON)
     write_json(PROP_HIT_SCHEMA, SCHEMA_JSON)
     write_json(build_performance_summary(df), PERFORMANCE_SUMMARY_JSON)
