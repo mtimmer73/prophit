@@ -414,7 +414,7 @@
     }
 
     .top-scroll-inner {
-      width: 2720px;
+      width: 3100px;
       height: 1px;
     }
 
@@ -427,7 +427,7 @@
 
     table {
       width: 100%;
-      min-width: 2720px;
+      min-width: 3100px;
       table-layout: fixed;
       border-collapse: collapse;
     }
@@ -773,35 +773,6 @@
       margin-bottom: 12px;
     }
 
-    .top-play-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .top-play-item {
-      border: 1px solid rgba(56,189,248,.14);
-      background: rgba(2,6,23,.42);
-      border-radius: 16px;
-      padding: 12px;
-      display: grid;
-      grid-template-columns: 32px minmax(0, 1fr) auto;
-      gap: 10px;
-      align-items: center;
-    }
-
-    .rank-badge {
-      width: 30px;
-      height: 30px;
-      border-radius: 999px;
-      display: grid;
-      place-items: center;
-      background: rgba(56,189,248,.16);
-      border: 1px solid rgba(56,189,248,.25);
-      color: #e0f2fe;
-      font-weight: 1000;
-      font-size: 12px;
-    }
-
     .legal-footer {
       margin-top: 40px;
       padding-top: 20px;
@@ -925,6 +896,16 @@
           </label>
 
           <label>
+            <span class="input-label">Min Pitcher BAA vs Batter Hand</span>
+            <input id="minPitcherBaaVsBatterHand" type="number" step="0.001" placeholder="0.250" />
+          </label>
+
+          <label>
+            <span class="input-label">Min Pitcher Season BAA Allowed vs Batter Hand</span>
+            <input id="minPitcherSeasonBaaAllowedVsBatterHand" type="number" step="0.001" placeholder="0.250" />
+          </label>
+
+          <label>
             <span class="input-label">Max Batting Order</span>
             <input id="maxOrder" type="number" step="1" placeholder="6" />
           </label>
@@ -962,13 +943,14 @@
       <div class="board-bar">
         <div>
           <button class="board-title-link" onclick="openBoardPopout()">PropHit Board</button>
-          <div class="small-note">Sticky lock controls • Player/team/opponent/time pinned • Click player for drawer • No Edge column yet</div>
+          <div class="small-note">Sticky lock controls • Player/team/opponent/time pinned • Pitcher BAA filters restored • No Edge column yet</div>
         </div>
 
         <div class="board-actions">
           <button onclick="setSort('one_plus_hit_probability')">Sort 1+ Hit</button>
           <button onclick="setSort('hit_score')">Sort Score</button>
           <button onclick="setSort('confidence_score')">Sort Confidence</button>
+          <button onclick="setSort('pitcher_season_baa_allowed_vs_batter_hand')">Sort Pitcher BAA</button>
         </div>
       </div>
 
@@ -1042,7 +1024,7 @@
       </div>
 
       <div class="table-scroll" style="max-height:78vh;">
-        <table style="min-width:1420px;">
+        <table style="min-width:1580px;">
           <thead id="popHead"></thead>
           <tbody id="popBody"></tbody>
         </table>
@@ -1079,6 +1061,8 @@
       ["bats", "Bats", 80, "Batter handedness."],
       ["opp_pitcher", "Pitcher", 235, "Expected opposing starting pitcher."],
       ["opp_pitcher_hand", "Hand", 85, "Opposing pitcher throwing hand."],
+      ["pitcher_baa_vs_batter_hand", "P BAA vs Bat Hand", 155, "Opposing pitcher batting average allowed against this batter's handedness."],
+      ["pitcher_season_baa_allowed_vs_batter_hand", "P Season BAA vs Hand", 190, "Opposing pitcher season batting average allowed against this batter's handedness."],
       ["projected_ab", "AB", 85, "Projected at-bats for this game."],
       ["projected_hits", "Hits", 95, "Projected hits for this game."],
       ["season_market_avg", "Season AVG", 120, "Official/raw season batting average."],
@@ -1102,6 +1086,8 @@
       ["bats", "B", 34],
       ["opp_pitcher", "Pitcher", 116],
       ["opp_pitcher_hand", "H", 34],
+      ["pitcher_baa_vs_batter_hand", "PBAA", 58],
+      ["pitcher_season_baa_allowed_vs_batter_hand", "SBAA", 58],
       ["projected_ab", "AB", 48],
       ["projected_hits", "Hits", 52],
       ["season_market_avg", "S AVG", 58],
@@ -1128,6 +1114,8 @@
     const minScoreInput = document.getElementById("minScore");
     const minConfidenceInput = document.getElementById("minConfidence");
     const minSeasonAvgVsHandInput = document.getElementById("minSeasonAvgVsHand");
+    const minPitcherBaaVsBatterHandInput = document.getElementById("minPitcherBaaVsBatterHand");
+    const minPitcherSeasonBaaAllowedVsBatterHandInput = document.getElementById("minPitcherSeasonBaaAllowedVsBatterHand");
     const maxOrderInput = document.getElementById("maxOrder");
 
     const filterFlags = {
@@ -1136,7 +1124,16 @@
       eliteOnly: false,
     };
 
-    [searchInput, minProbInput, minScoreInput, minConfidenceInput, minSeasonAvgVsHandInput, maxOrderInput].forEach((el) => {
+    [
+      searchInput,
+      minProbInput,
+      minScoreInput,
+      minConfidenceInput,
+      minSeasonAvgVsHandInput,
+      minPitcherBaaVsBatterHandInput,
+      minPitcherSeasonBaaAllowedVsBatterHandInput,
+      maxOrderInput
+    ].forEach((el) => {
       el.addEventListener("input", render);
     });
 
@@ -1167,13 +1164,6 @@
     function fmtPct(v, d = 1) {
       const n = toNum(v);
       return n === null ? "—" : `${(n * 100).toFixed(d)}%`;
-    }
-
-    function fmtDeltaPct(v, d = 1) {
-      const n = toNum(v);
-      if (n === null) return "—";
-      const sign = n > 0 ? "+" : "";
-      return `${sign}${(n * 100).toFixed(d)}%`;
     }
 
     function fmtAvgDelta(v) {
@@ -1221,6 +1211,30 @@
       if (hand === "L") return row?.season_avg_vs_lhp ?? row?.split_hits_per_ab_season_vs_opp_hand ?? null;
       if (hand === "R") return row?.season_avg_vs_rhp ?? row?.split_hits_per_ab_season_vs_opp_hand ?? null;
       return row?.season_avg_vs_pitcher_hand ?? row?.split_hits_per_ab_season_vs_opp_hand ?? null;
+    }
+
+    function getPitcherBaaVsBatterHand(row) {
+      return getValue(row, [
+        "pitcher_baa_vs_batter_hand",
+        "opp_pitcher_baa_vs_batter_hand",
+        "pitcher_baa_allowed_vs_batter_hand",
+        "opp_pitcher_baa_allowed_vs_batter_hand",
+        "pitcher_baa",
+        "opp_pitcher_baa"
+      ], null);
+    }
+
+    function getPitcherSeasonBaaAllowedVsBatterHand(row) {
+      return getValue(row, [
+        "pitcher_season_baa_allowed_vs_batter_hand",
+        "opp_pitcher_season_baa_allowed_vs_batter_hand",
+        "pitcher_season_baa_vs_batter_hand",
+        "opp_pitcher_season_baa_vs_batter_hand",
+        "pitcher_baa_vs_batter_hand",
+        "opp_pitcher_baa_vs_batter_hand",
+        "pitcher_baa",
+        "opp_pitcher_baa"
+      ], null);
     }
 
     function getConfidenceLetter(v) {
@@ -1315,6 +1329,8 @@
       if (key === "order_display") return getOrder(row);
       if (key === "confidence_letter") return getConfidenceLetter(row.confidence_score);
       if (key === "season_avg_vs_pitcher_hand") return row?.season_avg_vs_pitcher_hand ?? getSeasonAvgVsPitcherHand(row);
+      if (key === "pitcher_baa_vs_batter_hand") return getPitcherBaaVsBatterHand(row);
+      if (key === "pitcher_season_baa_allowed_vs_batter_hand") return getPitcherSeasonBaaAllowedVsBatterHand(row);
       return row?.[key];
     }
 
@@ -1323,7 +1339,15 @@
       if (key === "one_plus_hit_probability") return fmtPct(value);
       if (key === "fair_odds_american") return fmtOdds(value);
       if (["projected_ab", "projected_hits"].includes(key)) return fmtNum(value, 2);
-      if (["season_market_avg", "season_avg_vs_lhp", "season_avg_vs_rhp", "season_avg_vs_pitcher_hand", "model_avg"].includes(key)) return fmtNum(value, 3);
+      if ([
+        "season_market_avg",
+        "season_avg_vs_lhp",
+        "season_avg_vs_rhp",
+        "season_avg_vs_pitcher_hand",
+        "model_avg",
+        "pitcher_baa_vs_batter_hand",
+        "pitcher_season_baa_allowed_vs_batter_hand"
+      ].includes(key)) return fmtNum(value, 3);
       if (key === "model_vs_market_avg_delta") return fmtAvgDelta(value);
       if (key === "hit_score") return fmtNum(value, 1);
       if (key === "confidence_score") return fmtNum(value, 0);
@@ -1336,7 +1360,15 @@
       if (key === "hit_score") return getScoreTone(value);
       if (key === "confidence_score") return getConfTone(value);
       if (key === "projected_ab") return getABTone(value);
-      if (["season_market_avg", "season_avg_vs_lhp", "season_avg_vs_rhp", "season_avg_vs_pitcher_hand", "model_avg"].includes(key)) return getAvgTone(value);
+      if ([
+        "season_market_avg",
+        "season_avg_vs_lhp",
+        "season_avg_vs_rhp",
+        "season_avg_vs_pitcher_hand",
+        "model_avg",
+        "pitcher_baa_vs_batter_hand",
+        "pitcher_season_baa_allowed_vs_batter_hand"
+      ].includes(key)) return getAvgTone(value);
       if (key === "model_vs_market_avg_delta") return getDeltaTone(value);
       if (key === "order_display") return getOrderTone(value);
       return "#cbd5e1";
@@ -1346,6 +1378,8 @@
       if (key === "opp") return formatOpponent(row);
       if (key === "order_display") return getOrder(row);
       if (key === "season_avg_vs_pitcher_hand") return getSeasonAvgVsPitcherHand(row);
+      if (key === "pitcher_baa_vs_batter_hand") return getPitcherBaaVsBatterHand(row);
+      if (key === "pitcher_season_baa_allowed_vs_batter_hand") return getPitcherSeasonBaaAllowedVsBatterHand(row);
       if (key === "confidence_letter") return row.confidence_score;
       return row[key];
     }
@@ -1416,6 +1450,8 @@
       const minScore = toNum(minScoreInput.value);
       const minConfidence = toNum(minConfidenceInput.value);
       const minSeasonAvgVsHand = toNum(minSeasonAvgVsHandInput.value);
+      const minPitcherBaaVsBatterHand = toNum(minPitcherBaaVsBatterHandInput.value);
+      const minPitcherSeasonBaaAllowedVsBatterHand = toNum(minPitcherSeasonBaaAllowedVsBatterHandInput.value);
       const maxOrder = toNum(maxOrderInput.value);
 
       return rows.filter((row) => {
@@ -1431,10 +1467,14 @@
         if (minScore !== null && num(row.hit_score) < minScore) return false;
         if (minConfidence !== null && num(row.confidence_score) < minConfidence) return false;
         if (minSeasonAvgVsHand !== null && num(getSeasonAvgVsPitcherHand(row)) < minSeasonAvgVsHand) return false;
+        if (minPitcherBaaVsBatterHand !== null && num(getPitcherBaaVsBatterHand(row)) < minPitcherBaaVsBatterHand) return false;
+        if (minPitcherSeasonBaaAllowedVsBatterHand !== null && num(getPitcherSeasonBaaAllowedVsBatterHand(row)) < minPitcherSeasonBaaAllowedVsBatterHand) return false;
+
         if (maxOrder !== null) {
           const order = toNum(getOrder(row));
           if (order === null || order > maxOrder) return false;
         }
+
         if (filterFlags.confirmedOnly && !row.is_confirmed_starter && !row.lineup_spot_num) return false;
         if (filterFlags.strongOnly && !row.strong_play_tag && num(row.hit_score) < 70) return false;
         if (filterFlags.eliteOnly && !row.elite_play_tag && num(row.hit_score) < 80) return false;
@@ -1572,6 +1612,8 @@
       minScoreInput.value = "";
       minConfidenceInput.value = "";
       minSeasonAvgVsHandInput.value = "";
+      minPitcherBaaVsBatterHandInput.value = "";
+      minPitcherSeasonBaaAllowedVsBatterHandInput.value = "";
       maxOrderInput.value = "";
       filterFlags.confirmedOnly = false;
       filterFlags.strongOnly = false;
@@ -1639,6 +1681,8 @@
         metricHtml("Model - Market", fmtAvgDelta(row.model_vs_market_avg_delta), (num(row.model_vs_market_avg_delta) >= 0 ? tone.green : tone.red)),
         metricHtml("1+ Hit %", fmtPct(row.one_plus_hit_probability), getProbTone(row.one_plus_hit_probability)),
         metricHtml("Confidence", fmtNum(row.confidence_score, 0), getConfTone(row.confidence_score)),
+        metricHtml("Pitcher BAA vs Batter Hand", fmtNum(getPitcherBaaVsBatterHand(row), 3), getAvgTone(getPitcherBaaVsBatterHand(row))),
+        metricHtml("Pitcher Season BAA Allowed vs Batter Hand", fmtNum(getPitcherSeasonBaaAllowedVsBatterHand(row), 3), getAvgTone(getPitcherSeasonBaaAllowedVsBatterHand(row))),
         metricHtml("Best Bet Tier", row.best_bet_tier || "—", row.best_bet_tier === "A" ? tone.green : row.best_bet_tier === "B" ? tone.blue : tone.yellow),
         metricHtml("Status", row.status_label || (row.projection_locked ? "Locked" : row.is_confirmed_starter ? "Confirmed" : "Projected"), row.projection_locked ? tone.yellow : tone.green, row.freeze_status || "")
       ].join("");
@@ -1704,6 +1748,8 @@
           <div class="section-title">Matchup</div>
           <div class="metric-grid">
             ${metricHtml("Pitcher", row.opp_pitcher || "—", tone.white, row.opp_pitcher_hand ? `${row.opp_pitcher_hand}HP` : "Hand unknown")}
+            ${metricHtml("Pitcher BAA vs Batter Hand", fmtNum(getPitcherBaaVsBatterHand(row), 3), getAvgTone(getPitcherBaaVsBatterHand(row)))}
+            ${metricHtml("Pitcher Season BAA Allowed vs Batter Hand", fmtNum(getPitcherSeasonBaaAllowedVsBatterHand(row), 3), getAvgTone(getPitcherSeasonBaaAllowedVsBatterHand(row)))}
             ${metricHtml("Pitcher K Rate", fmtPct(row.opp_pitcher_k_rate), tone.blue)}
             ${metricHtml("Pinch Risk", fmtNum(row.pinch_hit_risk, 2), tone.yellow)}
             ${metricHtml("Matchup Score", fmtNum(row.matchup_score, 0), getScoreTone(row.matchup_score))}
@@ -1829,6 +1875,8 @@
         ["bats", "Bats"],
         ["opp_pitcher", "Opp Pitcher"],
         ["opp_pitcher_hand", "Pitcher Hand"],
+        ["pitcher_baa_vs_batter_hand", "Pitcher BAA vs Batter Hand"],
+        ["pitcher_season_baa_allowed_vs_batter_hand", "Pitcher Season BAA Allowed vs Batter Hand"],
         ["projected_ab", "Projected AB"],
         ["projected_hits", "Projected Hits"],
         ["season_market_avg", "Season AVG"],
@@ -1853,6 +1901,8 @@
           if (key === "opp") return formatOpponent(row);
           if (key === "order_display") return getOrder(row) ?? "";
           if (key === "season_avg_vs_pitcher_hand") return getSeasonAvgVsPitcherHand(row) ?? "";
+          if (key === "pitcher_baa_vs_batter_hand") return getPitcherBaaVsBatterHand(row) ?? "";
+          if (key === "pitcher_season_baa_allowed_vs_batter_hand") return getPitcherSeasonBaaAllowedVsBatterHand(row) ?? "";
           return row[key] ?? "";
         });
 
