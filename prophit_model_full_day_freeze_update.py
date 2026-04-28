@@ -1698,6 +1698,26 @@ def compute_projection(row: Dict[str, Any]) -> Dict[str, Any]:
         positives.append("Strong recent 1+ hit consistency")
     if row["split_hits_per_ab_3yr_vs_opp_hand"] >= 0.275:
         positives.append(f"Real MLB split is favorable vs {row['opp_pitcher_hand']}-handed pitching")
+    pitcher_baa_vs_hand = row.get("pitcher_season_baa_allowed_vs_batter_hand")
+
+    if pitcher_baa_vs_hand is not None and pd.notna(pitcher_baa_vs_hand):
+        if pitcher_baa_vs_hand >= 0.280:
+        positives.append(
+            f"Favorable pitcher matchup: opposing pitcher allows a {pitcher_baa_vs_hand:.3f} season BAA vs this batter hand"
+        )
+        elif pitcher_baa_vs_hand >= 0.250:
+        positives.append(
+            f"Neutral-to-favorable pitcher matchup: opposing pitcher allows a {pitcher_baa_vs_hand:.3f} season BAA vs this batter hand"
+        )
+        elif pitcher_baa_vs_hand < 0.230:
+        risks.append(
+            f"Pitcher matchup risk: opposing pitcher has limited this batter hand to a {pitcher_baa_vs_hand:.3f} season BAA"
+        )
+        else:
+        risks.append(
+            f"Moderate pitcher matchup caution: opposing pitcher allows only a {pitcher_baa_vs_hand:.3f} season BAA vs this batter hand"
+        )
+else:
     if row["matchup_score"] >= 65:
         positives.append("Favorable matchup profile")
     if row.get("lineup_spot_num") in [1, 2, 3, 4]:
