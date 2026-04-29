@@ -3,8 +3,16 @@ name: Run PropHit Model and Deploy UI
 on:
   workflow_dispatch:
   schedule:
-    # 7:00 AM Eastern during daylight time = 11:00 UTC
+    # 7:00 AM ET during daylight time = 11:00 UTC
     - cron: "0 11 * * *"
+
+    # Hourly 11:00 AM–10:00 PM ET during daylight time.
+    # GitHub Actions uses UTC, so this is split across UTC midnight.
+    # 11 AM–7 PM ET = 15:00–23:00 UTC
+    - cron: "0 15-23 * * *"
+
+    # 8 PM–10 PM ET = 00:00–02:00 UTC next UTC day
+    - cron: "0 0-2 * * *"
 
 permissions:
   contents: write
@@ -16,7 +24,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  run-model:
+  run-model-and-deploy:
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -79,7 +87,11 @@ jobs:
           git config --global user.email "prophit-bot@example.com"
           git config --global user.name "prophit-bot"
 
-          git add data/prophit_latest.json data/prophit_all_players.json data/prophit_schema.json data/prophit_performance_summary.json outputs || true
+          git add data/prophit_latest.json || true
+          git add data/prophit_all_players.json || true
+          git add data/prophit_schema.json || true
+          git add data/prophit_performance_summary.json || true
+          git add outputs || true
 
           if git diff --cached --quiet; then
             echo "No model output changes to commit."
@@ -88,18 +100,23 @@ jobs:
             git push
           fi
 
+      - name: Refresh repo after model commit
+        run: |
+          git pull --rebase || true
+
       - name: Prepare GitHub Pages artifact
         run: |
+          rm -rf site
           mkdir -p site
 
           cp index.html site/index.html
 
-          if [ -d assets ]; then
-            cp -r assets site/assets
-          fi
-
           if [ -d data ]; then
             cp -r data site/data
+          fi
+
+          if [ -d assets ]; then
+            cp -r assets site/assets
           fi
 
           if [ -f favicon.svg ]; then
@@ -118,8 +135,10 @@ jobs:
             cp index-nqMpl4T3.css site/index-nqMpl4T3.css
           fi
 
-          echo "Prepared site artifact:"
+          echo "Prepared GitHub Pages artifact:"
           ls -lah site
+          echo "Prepared data folder:"
+          ls -lah site/data || true
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
