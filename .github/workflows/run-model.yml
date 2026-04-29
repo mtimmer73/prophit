@@ -1,18 +1,24 @@
-name: Run PropHit Model
+name: Run PropHit Model and Deploy UI
 
 on:
   workflow_dispatch:
   schedule:
-    # GitHub cron uses UTC.
-    # 15-23 UTC = roughly 11 AM-7 PM Eastern during daylight time.
-    - cron: "0 15-23 * * *"
+    # 7:00 AM Eastern during daylight time = 11:00 UTC
+    - cron: "0 11 * * *"
 
 permissions:
   contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: prophit-model-and-ui
+  cancel-in-progress: true
 
 jobs:
   run-model:
     runs-on: ubuntu-latest
+    timeout-minutes: 30
 
     steps:
       - name: Checkout repo
@@ -25,55 +31,103 @@ jobs:
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
+      - name: Install Python dependencies
         run: |
+          python -m pip install --upgrade pip
           pip install requests pandas numpy openpyxl
 
-      - name: Run model
+      - name: Run PropHit model
+        timeout-minutes: 25
         run: |
           python prophit_model_full_day_freeze_update.py
 
-      - name: Verify output files
+      - name: Verify model output
         run: |
           echo "Checking data folder..."
           ls -lah data || true
 
-          echo "Preview prophit_latest.json..."
+          echo "Verifying data/prophit_latest.json..."
           python - <<'PY'
           import json
           from pathlib import Path
 
-          p = Path("data/prophit_latest.json")
-          print("Exists:", p.exists())
-          print("Size:", p.stat().st_size if p.exists() else "missing")
+          path = Path("data/prophit_latest.json")
 
-          if p.exists():
-              data = json.loads(p.read_text())
-              if isinstance(data, list):
-                  rows = len(data)
-              elif isinstance(data, dict):
-                  rows = len(data.get("players", []))
-              else:
-                  rows = "unknown"
+          if not path.exists():
+              raise FileNotFoundError("data/prophit_latest.json was not created")
 
-              print("Type:", type(data).__name__)
-              print("Rows:", rows)
-              print("Preview:", str(data)[:500])
+          with path.open("r", encoding="utf-8") as f:
+              data = json.load(f)
+
+          if isinstance(data, dict):
+              print("JSON format: object")
+              print("Top-level keys:", list(data.keys()))
+              print("Meta:", data.get("meta", {}))
+              players = data.get("players", [])
+              print("Player count:", len(players))
+          elif isinstance(data, list):
+              print("JSON format: list")
+              print("Player count:", len(data))
+          else:
+              raise TypeError(f"Unexpected JSON format: {type(data)}")
+
+          print("JSON verified successfully.")
           PY
 
-      - name: Commit updated JSON
+      - name: Commit updated model output
         run: |
-          git config user.name "github-actions"
-          git config user.email "actions@github.com"
+          git config --global user.email "prophit-bot@example.com"
+          git config --global user.name "prophit-bot"
 
-          git status
+          git add data/prophit_latest.json data/prophit_all_players.json data/prophit_schema.json data/prophit_performance_summary.json outputs || true
 
-          git add data/prophit_latest.json
-          git add data/prophit_all_players.json || true
-          git add data/prophit_schema.json || true
-          git add data/prophit_performance_summary.json || true
+          if git diff --cached --quiet; then
+            echo "No model output changes to commit."
+          else
+            git commit -m "Auto update PropHit model output"
+            git push
+          fi
 
-          git status
+      - name: Prepare GitHub Pages artifact
+        run: |
+          mkdir -p site
 
-          git commit -m "Auto update PropHit data" || echo "No changes to commit"
-          git push
+          cp index.html site/index.html
+
+          if [ -d assets ]; then
+            cp -r assets site/assets
+          fi
+
+          if [ -d data ]; then
+            cp -r data site/data
+          fi
+
+          if [ -f favicon.svg ]; then
+            cp favicon.svg site/favicon.svg
+          fi
+
+          if [ -f icons.svg ]; then
+            cp icons.svg site/icons.svg
+          fi
+
+          if [ -f index-Bcz-ZUx5.js ]; then
+            cp index-Bcz-ZUx5.js site/index-Bcz-ZUx5.js
+          fi
+
+          if [ -f index-nqMpl4T3.css ]; then
+            cp index-nqMpl4T3.css site/index-nqMpl4T3.css
+          fi
+
+          echo "Prepared site artifact:"
+          ls -lah site
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy UI to GitHub Pages
+        uses: actions/deploy-pages@v4
