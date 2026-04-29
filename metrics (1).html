@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PropHit Metric Index</title>
+  <style>
+    :root {
+      --bg: #020617;
+      --panel: rgba(15, 23, 42, 0.82);
+      --border: rgba(56, 189, 248, 0.18);
+      --muted: #94a3b8;
+      --text: #e5f2ff;
+      --cyan: #7dd3fc;
+      --green: #34d399;
+      --yellow: #fbbf24;
+      --red: #fb7185;
+      --blue: #60a5fa;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(14,165,233,.20), transparent 34%),
+        linear-gradient(180deg, #020617 0%, #071326 48%, #020617 100%);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    }
+
+    .page {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 28px 18px 48px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: #bae6fd;
+      text-decoration: none;
+      border: 1px solid rgba(56,189,248,.28);
+      background: rgba(14,165,233,.13);
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-weight: 900;
+    }
+
+    .back-link:hover { background: rgba(14,165,233,.24); }
+
+    .hero {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: 0 20px 70px rgba(0,0,0,.28);
+      margin-bottom: 18px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(56,189,248,.25);
+      background: rgba(14,165,233,.12);
+      color: #bae6fd;
+      border-radius: 999px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 16px 0 8px;
+      font-size: clamp(34px, 5vw, 58px);
+      line-height: .95;
+      letter-spacing: -.05em;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.55;
+      max-width: 900px;
+    }
+
+    .note {
+      margin-top: 14px;
+      color: #bae6fd;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .quick-nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin: 18px 0;
+    }
+
+    .quick-nav a {
+      color: #e0f2fe;
+      text-decoration: none;
+      border: 1px solid rgba(56,189,248,.20);
+      background: rgba(15,23,42,.70);
+      border-radius: 999px;
+      padding: 9px 12px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .quick-nav a:hover { background: rgba(14,165,233,.20); }
+
+    .section {
+      margin-top: 18px;
+      border: 1px solid var(--border);
+      background: rgba(15, 23, 42, 0.72);
+      border-radius: 24px;
+      padding: 20px;
+    }
+
+    .section h2 {
+      margin: 0 0 14px;
+      font-size: 22px;
+      letter-spacing: -.02em;
+      color: #e0f2fe;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 12px;
+    }
+
+    .metric {
+      border: 1px solid rgba(56,189,248,.14);
+      background: rgba(2,6,23,.48);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .metric-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: #ffffff;
+      font-weight: 1000;
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .metric-key {
+      color: var(--cyan);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .metric p {
+      margin: 0;
+      color: #cbd5e1;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .good { color: var(--green); font-weight: 900; }
+    .watch { color: var(--yellow); font-weight: 900; }
+    .bad { color: var(--red); font-weight: 900; }
+    .info { color: var(--blue); font-weight: 900; }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid rgba(56,189,248,.14);
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid rgba(56,189,248,.10);
+      vertical-align: top;
+      font-size: 14px;
+      line-height: 1.45;
+    }
+
+    th {
+      background: #0b2047;
+      color: #dbeafe;
+      text-transform: uppercase;
+      letter-spacing: .10em;
+      font-size: 11px;
+    }
+
+    td { color: #cbd5e1; background: rgba(2,6,23,.28); }
+
+    .footer {
+      margin-top: 28px;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    @media (max-width: 700px) {
+      .hero { padding: 20px; }
+      .section { padding: 16px; }
+      th, td { font-size: 13px; padding: 10px; }
+    }
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <div class="topbar">
+      <a class="back-link" href="./index.html">← Back to PropHit Board</a>
+      <a class="back-link" href="./data/prophit_latest.json" target="_blank" rel="noopener noreferrer">Open Live JSON</a>
+    </div>
+
+    <section class="hero">
+      <div class="badge">PropHit Reference</div>
+      <h1>Metric Index</h1>
+      <div class="subtitle">
+        Plain-English definitions for the PropHit board, player drawer, filters, and risk notes.
+        This page is designed to be linked from the main board so anyone viewing the site can understand what each number means.
+      </div>
+      <div class="note">
+        PropHit is an informational projection tool. Metrics are estimates based on available MLB data, model assumptions, lineup context,
+        splits, pitcher matchup data, and current board rules. They are not guarantees, financial advice, or betting advice.
+      </div>
+    </section>
+
+    <nav class="quick-nav">
+      <a href="#board">Board Columns</a>
+      <a href="#projection">Projection Metrics</a>
+      <a href="#splits">Splits & Recent Form</a>
+      <a href="#pitcher">Pitcher Matchup</a>
+      <a href="#scores">Scores & Tiers</a>
+      <a href="#risk">Risk Factors</a>
+      <a href="#run-rules">Run Rules</a>
+    </nav>
+
+    <section class="section" id="board">
+      <h2>Board Columns</h2>
+      <div class="grid">
+        <div class="metric"><div class="metric-title">Player <span class="metric-key">player</span></div><p>The hitter being projected. Clicking the player opens the right-side drilldown.</p></div>
+        <div class="metric"><div class="metric-title">Team <span class="metric-key">team</span></div><p>The hitter’s MLB team for today’s matchup.</p></div>
+        <div class="metric"><div class="metric-title">Opponent <span class="metric-key">opp</span></div><p>The opposing team. An <strong>@</strong> generally means the hitter’s team is away.</p></div>
+        <div class="metric"><div class="metric-title">Time <span class="metric-key">game_time_et</span></div><p>Scheduled first pitch time shown in Eastern Time.</p></div>
+        <div class="metric"><div class="metric-title">Order <span class="metric-key">lineup_spot_num</span></div><p>Confirmed batting order when available. Lower numbers usually mean more plate appearance opportunity.</p></div>
+        <div class="metric"><div class="metric-title">Bats <span class="metric-key">bats</span></div><p>Batter handedness: L, R, or S.</p></div>
+        <div class="metric"><div class="metric-title">Pitcher <span class="metric-key">opp_pitcher</span></div><p>The expected opposing starting pitcher.</p></div>
+        <div class="metric"><div class="metric-title">Hand <span class="metric-key">opp_pitcher_hand</span></div><p>The opposing pitcher’s throwing hand.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="projection">
+      <h2>Projection Metrics</h2>
+      <div class="grid">
+        <div class="metric"><div class="metric-title">Projected AB <span class="metric-key">projected_ab</span></div><p>Estimated at-bats for the hitter. It is driven by lineup spot, confirmed/fallback lineup status, home/away context, opposing environment, and pitcher traffic.</p></div>
+        <div class="metric"><div class="metric-title">Projected Hits <span class="metric-key">projected_hits</span></div><p>Estimated hits for the game. It comes from projected at-bats multiplied by the model’s final hit rate.</p></div>
+        <div class="metric"><div class="metric-title">1+ Hit % <span class="metric-key">one_plus_hit_probability</span></div><p>Projected probability that the hitter records at least one hit.</p></div>
+        <div class="metric"><div class="metric-title">Fair Odds <span class="metric-key">fair_odds_american</span></div><p>American odds implied by the model’s 1+ hit probability. These are model-implied fair odds, not sportsbook odds.</p></div>
+        <div class="metric"><div class="metric-title">Season AVG <span class="metric-key">season_market_avg</span></div><p>Official/raw season batting average used as the market-style baseline.</p></div>
+        <div class="metric"><div class="metric-title">Model AVG <span class="metric-key">model_avg</span></div><p>The model’s predicted batting average for this matchup after skill, recent form, split, pitcher, and park adjustments.</p></div>
+        <div class="metric"><div class="metric-title">Model - Market <span class="metric-key">model_vs_market_avg_delta</span></div><p>Difference between Model AVG and Season AVG. <span class="good">Positive</span> means the model is above season baseline; <span class="bad">negative</span> means below.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="splits">
+      <h2>Splits & Recent Form</h2>
+      <div class="grid">
+        <div class="metric"><div class="metric-title">Season vs LHP <span class="metric-key">season_avg_vs_lhp</span></div><p>Season batting average against left-handed pitching.</p></div>
+        <div class="metric"><div class="metric-title">Season vs RHP <span class="metric-key">season_avg_vs_rhp</span></div><p>Season batting average against right-handed pitching.</p></div>
+        <div class="metric"><div class="metric-title">Season vs Hand <span class="metric-key">season_avg_vs_pitcher_hand</span></div><p>Season split matched to today’s opposing pitcher hand.</p></div>
+        <div class="metric"><div class="metric-title">3-Year Split vs Hand <span class="metric-key">split_hits_per_ab_3yr_vs_opp_hand</span></div><p>Three-year handedness split against today’s pitcher hand. Used to stabilize the projection beyond small current-season samples.</p></div>
+        <div class="metric"><div class="metric-title">Split Sample Size <span class="metric-key">split_ab_3yr_vs_opp_hand</span></div><p>Number of at-bats in the 3-year split sample. Smaller samples are less reliable and may trigger a risk note.</p></div>
+        <div class="metric"><div class="metric-title">Recent AB Windows <span class="metric-key">last15 / last30 / last50 / last100 / last200</span></div><p>Recent batting average windows based on recent at-bats. These help show current form and volatility.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="pitcher">
+      <h2>Pitcher Matchup Metrics</h2>
+      <div class="grid">
+        <div class="metric"><div class="metric-title">Pitcher Season BAA vs Hand <span class="metric-key">pitcher_season_baa_allowed_vs_batter_hand</span></div><p>Opposing pitcher’s season batting average allowed against this hitter’s handedness. Higher is better for the hitter; lower is a risk.</p></div>
+        <div class="metric"><div class="metric-title">Pitcher K Rate <span class="metric-key">opp_pitcher_k_rate</span></div><p>Opposing pitcher strikeout rate. Higher strikeout rates reduce contact opportunity and can add risk.</p></div>
+        <div class="metric"><div class="metric-title">Pitcher WHIP <span class="metric-key">opp_pitcher_whip</span></div><p>Walks plus hits allowed per inning pitched. Higher WHIP generally means more traffic and more opportunities.</p></div>
+        <div class="metric"><div class="metric-title">Pitcher Hits per 9 <span class="metric-key">opp_pitcher_hits_per_9</span></div><p>Hits allowed per nine innings. Higher values generally help hitter projections.</p></div>
+        <div class="metric"><div class="metric-title">Pitcher Traffic Factor <span class="metric-key">pitcher_traffic_factor</span></div><p>Adjustment for how much traffic the opposing pitcher allows. It influences projected plate appearances and environment.</p></div>
+        <div class="metric"><div class="metric-title">Pitcher BAA Thresholds <span class="metric-key">risk logic</span></div><p><span class="good">.280+</span> favorable, <span class="info">.250–.279</span> neutral-to-favorable, <span class="watch">.230–.249</span> caution, <span class="bad">&lt;.230</span> risk.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="scores">
+      <h2>Scores, Grades & Tags</h2>
+      <div class="grid">
+        <div class="metric"><div class="metric-title">Hit Score <span class="metric-key">hit_score</span></div><p>Overall PropHit score that blends projection quality, matchup strength, recent form, split profile, projected AB, and other model components.</p></div>
+        <div class="metric"><div class="metric-title">Confidence Score <span class="metric-key">confidence_score</span></div><p>Reliability score for the projection. Higher means the model has stronger support from sample size, lineup certainty, and lower volatility.</p></div>
+        <div class="metric"><div class="metric-title">Confidence Letter <span class="metric-key">confidence_letter</span></div><p>A simplified grade: A = strongest, B = strong, C = playable, D = lower, F = avoid.</p></div>
+        <div class="metric"><div class="metric-title">Best Bet Tier <span class="metric-key">best_bet_tier</span></div><p>Simple tier label based on ranking score. A is strongest, then B, C, and Watch.</p></div>
+        <div class="metric"><div class="metric-title">Strong Play Tag <span class="metric-key">strong_play_tag</span></div><p>Flags players that meet stronger minimums for 1+ hit probability, confidence, and projected AB.</p></div>
+        <div class="metric"><div class="metric-title">Elite Play Tag <span class="metric-key">elite_play_tag</span></div><p>Flags players that meet higher cutoffs for probability, confidence, and hit score.</p></div>
+      </div>
+
+      <div style="margin-top:16px; overflow-x:auto;">
+        <table>
+          <thead>
+            <tr><th>Confidence Grade</th><th>Range</th><th>Meaning</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="good">A</span></td><td>80+</td><td>Highest confidence tier.</td></tr>
+            <tr><td><span class="info">B</span></td><td>70–79</td><td>Strong confidence tier.</td></tr>
+            <tr><td><span class="watch">C</span></td><td>60–69</td><td>Playable, but not top confidence.</td></tr>
+            <tr><td><span class="bad">D</span></td><td>45–59</td><td>Lower-confidence range.</td></tr>
+            <tr><td><span class="bad">F</span></td><td>&lt;45</td><td>Avoid or very low confidence.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section" id="risk">
+      <h2>Risk Factors</h2>
+      <div class="grid">
+        <div class="metric"><div class="metric-title">Low Pitcher BAA Allowed <span class="metric-key">&lt;.230</span></div><p>Opposing pitcher has limited this batter hand. This should appear as a risk note.</p></div>
+        <div class="metric"><div class="metric-title">Negative Model Delta <span class="metric-key">model_vs_market_avg_delta</span></div><p>Model AVG is below season AVG, suggesting the matchup projection is weaker than the hitter’s baseline.</p></div>
+        <div class="metric"><div class="metric-title">Cold Recent Form <span class="metric-key">last15 / last30</span></div><p>Recent AB windows below target can show current form risk.</p></div>
+        <div class="metric"><div class="metric-title">Low Split Reliability <span class="metric-key">split_reliability_score</span></div><p>Low split sample or unreliable handedness split data reduces confidence.</p></div>
+        <div class="metric"><div class="metric-title">Elevated Pitcher K Rate <span class="metric-key">opp_pitcher_k_rate</span></div><p>High strikeout pitchers reduce balls in play and can lower hit probability.</p></div>
+        <div class="metric"><div class="metric-title">Pinch-Hit / Role Risk <span class="metric-key">pinch_hit_risk</span></div><p>Risk that the hitter’s role or handedness matchup reduces expected plate appearances.</p></div>
+      </div>
+    </section>
+
+    <section class="section" id="run-rules">
+      <h2>Run Rules & Data Freshness</h2>
+      <div class="grid">
+        <div class="metric"><div class="metric-title">Latest Model Run <span class="metric-key">meta.last_model_run_et</span></div><p>Timestamp written by the model when the JSON was generated. This is the source of truth for the “Latest Model Run” display.</p></div>
+        <div class="metric"><div class="metric-title">Frozen Started Games <span class="metric-key">projection_locked</span></div><p>Games that have started remain visible but are frozen from their pregame projection.</p></div>
+        <div class="metric"><div class="metric-title">Upcoming Games Refresh <span class="metric-key">LIVE_REFRESH</span></div><p>Reruns update only games that have not started yet.</p></div>
+        <div class="metric"><div class="metric-title">Run Window <span class="metric-key">model_refresh_window_et</span></div><p>The board is intended to refresh hourly from 11:00 AM through 10:00 PM Eastern Time.</p></div>
+      </div>
+    </section>
+
+    <div class="footer">
+      PropHit is for informational and entertainment purposes only. Metrics are model outputs and may change as lineups, probable pitchers, and MLB data update.
+    </div>
+  </main>
+</body>
+</html>
