@@ -2,38 +2,86 @@
   "meta": {
     "summary_type": "postgame_grading",
     "target_date": "2026-04-29",
-    "generated_at_et": "2026-04-29 09:26:29 PM ET",
+    "generated_at_et": "2026-04-30 12:57:24 PM ET",
     "rule": "Grades only the last eligible model snapshot where the player appeared before game start."
   },
   "overall": {
-    "graded": 0,
-    "wins": 0,
-    "losses": 0,
-    "pending": 18,
-    "one_plus_hit_rate": null
+    "graded": 18,
+    "wins": 12,
+    "losses": 6,
+    "pending": 0,
+    "one_plus_hit_rate": 0.6667
   },
   "by_hit_score_bucket": [
     {
-      "bucket": "Unknown",
-      "graded": 0,
-      "wins": 0,
-      "hit_rate": null
+      "bucket": "60-69",
+      "graded": 3,
+      "wins": 2,
+      "hit_rate": 0.6667
+    },
+    {
+      "bucket": "70-79",
+      "graded": 2,
+      "wins": 1,
+      "hit_rate": 0.5
+    },
+    {
+      "bucket": "80-89",
+      "graded": 2,
+      "wins": 2,
+      "hit_rate": 1.0
+    },
+    {
+      "bucket": "<60",
+      "graded": 11,
+      "wins": 7,
+      "hit_rate": 0.6364
     }
   ],
   "by_confidence_bucket": [
     {
-      "bucket": "Unknown",
-      "graded": 0,
-      "wins": 0,
-      "hit_rate": null
+      "bucket": "A 80+",
+      "graded": 8,
+      "wins": 6,
+      "hit_rate": 0.75
+    },
+    {
+      "bucket": "B 70-79",
+      "graded": 2,
+      "wins": 1,
+      "hit_rate": 0.5
+    },
+    {
+      "bucket": "C 60-69",
+      "graded": 3,
+      "wins": 2,
+      "hit_rate": 0.6667
+    },
+    {
+      "bucket": "D 45-59",
+      "graded": 3,
+      "wins": 1,
+      "hit_rate": 0.3333
+    },
+    {
+      "bucket": "F <45",
+      "graded": 2,
+      "wins": 2,
+      "hit_rate": 1.0
     }
   ],
   "by_lineup_bucket": [
     {
-      "bucket": "Unknown",
-      "graded": 0,
-      "wins": 0,
-      "hit_rate": null
+      "bucket": "Confirmed 1-4",
+      "graded": 8,
+      "wins": 6,
+      "hit_rate": 0.75
+    },
+    {
+      "bucket": "Confirmed 5-9",
+      "graded": 10,
+      "wins": 6,
+      "hit_rate": 0.6
     }
   ]
 }
