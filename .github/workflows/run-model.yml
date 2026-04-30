@@ -33,6 +33,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           persist-credentials: true
+          fetch-depth: 0
 
       - name: Setup Python
         uses: actions/setup-python@v5
@@ -53,6 +54,12 @@ jobs:
         run: |
           echo "Checking data folder..."
           ls -lah data || true
+
+          echo "Checking outputs folder..."
+          ls -lah outputs || true
+
+          echo "Checking snapshots folder..."
+          ls -lah outputs/snapshots || true
 
           echo "Verifying data/prophit_latest.json..."
           python - <<'PY'
@@ -82,21 +89,31 @@ jobs:
           print("JSON verified successfully.")
           PY
 
-      - name: Commit updated model output
+      - name: Commit updated model output and snapshots
         run: |
           git config --global user.email "prophit-bot@example.com"
           git config --global user.name "prophit-bot"
 
+          # Live UI data
           git add data/prophit_latest.json || true
           git add data/prophit_all_players.json || true
           git add data/prophit_schema.json || true
           git add data/prophit_performance_summary.json || true
-          git add outputs || true
+
+          # Force-add grading snapshots even if outputs is ignored by .gitignore
+          git add -f outputs/snapshots/*.json || true
+          git add -f outputs/snapshots/*.xlsx || true
+
+          # Force-add useful run artifacts
+          git add -f outputs/prophit_today.xlsx || true
+          git add -f outputs/prophit_run_log.json || true
+          git add -f outputs/prophit_freeze_state.json || true
 
           if git diff --cached --quiet; then
             echo "No model output changes to commit."
           else
-            git commit -m "Auto update PropHit model output"
+            git commit -m "Auto update PropHit model output and snapshots"
+            git pull --rebase || true
             git push
           fi
 
@@ -137,7 +154,8 @@ jobs:
 
           echo "Prepared GitHub Pages artifact:"
           ls -lah site
-          echo "Prepared data folder:"
+
+          echo "Prepared site/data folder:"
           ls -lah site/data || true
 
       - name: Configure GitHub Pages
