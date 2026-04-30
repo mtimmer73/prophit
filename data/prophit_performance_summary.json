@@ -1,87 +1,14 @@
 {
-  "meta": {
-    "summary_type": "postgame_grading",
-    "target_date": "2026-04-29",
-    "generated_at_et": "2026-04-30 12:57:24 PM ET",
-    "rule": "Grades only the last eligible model snapshot where the player appeared before game start."
-  },
-  "overall": {
-    "graded": 18,
-    "wins": 12,
-    "losses": 6,
-    "pending": 0,
-    "one_plus_hit_rate": 0.6667
-  },
-  "by_hit_score_bucket": [
-    {
-      "bucket": "60-69",
-      "graded": 3,
-      "wins": 2,
-      "hit_rate": 0.6667
-    },
-    {
-      "bucket": "70-79",
-      "graded": 2,
-      "wins": 1,
-      "hit_rate": 0.5
-    },
-    {
-      "bucket": "80-89",
-      "graded": 2,
-      "wins": 2,
-      "hit_rate": 1.0
-    },
-    {
-      "bucket": "<60",
-      "graded": 11,
-      "wins": 7,
-      "hit_rate": 0.6364
-    }
-  ],
-  "by_confidence_bucket": [
-    {
-      "bucket": "A 80+",
-      "graded": 8,
-      "wins": 6,
-      "hit_rate": 0.75
-    },
-    {
-      "bucket": "B 70-79",
-      "graded": 2,
-      "wins": 1,
-      "hit_rate": 0.5
-    },
-    {
-      "bucket": "C 60-69",
-      "graded": 3,
-      "wins": 2,
-      "hit_rate": 0.6667
-    },
-    {
-      "bucket": "D 45-59",
-      "graded": 3,
-      "wins": 1,
-      "hit_rate": 0.3333
-    },
-    {
-      "bucket": "F <45",
-      "graded": 2,
-      "wins": 2,
-      "hit_rate": 1.0
-    }
-  ],
-  "by_lineup_bucket": [
-    {
-      "bucket": "Confirmed 1-4",
-      "graded": 8,
-      "wins": 6,
-      "hit_rate": 0.75
-    },
-    {
-      "bucket": "Confirmed 5-9",
-      "graded": 10,
-      "wins": 6,
-      "hit_rate": 0.6
-    }
-  ]
+  "status": "live",
+  "updated_et": "2026-04-30 04:01:58 PM",
+  "target_date": "2026-04-30",
+  "total_players": 230,
+  "confirmed_starters": 126,
+  "confirmed_lineup_pct": 0.5478260869565217,
+  "locked_rows": 182,
+  "top_play_count": 36,
+  "avg_top_play_probability": 0.7051457469314317,
+  "avg_top_play_confidence": 84.56794569780848,
+  "best_bet_rank_score_avg": 46.20120981346376,
+  "note": "Full-day board. Started games remain visible as frozen pregame projections; only upcoming games refresh on reruns."
 }
