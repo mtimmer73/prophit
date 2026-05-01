@@ -3,16 +3,14 @@ name: Run PropHit Model and Deploy UI
 on:
   workflow_dispatch:
   schedule:
-    # 7:00 AM ET during daylight time = 11:00 UTC
-    - cron: "0 11 * * *"
+    # 7:05 AM ET during daylight time = 11:05 UTC
+    - cron: "5 11 * * *"
 
-    # Hourly 11:00 AM–10:00 PM ET during daylight time.
-    # GitHub Actions uses UTC, so this is split across UTC midnight.
-    # 11 AM–7 PM ET = 15:00–23:00 UTC
-    - cron: "0 15-23 * * *"
-
-    # 8 PM–10 PM ET = 00:00–02:00 UTC next UTC day
-    - cron: "0 0-2 * * *"
+    # Hourly 11:05 AM–10:05 PM ET during daylight time.
+    # GitHub Actions uses UTC.
+    # 11 AM–7 PM ET = 15:05–23:05 UTC
+    # 8 PM–10 PM ET = 00:05–02:05 UTC
+    - cron: "5 15-23,0-2 * * *"
 
 permissions:
   contents: write
@@ -99,6 +97,7 @@ jobs:
           git add data/prophit_all_players.json || true
           git add data/prophit_schema.json || true
           git add data/prophit_performance_summary.json || true
+          git add data/prophit_validation_rows.json || true
 
           # Force-add grading snapshots even if outputs is ignored by .gitignore
           git add -f outputs/snapshots/*.json || true
