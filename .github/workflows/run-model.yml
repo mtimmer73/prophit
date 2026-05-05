@@ -2,15 +2,27 @@ name: Run PropHit Model and Deploy UI
 
 on:
   workflow_dispatch:
-  schedule:
-    # 7:05 AM ET during daylight time = 11:05 UTC
-    - cron: "5 11 * * *"
 
-    # Hourly 11:05 AM–10:05 PM ET during daylight time.
+  # Deploy UI automatically when the site or this workflow changes.
+  push:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - "assets/**"
+      - "favicon.svg"
+      - "icons.svg"
+      - ".github/workflows/run-model.yml"
+
+  schedule:
+    # 7:17 AM ET during daylight time = 11:17 UTC
+    - cron: "17 11 * * *"
+
+    # Hourly 11:17 AM–10:17 PM ET during daylight time.
     # GitHub Actions uses UTC.
-    # 11 AM–7 PM ET = 15:05–23:05 UTC
-    # 8 PM–10 PM ET = 00:05–02:05 UTC
-    - cron: "5 15-23,0-2 * * *"
+    # 11 AM–7 PM ET = 15:17–23:17 UTC
+    # 8 PM–10 PM ET = 00:17–02:17 UTC
+    - cron: "17 15-23,0-2 * * *"
 
 permissions:
   contents: write
@@ -43,12 +55,27 @@ jobs:
           python -m pip install --upgrade pip
           pip install requests pandas numpy openpyxl
 
+      - name: Decide whether to run model
+        id: model_decision
+        run: |
+          echo "Event name: ${{ github.event_name }}"
+
+          if [ "${{ github.event_name }}" = "push" ]; then
+            echo "UI/workflow push detected. Skipping model run and only deploying UI."
+            echo "run_model=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Manual or scheduled run detected. Running model before deploy."
+            echo "run_model=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Run PropHit model
+        if: steps.model_decision.outputs.run_model == 'true'
         timeout-minutes: 25
         run: |
           python prophit_model_full_day_freeze_update.py
 
       - name: Verify model output
+        if: steps.model_decision.outputs.run_model == 'true'
         run: |
           echo "Checking data folder..."
           ls -lah data || true
@@ -88,6 +115,7 @@ jobs:
           PY
 
       - name: Commit updated model output and snapshots
+        if: steps.model_decision.outputs.run_model == 'true'
         run: |
           git config --global user.email "prophit-bot@example.com"
           git config --global user.name "prophit-bot"
@@ -117,8 +145,32 @@ jobs:
           fi
 
       - name: Refresh repo after model commit
+        if: steps.model_decision.outputs.run_model == 'true'
         run: |
           git pull --rebase || true
+
+      - name: Verify site files before deploy
+        run: |
+          echo "Current branch:"
+          git branch --show-current
+
+          echo "Current commit:"
+          git rev-parse --short HEAD
+
+          echo "Root files:"
+          ls -lah
+
+          echo "Data files:"
+          ls -lah data || true
+
+          if [ ! -f index.html ]; then
+            echo "index.html is missing"
+            exit 1
+          fi
+
+          if [ ! -f data/prophit_latest.json ]; then
+            echo "Warning: data/prophit_latest.json is missing. Site will deploy, but board may not load data."
+          fi
 
       - name: Prepare GitHub Pages artifact
         run: |
@@ -127,7 +179,7 @@ jobs:
 
           cp index.html site/index.html
 
-          # Keep custom domain attached after every deploy
+          # Keep custom domain attached after every deploy.
           echo "prophitlab.com" > site/CNAME
 
           if [ -d data ]; then
@@ -146,7 +198,7 @@ jobs:
             cp icons.svg site/icons.svg
           fi
 
-          # Optional Vite/static build files if present
+          # Optional Vite/static build files if present.
           if [ -f index-Bcz-ZUx5.js ]; then
             cp index-Bcz-ZUx5.js site/index-Bcz-ZUx5.js
           fi
