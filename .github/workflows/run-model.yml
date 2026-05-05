@@ -24,7 +24,7 @@ concurrency:
 jobs:
   run-model-and-deploy:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 35
 
     steps:
       - name: Checkout repo
@@ -127,6 +127,9 @@ jobs:
 
           cp index.html site/index.html
 
+          # Keep custom domain attached after every deploy
+          echo "prophitlab.com" > site/CNAME
+
           if [ -d data ]; then
             cp -r data site/data
           fi
@@ -143,6 +146,7 @@ jobs:
             cp icons.svg site/icons.svg
           fi
 
+          # Optional Vite/static build files if present
           if [ -f index-Bcz-ZUx5.js ]; then
             cp index-Bcz-ZUx5.js site/index-Bcz-ZUx5.js
           fi
