@@ -1,8 +1,8 @@
 {
   "meta": {
     "model_name": "PropHit",
-    "last_model_run_et": "05/07/2026 04:10 PM ET",
-    "last_model_run_iso": "2026-05-07T16:10:57.994671-04:00",
+    "last_model_run_et": "05/07/2026 05:01 PM ET",
+    "last_model_run_iso": "2026-05-07T17:01:35.503199-04:00",
     "run_type": "manual_or_scheduled",
     "freeze_rule": "Started games remain frozen at their pregame projection."
   },
@@ -243,11 +243,11 @@
       "row_key": "2026-05-07|824767|650490",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -489,11 +489,11 @@
       "row_key": "2026-05-07|823467|669127",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -736,11 +736,11 @@
       "row_key": "2026-05-07|823870|672640",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -983,11 +983,11 @@
       "row_key": "2026-05-07|823467|805779",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -1231,11 +1231,11 @@
       "row_key": "2026-05-07|823467|607208",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -1477,11 +1477,11 @@
       "row_key": "2026-05-07|823467|669016",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -1722,11 +1722,11 @@
       "row_key": "2026-05-07|823467|666126",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -1969,11 +1969,11 @@
       "row_key": "2026-05-07|824767|677800",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -2213,11 +2213,11 @@
       "row_key": "2026-05-07|824767|691406",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -2458,11 +2458,11 @@
       "row_key": "2026-05-07|823467|691016",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -2705,11 +2705,11 @@
       "row_key": "2026-05-07|823467|701762",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -2952,11 +2952,11 @@
       "row_key": "2026-05-07|823467|667670",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -3202,11 +3202,11 @@
       "row_key": "2026-05-07|823467|547180",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -3450,11 +3450,11 @@
       "row_key": "2026-05-07|824767|680776",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -3695,11 +3695,11 @@
       "row_key": "2026-05-07|823467|643446",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -3940,11 +3940,11 @@
       "row_key": "2026-05-07|824767|676356",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -4190,10 +4190,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -4430,11 +4430,11 @@
       "row_key": "2026-05-07|824767|666018",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -4679,11 +4679,11 @@
       "row_key": "2026-05-07|824767|575929",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -4927,11 +4927,11 @@
       "row_key": "2026-05-07|823870|689414",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -5174,11 +5174,11 @@
       "row_key": "2026-05-07|823870|683002",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -5424,10 +5424,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -5670,10 +5670,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -5914,11 +5914,11 @@
       "row_key": "2026-05-07|824767|596115",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -6160,11 +6160,11 @@
       "row_key": "2026-05-07|824767|678882",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -6405,11 +6405,11 @@
       "row_key": "2026-05-07|824767|663743",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -6649,11 +6649,11 @@
       "row_key": "2026-05-07|824767|807799",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -6895,11 +6895,11 @@
       "row_key": "2026-05-07|823467|666969",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -7144,10 +7144,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -7389,10 +7389,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -7633,10 +7633,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -7872,11 +7872,11 @@
       "row_key": "2026-05-07|824767|810938",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -8125,10 +8125,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -8370,10 +8370,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -8610,11 +8610,11 @@
       "row_key": "2026-05-07|823467|671732",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -8859,10 +8859,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -9104,10 +9104,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -9346,11 +9346,11 @@
       "row_key": "2026-05-07|823306|609280",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -9590,11 +9590,11 @@
       "row_key": "2026-05-07|823467|624641",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -9838,10 +9838,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -10083,11 +10083,11 @@
       "row_key": "2026-05-07|824767|668723",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -10327,11 +10327,11 @@
       "row_key": "2026-05-07|823467|680869",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -10576,10 +10576,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -10822,10 +10822,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -11067,10 +11067,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -11307,11 +11307,11 @@
       "row_key": "2026-05-07|823467|681082",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -11554,11 +11554,11 @@
       "row_key": "2026-05-07|823467|656941",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -11803,10 +11803,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -12047,11 +12047,11 @@
       "row_key": "2026-05-07|823870|681393",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -12296,10 +12296,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -12541,10 +12541,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -12785,11 +12785,11 @@
       "row_key": "2026-05-07|823870|621493",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -13037,10 +13037,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -13282,10 +13282,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -13526,10 +13526,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -13764,11 +13764,11 @@
       "row_key": "2026-05-07|824767|657136",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -14009,11 +14009,11 @@
       "row_key": "2026-05-07|823467|702222",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -14256,11 +14256,11 @@
       "row_key": "2026-05-07|823306|823550",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -14501,11 +14501,11 @@
       "row_key": "2026-05-07|823870|624413",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -14747,11 +14747,11 @@
       "row_key": "2026-05-07|823306|593428",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -14992,11 +14992,11 @@
       "row_key": "2026-05-07|823870|666624",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -15243,10 +15243,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -15492,10 +15492,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -15740,10 +15740,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -15982,11 +15982,11 @@
       "row_key": "2026-05-07|823306|665487",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -16233,10 +16233,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -16475,11 +16475,11 @@
       "row_key": "2026-05-07|823306|592206",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -16720,11 +16720,11 @@
       "row_key": "2026-05-07|823306|664034",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -16965,11 +16965,11 @@
       "row_key": "2026-05-07|823306|657656",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -17209,11 +17209,11 @@
       "row_key": "2026-05-07|823306|701538",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -17459,10 +17459,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -17698,11 +17698,11 @@
       "row_key": "2026-05-07|823870|691594",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -17948,10 +17948,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -18194,10 +18194,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -18441,10 +18441,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -18688,10 +18688,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -18933,10 +18933,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -19179,10 +19179,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -19426,10 +19426,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -19672,10 +19672,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -19918,10 +19918,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -20159,11 +20159,11 @@
       "row_key": "2026-05-07|823306|592518",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -20407,10 +20407,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -20655,10 +20655,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -20900,10 +20900,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -21143,10 +21143,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -21388,10 +21388,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -21635,10 +21635,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -21878,11 +21878,11 @@
       "row_key": "2026-05-07|824767|691785",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -22129,10 +22129,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -22375,10 +22375,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -22622,10 +22622,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -22866,11 +22866,11 @@
       "row_key": "2026-05-07|823306|676475",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -23118,10 +23118,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -23368,10 +23368,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -23615,10 +23615,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -23865,10 +23865,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -24114,10 +24114,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -24359,10 +24359,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -24606,10 +24606,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -24857,10 +24857,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -25100,11 +25100,11 @@
       "row_key": "2026-05-07|823306|657757",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -25349,10 +25349,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -25591,11 +25591,11 @@
       "row_key": "2026-05-07|823870|665923",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -25836,11 +25836,11 @@
       "row_key": "2026-05-07|823870|669236",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -26086,10 +26086,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -26332,10 +26332,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -26576,11 +26576,11 @@
       "row_key": "2026-05-07|823306|691023",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -26827,10 +26827,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -27076,10 +27076,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -27323,10 +27323,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -27565,11 +27565,11 @@
       "row_key": "2026-05-07|824767|656775",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -27815,10 +27815,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -28063,10 +28063,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -28311,10 +28311,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -28552,11 +28552,11 @@
       "row_key": "2026-05-07|824767|702332",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -28805,10 +28805,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -29050,10 +29050,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -29293,11 +29293,11 @@
       "row_key": "2026-05-07|823870|687637",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -29543,10 +29543,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -29792,10 +29792,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -30034,11 +30034,11 @@
       "row_key": "2026-05-07|823870|681715",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -30284,11 +30284,11 @@
       "row_key": "2026-05-07|823306|671056",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -30534,10 +30534,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -30774,11 +30774,11 @@
       "row_key": "2026-05-07|824767|670764",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -31025,10 +31025,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -31270,10 +31270,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -31519,10 +31519,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -31765,11 +31765,11 @@
       "row_key": "2026-05-07|823306|691026",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -32016,10 +32016,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -32263,10 +32263,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -32508,10 +32508,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -32755,10 +32755,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -33004,10 +33004,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -33250,10 +33250,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -33496,10 +33496,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -33738,11 +33738,11 @@
       "row_key": "2026-05-07|823870|694212",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -33988,10 +33988,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -34235,10 +34235,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -34483,10 +34483,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -34732,10 +34732,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -34980,10 +34980,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -35227,10 +35227,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -35474,10 +35474,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -35719,10 +35719,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -35962,11 +35962,11 @@
       "row_key": "2026-05-07|823870|805300",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -36215,10 +36215,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -36457,11 +36457,11 @@
       "row_key": "2026-05-07|823306|669369",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -36711,10 +36711,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -36959,10 +36959,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -37208,10 +37208,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -37454,10 +37454,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -37702,10 +37702,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -37948,10 +37948,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -38194,10 +38194,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -38440,10 +38440,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -38688,10 +38688,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -38934,10 +38934,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -39180,10 +39180,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -39428,10 +39428,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -39676,10 +39676,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -39921,10 +39921,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -40163,11 +40163,11 @@
       "row_key": "2026-05-07|823306|669134",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -40407,11 +40407,11 @@
       "row_key": "2026-05-07|823870|641933",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -40658,10 +40658,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -40903,10 +40903,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -41147,11 +41147,11 @@
       "row_key": "2026-05-07|823306|666023",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -41398,10 +41398,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -41646,10 +41646,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -41891,10 +41891,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -42131,11 +42131,11 @@
       "row_key": "2026-05-07|823870|681297",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -42382,10 +42382,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -42626,11 +42626,11 @@
       "row_key": "2026-05-07|823306|686780",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -42877,10 +42877,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -43125,10 +43125,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -43368,11 +43368,11 @@
       "row_key": "2026-05-07|823306|669357",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -43620,10 +43620,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -43868,10 +43868,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -44117,10 +44117,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -44363,10 +44363,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -44610,10 +44610,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -44858,10 +44858,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -45104,10 +45104,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -45351,10 +45351,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -45597,10 +45597,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -45846,10 +45846,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -46092,10 +46092,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -46340,10 +46340,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -46589,10 +46589,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -46836,10 +46836,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -47081,11 +47081,11 @@
       "row_key": "2026-05-07|823306|802139",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -47332,10 +47332,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -47580,10 +47580,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -47827,10 +47827,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -48070,11 +48070,11 @@
       "row_key": "2026-05-07|823306|695336",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -48322,10 +48322,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -48569,10 +48569,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -48816,10 +48816,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -49064,10 +49064,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -49311,10 +49311,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -49560,10 +49560,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -49808,10 +49808,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -50057,10 +50057,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -50305,10 +50305,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -50553,10 +50553,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -50795,11 +50795,11 @@
       "row_key": "2026-05-07|823467|665561",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -51045,10 +51045,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -51294,10 +51294,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -51540,10 +51540,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -51781,11 +51781,11 @@
       "row_key": "2026-05-07|823870|691723",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -52026,11 +52026,11 @@
       "row_key": "2026-05-07|823306|687363",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -52279,10 +52279,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -52527,10 +52527,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -52776,10 +52776,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -53018,11 +53018,11 @@
       "row_key": "2026-05-07|823870|677870",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -53266,11 +53266,11 @@
       "row_key": "2026-05-07|823306|665877",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -53518,10 +53518,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -53766,10 +53766,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -54012,10 +54012,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -54259,10 +54259,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -54504,11 +54504,11 @@
       "row_key": "2026-05-07|823306|701675",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -54758,10 +54758,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -55006,10 +55006,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -55250,11 +55250,11 @@
       "row_key": "2026-05-07|823306|650968",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -55502,10 +55502,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -55751,10 +55751,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -55999,10 +55999,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -56250,10 +56250,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -56498,10 +56498,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -56745,10 +56745,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -56994,10 +56994,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -57242,10 +57242,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -57490,10 +57490,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -57740,10 +57740,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     },
     {
       "date": "2026-05-07",
@@ -57985,11 +57985,11 @@
       "row_key": "2026-05-07|823306|693409",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-05-07 04:10:57 PM",
+      "last_refreshed_et": "2026-05-07 05:01:34 PM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
       "frozen_as_of_et": null
@@ -58238,10 +58238,10 @@
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-05-07",
-      "run_as_of_et": "2026-05-07T16:10:57.092773-04:00",
+      "run_as_of_et": "2026-05-07T17:01:34.668909-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 6,
-      "frozen_as_of_et": "2026-05-07 04:10:57 PM"
+      "frozen_as_of_et": "2026-05-07 05:01:34 PM"
     }
   ]
 }
