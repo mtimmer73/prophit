@@ -1,117 +1,14 @@
 {
-  "meta": {
-    "summary_type": "postgame_grading",
-    "target_date": "2026-05-13",
-    "generated_at_et": "2026-05-14 01:28:48 PM ET",
-    "rule": "Grades only the last eligible model snapshot where the player appeared before game start."
-  },
-  "overall": {
-    "graded": 388,
-    "wins": 162,
-    "losses": 226,
-    "pending": 2,
-    "one_plus_hit_rate": 0.4175
-  },
-  "by_hit_score_bucket": [
-    {
-      "bucket": "60-69",
-      "graded": 39,
-      "wins": 19,
-      "hit_rate": 0.4872
-    },
-    {
-      "bucket": "70-79",
-      "graded": 29,
-      "wins": 18,
-      "hit_rate": 0.6207
-    },
-    {
-      "bucket": "80-89",
-      "graded": 20,
-      "wins": 13,
-      "hit_rate": 0.65
-    },
-    {
-      "bucket": "90+",
-      "graded": 8,
-      "wins": 6,
-      "hit_rate": 0.75
-    },
-    {
-      "bucket": "<60",
-      "graded": 292,
-      "wins": 106,
-      "hit_rate": 0.363
-    },
-    {
-      "bucket": "Unknown",
-      "graded": 0,
-      "wins": 0,
-      "hit_rate": null
-    }
-  ],
-  "by_confidence_bucket": [
-    {
-      "bucket": "A 80+",
-      "graded": 96,
-      "wins": 55,
-      "hit_rate": 0.5729
-    },
-    {
-      "bucket": "B 70-79",
-      "graded": 49,
-      "wins": 25,
-      "hit_rate": 0.5102
-    },
-    {
-      "bucket": "C 60-69",
-      "graded": 43,
-      "wins": 20,
-      "hit_rate": 0.4651
-    },
-    {
-      "bucket": "D 45-59",
-      "graded": 56,
-      "wins": 20,
-      "hit_rate": 0.3571
-    },
-    {
-      "bucket": "F <45",
-      "graded": 144,
-      "wins": 42,
-      "hit_rate": 0.2917
-    },
-    {
-      "bucket": "Unknown",
-      "graded": 0,
-      "wins": 0,
-      "hit_rate": null
-    }
-  ],
-  "by_lineup_bucket": [
-    {
-      "bucket": "Confirmed 1-4",
-      "graded": 100,
-      "wins": 59,
-      "hit_rate": 0.59
-    },
-    {
-      "bucket": "Confirmed 5-9",
-      "graded": 125,
-      "wins": 73,
-      "hit_rate": 0.584
-    },
-    {
-      "bucket": "Unconfirmed/Fallback",
-      "graded": 163,
-      "wins": 30,
-      "hit_rate": 0.184
-    },
-    {
-      "bucket": "Unknown",
-      "graded": 0,
-      "wins": 0,
-      "hit_rate": null
-    }
-  ]
+  "status": "live",
+  "updated_et": "2026-05-14 02:38:04 PM",
+  "target_date": "2026-05-14",
+  "total_players": 278,
+  "confirmed_starters": 18,
+  "confirmed_lineup_pct": 0.06474820143884892,
+  "locked_rows": 156,
+  "top_play_count": 4,
+  "avg_top_play_probability": 0.6813690965690087,
+  "avg_top_play_confidence": 77.5658970604502,
+  "best_bet_rank_score_avg": 31.86046524780964,
+  "note": "Full-day board. Started games remain visible as frozen pregame projections; only upcoming games refresh on reruns."
 }
