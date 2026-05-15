@@ -745,5 +745,14 @@
     "real_split_rows": 389,
     "thin_real_split_rows": 0,
     "locked_rows": 0
+  },
+  {
+    "run_timestamp_et": "2026-05-15 01:28:58 PM",
+    "target_date": "2026-05-15",
+    "players": 389,
+    "confirmed_starters": 0,
+    "real_split_rows": 389,
+    "thin_real_split_rows": 0,
+    "locked_rows": 0
   }
 ]
