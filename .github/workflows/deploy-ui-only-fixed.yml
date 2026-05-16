@@ -1,0 +1,84 @@
+name: Deploy UI Only
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - "package.json"
+      - "package-lock.json"
+      - "npm-shrinkwrap.json"
+      - "yarn.lock"
+      - "pnpm-lock.yaml"
+      - "vite.config.js"
+      - "src/**"
+      - "public/**"
+      - "data/**"
+      - ".github/workflows/deploy-ui-only.yml"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: deploy-ui-only
+  cancel-in-progress: true
+
+jobs:
+  build-ui:
+    name: Build UI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install UI dependencies
+        run: |
+          if [ -f package-lock.json ] || [ -f npm-shrinkwrap.json ]; then
+            echo "Lock file found. Running npm ci..."
+            npm ci
+          else
+            echo "No package-lock.json found. Running npm install..."
+            npm install
+          fi
+
+      - name: Build UI
+        run: npm run build
+
+      - name: Verify build output
+        run: |
+          if [ ! -d "dist" ]; then
+            echo "Build failed: dist folder was not created."
+            exit 1
+          fi
+          echo "Build output found:"
+          ls -la dist
+
+      - name: Upload UI artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy-ui:
+    name: Deploy UI to GitHub Pages
+    needs: build-ui
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy UI
+        id: deployment
+        uses: actions/deploy-pages@v4
