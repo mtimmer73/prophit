@@ -1,0 +1,94 @@
+name: Deploy Static UI Only
+
+on:
+  workflow_dispatch:
+
+  push:
+    branches:
+      - main
+    paths:
+      - "index.html"
+      - "*.html"
+      - "data/**"
+      - "assets/**"
+      - "public/**"
+      - "css/**"
+      - "js/**"
+      - ".github/workflows/deploy-static-ui-only.yml"
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: deploy-static-ui-only
+  cancel-in-progress: true
+
+jobs:
+  deploy-static-ui:
+    name: Deploy Static UI
+    runs-on: ubuntu-latest
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Prepare static site folder
+        run: |
+          rm -rf _site
+          mkdir -p _site
+
+          echo "Copying root HTML files..."
+          cp -f ./*.html _site/ 2>/dev/null || true
+
+          echo "Copying data folder if present..."
+          if [ -d "data" ]; then
+            cp -R data _site/data
+          fi
+
+          echo "Copying assets folder if present..."
+          if [ -d "assets" ]; then
+            cp -R assets _site/assets
+          fi
+
+          echo "Copying public folder contents if present..."
+          if [ -d "public" ]; then
+            cp -R public/. _site/
+          fi
+
+          echo "Copying css folder if present..."
+          if [ -d "css" ]; then
+            cp -R css _site/css
+          fi
+
+          echo "Copying js folder if present..."
+          if [ -d "js" ]; then
+            cp -R js _site/js
+          fi
+
+          echo "Checking for index.html..."
+          if [ ! -f "_site/index.html" ]; then
+            echo "ERROR: _site/index.html was not found."
+            echo "Make sure your main UI file is named index.html in the repo root or inside public/."
+            exit 1
+          fi
+
+          echo "Static site contents:"
+          find _site -maxdepth 3 -type f | sort
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload static UI artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - name: Deploy UI to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
