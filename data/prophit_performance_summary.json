@@ -1,11 +1,11 @@
 {
   "status": "live",
-  "updated_et": "2026-05-17 05:12:09 PM",
+  "updated_et": "2026-05-17 08:15:16 PM",
   "target_date": "2026-05-17",
   "total_players": 270,
   "confirmed_starters": 270,
   "confirmed_lineup_pct": 1.0,
-  "locked_rows": 252,
+  "locked_rows": 270,
   "top_play_count": 59,
   "avg_top_play_probability": 0.6887117194044157,
   "avg_top_play_confidence": 88.21924512286662,
