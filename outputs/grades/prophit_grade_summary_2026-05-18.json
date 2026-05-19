@@ -2,7 +2,7 @@
   "meta": {
     "summary_type": "postgame_grading",
     "target_date": "2026-05-18",
-    "generated_at_et": "2026-05-19 01:24:27 PM ET",
+    "generated_at_et": "2026-05-19 02:23:50 PM ET",
     "rule": "Grades only the last eligible model snapshot where the player appeared before game start."
   },
   "overall": {
