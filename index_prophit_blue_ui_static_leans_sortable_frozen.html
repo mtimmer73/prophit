@@ -1,0 +1,2607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PropHit Lab - Full UI</title>
+  <style>
+    :root {
+      --slate-50:#f8fafc; --slate-100:#f1f5f9; --slate-200:#e2e8f0; --slate-300:#cbd5e1;
+      --slate-400:#94a3b8; --slate-500:#64748b; --slate-600:#475569; --slate-700:#334155;
+      --slate-800:#1e293b; --slate-900:#0f172a; --slate-950:#020617;
+      --indigo-50:#eef2ff; --indigo-100:#e0e7ff; --indigo-600:#4f46e5; --indigo-700:#4338ca;
+      --emerald-50:#ecfdf5; --emerald-100:#d1fae5; --emerald-200:#a7f3d0; --emerald-700:#047857;
+      --blue-100:#dbeafe; --blue-700:#1d4ed8;
+      --amber-50:#fffbeb; --amber-100:#fef3c7; --amber-700:#b45309;
+      --rose-50:#fff1f2; --rose-100:#ffe4e6; --rose-200:#fecdd3; --rose-600:#e11d48; --rose-700:#be123c;
+      --white:#ffffff;
+      --shadow:0 1px 3px rgba(15,23,42,.08),0 1px 2px rgba(15,23,42,.06);
+      --shadow-lg:0 10px 25px rgba(15,23,42,.08);
+      --radius-xl:16px; --radius-2xl:20px; --radius-3xl:28px;
+    }
+
+    * { box-sizing:border-box; }
+    body {
+      margin:0; min-height:100vh; background:linear-gradient(135deg, #0f172a 0%, #1e3a8a 48%, #0f172a 100%); color:var(--slate-900);
+      font-family:Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    .page { max-width:1320px; margin:0 auto; padding:24px; }
+    .stack { display:grid; gap:24px; }
+    .card { background:var(--white); border:1px solid var(--slate-200); border-radius:var(--radius-3xl); box-shadow:var(--shadow); }
+
+    .page::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 10%, rgba(96, 165, 250, 0.22), transparent 28%),
+        radial-gradient(circle at 80% 20%, rgba(79, 70, 229, 0.20), transparent 26%),
+        radial-gradient(circle at 50% 95%, rgba(14, 165, 233, 0.16), transparent 28%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .blue-shell {
+      border: 1px solid rgba(226, 232, 240, 0.24);
+      background: rgba(255, 255, 255, 0.96);
+      backdrop-filter: blur(10px);
+    }
+
+
+    .sortable-header {
+      cursor: pointer;
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .sortable-header:hover {
+      color: var(--indigo-700);
+      background: var(--indigo-50);
+    }
+
+    .sort-indicator {
+      margin-left: 4px;
+      color: var(--slate-400);
+      font-size: 10px;
+    }
+
+    .sticky-player-col {
+      position: sticky;
+      left: 0;
+      z-index: 4;
+      background: white;
+      box-shadow: 2px 0 0 rgba(226, 232, 240, 0.75);
+    }
+
+    thead .sticky-player-col {
+      z-index: 8;
+      background: var(--slate-50);
+    }
+
+    tbody tr:hover .sticky-player-col {
+      background: var(--slate-50);
+    }
+
+    tbody tr.grade-a-row .sticky-player-col {
+      background: rgba(236, 253, 245, 0.96);
+    }
+
+    .fallback-lean-note {
+      margin-top: 6px;
+      color: var(--amber-700);
+      font-size: 10px;
+      font-weight: 850;
+    }
+
+    .value-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .value-strong {
+      background: var(--emerald-100);
+      color: var(--emerald-700);
+    }
+
+    .value-positive {
+      background: var(--blue-100);
+      color: var(--blue-700);
+    }
+
+    .value-watch {
+      background: var(--amber-100);
+      color: var(--amber-700);
+    }
+
+    .value-neutral {
+      background: var(--slate-100);
+      color: var(--slate-600);
+    }
+
+    .signal-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 150px;
+    }
+
+    .signal-main {
+      color: var(--slate-950);
+      font-weight: 950;
+      font-size: 13px;
+    }
+
+    .signal-sub {
+      color: var(--slate-500);
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .header-card { padding:28px; }
+    .header-flex { display:flex; justify-content:space-between; align-items:flex-end; gap:24px; flex-wrap:wrap; }
+    .eyebrow, .section-kicker {
+      color:var(--indigo-600); text-transform:uppercase; letter-spacing:.16em; font-size:12px; font-weight:950;
+    }
+    h1,h2,h3,p { margin:0; }
+    h1 { margin-top:8px; font-size:clamp(30px,5vw,46px); line-height:1; letter-spacing:-.05em; color:var(--slate-950); font-weight:950; }
+    h2 { font-size:26px; line-height:1.15; color:var(--slate-950); font-weight:950; }
+    h3 { font-size:17px; line-height:1.25; color:var(--slate-900); font-weight:950; }
+    .subtitle { margin-top:10px; max-width:850px; color:var(--slate-600); font-size:14px; line-height:1.5; }
+
+    .last-run {
+      background:var(--slate-50); border:1px solid var(--slate-200); border-radius:var(--radius-2xl);
+      padding:14px 18px; min-width:250px;
+    }
+    .last-run-label { color:var(--slate-500); font-size:12px; text-transform:uppercase; letter-spacing:.08em; font-weight:900; }
+    .last-run-value { margin-top:4px; color:var(--slate-950); font-size:16px; font-weight:950; }
+    .last-run-source { margin-top:4px; color:var(--slate-500); font-size:11px; font-weight:700; }
+
+    .error {
+      display:none; margin-top:18px; border:1px solid var(--rose-200); background:var(--rose-50); color:var(--rose-700);
+      border-radius:var(--radius-2xl); padding:14px 16px; font-size:14px; font-weight:750;
+    }
+
+    .stats-grid { display:grid; grid-template-columns:repeat(5,1fr); gap:12px; }
+    .stat-pill { background:rgba(255,255,255,.86); border:1px solid var(--slate-200); border-radius:var(--radius-2xl); padding:16px; box-shadow:var(--shadow); }
+    .stat-label { color:var(--slate-500); text-transform:uppercase; letter-spacing:.08em; font-size:11px; font-weight:900; }
+    .stat-value { margin-top:6px; color:var(--slate-900); font-size:23px; font-weight:950; }
+
+    .section { padding:22px; }
+    .section-head { display:flex; justify-content:space-between; align-items:flex-end; gap:18px; flex-wrap:wrap; }
+    .section-note { margin-top:5px; color:var(--slate-600); font-size:14px; line-height:1.45; }
+
+    label { display:grid; gap:6px; color:var(--slate-700); font-size:13px; font-weight:850; }
+    select,input,button { font:inherit; }
+    select,input {
+      width:100%; border:1px solid var(--slate-300); background:white; border-radius:var(--radius-2xl);
+      padding:12px 14px; color:var(--slate-900); outline:none; font-size:14px; font-weight:650;
+    }
+    select:focus,input:focus { border-color:var(--indigo-600); }
+
+    .button {
+      border:1px solid var(--slate-300); background:white; color:var(--slate-700); border-radius:var(--radius-2xl);
+      padding:12px 14px; cursor:pointer; font-size:14px; font-weight:950; box-shadow:var(--shadow);
+    }
+    .button.primary { border-color:var(--indigo-600); background:var(--indigo-600); color:white; }
+    .button.dark { border-color:var(--slate-900); background:var(--slate-900); color:white; }
+    .button.danger-active { border-color:var(--rose-600); background:var(--rose-600); color:white; }
+    .button.small { border-radius:999px; padding:7px 10px; font-size:12px; box-shadow:none; }
+
+    .filter-board {
+      background:linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+      border:1px solid var(--slate-200);
+      border-radius:var(--radius-3xl);
+      padding:22px;
+      box-shadow:var(--shadow);
+    }
+    .filter-grid { margin-top:18px; display:grid; grid-template-columns:repeat(6,1fr); gap:12px; }
+    .filter-actions { margin-top:16px; display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; }
+    .active-filter-tags { display:flex; flex-wrap:wrap; gap:8px; }
+    .filter-tag {
+      border:1px solid var(--indigo-100); background:var(--indigo-50); color:var(--indigo-700);
+      border-radius:999px; padding:7px 10px; font-size:12px; font-weight:850;
+    }
+
+    .correlation-grid { margin-top:20px; display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+    .correlation-card,.parlay-panel,.grade-player {
+      background:white; border:1px solid var(--slate-200); border-radius:var(--radius-2xl); padding:18px; box-shadow:var(--shadow);
+    }
+    .correlation-top,.parlay-card-top,.grade-player-top {
+      display:flex; justify-content:space-between; align-items:flex-start; gap:12px;
+    }
+    .signal-rank { color:var(--indigo-600); text-transform:uppercase; letter-spacing:.08em; font-size:12px; font-weight:950; margin-bottom:4px; }
+    .trend-pill {
+      background:var(--slate-100); color:var(--slate-700); border-radius:999px; padding:6px 10px;
+      font-size:12px; font-weight:850; white-space:nowrap;
+    }
+    .description { margin-top:10px; color:var(--slate-600); font-size:14px; line-height:1.45; }
+    .mini-stat-grid,.grade-metrics { margin-top:16px; display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+    .mini-stat,.tiny-stat { background:var(--slate-50); border-radius:14px; padding:10px; }
+    .mini-label,.tiny-label { color:var(--slate-500); text-transform:uppercase; font-size:10px; font-weight:900; }
+    .mini-value,.tiny-value { margin-top:3px; color:var(--slate-900); font-size:18px; font-weight:950; }
+    .tag-title { margin-top:16px; color:var(--slate-500); text-transform:uppercase; letter-spacing:.08em; font-size:11px; font-weight:900; }
+    .tag-wrap { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+    .player-tag {
+      background:var(--indigo-50); color:var(--indigo-700); border-radius:999px; padding:6px 10px; font-size:12px; font-weight:850;
+    }
+
+    .empty-box {
+      margin-top:20px; border:1px dashed var(--slate-300); background:var(--slate-50); border-radius:var(--radius-2xl);
+      padding:22px; color:var(--slate-600); font-size:14px;
+    }
+
+    .grade-box { border-color:var(--emerald-200); background:rgba(236,253,245,.75); padding:22px; }
+    .grade-head { display:flex; justify-content:space-between; align-items:flex-end; gap:16px; flex-wrap:wrap; }
+    .grade-kicker { color:var(--emerald-700); text-transform:uppercase; letter-spacing:.08em; font-size:12px; font-weight:950; }
+    .grade-total { background:white; border-radius:var(--radius-2xl); padding:10px 18px; text-align:center; box-shadow:var(--shadow); }
+    .grade-total-label { color:var(--slate-500); text-transform:uppercase; font-size:11px; font-weight:850; }
+    .grade-total-value { color:var(--emerald-700); font-size:28px; font-weight:950; }
+    .grade-grid { margin-top:20px; display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+    .player-name { color:var(--slate-950); font-size:16px; font-weight:950; }
+    .player-matchup { margin-top:3px; color:var(--slate-500); font-size:14px; font-weight:650; }
+    .grade-badge { background:var(--emerald-100); color:var(--emerald-700); border-radius:999px; padding:6px 12px; font-size:12px; font-weight:950; }
+    .pitcher-note { margin-top:12px; color:var(--slate-500); font-size:12px; }
+
+    .parlay-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:18px; }
+    .parlay-controls { display:grid; grid-template-columns:160px 1fr; gap:10px; margin-top:14px; align-items:center; }
+    .parlay-output { margin-top:16px; display:grid; gap:12px; }
+    .parlay-card { border:1px solid var(--slate-200); background:var(--slate-50); border-radius:var(--radius-2xl); padding:14px; }
+    .parlay-title { color:var(--slate-950); font-weight:950; }
+    .parlay-odds { text-align:right; color:var(--slate-700); font-size:13px; font-weight:850; }
+    .parlay-leg-list { margin:12px 0 0; padding:0; list-style:none; display:grid; gap:8px; }
+    .parlay-leg {
+      display:flex; justify-content:space-between; gap:12px; border-radius:14px; background:white; padding:10px; font-size:13px;
+    }
+    .leg-name { font-weight:950; color:var(--slate-950); }
+    .leg-detail { color:var(--slate-500); font-size:12px; margin-top:2px; }
+    .leg-prob { white-space:nowrap; color:var(--emerald-700); font-weight:950; }
+    .selected-builder-box { margin-top:14px; border:1px dashed var(--slate-300); background:var(--slate-50); border-radius:var(--radius-2xl); padding:14px; }
+    .selected-player-list { display:grid; gap:8px; margin-top:10px; }
+    .selected-player-row {
+      display:flex; justify-content:space-between; gap:10px; align-items:center; background:white; border:1px solid var(--slate-200);
+      border-radius:14px; padding:10px; font-size:13px;
+    }
+    .remove-leg {
+      border:0; background:var(--rose-100); color:var(--rose-700); border-radius:999px; padding:6px 9px;
+      cursor:pointer; font-size:12px; font-weight:900;
+    }
+    .add-leg-button {
+      border:1px solid var(--slate-300); background:white; color:var(--slate-700); border-radius:999px;
+      padding:6px 10px; cursor:pointer; font-size:12px; font-weight:900;
+    }
+    .add-leg-button.added { border-color:var(--emerald-200); background:var(--emerald-100); color:var(--emerald-700); }
+
+    .table-card { overflow:hidden; }
+    .table-head { display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--slate-200); padding:18px; gap:12px; flex-wrap:wrap; }
+    .table-note { margin-top:3px; color:var(--slate-500); font-size:14px; }
+    .table-wrap { max-height:720px; overflow:auto; }
+    table { width:100%; min-width:1280px; border-collapse:collapse; text-align:left; font-size:14px; }
+    thead {
+      position:sticky; top:0; z-index:5; background:var(--slate-50); color:var(--slate-500);
+      text-transform:uppercase; letter-spacing:.08em; font-size:12px; font-weight:900;
+    }
+    th,td { padding:13px 16px; border-bottom:1px solid var(--slate-100); white-space:nowrap; }
+    tbody tr:hover { background:var(--slate-50); }
+    tbody tr.grade-a-row { background:rgba(236,253,245,.48); }
+    .name-cell { color:var(--slate-950); font-weight:950; }
+    .strong-cell { color:var(--slate-900); font-weight:900; }
+    .badge {
+      display:inline-flex; align-items:center; justify-content:center; border-radius:999px; padding:5px 11px; font-size:12px; font-weight:950;
+    }
+    .badge-a { background:var(--emerald-100); color:var(--emerald-700); }
+    .badge-b { background:var(--blue-100); color:var(--blue-700); }
+    .badge-c { background:var(--amber-100); color:var(--amber-700); }
+    .badge-other { background:var(--slate-100); color:var(--slate-600); }
+    .status-started { background:var(--rose-100); color:var(--rose-700); }
+    .status-pregame { background:var(--slate-100); color:var(--slate-600); }
+    .loading { padding:28px; color:var(--slate-500); text-align:center; font-size:14px; }
+
+
+
+
+
+    .lean-board-grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 12px;
+    }
+
+    .lean-category-card {
+      background: white;
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-2xl);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+
+    .lean-category-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .lean-category-title {
+      color: var(--slate-950);
+      font-size: 15px;
+      font-weight: 950;
+      line-height: 1.2;
+    }
+
+    .lean-category-subtitle {
+      margin-top: 3px;
+      color: var(--slate-500);
+      font-size: 11px;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+
+    .lean-count-pill {
+      background: var(--indigo-50);
+      color: var(--indigo-700);
+      border-radius: 999px;
+      padding: 5px 8px;
+      font-size: 11px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .lean-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .lean-player-card {
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      border-radius: 16px;
+      padding: 12px;
+    }
+
+    .lean-player-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .lean-player-name {
+      color: var(--slate-950);
+      font-size: 13px;
+      font-weight: 950;
+      line-height: 1.2;
+    }
+
+    .lean-player-meta {
+      margin-top: 3px;
+      color: var(--slate-500);
+      font-size: 11px;
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .lean-score {
+      color: var(--emerald-700);
+      background: var(--emerald-100);
+      border-radius: 999px;
+      padding: 4px 7px;
+      font-size: 11px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .lean-reasons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 9px;
+    }
+
+    .lean-reason-tag {
+      background: white;
+      border: 1px solid var(--slate-200);
+      color: var(--slate-700);
+      border-radius: 999px;
+      padding: 4px 7px;
+      font-size: 10px;
+      font-weight: 850;
+      line-height: 1.2;
+    }
+
+    .lean-empty {
+      background: var(--slate-50);
+      border: 1px dashed var(--slate-300);
+      border-radius: 16px;
+      padding: 14px;
+      color: var(--slate-500);
+      font-size: 12px;
+      line-height: 1.4;
+      font-weight: 700;
+    }
+
+    .board-scroll-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .scroll-button {
+      border: 1px solid var(--slate-300);
+      background: white;
+      color: var(--slate-700);
+      border-radius: 999px;
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 950;
+      box-shadow: var(--shadow);
+    }
+
+    .scroll-button:hover {
+      background: var(--indigo-50);
+      color: var(--indigo-700);
+      border-color: var(--indigo-100);
+    }
+
+    .scroll-hint {
+      color: var(--slate-500);
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .baa-filter-note {
+      grid-column: span 6;
+      background: var(--amber-50);
+      border: 1px solid var(--amber-100);
+      border-radius: var(--radius-2xl);
+      padding: 12px 14px;
+      color: var(--slate-700);
+      font-size: 12px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .inline-control {
+      min-width: 230px;
+    }
+
+    .grade-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .index-grid {
+      margin-top: 18px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .index-card {
+      background: white;
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-2xl);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .index-card h3 {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .definition-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 12px;
+    }
+
+    .definition-item {
+      border-top: 1px solid var(--slate-100);
+      padding-top: 10px;
+    }
+
+    .definition-term {
+      color: var(--slate-950);
+      font-size: 13px;
+      font-weight: 950;
+    }
+
+    .definition-copy {
+      margin-top: 3px;
+      color: var(--slate-600);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .disclaimer-card {
+      background: linear-gradient(180deg, #ffffff 0%, #fffbeb 100%);
+      border: 1px solid var(--amber-100);
+      border-radius: var(--radius-3xl);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    .disclaimer-grid {
+      margin-top: 16px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .disclaimer-box {
+      background: white;
+      border: 1px solid var(--slate-200);
+      border-radius: var(--radius-2xl);
+      padding: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .disclaimer-title {
+      color: var(--slate-950);
+      font-size: 14px;
+      font-weight: 950;
+    }
+
+    .disclaimer-copy {
+      margin-top: 7px;
+      color: var(--slate-600);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .footer-disclaimer {
+      color: var(--slate-500);
+      font-size: 12px;
+      line-height: 1.6;
+      text-align: center;
+      padding: 8px 18px 20px;
+    }
+
+    .jump-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .jump-link {
+      text-decoration: none;
+      background: var(--slate-50);
+      border: 1px solid var(--slate-200);
+      color: var(--slate-700);
+      border-radius: 999px;
+      padding: 8px 11px;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .jump-link:hover {
+      background: var(--indigo-50);
+      border-color: var(--indigo-100);
+      color: var(--indigo-700);
+    }
+
+    @media (max-width:1100px) {
+      .stats-grid { grid-template-columns:repeat(2,1fr); }
+      .filter-grid { grid-template-columns:repeat(3,1fr); }
+      .correlation-grid,.grade-grid,.parlay-grid,.index-grid,.disclaimer-grid { grid-template-columns:1fr 1fr; }
+      .lean-board-grid { grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width:700px) {
+      .page { padding:16px; }
+      .header-card,.section,.grade-box,.filter-board { padding:18px; }
+      .stats-grid,.filter-grid,.correlation-grid,.grade-grid,.parlay-grid,.parlay-controls,.index-grid,.disclaimer-grid { grid-template-columns:1fr; }
+      .lean-board-grid { grid-template-columns:1fr; }
+      .baa-filter-note { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="stack">
+      <header class="card header-card blue-shell">
+        <div class="header-flex">
+          <div>
+            <div class="eyebrow">PropHit Lab</div>
+            <h1>MLB Hits Model Board</h1>
+            <p class="subtitle">
+              Top correlations, Grade A player watch box, filter board, parlay maker, metric index, legal disclaimers,
+              and today’s model projections. Games that have already started can be hidden while frozen rows remain available.
+            </p>
+            <nav class="jump-links" aria-label="PropHit page sections">
+              <a class="jump-link" href="#filter-board">Filter Board</a>
+              <a class="jump-link" href="#correlations">Correlations</a>
+              <a class="jump-link" href="#grade-a">Grade A Players</a>
+              <a class="jump-link" href="#daily-leans">Daily Leans</a>
+              <a class="jump-link" href="#parlay-maker">Parlay Maker</a>
+              <a class="jump-link" href="#today-board">Today’s Board</a>
+              <a class="jump-link" href="#metric-index">Metric Index</a>
+              <a class="jump-link" href="#legal-disclaimers">Disclaimers</a>
+            </nav>
+          </div>
+          <div class="last-run">
+            <div class="last-run-label">Last Model Run</div>
+            <div class="last-run-value" id="lastRun">Loading...</div>
+            <div class="last-run-source" id="lastRunSource">Reading model timestamp...</div>
+          </div>
+        </div>
+        <div class="error" id="errorBox"></div>
+      </header>
+
+      <section class="stats-grid">
+        <div class="stat-pill"><div class="stat-label">Rows Loaded</div><div class="stat-value" id="rowsLoaded">Loading...</div></div>
+        <div class="stat-pill"><div class="stat-label">Visible Rows</div><div class="stat-value" id="visibleRows">—</div></div>
+        <div class="stat-pill"><div class="stat-label">Grade A Players</div><div class="stat-value" id="gradeACount">—</div></div>
+        <div class="stat-pill"><div class="stat-label">Avg Confidence</div><div class="stat-value" id="avgConfidence">—</div></div>
+        <div class="stat-pill"><div class="stat-label">Parlay Eligible</div><div class="stat-value" id="parlayEligibleCount">—</div></div>
+      </section>
+
+      <section class="filter-board blue-shell" id="filter-board">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Filter Board</div>
+            <h2>Board Control Panel</h2>
+            <p class="section-note">
+              Use these filters to narrow the board before building parlays or reviewing Grade A / high-confidence players.
+            </p>
+          </div>
+          <button id="resetFiltersButton" class="button" type="button">Reset Filters</button>
+        </div>
+
+        <div class="filter-grid">
+          <label>Search
+            <input id="searchInput" placeholder="Player, team, pitcher, grade..." />
+          </label>
+
+          <label>Team
+            <select id="teamFilter"><option value="ALL">All Teams</option></select>
+          </label>
+
+          <label>Minimum Grade
+            <select id="gradeFilter">
+              <option value="ANY">Any Grade</option>
+              <option value="A">A only</option>
+              <option value="B">B or better</option>
+              <option value="C">C or better</option>
+            </select>
+          </label>
+
+          <label>Min Hit Score
+            <input id="minHitScore" type="number" step="1" placeholder="Example: 70" />
+          </label>
+
+          <label>Min Projected Hits
+            <input id="minProjHits" type="number" step="0.05" placeholder="Example: 1.00" />
+          </label>
+
+          <label>Min 1+ Hit Rate %
+            <input id="minOnePlusRate" type="number" step="1" placeholder="Example: 65" />
+          </label>
+
+          <div class="baa-filter-note">
+            Batting average filters support either decimal format like .275 or whole-number format like 275.
+            Pitcher BAA filters are maximum thresholds because lower pitcher BAA is stronger for hitters.
+          </div>
+
+          <label>Min Season BA vs Hand
+            <input id="minSeasonBA" type="number" step="0.001" placeholder="Example: .260" />
+          </label>
+
+          <label>Min Career BA vs Hand
+            <input id="minCareerBA" type="number" step="0.001" placeholder="Example: .250" />
+          </label>
+
+          <label>Max Pitcher Season BAA vs Hand
+            <input id="maxPitcherSeasonBAA" type="number" step="0.001" placeholder="Example: .260" />
+          </label>
+
+          <label>Max Pitcher Career BAA vs Hand
+            <input id="maxPitcherCareerBAA" type="number" step="0.001" placeholder="Example: .255" />
+          </label>
+
+          <label>Batting Order Max
+            <input id="maxBattingOrder" type="number" step="1" placeholder="Example: 5" />
+          </label>
+
+          <label>Opponent / Pitcher
+            <input id="pitcherSearch" placeholder="Pitcher or opponent..." />
+          </label>
+
+          <label>Game Status
+            <select id="statusFilter">
+              <option value="ALL">All Games</option>
+              <option value="PREGAME">Pre-game only</option>
+              <option value="STARTED">Started/frozen only</option>
+            </select>
+          </label>
+
+          <label>Parlay Eligible
+            <select id="parlayEligibleFilter">
+              <option value="ALL">All Rows</option>
+              <option value="YES">Parlay eligible only</option>
+            </select>
+          </label>
+
+          <label>Sort Board
+            <select id="sortMode">
+              <option value="MODEL">Model Rank</option>
+              <option value="HIT_SCORE">Hit Score</option>
+              <option value="PROJ_HITS">Projected Hits</option>
+              <option value="ONE_PLUS">1+ Hit Rate</option>
+              <option value="BATTING_ORDER">Batting Order</option>
+            </select>
+          </label>
+
+          <label>Correlation View
+            <select id="correlationView">
+              <option value="3">Top 3 correlations</option>
+              <option value="12">Expand to top 12 correlations</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="filter-actions">
+          <div class="active-filter-tags" id="activeFilterTags"></div>
+          <button id="hideStartedButton" class="button" type="button">Hide Started Games</button>
+        </div>
+      </section>
+
+      <section class="card section blue-shell" id="correlations">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Dynamic Correlation Board</div>
+            <h2 id="correlationTitle">Showing Top 3 Correlations</h2>
+            <p class="section-note">
+              Default view keeps the board clean. Use the pull-down to expand up to 12 signals.
+            </p>
+          </div>
+
+          <label class="inline-control">
+            Correlation View
+            <select id="correlationViewBoard">
+              <option value="3">Top 3 correlations</option>
+              <option value="12">Expand to top 12 correlations</option>
+            </select>
+          </label>
+        </div>
+        <div id="correlationGrid" class="correlation-grid"></div>
+        <div id="correlationEmpty" class="empty-box" style="display:none;">
+          No correlations were found. Add a correlations array to the model output, or the UI will build fallback current-board signals.
+        </div>
+      </section>
+
+      <section class="card grade-box blue-shell" id="grade-a">
+        <div class="grade-head">
+          <div>
+            <div class="grade-kicker">Grade A Watch Box</div>
+            <h2 id="gradeATitle">Top 3 Grade A Players</h2>
+            <p class="section-note">Highest-confidence players based on confidence grade or derived model thresholds.</p>
+          </div>
+
+          <div class="grade-toolbar">
+            <label class="inline-control">
+              Grade A View
+              <select id="gradeAView">
+                <option value="3">Show top 3 Grade A players</option>
+                <option value="ALL">Show all Grade A players</option>
+              </select>
+            </label>
+            <div class="grade-total"><div class="grade-total-label">Total</div><div class="grade-total-value" id="gradeATotal">0</div></div>
+          </div>
+        </div>
+        <div id="gradeAGrid" class="grade-grid"></div>
+        <div id="gradeAEmpty" class="empty-box" style="display:none;">No Grade A players found in the current data file.</div>
+      </section>
+
+      
+      <section class="card section blue-shell" id="daily-leans">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Daily Lean Board</div>
+            <h2>Top 5 Leans by Category</h2>
+            <p class="section-note">
+              These are UI-only lean categories built from the existing model output. They create day-to-day variation
+              without changing model weights or weakening the Grade A accuracy layer.
+            </p>
+          </div>
+
+          <label class="inline-control">
+            Lean View
+            <select id="leanBoardView">
+              <option value="5">Show top 5 per category</option>
+              <option value="ALL">Show all leans</option>
+            </select>
+          </label>
+        </div>
+
+        <div id="dailyLeanGrid" class="lean-board-grid"></div>
+      </section>
+
+      <section class="card section blue-shell" id="parlay-maker">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Parlay Maker</div>
+            <h2>Model-Generated and User-Selected Parlays</h2>
+            <p class="section-note">
+              Generate five model-built parlays from the strongest available pre-game rows, or build your own by adding players from today’s board.
+              Fair value is estimated from model probability and should be used as a guide, not sportsbook odds.
+            </p>
+          </div>
+        </div>
+
+        <div class="parlay-grid">
+          <div class="parlay-panel">
+            <h3>Model-Generated Parlays</h3>
+            <p class="section-note">Select the number of legs and generate five options ranked by model strength.</p>
+            <div class="parlay-controls">
+              <select id="modelParlayLegs">
+                <option value="2">2 legs</option>
+                <option value="3">3 legs</option>
+                <option value="4" selected>4 legs</option>
+                <option value="5">5 legs</option>
+                <option value="6">6 legs</option>
+              </select>
+              <button id="generateModelParlays" class="button primary" type="button">Generate 5 Model Parlays</button>
+            </div>
+            <div id="modelParlayOutput" class="parlay-output"></div>
+          </div>
+
+          <div class="parlay-panel">
+            <h3>User-Selected Parlay Builder</h3>
+            <p class="section-note">Use the Add buttons in today’s board to build a custom parlay and calculate estimated fair value.</p>
+            <div class="selected-builder-box">
+              <div class="parlay-card-top">
+                <div>
+                  <div class="parlay-title">Selected Players</div>
+                  <div class="section-note" id="selectedParlaySummary">No players selected.</div>
+                </div>
+                <button id="clearSelectedParlay" class="button small" type="button">Clear</button>
+              </div>
+              <div id="selectedPlayerList" class="selected-player-list"></div>
+              <div id="selectedParlayOutput" class="parlay-output"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card table-card blue-shell" id="today-board">
+        <div class="table-head">
+          <div>
+            <h2>Today’s Board</h2>
+            <p class="table-note">Sorted by your selected filter board setting.</p>
+          </div>
+          <div class="board-scroll-controls">
+            <span class="scroll-hint">Board scroll</span>
+            <button id="scrollBoardLeft" class="scroll-button" type="button">← Left</button>
+            <button id="scrollBoardRight" class="scroll-button" type="button">Right →</button>
+            <button id="exportCsvButton" class="button dark" type="button">Export Visible CSV</button>
+          </div>
+        </div>
+        <div class="table-wrap" id="todayBoardScroll">
+          <table>
+            <thead>
+              <tr>
+                <th class="sortable-header sticky-player-col" data-sort-column="player">Player <span class="sort-indicator" id="sort-player"></span></th>
+                <th class="sortable-header" data-sort-column="team">Team <span class="sort-indicator" id="sort-team"></span></th>
+                <th class="sortable-header" data-sort-column="opponent">Opp <span class="sort-indicator" id="sort-opponent"></span></th>
+                <th class="sortable-header" data-sort-column="time">Time <span class="sort-indicator" id="sort-time"></span></th>
+                <th class="sortable-header" data-sort-column="order">Order <span class="sort-indicator" id="sort-order"></span></th>
+                <th class="sortable-header" data-sort-column="pitcher">Pitcher <span class="sort-indicator" id="sort-pitcher"></span></th>
+                <th class="sortable-header" data-sort-column="grade">Grade <span class="sort-indicator" id="sort-grade"></span></th>
+                <th class="sortable-header" data-sort-column="confidence">Confidence Score <span class="sort-indicator" id="sort-confidence"></span></th>
+                <th class="sortable-header" data-sort-column="hitScore">Hit Score <span class="sort-indicator" id="sort-hitScore"></span></th>
+                <th class="sortable-header" data-sort-column="projHits">Proj Hits <span class="sort-indicator" id="sort-projHits"></span></th>
+                <th class="sortable-header" data-sort-column="leanType">Lean Type <span class="sort-indicator" id="sort-leanType"></span></th>
+                <th class="sortable-header" data-sort-column="modelValue">Model Value <span class="sort-indicator" id="sort-modelValue"></span></th>
+                <th class="sortable-header" data-sort-column="fairOdds">Fair Odds <span class="sort-indicator" id="sort-fairOdds"></span></th>
+                <th>Value Reason</th>
+                <th class="sortable-header" data-sort-column="status">Status <span class="sort-indicator" id="sort-status"></span></th>
+                <th>Parlay</th>
+              </tr>
+            </thead>
+            <tbody id="playerTableBody"><tr><td colspan="16" class="loading">Loading model data...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="card section blue-shell" id="metric-index">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Metric Index</div>
+            <h2>Model Field Definitions</h2>
+            <p class="section-note">
+              Quick reference for the columns, filters, confidence labels, parlay estimates, and correlation signals used throughout the board.
+            </p>
+          </div>
+        </div>
+
+        <div class="index-grid">
+          <article class="index-card">
+            <h3>Core Projection Metrics</h3>
+            <div class="definition-list">
+              <div class="definition-item">
+                <div class="definition-term">Projected Hits</div>
+                <div class="definition-copy">Model-estimated hit expectation for the player based on available projection inputs. This is not a guaranteed result.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Hit Score</div>
+                <div class="definition-copy">A blended model score intended to rank hitter opportunity and strength for the current matchup.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Last 30 1+ Hit Rate</div>
+                <div class="definition-copy">Recent percentage or rate showing how often a player recorded at least one hit across the recent sample when available.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Batting Order</div>
+                <div class="definition-copy">Expected or confirmed lineup position. Earlier lineup spots generally receive more plate appearance opportunity.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="index-card">
+            <h3>Confidence & Grades</h3>
+            <div class="definition-list">
+              <div class="definition-item">
+                <div class="definition-term">Grade A</div>
+                <div class="definition-copy">Highest board tier. Displayed when the model output provides an A grade or when derived thresholds meet the strongest available criteria.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Grade B</div>
+                <div class="definition-copy">Strong but below Grade A. Usually reflects a favorable blend of score, projection, and recent profile.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Grade C</div>
+                <div class="definition-copy">Playable or watch-list tier depending on user thresholds. Less aggressive than A or B.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Confidence Score</div>
+                <div class="definition-copy">Numeric confidence value from the JSON when available. If missing, the UI estimates it from grade, Hit Score, Projected Hits, and recent hit rate.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Derived Grade</div>
+                <div class="definition-copy">If the JSON does not include a confidence grade, the UI estimates one from Hit Score, Projected Hits, and recent hit-rate fields.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="index-card">
+            <h3>Filter Board</h3>
+            <div class="definition-list">
+              <div class="definition-item">
+                <div class="definition-term">Minimum Hit Score</div>
+                <div class="definition-copy">Filters out players below the selected model score threshold.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Minimum Projected Hits</div>
+                <div class="definition-copy">Filters out players below the selected projected-hit threshold.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Parlay Eligible</div>
+                <div class="definition-copy">Limits the board to pre-game players with enough estimated probability to be considered by the parlay maker.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Season / Career BA vs Hand</div>
+                <div class="definition-copy">Filters hitter batting average against the opposing pitcher handedness when those fields are present in the JSON. These raw fields are intentionally kept out of the main board and used inside lean/value logic.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Pitcher BAA vs Hand</div>
+                <div class="definition-copy">Filters opposing pitcher batting average allowed against the hitter handedness. Raw pitcher BAA is used in matchup/value logic instead of being displayed as a main board column.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Hide Started Games</div>
+                <div class="definition-copy">Hides games marked started, live, final, in-progress, or frozen. These rows remain in the data but are removed from view.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="index-card">
+            <h3>Correlation Board</h3>
+            <div class="definition-list">
+              <div class="definition-item">
+                <div class="definition-term">Correlation Signal</div>
+                <div class="definition-copy">A model or fallback pattern combining multiple thresholds, such as Hit Score plus Projected Hits.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Sample</div>
+                <div class="definition-copy">Number of matching rows or historical opportunities when the model output provides that data.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Hit Rate</div>
+                <div class="definition-copy">Historical or model-provided success rate if included in the JSON. If unavailable, the UI displays an estimated current-board hit rate based on matching player probabilities.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Signal Score</div>
+                <div class="definition-copy">A ranking score used to sort available signals. Higher scores appear earlier.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="index-card">
+            <h3>Parlay Maker</h3>
+            <div class="definition-list">
+              <div class="definition-item">
+                <div class="definition-term">Estimated Leg Probability</div>
+                <div class="definition-copy">UI-estimated probability using score, projection, recent hit rate, and grade. This is a model estimate, not sportsbook probability.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">All-Hit Probability</div>
+                <div class="definition-copy">Estimated combined probability that every selected leg records a hit. It assumes legs are independent unless your model data says otherwise.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Fair Value</div>
+                <div class="definition-copy">Estimated fair American odds and multiplier based on model probability. It is not a betting recommendation or guaranteed edge.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Model-Generated Parlays</div>
+                <div class="definition-copy">Automatically built from filtered, pre-game eligible rows ranked by model strength.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="index-card">
+            <h3>Data & Status Fields</h3>
+            <div class="definition-list">
+              <div class="definition-item">
+                <div class="definition-term">Last Model Run</div>
+                <div class="definition-copy">Timestamp pulled from the JSON using common fields like last_run_et, generated_at_et, timestamp, or nested run-time fields.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Pre-game</div>
+                <div class="definition-copy">Game has not been marked started by the available data fields.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Frozen/Started</div>
+                <div class="definition-copy">Game appears to be started, live, final, in-progress, or frozen based on the JSON status fields.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Sortable / Frozen Board</div>
+                <div class="definition-copy">Today’s Board supports clickable column sorting and keeps the player-name column frozen while scrolling horizontally.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Export Visible CSV</div>
+                <div class="definition-copy">Exports only the rows currently visible after filters are applied.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="index-card">
+            <h3>Suggested JSON Timestamp Keys</h3>
+            <div class="definition-list">
+              <div class="definition-item">
+                <div class="definition-term">Preferred Field</div>
+                <div class="definition-copy">Use last_run_et when possible, for example: "last_run_et": "2026-05-16 3:05 PM ET".</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Also Supported</div>
+                <div class="definition-copy">generated_at_et, model_run_time_et, last_updated_et, timestamp, generated_at, updated_at, and common camelCase versions.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Nested Fields</div>
+                <div class="definition-copy">The UI also searches nested metadata objects for run, generated, updated, or timestamp-like keys.</div>
+              </div>
+            </div>
+          </article>
+
+
+
+          <article class="index-card">
+            <h3>Model Value Columns</h3>
+            <div class="definition-list">
+              <div class="definition-item">
+                <div class="definition-term">Lean Type</div>
+                <div class="definition-copy">The strongest UI-generated lean category for the row: Core, Rising, Matchup, Volume, Watchlist, or Standard.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Model Value</div>
+                <div class="definition-copy">A UI-generated value score that blends confidence, estimated leg probability, Hit Score, Projected Hits, grade, and lean strength.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Fair Odds</div>
+                <div class="definition-copy">Estimated fair American odds based on the UI-estimated hit probability. This is not a sportsbook line.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Value Reason</div>
+                <div class="definition-copy">Plain-English summary of why the row is surfacing, without showing raw data-heavy split columns on the main board.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="index-card">
+            <h3>Daily Lean Board</h3>
+            <div class="definition-list">
+              <div class="definition-item">
+                <div class="definition-term">Core Leans</div>
+                <div class="definition-copy">Players closest to the high-confidence profile using Grade, Confidence Score, Hit Score, Projected Hits, and estimated leg probability. If a category has no strict matches, fallback rows are shown so the UI never displays an empty lean box.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Rising Leans</div>
+                <div class="definition-copy">Players who may not be Grade A but are surfacing through recent form, projection, score range, or lineup position.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Matchup Leans</div>
+                <div class="definition-copy">Players with hitter batting-average strength against pitcher hand and/or a favorable opposing pitcher BAA allowed profile.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Volume Leans</div>
+                <div class="definition-copy">Players with stronger plate appearance opportunity based primarily on lineup position and projected hit volume.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Watchlist Leans</div>
+                <div class="definition-copy">Interesting non-core names with one or two strong supporting signals. These are discovery signals, not automatic plays.</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="index-card">
+            <h3>Important Usage Notes</h3>
+            <div class="definition-list">
+              <div class="definition-item">
+                <div class="definition-term">Model Estimates</div>
+                <div class="definition-copy">All rankings, filters, probabilities, and grades are estimates based on available data and assumptions.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Lineups</div>
+                <div class="definition-copy">A missing or unconfirmed batting order can reduce confidence. Confirm lineups separately before relying on any row.</div>
+              </div>
+              <div class="definition-item">
+                <div class="definition-term">Late Changes</div>
+                <div class="definition-copy">Scratches, pitching changes, weather, lineup changes, and data delays can materially change projections.</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="disclaimer-card blue-shell" id="legal-disclaimers">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">Legal & Data Disclaimers</div>
+            <h2>Responsible Use Notice</h2>
+            <p class="section-note">
+              These disclaimers are written directly into the page so they remain visible with the static UI.
+            </p>
+          </div>
+        </div>
+
+        <div class="disclaimer-grid">
+          <article class="disclaimer-box">
+            <div class="disclaimer-title">No Gambling Advice</div>
+            <div class="disclaimer-copy">
+              PropHit is an informational and analytical tool. It does not provide financial, betting, gambling, legal, or professional advice.
+              Model outputs, confidence grades, daily leans, parlay estimates, and fair-value calculations are for research and entertainment purposes only.
+            </div>
+          </article>
+
+          <article class="disclaimer-box">
+            <div class="disclaimer-title">No Guarantee of Accuracy</div>
+            <div class="disclaimer-copy">
+              Projections are estimates based on available data and model assumptions. Results are not guaranteed.
+              Baseball outcomes are uncertain and may be affected by lineup changes, injuries, weather, pitching changes, scoring decisions, data delays, or other factors.
+            </div>
+          </article>
+
+          <article class="disclaimer-box">
+            <div class="disclaimer-title">Not Affiliated With MLB</div>
+            <div class="disclaimer-copy">
+              PropHit is not affiliated with, endorsed by, sponsored by, or connected to Major League Baseball, MLB Advanced Media, any MLB club,
+              sportsbook, league, player, team, or official data provider unless expressly stated otherwise.
+            </div>
+          </article>
+
+          <article class="disclaimer-box">
+            <div class="disclaimer-title">Data Ownership</div>
+            <div class="disclaimer-copy">
+              Baseball names, team names, game information, statistics, trademarks, and related intellectual property may belong to their respective owners.
+              Any references are used for identification, analysis, and informational display.
+            </div>
+          </article>
+
+          <article class="disclaimer-box">
+            <div class="disclaimer-title">Fair-Value Estimates</div>
+            <div class="disclaimer-copy">
+              Fair odds and parlay values are calculated from model-estimated probabilities. They are not sportsbook lines, not guaranteed market edges,
+              and not instructions to place wagers. Users are responsible for their own decisions.
+            </div>
+          </article>
+
+          <article class="disclaimer-box">
+            <div class="disclaimer-title">Age & Jurisdiction</div>
+            <div class="disclaimer-copy">
+              If you use this information in connection with wagering, you are responsible for complying with all applicable laws, age restrictions,
+              and regulations in your location. Do not gamble where prohibited.
+            </div>
+          </article>
+
+          <article class="disclaimer-box">
+            <div class="disclaimer-title">Responsible Gaming</div>
+            <div class="disclaimer-copy">
+              Never risk money you cannot afford to lose. If gambling stops being fun or becomes harmful, seek help from responsible gaming resources
+              available in your area.
+            </div>
+          </article>
+
+          <article class="disclaimer-box">
+            <div class="disclaimer-title">Data Delay / Availability</div>
+            <div class="disclaimer-copy">
+              The board depends on the latest available JSON file and may not reflect real-time changes. The last model run timestamp should be checked
+              before using any projection or filter result.
+            </div>
+          </article>
+
+          <article class="disclaimer-box">
+            <div class="disclaimer-title">Independent Verification</div>
+            <div class="disclaimer-copy">
+              Users should independently verify player status, confirmed lineups, probable pitchers, game start times, and any relevant market information
+              before making decisions based on the board.
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <footer class="footer-disclaimer">
+        PropHit is an independent analytics interface. All model outputs are estimates for informational and entertainment purposes only.
+        No prediction, grade, probability, or fair-value calculation guarantees any outcome.
+      </footer>
+
+    </div>
+  </main>
+
+  <script>
+    const DATA_URL = "./data/prophit_latest.json";
+
+    let state = {
+      payload: null,
+      rows: [],
+      rawCorrelations: [],
+      selectedParlayPlayers: [],
+      filters: {
+        query: "",
+        team: "ALL",
+        grade: "ANY",
+        minHitScore: "",
+        minProjHits: "",
+        minOnePlusRate: "",
+        minSeasonBA: "",
+        minCareerBA: "",
+        maxPitcherSeasonBAA: "",
+        maxPitcherCareerBAA: "",
+        maxBattingOrder: "",
+        pitcherSearch: "",
+        status: "ALL",
+        parlayEligible: "ALL",
+        sortMode: "MODEL",
+        correlationLimit: 3,
+        gradeAView: "3",
+        leanBoardView: "5",
+        tableSortColumn: "MODEL",
+        tableSortDirection: "desc",
+        hideStarted: false
+      }
+    };
+
+    const numberOrNull = (value) => {
+      if (value === null || value === undefined || value === "") return null;
+      const n = Number(value);
+      return Number.isFinite(n) ? n : null;
+    };
+
+    const pct = (value, decimals = 1) => {
+      const n = numberOrNull(value);
+      if (n === null) return "—";
+      const normalized = n <= 1 ? n * 100 : n;
+      return `${normalized.toFixed(decimals)}%`;
+    };
+
+    const fmt = (value, decimals = 2) => {
+      const n = numberOrNull(value);
+      if (n === null) return "—";
+      return n.toFixed(decimals);
+    };
+
+    const text = (value, fallback = "—") => {
+      if (value === null || value === undefined || value === "") return fallback;
+      return String(value);
+    };
+
+    const lower = (value) => text(value, "").toLowerCase();
+
+    const getFirst = (row, keys, fallback = null) => {
+      for (const key of keys) {
+        if (row && row[key] !== undefined && row[key] !== null && row[key] !== "") return row[key];
+      }
+      return fallback;
+    };
+
+    const getPlayerName = (row) => text(getFirst(row, ["player","player_name","name","batter","hitter","Player","PLAYER"]), "Unknown Player");
+    const getTeam = (row) => text(getFirst(row, ["team","Team","TEAM","batter_team","player_team"]), "");
+    const getOpponent = (row) => text(getFirst(row, ["opponent","opp","Opponent","OPP","vs","matchup"]), "");
+    const getGameTime = (row) => text(getFirst(row, ["game_time_et","game_time","start_time_et","start_time","time","Game Time","gameTimeET"]), "");
+    const getHitScore = (row) => numberOrNull(getFirst(row, ["hit_score","Hit Score","hits_score","model_score","overall_score","score","hitScore"]));
+    const getProjectedHits = (row) => numberOrNull(getFirst(row, ["proj_hits","projected_hits","Projected Hits","x_hits","hits_projection","projectedHits"]));
+    const getConfidence = (row) => text(getFirst(row, ["confidence","Confidence","confidence_grade","grade","Grade","model_confidence"]), "").toUpperCase();
+    const getConfidenceScore = (row) => {
+      const direct = numberOrNull(getFirst(row, [
+        "confidence_score","Confidence Score","confidenceScore","model_confidence_score",
+        "projection_confidence_score","Projection Confidence Score","confidence_numeric",
+        "confidence_value","reliability_score","Reliability Score"
+      ]));
+      if (direct !== null) return direct;
+
+      const grade = deriveGrade(row);
+      const hitScore = getHitScore(row);
+      const proj = getProjectedHits(row);
+      const rate = getOnePlusRate(row);
+      const normalizedRate = rate === null ? null : rate <= 1 ? rate * 100 : rate;
+
+      let score = 50;
+      if (hitScore !== null) score += (hitScore - 60) * 0.35;
+      if (proj !== null) score += (proj - 0.85) * 18;
+      if (normalizedRate !== null) score += (normalizedRate - 55) * 0.18;
+      if (grade === "A") score += 12;
+      if (grade === "B") score += 6;
+      if (grade === "C") score += 2;
+
+      return clamp(score, 1, 99);
+    };
+    const getBattingOrder = (row) => text(getFirst(row, ["batting_order","lineup_spot","lineup","battingOrder","order","Batting Order"]), "");
+    const getPitcher = (row) => {
+      const direct = getFirst(row, [
+        "pitcher","probable_pitcher","opposing_pitcher","Opposing Pitcher","starter","probablePitcher",
+        "opp_pitcher","opponent_pitcher","opposingPitcher","opponentPitcher","pitcher_name","pitcherName",
+        "opposing_starter","opponent_starter","starting_pitcher","away_pitcher","home_pitcher",
+        "probable_opposing_pitcher","probableOpponentPitcher","probable_opponent_pitcher",
+        "opposing_pitcher_name","opponent_pitcher_name"
+      ], "");
+      if (direct) return text(direct, "");
+
+      const nestedPaths = [
+        ["opposing_pitcher", "name"],
+        ["opponent_pitcher", "name"],
+        ["probable_pitcher", "name"],
+        ["pitcher", "name"],
+        ["starter", "name"],
+        ["matchup", "pitcher"],
+        ["matchup", "opposing_pitcher"],
+        ["game", "opposing_pitcher"],
+        ["game", "probable_pitcher"]
+      ];
+
+      for (const path of nestedPaths) {
+        let current = row;
+        for (const key of path) current = current && current[key];
+        if (current) return text(current, "");
+      }
+
+      return "";
+    };
+    const getOnePlusRate = (row) => numberOrNull(getFirst(row, ["last30_one_plus_hit_rate","one_plus_hit_rate","hit_rate","last_30_hit_rate","one_plus_rate","last30OnePlusHitRate"]));
+
+    const normalizeAverage = (value) => {
+      const n = numberOrNull(value);
+      if (n === null) return null;
+      if (n > 2) return n / 1000;
+      return n;
+    };
+
+    const getSeasonBA = (row) => normalizeAverage(getFirst(row, [
+      "season_ba_vs_hand","season_avg_vs_hand","season_batting_avg_vs_hand","ba_vs_hand_season",
+      "avg_vs_hand_season","hitter_season_ba_vs_hand","batter_season_ba_vs_hand",
+      "season_ba","season_avg","batting_average_season","hitterSeasonBAVsHand",
+      "seasonBA","season_avg_vs_pitcher_hand"
+    ]));
+
+    const getCareerBA = (row) => normalizeAverage(getFirst(row, [
+      "career_ba_vs_hand","career_avg_vs_hand","career_batting_avg_vs_hand","ba_vs_hand_career",
+      "avg_vs_hand_career","hitter_career_ba_vs_hand","batter_career_ba_vs_hand",
+      "career_ba","career_avg","batting_average_career","hitterCareerBAVsHand",
+      "careerBA","career_avg_vs_pitcher_hand"
+    ]));
+
+    const getPitcherSeasonBAA = (row) => normalizeAverage(getFirst(row, [
+      "pitcher_baa_vs_hand_season","pitcher_season_baa_vs_hand","opp_pitcher_baa_vs_hand_season",
+      "opposing_pitcher_baa_vs_hand_season","pitcher_baa_season","pitcher_season_baa",
+      "season_pitcher_baa_vs_hand","p_baa_vs_hand_season","probable_pitcher_baa_vs_hand_season",
+      "pitcherSeasonBAA","pitcherSeasonBAAVsHand","oppPitcherSeasonBAAVsHand"
+    ]));
+
+    const getPitcherCareerBAA = (row) => normalizeAverage(getFirst(row, [
+      "pitcher_baa_vs_hand_career","pitcher_career_baa_vs_hand","opp_pitcher_baa_vs_hand_career",
+      "opposing_pitcher_baa_vs_hand_career","pitcher_baa_career","pitcher_career_baa",
+      "career_pitcher_baa_vs_hand","p_baa_vs_hand_career","probable_pitcher_baa_vs_hand_career",
+      "pitcherCareerBAA","pitcherCareerBAAVsHand","oppPitcherCareerBAAVsHand"
+    ]));
+
+    const escapeHtml = (value) => text(value, "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;");
+    const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+
+    const isGameStarted = (row) => {
+      const flags = [
+        getFirst(row, ["game_started","started","is_started","in_progress","isGameStarted"], null),
+        getFirst(row, ["status","game_status","status_detail","gameStatus"], null)
+      ];
+      return flags.some((flag) => {
+        if (typeof flag === "boolean") return flag;
+        const value = lower(flag);
+        return value.includes("started") || value.includes("in progress") || value.includes("final") || value.includes("live");
+      });
+    };
+
+    const getGradeRank = (grade) => {
+      const g = text(grade, "").toUpperCase().replace("+", "");
+      if (g === "A") return 5;
+      if (g === "B") return 4;
+      if (g === "C") return 3;
+      if (g === "D") return 2;
+      return 1;
+    };
+
+    const deriveGrade = (row) => {
+      const existing = getConfidence(row);
+      if (existing.startsWith("A")) return "A";
+      if (existing.startsWith("B")) return "B";
+      if (existing.startsWith("C")) return "C";
+
+      const score = getHitScore(row);
+      const proj = getProjectedHits(row);
+      const rate = getOnePlusRate(row);
+
+      if ((score ?? 0) >= 78 && (proj ?? 0) >= 1.1) return "A";
+      if ((score ?? 0) >= 70 && (proj ?? 0) >= 1.0) return "B";
+      if ((score ?? 0) >= 62) return "C";
+
+      const normalizedRate = rate === null ? null : rate <= 1 ? rate * 100 : rate;
+      if ((normalizedRate ?? 0) >= 72 && (proj ?? 0) >= 1.0) return "B";
+      return existing || "—";
+    };
+
+    const normalizeRows = (payload) => {
+      if (Array.isArray(payload)) return payload;
+      if (payload && Array.isArray(payload.players)) return payload.players;
+      if (payload && Array.isArray(payload.rows)) return payload.rows;
+      if (payload && Array.isArray(payload.data)) return payload.data;
+      if (payload && Array.isArray(payload.projections)) return payload.projections;
+      if (payload && Array.isArray(payload.board)) return payload.board;
+      if (payload && payload.model && Array.isArray(payload.model.players)) return payload.model.players;
+      return [];
+    };
+
+    const normalizeCorrelations = (payload) => {
+      if (payload && Array.isArray(payload.correlations)) return payload.correlations;
+      if (payload && Array.isArray(payload.correlation_board)) return payload.correlation_board;
+      if (payload && Array.isArray(payload.validation_correlations)) return payload.validation_correlations;
+      if (payload && payload.model && Array.isArray(payload.model.correlations)) return payload.model.correlations;
+      return [];
+    };
+
+    const formatTimestamp = (value) => {
+      if (value === null || value === undefined || value === "") return null;
+      if (typeof value === "number") {
+        const date = new Date(value > 9999999999 ? value : value * 1000);
+        if (!Number.isNaN(date.getTime())) return date.toLocaleString("en-US", { timeZone: "America/New_York" }) + " ET";
+      }
+
+      const raw = String(value).trim();
+      const parsed = new Date(raw);
+      if (!Number.isNaN(parsed.getTime()) && /T|Z|GMT|\d{4}-\d{2}-\d{2}/.test(raw)) {
+        return parsed.toLocaleString("en-US", { timeZone: "America/New_York" }) + " ET";
+      }
+      return raw;
+    };
+
+    const findTimestampDeep = (obj, path = "") => {
+      const preferredKeys = [
+        "last_run_et","last_model_run_et","model_run_time_et","run_time_et","generated_at_et","last_updated_et",
+        "lastRunET","lastModelRunET","modelRunTimeET","generatedAtET",
+        "last_run","last_model_run","model_run_time","run_time","generated_at","last_updated","updated_at",
+        "timestamp","created_at","date_generated","file_generated_at"
+      ];
+
+      for (const key of preferredKeys) {
+        if (obj && obj[key] !== undefined && obj[key] !== null && obj[key] !== "") {
+          return { value: formatTimestamp(obj[key]), source: key };
+        }
+      }
+
+      if (!obj || typeof obj !== "object") return null;
+
+      const entries = Object.entries(obj).slice(0, 80);
+      for (const [key, value] of entries) {
+        const keyLower = key.toLowerCase();
+        const looksLikeTimestampKey =
+          (keyLower.includes("run") || keyLower.includes("generated") || keyLower.includes("updated") || keyLower.includes("timestamp")) &&
+          !Array.isArray(value) &&
+          typeof value !== "object";
+
+        if (looksLikeTimestampKey && value) {
+          return { value: formatTimestamp(value), source: path ? `${path}.${key}` : key };
+        }
+      }
+
+      for (const [key, value] of entries) {
+        if (value && typeof value === "object" && !Array.isArray(value)) {
+          const found = findTimestampDeep(value, path ? `${path}.${key}` : key);
+          if (found) return found;
+        }
+      }
+
+      return null;
+    };
+
+    const estimateLegProbability = (row) => {
+      const score = getHitScore(row);
+      const proj = getProjectedHits(row);
+      const rate = getOnePlusRate(row);
+      const grade = deriveGrade(row);
+
+      let probability = 0.50;
+      if (score !== null) probability += (score - 60) / 160;
+      if (proj !== null) probability += (proj - 0.85) * 0.16;
+      if (rate !== null) {
+        const normalizedRate = rate <= 1 ? rate : rate / 100;
+        probability = probability * 0.65 + normalizedRate * 0.35;
+      }
+      if (grade === "A") probability += 0.035;
+      if (grade === "B") probability += 0.015;
+      if (grade === "C") probability -= 0.01;
+
+      return clamp(probability, 0.42, 0.82);
+    };
+
+    const decimalToAmerican = (decimalOdds) => {
+      if (!Number.isFinite(decimalOdds) || decimalOdds <= 1) return "—";
+      if (decimalOdds >= 2) return `+${Math.round((decimalOdds - 1) * 100)}`;
+      return `${Math.round(-100 / (decimalOdds - 1))}`;
+    };
+
+    const calculateParlay = (legs) => {
+      if (!legs || legs.length === 0) return { probability:null, decimalOdds:null, americanOdds:"—", fairMultiplier:"—" };
+      const probability = legs.reduce((product, row) => product * estimateLegProbability(row), 1);
+      const decimalOdds = probability > 0 ? 1 / probability : null;
+      return { probability, decimalOdds, americanOdds:decimalToAmerican(decimalOdds), fairMultiplier:decimalOdds ? `${decimalOdds.toFixed(2)}x` : "—" };
+    };
+
+    const getParlayScore = (row) => {
+      const gradeBonus = deriveGrade(row) === "A" ? 20 : deriveGrade(row) === "B" ? 10 : 0;
+      return (getHitScore(row) ?? 0) + (getProjectedHits(row) ?? 0) * 18 + estimateLegProbability(row) * 25 + gradeBonus;
+    };
+
+    const isParlayEligible = (row) => !isGameStarted(row) && getPlayerName(row) !== "Unknown Player" && estimateLegProbability(row) >= 0.50;
+
+    const buildFallbackCorrelations = (rows) => {
+      const rules = [
+        { id:"hit70-proj110", label:"Hit Score ≥ 70 + Projected Hits ≥ 1.10", test:(r)=>(getHitScore(r)??0)>=70 && (getProjectedHits(r)??0)>=1.1 },
+        { id:"hit75-proj100", label:"Hit Score ≥ 75 + Projected Hits ≥ 1.00", test:(r)=>(getHitScore(r)??0)>=75 && (getProjectedHits(r)??0)>=1.0 },
+        { id:"gradeA", label:"Grade A Players", test:(r)=>deriveGrade(r)==="A" },
+        { id:"gradeA-proj100", label:"Grade A + Projected Hits ≥ 1.00", test:(r)=>deriveGrade(r)==="A" && (getProjectedHits(r)??0)>=1.0 },
+        { id:"topOrder-score70", label:"Batting Order 1–4 + Hit Score ≥ 70", test:(r)=>{ const order=numberOrNull(getBattingOrder(r)); return order!==null && order>=1 && order<=4 && (getHitScore(r)??0)>=70; }},
+        { id:"rate70-proj100", label:"Last 30 1+ Hit Rate ≥ 70% + Projected Hits ≥ 1.00", test:(r)=>{ const rate=getOnePlusRate(r); const normalized=rate===null?0:rate<=1?rate*100:rate; return normalized>=70 && (getProjectedHits(r)??0)>=1.0; }},
+        { id:"score80", label:"Hit Score ≥ 80", test:(r)=>(getHitScore(r)??0)>=80 },
+        { id:"proj120", label:"Projected Hits ≥ 1.20", test:(r)=>(getProjectedHits(r)??0)>=1.2 },
+        { id:"proj115-score68", label:"Projected Hits ≥ 1.15 + Hit Score ≥ 68", test:(r)=>(getProjectedHits(r)??0)>=1.15 && (getHitScore(r)??0)>=68 },
+        { id:"topOrder-gradeA", label:"Batting Order 1–4 + Grade A", test:(r)=>{ const order=numberOrNull(getBattingOrder(r)); return order!==null && order>=1 && order<=4 && deriveGrade(r)==="A"; }},
+        { id:"score72-rate65", label:"Hit Score ≥ 72 + Last 30 1+ Hit Rate ≥ 65%", test:(r)=>{ const rate=getOnePlusRate(r); const normalized=rate===null?0:rate<=1?rate*100:rate; return (getHitScore(r)??0)>=72 && normalized>=65; }},
+        { id:"score65-proj100", label:"Hit Score ≥ 65 + Projected Hits ≥ 1.00", test:(r)=>(getHitScore(r)??0)>=65 && (getProjectedHits(r)??0)>=1.0 }
+      ];
+
+      return rules.map((rule) => {
+        const matches = rows.filter(rule.test);
+        const avgScore = matches.length ? matches.reduce((sum,row)=>sum+(getHitScore(row)??0),0) / matches.length : 0;
+        const avgProj = matches.length ? matches.reduce((sum,row)=>sum+(getProjectedHits(row)??0),0) / matches.length : 0;
+        return {
+          id:rule.id, label:rule.label, description:"Current-board signal generated from available projection fields.",
+          sample_size:matches.length, hit_rate:null, estimated_hit_rate:matches.length ? matches.reduce((sum,row)=>sum+estimateLegProbability(row),0) / matches.length : null, confidence:matches.length>=5?"Medium":matches.length>=2?"Emerging":"Low",
+          signal_score:avgScore + avgProj * 10 + Math.min(matches.length,10), players:matches.slice(0,8).map(getPlayerName)
+        };
+      }).filter(c=>c.sample_size>0).sort((a,b)=>(b.signal_score??0)-(a.signal_score??0));
+    };
+
+    const normalizeCorrelationItem = (item,index) => ({
+      id:item.id || item.rule_id || item.name || `correlation-${index}`,
+      label:item.label || item.rule || item.name || item.title || item.correlation || `Correlation ${index+1}`,
+      description:item.description || item.summary || item.notes || item.reason || "Model-generated correlation signal.",
+      sample_size:numberOrNull(getFirst(item,["sample_size","sample","opportunities","n","count","matches"])) ?? 0,
+      hit_rate:numberOrNull(getFirst(item,[
+        "hit_rate","historical_hit_rate","success_rate","rate","win_rate","actual_hit_rate",
+        "validation_hit_rate","last_7_hit_rate","last7_hit_rate","hitRate","successRate"
+      ])),
+      estimated_hit_rate:numberOrNull(getFirst(item,[
+        "estimated_hit_rate","model_hit_rate","projected_hit_rate","est_hit_rate","estimatedHitRate"
+      ])),
+      trend:item.trend || item.direction || item.reliability || item.confidence || item.strength || "Review",
+      signal_score:numberOrNull(getFirst(item,["signal_score","score","strength_score","rank_score"])) ?? 0,
+      players:Array.isArray(item.players) ? item.players : Array.isArray(item.matches) ? item.matches.map(p=>typeof p==="string"?p:getPlayerName(p)) : []
+    });
+
+    const getCorrelations = () => {
+      const source = state.rawCorrelations.length ? state.rawCorrelations.map(normalizeCorrelationItem) : buildFallbackCorrelations(state.rows);
+      return source.map(normalizeCorrelationItem).sort((a,b)=>{
+        const scoreDiff=(b.signal_score??0)-(a.signal_score??0);
+        if (scoreDiff !== 0) return scoreDiff;
+        return (b.sample_size??0)-(a.sample_size??0);
+      }).slice(0,12);
+    };
+
+    const getGradeAPlayers = () => state.rows.filter(row=>deriveGrade(row)==="A").sort((a,b)=>{
+      const scoreDiff=(getHitScore(b)??0)-(getHitScore(a)??0);
+      if (scoreDiff !== 0) return scoreDiff;
+      return (getProjectedHits(b)??0)-(getProjectedHits(a)??0);
+    });
+
+    const passesFilters = (row) => {
+      const f = state.filters;
+      const q = f.query.trim().toLowerCase();
+      const pitcherQ = f.pitcherSearch.trim().toLowerCase();
+
+      if (f.hideStarted && isGameStarted(row)) return false;
+      if (f.team !== "ALL" && getTeam(row) !== f.team) return false;
+
+      if (q) {
+        const haystack = [getPlayerName(row),getTeam(row),getOpponent(row),getPitcher(row),deriveGrade(row)].join(" ").toLowerCase();
+        if (!haystack.includes(q)) return false;
+      }
+
+      if (pitcherQ) {
+        const haystack = [getPitcher(row),getOpponent(row)].join(" ").toLowerCase();
+        if (!haystack.includes(pitcherQ)) return false;
+      }
+
+      if (f.grade !== "ANY" && getGradeRank(deriveGrade(row)) < getGradeRank(f.grade)) return false;
+
+      const minHitScore = numberOrNull(f.minHitScore);
+      if (minHitScore !== null && (getHitScore(row) ?? -Infinity) < minHitScore) return false;
+
+      const minProjHits = numberOrNull(f.minProjHits);
+      if (minProjHits !== null && (getProjectedHits(row) ?? -Infinity) < minProjHits) return false;
+
+      const minOnePlusRate = numberOrNull(f.minOnePlusRate);
+      if (minOnePlusRate !== null) {
+        const rate = getOnePlusRate(row);
+        const normalized = rate === null ? -Infinity : rate <= 1 ? rate * 100 : rate;
+        if (normalized < minOnePlusRate) return false;
+      }
+
+      const minSeasonBA = normalizeAverage(f.minSeasonBA);
+      if (minSeasonBA !== null) {
+        const value = getSeasonBA(row);
+        if (value === null || value < minSeasonBA) return false;
+      }
+
+      const minCareerBA = normalizeAverage(f.minCareerBA);
+      if (minCareerBA !== null) {
+        const value = getCareerBA(row);
+        if (value === null || value < minCareerBA) return false;
+      }
+
+      const maxPitcherSeasonBAA = normalizeAverage(f.maxPitcherSeasonBAA);
+      if (maxPitcherSeasonBAA !== null) {
+        const value = getPitcherSeasonBAA(row);
+        if (value === null || value > maxPitcherSeasonBAA) return false;
+      }
+
+      const maxPitcherCareerBAA = normalizeAverage(f.maxPitcherCareerBAA);
+      if (maxPitcherCareerBAA !== null) {
+        const value = getPitcherCareerBAA(row);
+        if (value === null || value > maxPitcherCareerBAA) return false;
+      }
+
+      const maxBattingOrder = numberOrNull(f.maxBattingOrder);
+      if (maxBattingOrder !== null) {
+        const order = numberOrNull(getBattingOrder(row));
+        if (order === null || order > maxBattingOrder) return false;
+      }
+
+      if (f.status === "PREGAME" && isGameStarted(row)) return false;
+      if (f.status === "STARTED" && !isGameStarted(row)) return false;
+      if (f.parlayEligible === "YES" && !isParlayEligible(row)) return false;
+
+      return true;
+    };
+
+    const getFilteredRows = () => {
+      const rows = state.rows.filter(passesFilters);
+      const sortMode = state.filters.sortMode;
+
+      return rows.sort((a,b) => {
+        const column = state.filters.tableSortColumn;
+        const direction = state.filters.tableSortDirection === "asc" ? 1 : -1;
+
+        const compareText = (left, right) => String(left || "").localeCompare(String(right || ""));
+        const compareNumber = (left, right) => (numberOrNull(left) ?? -999999) - (numberOrNull(right) ?? -999999);
+
+        let result = 0;
+
+        if (column && column !== "MODEL") {
+          if (column === "player") result = compareText(getPlayerName(a), getPlayerName(b));
+          else if (column === "team") result = compareText(getTeam(a), getTeam(b));
+          else if (column === "opponent") result = compareText(getOpponent(a), getOpponent(b));
+          else if (column === "time") result = compareText(getGameTime(a), getGameTime(b));
+          else if (column === "order") result = compareNumber(getBattingOrder(a), getBattingOrder(b));
+          else if (column === "pitcher") result = compareText(getPitcher(a), getPitcher(b));
+          else if (column === "grade") result = getGradeRank(deriveGrade(a)) - getGradeRank(deriveGrade(b));
+          else if (column === "confidence") result = compareNumber(getConfidenceScore(a), getConfidenceScore(b));
+          else if (column === "hitScore") result = compareNumber(getHitScore(a), getHitScore(b));
+          else if (column === "projHits") result = compareNumber(getProjectedHits(a), getProjectedHits(b));
+          else if (column === "leanType") result = compareText(getPrimaryLeanType(a).type, getPrimaryLeanType(b).type);
+          else if (column === "modelValue") result = compareNumber(getModelValueScore(a), getModelValueScore(b));
+          else if (column === "fairOdds") result = compareNumber(estimateLegProbability(a), estimateLegProbability(b));
+          else if (column === "status") result = compareText(isGameStarted(a) ? "Started" : "Pre-game", isGameStarted(b) ? "Started" : "Pre-game");
+
+          if (result !== 0) return result * direction;
+        }
+
+        if (sortMode === "HIT_SCORE") return (getHitScore(b)??0)-(getHitScore(a)??0);
+        if (sortMode === "PROJ_HITS") return (getProjectedHits(b)??0)-(getProjectedHits(a)??0);
+        if (sortMode === "ONE_PLUS") return (getOnePlusRate(b)??0)-(getOnePlusRate(a)??0);
+        if (sortMode === "BATTING_ORDER") return (numberOrNull(getBattingOrder(a))??99)-(numberOrNull(getBattingOrder(b))??99);
+
+        const gradeDiff = getGradeRank(deriveGrade(b)) - getGradeRank(deriveGrade(a));
+        if (gradeDiff !== 0) return gradeDiff;
+        const scoreDiff = (getHitScore(b)??0)-(getHitScore(a)??0);
+        if (scoreDiff !== 0) return scoreDiff;
+        return (getProjectedHits(b)??0)-(getProjectedHits(a)??0);
+      });
+    };
+
+
+    const averageDisplay = (value) => {
+      const n = normalizeAverage(value);
+      if (n === null) return "—";
+      return n.toFixed(3);
+    };
+
+    const getLeanBaseRows = () => {
+      return getFilteredRows()
+        .filter(row => !isGameStarted(row))
+        .filter(row => getPlayerName(row) !== "Unknown Player");
+    };
+
+    const getPitcherBaaAdvantage = (row) => {
+      const season = getPitcherSeasonBAA(row);
+      const career = getPitcherCareerBAA(row);
+      const values = [season, career].filter(value => value !== null);
+      if (!values.length) return null;
+      return values.reduce((sum, value) => sum + value, 0) / values.length;
+    };
+
+    const getHitterBaStrength = (row) => {
+      const season = getSeasonBA(row);
+      const career = getCareerBA(row);
+      const values = [season, career].filter(value => value !== null);
+      if (!values.length) return null;
+      return values.reduce((sum, value) => sum + value, 0) / values.length;
+    };
+
+    const getNormalizedOnePlus = (row) => {
+      const rate = getOnePlusRate(row);
+      if (rate === null) return null;
+      return rate <= 1 ? rate * 100 : rate;
+    };
+
+    const makeReason = (label, value) => ({ label, value });
+
+    const scoreCoreLean = (row) => {
+      let score = 0;
+      const reasons = [];
+      const grade = deriveGrade(row);
+      const hitScore = getHitScore(row);
+      const proj = getProjectedHits(row);
+      const conf = getConfidenceScore(row);
+
+      if (grade === "A") { score += 45; reasons.push(makeReason("Grade", "A")); }
+      if ((hitScore ?? 0) >= 75) { score += 18; reasons.push(makeReason("Hit Score", fmt(hitScore, 1))); }
+      if ((proj ?? 0) >= 1.05) { score += 15; reasons.push(makeReason("Proj Hits", fmt(proj, 2))); }
+      if ((conf ?? 0) >= 70) { score += 12; reasons.push(makeReason("Confidence", fmt(conf, 0))); }
+
+      score += estimateLegProbability(row) * 20;
+      return { score, reasons };
+    };
+
+    const scoreRisingLean = (row) => {
+      let score = 0;
+      const reasons = [];
+      const grade = deriveGrade(row);
+      const hitScore = getHitScore(row);
+      const proj = getProjectedHits(row);
+      const rate = getNormalizedOnePlus(row);
+      const order = numberOrNull(getBattingOrder(row));
+
+      if (grade !== "A") { score += 8; reasons.push(makeReason("Non-A Lean", `Grade ${grade}`)); }
+      if ((hitScore ?? 0) >= 66 && (hitScore ?? 0) < 78) { score += 20; reasons.push(makeReason("Rising Score", fmt(hitScore, 1))); }
+      if ((proj ?? 0) >= 0.95) { score += 18; reasons.push(makeReason("Proj Hits", fmt(proj, 2))); }
+      if ((rate ?? 0) >= 62) { score += 18; reasons.push(makeReason("Recent 1+ Rate", `${fmt(rate, 0)}%`)); }
+      if (order !== null && order <= 6) { score += 10; reasons.push(makeReason("Lineup", `Batting ${order}`)); }
+
+      return { score, reasons };
+    };
+
+    const scoreMatchupLean = (row) => {
+      let score = 0;
+      const reasons = [];
+      const hitterBA = getHitterBaStrength(row);
+      const pitcherBAA = getPitcherBaaAdvantage(row);
+      const seasonBA = getSeasonBA(row);
+      const careerBA = getCareerBA(row);
+      const pitcherSeasonBAA = getPitcherSeasonBAA(row);
+      const pitcherCareerBAA = getPitcherCareerBAA(row);
+
+      if ((hitterBA ?? 0) >= 0.260) { score += 24; reasons.push(makeReason("Hitter BA", averageDisplay(hitterBA))); }
+      if ((seasonBA ?? 0) >= 0.270) { score += 10; reasons.push(makeReason("Season BA", averageDisplay(seasonBA))); }
+      if ((careerBA ?? 0) >= 0.250) { score += 8; reasons.push(makeReason("Career BA", averageDisplay(careerBA))); }
+
+      if ((pitcherBAA ?? 0) >= 0.255) { score += 24; reasons.push(makeReason("Pitcher BAA Allowed", averageDisplay(pitcherBAA))); }
+      if ((pitcherSeasonBAA ?? 0) >= 0.260) { score += 8; reasons.push(makeReason("Pitcher Season BAA", averageDisplay(pitcherSeasonBAA))); }
+      if ((pitcherCareerBAA ?? 0) >= 0.250) { score += 6; reasons.push(makeReason("Pitcher Career BAA", averageDisplay(pitcherCareerBAA))); }
+
+      score += (getProjectedHits(row) ?? 0) * 8;
+      return { score, reasons };
+    };
+
+    const scoreVolumeLean = (row) => {
+      let score = 0;
+      const reasons = [];
+      const order = numberOrNull(getBattingOrder(row));
+      const proj = getProjectedHits(row);
+      const hitScore = getHitScore(row);
+
+      if (order !== null && order <= 4) { score += 34; reasons.push(makeReason("Lineup Volume", `Batting ${order}`)); }
+      else if (order !== null && order <= 6) { score += 18; reasons.push(makeReason("Lineup", `Batting ${order}`)); }
+
+      if ((proj ?? 0) >= 1.00) { score += 20; reasons.push(makeReason("Proj Hits", fmt(proj, 2))); }
+      if ((hitScore ?? 0) >= 65) { score += 10; reasons.push(makeReason("Hit Score", fmt(hitScore, 1))); }
+
+      score += estimateLegProbability(row) * 12;
+      return { score, reasons };
+    };
+
+    const scoreWatchlistLean = (row) => {
+      let score = 0;
+      const reasons = [];
+      const grade = deriveGrade(row);
+      const proj = getProjectedHits(row);
+      const hitScore = getHitScore(row);
+      const rate = getNormalizedOnePlus(row);
+      const order = numberOrNull(getBattingOrder(row));
+      const pitcherBAA = getPitcherBaaAdvantage(row);
+
+      if (grade !== "A") { score += 12; reasons.push(makeReason("Watchlist Grade", `Grade ${grade}`)); }
+      if ((proj ?? 0) >= 1.05 && (hitScore ?? 0) < 72) { score += 25; reasons.push(makeReason("Projection > Score", `Proj ${fmt(proj, 2)}`)); }
+      if ((rate ?? 0) >= 68) { score += 18; reasons.push(makeReason("Recent Form", `${fmt(rate, 0)}% 1+`)); }
+      if (order !== null && order <= 5) { score += 10; reasons.push(makeReason("Lineup", `Batting ${order}`)); }
+      if ((pitcherBAA ?? 0) >= 0.260) { score += 8; reasons.push(makeReason("Pitcher Allows BA", averageDisplay(pitcherBAA))); }
+
+      return { score, reasons };
+    };
+
+    const buildLeanCategory = (id, title, subtitle, scorer, minScore = 20) => {
+      const baseRows = getLeanBaseRows();
+
+      const scored = baseRows
+        .map(row => {
+          const result = scorer(row);
+          return {
+            row,
+            score: result.score,
+            reasons: result.reasons,
+            isFallback: false
+          };
+        })
+        .filter(item => item.score >= minScore && item.reasons.length > 0)
+        .sort((a, b) => b.score - a.score);
+
+      // Static fallback: never allow a category to be empty.
+      // If no one clears the strict category threshold, use best available model rows
+      // and clearly mark them as fallback leans.
+      if (!scored.length) {
+        const fallbackRows = baseRows
+          .map(row => ({
+            row,
+            score: getModelValueScore(row),
+            reasons: [
+              makeReason("Fallback Lean", "Best available profile"),
+              makeReason("Model Value", fmt(getModelValueScore(row), 0)),
+              makeReason("Confidence", fmt(getConfidenceScore(row), 0))
+            ],
+            isFallback: true
+          }))
+          .sort((a, b) => b.score - a.score)
+          .slice(0, 8);
+
+        return { id, title, subtitle, rows: fallbackRows, isFallbackCategory: true };
+      }
+
+      return { id, title, subtitle, rows: scored, isFallbackCategory: false };
+    };
+
+    const getDailyLeanCategories = () => [
+      buildLeanCategory("core", "Core Leans", "Closest to Grade A / high-confidence profile.", scoreCoreLean, 45),
+      buildLeanCategory("rising", "Rising Leans", "Surfacing through projection, score, recent form, or lineup.", scoreRisingLean, 35),
+      buildLeanCategory("matchup", "Matchup Leans", "Hitter split strength plus favorable pitcher BAA allowed.", scoreMatchupLean, 25),
+      buildLeanCategory("volume", "Volume Leans", "Lineup position and projected opportunity.", scoreVolumeLean, 30),
+      buildLeanCategory("watchlist", "Watchlist Leans", "Non-core names with one or two strong signals.", scoreWatchlistLean, 28)
+    ];
+
+    const renderDailyLeanBoard = () => {
+      const grid = document.getElementById("dailyLeanGrid");
+      if (!grid) return;
+
+      const showAll = state.filters.leanBoardView === "ALL";
+      const categories = getDailyLeanCategories();
+
+      grid.innerHTML = categories.map(category => {
+        const displayed = showAll ? category.rows : category.rows.slice(0, 5);
+
+        const listHtml = displayed.length
+          ? displayed.map(item => {
+              const row = item.row;
+              const reasons = item.reasons.slice(0, 4).map(reason =>
+                `<span class="lean-reason-tag">${escapeHtml(reason.label)}: ${escapeHtml(reason.value)}</span>`
+              ).join("");
+
+              return `
+                <article class="lean-player-card">
+                  <div class="lean-player-top">
+                    <div>
+                      <div class="lean-player-name">${escapeHtml(getPlayerName(row))}</div>
+                      <div class="lean-player-meta">
+                        ${escapeHtml(getTeam(row) || "—")} ${getOpponent(row) ? `vs ${escapeHtml(getOpponent(row))}` : ""}
+                        • Grade ${escapeHtml(deriveGrade(row))}
+                        • Conf ${fmt(getConfidenceScore(row), 0)}
+                      </div>
+                    </div>
+                    <div class="lean-score">${fmt(item.score, 0)}</div>
+                  </div>
+                  <div class="lean-reasons">${reasons}</div>
+                  ${item.isFallback ? `<div class="fallback-lean-note">Fallback shown so this category never goes empty.</div>` : ""}
+                </article>
+              `;
+            }).join("")
+          : `<div class="lean-empty">No current players match this category with the active filters.</div>`;
+
+        return `
+          <article class="lean-category-card">
+            <div class="lean-category-head">
+              <div>
+                <div class="lean-category-title">${escapeHtml(category.title)}</div>
+                <div class="lean-category-subtitle">${escapeHtml(category.subtitle)}</div>
+              </div>
+              <div class="lean-count-pill">${category.isFallbackCategory ? "Fallback" : category.rows.length}</div>
+            </div>
+            <div class="lean-list">${listHtml}</div>
+          </article>
+        `;
+      }).join("");
+    };
+
+
+    const renderStats = () => {
+      const gradeAPlayers = getGradeAPlayers();
+      const filteredRows = getFilteredRows();
+      const parlayEligibleRows = filteredRows.filter(isParlayEligible);
+      const avgConfidence = filteredRows.length
+        ? filteredRows.reduce((sum,row)=>sum + (getConfidenceScore(row) || 0), 0) / filteredRows.length
+        : null;
+
+      document.getElementById("rowsLoaded").textContent = state.rows.length;
+      document.getElementById("visibleRows").textContent = filteredRows.length;
+      document.getElementById("gradeACount").textContent = gradeAPlayers.length;
+      document.getElementById("gradeATotal").textContent = gradeAPlayers.length;
+      document.getElementById("avgConfidence").textContent = avgConfidence === null ? "—" : fmt(avgConfidence, 0);
+      document.getElementById("parlayEligibleCount").textContent = parlayEligibleRows.length;
+
+      const found = findTimestampDeep(state.payload || {});
+      if (found && found.value) {
+        document.getElementById("lastRun").textContent = found.value;
+        document.getElementById("lastRunSource").textContent = `Source: ${found.source}`;
+      } else {
+        document.getElementById("lastRun").textContent = "Timestamp not found";
+        document.getElementById("lastRunSource").textContent = "Add last_run_et, generated_at_et, or timestamp to JSON.";
+      }
+    };
+
+    const renderTeamFilter = () => {
+      const select = document.getElementById("teamFilter");
+      const teams = Array.from(new Set(state.rows.map(getTeam).filter(Boolean))).sort();
+      select.innerHTML = `<option value="ALL">All Teams</option>` + teams.map(team=>`<option value="${escapeHtml(team)}">${escapeHtml(team)}</option>`).join("");
+      select.value = state.filters.team;
+    };
+
+    const renderActiveFilterTags = () => {
+      const f = state.filters;
+      const tags = [];
+      if (f.query) tags.push(`Search: ${f.query}`);
+      if (f.team !== "ALL") tags.push(`Team: ${f.team}`);
+      if (f.grade !== "ANY") tags.push(`Grade: ${f.grade}+`);
+      if (f.minHitScore) tags.push(`Hit Score ≥ ${f.minHitScore}`);
+      if (f.minProjHits) tags.push(`Proj Hits ≥ ${f.minProjHits}`);
+      if (f.minOnePlusRate) tags.push(`1+ Rate ≥ ${f.minOnePlusRate}%`);
+      if (f.minSeasonBA) tags.push(`Season BA ≥ ${f.minSeasonBA}`);
+      if (f.minCareerBA) tags.push(`Career BA ≥ ${f.minCareerBA}`);
+      if (f.maxPitcherSeasonBAA) tags.push(`Pitcher Season BAA ≤ ${f.maxPitcherSeasonBAA}`);
+      if (f.maxPitcherCareerBAA) tags.push(`Pitcher Career BAA ≤ ${f.maxPitcherCareerBAA}`);
+      if (f.maxBattingOrder) tags.push(`Order ≤ ${f.maxBattingOrder}`);
+      if (f.pitcherSearch) tags.push(`Pitcher/Opp: ${f.pitcherSearch}`);
+      if (f.status !== "ALL") tags.push(f.status === "PREGAME" ? "Pre-game only" : "Started only");
+      if (f.parlayEligible === "YES") tags.push("Parlay eligible");
+      if (f.hideStarted) tags.push("Started hidden");
+
+      const wrap = document.getElementById("activeFilterTags");
+      wrap.innerHTML = tags.length ? tags.map(tag=>`<span class="filter-tag">${escapeHtml(tag)}</span>`).join("") : `<span class="filter-tag">No active filters</span>`;
+    };
+
+    const renderCorrelations = () => {
+      const correlations = getCorrelations();
+      const displayed = correlations.slice(0, state.filters.correlationLimit);
+      const grid = document.getElementById("correlationGrid");
+      const empty = document.getElementById("correlationEmpty");
+      document.getElementById("correlationTitle").textContent = `Showing Top ${state.filters.correlationLimit} Correlations`;
+
+      if (!displayed.length) {
+        grid.innerHTML = "";
+        empty.style.display = "block";
+        return;
+      }
+
+      empty.style.display = "none";
+      grid.innerHTML = displayed.map((item,index) => {
+        const players = (item.players || []).slice(0,8).map(player=>`<span class="player-tag">${escapeHtml(player)}</span>`).join("");
+        return `
+          <article class="correlation-card">
+            <div class="correlation-top">
+              <div><div class="signal-rank">Signal #${index+1}</div><h3>${escapeHtml(item.label)}</h3></div>
+              <div class="trend-pill">${escapeHtml(item.trend)}</div>
+            </div>
+            <p class="description">${escapeHtml(item.description)}</p>
+            <div class="mini-stat-grid">
+              <div class="mini-stat"><div class="mini-label">${item.hit_rate === null && item.estimated_hit_rate !== null ? "Est. Hit Rate" : "Hit Rate"}</div><div class="mini-value">${item.hit_rate === null ? (item.estimated_hit_rate === null ? "—" : pct(item.estimated_hit_rate)) : pct(item.hit_rate)}</div></div>
+              <div class="mini-stat"><div class="mini-label">Sample</div><div class="mini-value">${item.sample_size || "—"}</div></div>
+              <div class="mini-stat"><div class="mini-label">Score</div><div class="mini-value">${fmt(item.signal_score,1)}</div></div>
+            </div>
+            ${players ? `<div class="tag-title">Matching Players</div><div class="tag-wrap">${players}</div>` : ""}
+          </article>
+        `;
+      }).join("");
+    };
+
+    const renderGradeAPlayers = () => {
+      const players = getGradeAPlayers();
+      const displayedPlayers = state.filters.gradeAView === "ALL" ? players : players.slice(0, 3);
+      const grid = document.getElementById("gradeAGrid");
+      const empty = document.getElementById("gradeAEmpty");
+      const title = document.getElementById("gradeATitle");
+
+      if (title) {
+        title.textContent = state.filters.gradeAView === "ALL"
+          ? `All Grade A Players`
+          : `Top 3 Grade A Players`;
+      }
+
+      const gradeAView = document.getElementById("gradeAView");
+      if (gradeAView) {
+        gradeAView.style.display = players.length > 3 ? "block" : "none";
+      }
+
+      if (!players.length) {
+        grid.innerHTML = "";
+        empty.style.display = "block";
+        return;
+      }
+
+      empty.style.display = "none";
+      grid.innerHTML = displayedPlayers.map(row => `
+        <article class="grade-player">
+          <div class="grade-player-top">
+            <div>
+              <div class="player-name">${escapeHtml(getPlayerName(row))}</div>
+              <div class="player-matchup">${escapeHtml(getTeam(row) || "—")} ${getOpponent(row) ? `vs ${escapeHtml(getOpponent(row))}` : ""}</div>
+            </div>
+            <div class="grade-badge">A</div>
+          </div>
+          <div class="grade-metrics">
+            <div class="tiny-stat"><div class="tiny-label">Score</div><div class="tiny-value">${fmt(getHitScore(row),1)}</div></div>
+            <div class="tiny-stat"><div class="tiny-label">Proj H</div><div class="tiny-value">${fmt(getProjectedHits(row),2)}</div></div>
+            <div class="tiny-stat"><div class="tiny-label">Conf</div><div class="tiny-value">${fmt(getConfidenceScore(row),0)}</div></div>
+            <div class="tiny-stat"><div class="tiny-label">Order</div><div class="tiny-value">${escapeHtml(getBattingOrder(row) || "—")}</div></div>
+          </div>
+          <div class="pitcher-note">Pitcher: ${escapeHtml(getPitcher(row) || "—")}${getGameTime(row) ? ` • ${escapeHtml(getGameTime(row))}` : ""}</div>
+        </article>
+      `).join("");
+    };
+
+    const getEligibleParlayRows = () => getFilteredRows().filter(isParlayEligible).sort((a,b)=>getParlayScore(b)-getParlayScore(a));
+
+    const buildModelParlays = (legCount) => {
+      const eligible = getEligibleParlayRows();
+      const parlays = [];
+      const usedCombos = new Set();
+
+      if (eligible.length < legCount) return parlays;
+
+      for (let i=0; i<5; i++) {
+        const legs = [];
+        const usedPlayers = new Set();
+        for (let j=i; j<eligible.length && legs.length<legCount; j++) {
+          const row = eligible[j];
+          const player = getPlayerName(row);
+          if (usedPlayers.has(player)) continue;
+          legs.push(row);
+          usedPlayers.add(player);
+        }
+        if (legs.length < legCount) {
+          for (const row of eligible) {
+            const player = getPlayerName(row);
+            if (!usedPlayers.has(player)) {
+              legs.push(row);
+              usedPlayers.add(player);
+            }
+            if (legs.length === legCount) break;
+          }
+        }
+        const comboKey = legs.map(getPlayerName).sort().join("|");
+        if (legs.length === legCount && !usedCombos.has(comboKey)) {
+          usedCombos.add(comboKey);
+          parlays.push(legs);
+        }
+      }
+
+      return parlays;
+    };
+
+    const renderParlayCard = (legs,title) => {
+      const calc = calculateParlay(legs);
+      const legHtml = legs.map(row => `
+        <li class="parlay-leg">
+          <div>
+            <div class="leg-name">${escapeHtml(getPlayerName(row))}</div>
+            <div class="leg-detail">
+              ${escapeHtml(getTeam(row) || "—")} ${getOpponent(row) ? `vs ${escapeHtml(getOpponent(row))}` : ""}
+              • Grade ${escapeHtml(deriveGrade(row))}
+              • Score ${fmt(getHitScore(row),1)}
+              • Proj H ${fmt(getProjectedHits(row),2)}
+            </div>
+          </div>
+          <div class="leg-prob">${pct(estimateLegProbability(row))}</div>
+        </li>
+      `).join("");
+
+      return `
+        <article class="parlay-card">
+          <div class="parlay-card-top">
+            <div>
+              <div class="parlay-title">${escapeHtml(title)}</div>
+              <div class="section-note">${legs.length} legs • Estimated all-hit probability ${pct(calc.probability)}</div>
+            </div>
+            <div class="parlay-odds"><div>Fair Value</div><div>${calc.americanOdds}</div><div>${calc.fairMultiplier}</div></div>
+          </div>
+          <ul class="parlay-leg-list">${legHtml}</ul>
+        </article>
+      `;
+    };
+
+    const renderModelParlays = () => {
+      const output = document.getElementById("modelParlayOutput");
+      const legCount = Number(document.getElementById("modelParlayLegs").value || 4);
+      const parlays = buildModelParlays(legCount);
+      if (!parlays.length) {
+        output.innerHTML = `<div class="empty-box">Not enough eligible pre-game players to build ${legCount}-leg parlays with the current filters.</div>`;
+        return;
+      }
+      output.innerHTML = parlays.map((legs,index)=>renderParlayCard(legs,`Model Parlay #${index+1}`)).join("");
+    };
+
+    const isSelectedForParlay = (row) => state.selectedParlayPlayers.some(selected=>getPlayerName(selected)===getPlayerName(row));
+
+    const toggleSelectedParlayPlayer = (row) => {
+      const player = getPlayerName(row);
+      if (isSelectedForParlay(row)) {
+        state.selectedParlayPlayers = state.selectedParlayPlayers.filter(selected=>getPlayerName(selected)!==player);
+      } else {
+        state.selectedParlayPlayers = [...state.selectedParlayPlayers, row];
+      }
+      renderAll();
+    };
+
+    const renderSelectedParlay = () => {
+      const selected = state.selectedParlayPlayers;
+      const list = document.getElementById("selectedPlayerList");
+      const output = document.getElementById("selectedParlayOutput");
+      const summary = document.getElementById("selectedParlaySummary");
+
+      if (!selected.length) {
+        summary.textContent = "No players selected.";
+        list.innerHTML = "";
+        output.innerHTML = "";
+        return;
+      }
+
+      const calc = calculateParlay(selected);
+      summary.textContent = `${selected.length} selected • Estimated all-hit probability ${pct(calc.probability)} • Fair value ${calc.americanOdds}`;
+
+      list.innerHTML = selected.map(row => `
+        <div class="selected-player-row">
+          <div>
+            <div class="leg-name">${escapeHtml(getPlayerName(row))}</div>
+            <div class="leg-detail">${escapeHtml(getTeam(row) || "—")} ${getOpponent(row) ? `vs ${escapeHtml(getOpponent(row))}` : ""} • Grade ${escapeHtml(deriveGrade(row))} • Est. ${pct(estimateLegProbability(row))}</div>
+          </div>
+          <button class="remove-leg" type="button" data-remove-player="${escapeHtml(getPlayerName(row))}">Remove</button>
+        </div>
+      `).join("");
+
+      output.innerHTML = renderParlayCard(selected, "User-Selected Parlay");
+
+      document.querySelectorAll("[data-remove-player]").forEach(button => {
+        button.addEventListener("click", () => {
+          const player = button.getAttribute("data-remove-player");
+          state.selectedParlayPlayers = state.selectedParlayPlayers.filter(row=>getPlayerName(row)!==player);
+          renderAll();
+        });
+      });
+    };
+
+
+    const getPrimaryLeanType = (row) => {
+      const categories = [
+        { name: "Core", result: scoreCoreLean(row) },
+        { name: "Rising", result: scoreRisingLean(row) },
+        { name: "Matchup", result: scoreMatchupLean(row) },
+        { name: "Volume", result: scoreVolumeLean(row) },
+        { name: "Watchlist", result: scoreWatchlistLean(row) }
+      ].filter(item => item.result.reasons.length > 0);
+
+      if (!categories.length) return { type: "Standard", score: 0, reasons: [] };
+
+      categories.sort((a, b) => b.result.score - a.result.score);
+      return {
+        type: categories[0].name,
+        score: categories[0].result.score,
+        reasons: categories[0].result.reasons
+      };
+    };
+
+    const getModelValueScore = (row) => {
+      const confidence = getConfidenceScore(row) ?? 50;
+      const probability = estimateLegProbability(row) * 100;
+      const projectedHits = getProjectedHits(row) ?? 0;
+      const hitScore = getHitScore(row) ?? 0;
+      const lean = getPrimaryLeanType(row);
+
+      let value = 0;
+      value += confidence * 0.30;
+      value += probability * 0.28;
+      value += hitScore * 0.22;
+      value += projectedHits * 12;
+      value += Math.min(lean.score, 80) * 0.10;
+
+      if (deriveGrade(row) === "A") value += 6;
+      if (isGameStarted(row)) value -= 12;
+
+      return clamp(value, 1, 99);
+    };
+
+    const getModelValueTier = (row) => {
+      const value = getModelValueScore(row);
+      if (value >= 78) return { label: "Strong Value", className: "value-strong" };
+      if (value >= 68) return { label: "Positive Value", className: "value-positive" };
+      if (value >= 58) return { label: "Watch Value", className: "value-watch" };
+      return { label: "Neutral", className: "value-neutral" };
+    };
+
+    const getFairOddsForRow = (row) => {
+      return decimalToAmerican(1 / estimateLegProbability(row));
+    };
+
+    const getModelValueReason = (row) => {
+      const lean = getPrimaryLeanType(row);
+      const pieces = [];
+
+      if (lean.type !== "Standard") pieces.push(`${lean.type} lean`);
+      if ((getConfidenceScore(row) ?? 0) >= 70) pieces.push(`Conf ${fmt(getConfidenceScore(row), 0)}`);
+      if ((getProjectedHits(row) ?? 0) >= 1.0) pieces.push(`Proj ${fmt(getProjectedHits(row), 2)}`);
+      if ((getHitScore(row) ?? 0) >= 70) pieces.push(`Hit Score ${fmt(getHitScore(row), 1)}`);
+
+      const probability = estimateLegProbability(row);
+      if (probability >= 0.62) pieces.push(`Est ${pct(probability)}`);
+
+      if (!pieces.length && lean.reasons.length) {
+        return lean.reasons.slice(0, 2).map(reason => `${reason.label} ${reason.value}`).join(" • ");
+      }
+
+      return pieces.slice(0, 3).join(" • ") || "Baseline model profile";
+    };
+
+
+    const getGradeBadgeClass = (grade) => {
+      if (grade === "A") return "badge badge-a";
+      if (grade === "B") return "badge badge-b";
+      if (grade === "C") return "badge badge-c";
+      return "badge badge-other";
+    };
+
+    const renderTable = () => {
+      const rows = getFilteredRows();
+      const tbody = document.getElementById("playerTableBody");
+
+      if (!rows.length) {
+        tbody.innerHTML = `<tr><td colspan="16" class="loading">No player rows found for the current filters.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = rows.map(row => {
+        const grade = deriveGrade(row);
+        const started = isGameStarted(row);
+        const statusClass = started ? "badge status-started" : "badge status-pregame";
+        const statusText = started ? "Frozen/Started" : "Pre-game";
+        return `
+          <tr class="${grade === "A" ? "grade-a-row" : ""}">
+            <td class="name-cell sticky-player-col">${escapeHtml(getPlayerName(row))}</td>
+            <td>${escapeHtml(getTeam(row) || "—")}</td>
+            <td>${escapeHtml(getOpponent(row) || "—")}</td>
+            <td>${escapeHtml(getGameTime(row) || "—")}</td>
+            <td>${escapeHtml(getBattingOrder(row) || "—")}</td>
+            <td>${escapeHtml(getPitcher(row) || "—")}</td>
+            <td><span class="${getGradeBadgeClass(grade)}">${escapeHtml(grade)}</span></td>
+            <td class="strong-cell">${fmt(getConfidenceScore(row),0)}</td>
+            <td class="strong-cell">${fmt(getHitScore(row),1)}</td>
+            <td class="strong-cell">${fmt(getProjectedHits(row),2)}</td>
+            <td>
+              <div class="signal-stack">
+                <div class="signal-main">${escapeHtml(getPrimaryLeanType(row).type)}</div>
+                <div class="signal-sub">${pct(estimateLegProbability(row))} est. leg prob</div>
+              </div>
+            </td>
+            <td><span class="value-pill ${getModelValueTier(row).className}">${fmt(getModelValueScore(row), 0)} • ${getModelValueTier(row).label}</span></td>
+            <td class="strong-cell">${getFairOddsForRow(row)}</td>
+            <td>
+              <div class="signal-stack">
+                <div class="signal-main">${escapeHtml(getModelValueReason(row))}</div>
+                <div class="signal-sub">Raw splits kept in filters/lean logic</div>
+              </div>
+            </td>
+            <td><span class="${statusClass}">${statusText}</span></td>
+            <td><button class="add-leg-button ${isSelectedForParlay(row) ? "added" : ""}" type="button" data-add-player="${escapeHtml(getPlayerName(row))}">${isSelectedForParlay(row) ? "Added" : "Add"}</button></td>
+          </tr>
+        `;
+      }).join("");
+
+      document.querySelectorAll("[data-add-player]").forEach(button => {
+        button.addEventListener("click", () => {
+          const player = button.getAttribute("data-add-player");
+          const row = state.rows.find(candidate=>getPlayerName(candidate)===player);
+          if (row) toggleSelectedParlayPlayer(row);
+        });
+      });
+    };
+
+
+    const renderSortIndicators = () => {
+      document.querySelectorAll(".sort-indicator").forEach(span => {
+        span.textContent = "";
+      });
+
+      const column = state.filters.tableSortColumn;
+      if (!column || column === "MODEL") return;
+
+      const indicator = document.getElementById(`sort-${column}`);
+      if (indicator) {
+        indicator.textContent = state.filters.tableSortDirection === "asc" ? "▲" : "▼";
+      }
+    };
+
+
+    const renderAll = () => {
+      renderStats();
+      renderActiveFilterTags();
+      renderCorrelations();
+      renderGradeAPlayers();
+      renderDailyLeanBoard();
+      renderTable();
+      renderSelectedParlay();
+      renderSortIndicators();
+
+      document.getElementById("correlationView").value = String(state.filters.correlationLimit);
+      document.getElementById("correlationViewBoard").value = String(state.filters.correlationLimit);
+      document.getElementById("gradeAView").value = state.filters.gradeAView;
+      document.getElementById("leanBoardView").value = state.filters.leanBoardView;
+
+      const hideButton = document.getElementById("hideStartedButton");
+      hideButton.textContent = state.filters.hideStarted ? "Started Games Hidden" : "Hide Started Games";
+      hideButton.classList.toggle("danger-active", state.filters.hideStarted);
+    };
+
+    const resetFilters = () => {
+      state.filters = {
+        query:"", team:"ALL", grade:"ANY", minHitScore:"", minProjHits:"", minOnePlusRate:"",
+        minSeasonBA:"", minCareerBA:"", maxPitcherSeasonBAA:"", maxPitcherCareerBAA:"",
+        maxBattingOrder:"", pitcherSearch:"", status:"ALL", parlayEligible:"ALL",
+        sortMode:"MODEL", correlationLimit:3, gradeAView:"3", leanBoardView:"5", tableSortColumn:"MODEL", tableSortDirection:"desc", hideStarted:false
+      };
+
+      document.getElementById("searchInput").value = "";
+      document.getElementById("teamFilter").value = "ALL";
+      document.getElementById("gradeFilter").value = "ANY";
+      document.getElementById("minHitScore").value = "";
+      document.getElementById("minProjHits").value = "";
+      document.getElementById("minOnePlusRate").value = "";
+      document.getElementById("minSeasonBA").value = "";
+      document.getElementById("minCareerBA").value = "";
+      document.getElementById("maxPitcherSeasonBAA").value = "";
+      document.getElementById("maxPitcherCareerBAA").value = "";
+      document.getElementById("maxBattingOrder").value = "";
+      document.getElementById("pitcherSearch").value = "";
+      document.getElementById("statusFilter").value = "ALL";
+      document.getElementById("parlayEligibleFilter").value = "ALL";
+      document.getElementById("sortMode").value = "MODEL";
+      document.getElementById("correlationView").value = "3";
+      document.getElementById("correlationViewBoard").value = "3";
+      document.getElementById("gradeAView").value = "3";
+      document.getElementById("leanBoardView").value = "5";
+
+      renderAll();
+      renderModelParlays();
+    };
+
+    const exportVisibleCsv = () => {
+      const rows = getFilteredRows();
+      const headers = ["Player","Team","Opponent","Time","Batting Order","Opposing Pitcher","Grade","Confidence Score","Hit Score","Projected Hits","Lean Type","Model Value Score","Model Value Tier","Fair Odds","Value Reason","Status"];
+      const csvRows = [headers];
+
+      rows.forEach(row => {
+        csvRows.push([
+          getPlayerName(row), getTeam(row), getOpponent(row), getGameTime(row), getBattingOrder(row), getPitcher(row),
+          deriveGrade(row), fmt(getConfidenceScore(row),0), fmt(getHitScore(row),1), fmt(getProjectedHits(row),2),
+          getPrimaryLeanType(row).type,
+          fmt(getModelValueScore(row),0),
+          getModelValueTier(row).label,
+          getFairOddsForRow(row),
+          getModelValueReason(row),
+          isGameStarted(row) ? "Frozen/Started" : "Pre-game"
+        ]);
+      });
+
+      const csv = csvRows.map(row => row.map(cell => `"${String(cell).replaceAll('"','""')}"`).join(",")).join("\n");
+      const blob = new Blob([csv], { type:"text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "prophit_visible_board.csv";
+      a.click();
+      URL.revokeObjectURL(url);
+    };
+
+    const showError = (message) => {
+      const errorBox = document.getElementById("errorBox");
+      errorBox.style.display = "block";
+      errorBox.textContent = message;
+    };
+
+    const bindEvents = () => {
+      const map = [
+        ["searchInput","query"], ["teamFilter","team"], ["gradeFilter","grade"], ["minHitScore","minHitScore"],
+        ["minProjHits","minProjHits"], ["minOnePlusRate","minOnePlusRate"], ["minSeasonBA","minSeasonBA"], ["minCareerBA","minCareerBA"], ["maxPitcherSeasonBAA","maxPitcherSeasonBAA"], ["maxPitcherCareerBAA","maxPitcherCareerBAA"], ["maxBattingOrder","maxBattingOrder"],
+        ["pitcherSearch","pitcherSearch"], ["statusFilter","status"], ["parlayEligibleFilter","parlayEligible"],
+        ["sortMode","sortMode"]
+      ];
+
+      map.forEach(([id,key]) => {
+        document.getElementById(id).addEventListener("input", (event) => {
+          state.filters[key] = event.target.value;
+          renderAll();
+        });
+        document.getElementById(id).addEventListener("change", (event) => {
+          state.filters[key] = event.target.value;
+          renderAll();
+          if (["team","grade","minHitScore","minProjHits","minOnePlusRate","minSeasonBA","minCareerBA","maxPitcherSeasonBAA","maxPitcherCareerBAA","maxBattingOrder","status","parlayEligible","sortMode"].includes(key)) {
+            renderModelParlays();
+          }
+        });
+      });
+
+      const updateCorrelationLimit = (value) => {
+        state.filters.correlationLimit = Number(value);
+        document.getElementById("correlationView").value = String(state.filters.correlationLimit);
+        document.getElementById("correlationViewBoard").value = String(state.filters.correlationLimit);
+        renderAll();
+      };
+
+      document.getElementById("correlationView").addEventListener("change", (event) => {
+        updateCorrelationLimit(event.target.value);
+      });
+
+      document.getElementById("correlationViewBoard").addEventListener("change", (event) => {
+        updateCorrelationLimit(event.target.value);
+      });
+
+      document.getElementById("gradeAView").addEventListener("change", (event) => {
+        state.filters.gradeAView = event.target.value;
+        renderAll();
+      });
+
+      document.getElementById("leanBoardView").addEventListener("change", (event) => {
+        state.filters.leanBoardView = event.target.value;
+        renderAll();
+      });
+
+      document.getElementById("hideStartedButton").addEventListener("click", () => {
+        state.filters.hideStarted = !state.filters.hideStarted;
+        renderAll();
+        renderModelParlays();
+      });
+
+      document.getElementById("resetFiltersButton").addEventListener("click", resetFilters);
+      document.getElementById("generateModelParlays").addEventListener("click", renderModelParlays);
+      document.getElementById("modelParlayLegs").addEventListener("change", renderModelParlays);
+      document.getElementById("clearSelectedParlay").addEventListener("click", () => {
+        state.selectedParlayPlayers = [];
+        renderAll();
+      });
+      document.querySelectorAll("[data-sort-column]").forEach(header => {
+        header.addEventListener("click", () => {
+          const column = header.getAttribute("data-sort-column");
+
+          if (state.filters.tableSortColumn === column) {
+            state.filters.tableSortDirection = state.filters.tableSortDirection === "asc" ? "desc" : "asc";
+          } else {
+            state.filters.tableSortColumn = column;
+            state.filters.tableSortDirection = ["player", "team", "opponent", "time", "pitcher", "leanType", "status"].includes(column) ? "asc" : "desc";
+          }
+
+          renderAll();
+        });
+      });
+
+      document.getElementById("scrollBoardLeft").addEventListener("click", () => {
+        const wrap = document.getElementById("todayBoardScroll");
+        wrap.scrollBy({ left: -520, behavior: "smooth" });
+      });
+
+      document.getElementById("scrollBoardRight").addEventListener("click", () => {
+        const wrap = document.getElementById("todayBoardScroll");
+        wrap.scrollBy({ left: 520, behavior: "smooth" });
+      });
+
+      document.getElementById("exportCsvButton").addEventListener("click", exportVisibleCsv);
+    };
+
+    const loadData = async () => {
+      try {
+        const response = await fetch(DATA_URL, { cache:"no-store" });
+        if (!response.ok) throw new Error(`Could not load ${DATA_URL}. Status ${response.status}`);
+
+        const payload = await response.json();
+        state.payload = payload;
+        state.rows = normalizeRows(payload);
+        state.rawCorrelations = normalizeCorrelations(payload);
+
+        renderTeamFilter();
+        renderAll();
+        renderModelParlays();
+      } catch (error) {
+        state.payload = {};
+        state.rows = [];
+        state.rawCorrelations = [];
+        showError(error?.message || "Could not load model data.");
+        renderTeamFilter();
+        renderAll();
+        renderModelParlays();
+      }
+    };
+
+    bindEvents();
+    loadData();
+  </script>
+</body>
+</html>
