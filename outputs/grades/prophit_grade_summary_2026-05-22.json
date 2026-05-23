@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "summary_type": "postgame_grading",
+    "target_date": "2026-05-22",
+    "generated_at_et": "2026-05-23 11:45:54 AM ET",
+    "rule": "Grades only the last eligible model snapshot where the player appeared before game start."
+  },
+  "overall": {
+    "graded": 358,
+    "wins": 151,
+    "losses": 207,
+    "pending": 35,
+    "one_plus_hit_rate": 0.4218
+  },
+  "by_hit_score_bucket": [
+    {
+      "bucket": "60-69",
+      "graded": 32,
+      "wins": 16,
+      "hit_rate": 0.5
+    },
+    {
+      "bucket": "70-79",
+      "graded": 29,
+      "wins": 17,
+      "hit_rate": 0.5862
+    },
+    {
+      "bucket": "80-89",
+      "graded": 12,
+      "wins": 9,
+      "hit_rate": 0.75
+    },
+    {
+      "bucket": "90+",
+      "graded": 4,
+      "wins": 2,
+      "hit_rate": 0.5
+    },
+    {
+      "bucket": "<60",
+      "graded": 281,
+      "wins": 107,
+      "hit_rate": 0.3808
+    },
+    {
+      "bucket": "Unknown",
+      "graded": 0,
+      "wins": 0,
+      "hit_rate": null
+    }
+  ],
+  "by_confidence_bucket": [
+    {
+      "bucket": "A 80+",
+      "graded": 69,
+      "wins": 38,
+      "hit_rate": 0.5507
+    },
+    {
+      "bucket": "B 70-79",
+      "graded": 50,
+      "wins": 33,
+      "hit_rate": 0.66
+    },
+    {
+      "bucket": "C 60-69",
+      "graded": 47,
+      "wins": 23,
+      "hit_rate": 0.4894
+    },
+    {
+      "bucket": "D 45-59",
+      "graded": 55,
+      "wins": 19,
+      "hit_rate": 0.3455
+    },
+    {
+      "bucket": "F <45",
+      "graded": 137,
+      "wins": 38,
+      "hit_rate": 0.2774
+    },
+    {
+      "bucket": "Unknown",
+      "graded": 0,
+      "wins": 0,
+      "hit_rate": null
+    }
+  ],
+  "by_lineup_bucket": [
+    {
+      "bucket": "Confirmed 1-4",
+      "graded": 76,
+      "wins": 40,
+      "hit_rate": 0.5263
+    },
+    {
+      "bucket": "Confirmed 5-9",
+      "graded": 95,
+      "wins": 55,
+      "hit_rate": 0.5789
+    },
+    {
+      "bucket": "Unconfirmed/Fallback",
+      "graded": 187,
+      "wins": 56,
+      "hit_rate": 0.2995
+    },
+    {
+      "bucket": "Unknown",
+      "graded": 0,
+      "wins": 0,
+      "hit_rate": null
+    }
+  ]
+}
