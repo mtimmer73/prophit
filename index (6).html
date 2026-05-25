@@ -1,0 +1,2357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PropHit Lab</title>
+  <style>
+    :root {
+      --navy: #061426;
+      --navy2: #0b1f3a;
+      --blue: #2563eb;
+      --sky: #38bdf8;
+      --green: #16a34a;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+      --purple: #7c3aed;
+      --orange: #f97316;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --panel: #ffffff;
+      --bg: #f5f8fc;
+      --shadow: 0 18px 50px rgba(15, 23, 42, 0.12);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    }
+
+    button, select, input {
+      font-family: inherit;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 270px 1fr;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 38%),
+        linear-gradient(180deg, #071629 0%, #08213b 42%, #061426 100%);
+      color: #dbeafe;
+      padding: 22px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      z-index: 50;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 4px 2px 12px;
+    }
+
+    .brand-ball {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: #f8fafc;
+      position: relative;
+      box-shadow: inset 0 0 0 2px rgba(15,23,42,.12), 0 0 24px rgba(56,189,248,.25);
+      flex: 0 0 auto;
+    }
+
+    .brand-ball::before,
+    .brand-ball::after {
+      content: "";
+      position: absolute;
+      top: 5px;
+      width: 15px;
+      height: 36px;
+      border-radius: 50%;
+      opacity: .9;
+    }
+
+    .brand-ball::before {
+      left: 10px;
+      border-right: 2px dashed #ef4444;
+      transform: rotate(-16deg);
+    }
+
+    .brand-ball::after {
+      right: 10px;
+      border-left: 2px dashed #ef4444;
+      transform: rotate(16deg);
+    }
+
+    .brand-text {
+      font-size: 30px;
+      font-weight: 1000;
+      letter-spacing: -0.05em;
+      color: #ffffff;
+    }
+
+    .brand-text span {
+      color: #60a5fa;
+      font-size: 18px;
+      letter-spacing: -0.02em;
+      margin-left: 3px;
+    }
+
+    .date-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 15px 12px;
+      border-top: 1px solid rgba(148, 163, 184, 0.18);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+    }
+
+    .date-main {
+      color: #ffffff;
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .date-sub {
+      color: #93c5fd;
+      font-size: 12px;
+      margin-top: 2px;
+    }
+
+    .nav-section-title {
+      margin: 7px 8px 4px;
+      color: #94a3b8;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      font-weight: 900;
+    }
+
+    .nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-radius: 12px;
+      padding: 11px 13px;
+      color: #cbd5e1;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 14px;
+      transition: .15s ease;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+      color: #ffffff;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      box-shadow: 0 12px 26px rgba(37, 99, 235, .25);
+    }
+
+    .nav-icon {
+      width: 20px;
+      text-align: center;
+      opacity: .95;
+    }
+
+    .status-card {
+      margin-top: auto;
+      border: 1px solid rgba(125, 211, 252, .20);
+      background: rgba(15, 23, 42, .42);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .status-title {
+      color: #ffffff;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+
+    .status-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #bbf7d0;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 12px rgba(34, 197, 94, .8);
+      flex: 0 0 auto;
+    }
+
+    .status-detail {
+      color: #cbd5e1;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .main { min-width: 0; }
+
+    .topbar {
+      min-height: 74px;
+      background: linear-gradient(90deg, #071629 0%, #061426 100%);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.22);
+      gap: 20px;
+    }
+
+    .tabs {
+      display: flex;
+      align-items: stretch;
+      gap: 12px;
+      height: 74px;
+      overflow-x: auto;
+    }
+
+    .tab {
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      color: #e2e8f0;
+      font-size: 13px;
+      font-weight: 900;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-bottom: 4px solid transparent;
+      white-space: nowrap;
+    }
+
+    .tab:hover,
+    .tab.active {
+      color: #ffffff;
+      border-bottom-color: #2563eb;
+    }
+
+    .run-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-shrink: 0;
+    }
+
+    .last-run {
+      font-size: 12px;
+      line-height: 1.25;
+      color: #ffffff;
+      font-weight: 850;
+    }
+
+    .last-run span {
+      color: #cbd5e1;
+      font-weight: 600;
+    }
+
+    .run-btn {
+      border: 0;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: white;
+      padding: 13px 22px;
+      font-weight: 1000;
+      cursor: pointer;
+      box-shadow: 0 12px 28px rgba(37, 99, 235, .35);
+    }
+
+    .content {
+      padding: 20px 26px 28px;
+    }
+
+    .alert {
+      display: none;
+      margin-bottom: 14px;
+      border-radius: 14px;
+      padding: 12px 14px;
+      font-size: 13px;
+      font-weight: 800;
+      line-height: 1.45;
+    }
+
+    .alert.show { display: block; }
+    .alert.info {
+      border: 1px solid #bfdbfe;
+      background: #eff6ff;
+      color: #1e3a8a;
+    }
+    .alert.warn {
+      border: 1px solid #fde68a;
+      background: #fffbeb;
+      color: #92400e;
+    }
+    .alert.error {
+      border: 1px solid #fecaca;
+      background: #fef2f2;
+      color: #991b1b;
+    }
+
+    .live-tools {
+      margin-bottom: 14px;
+      border: 1px solid #bfdbfe;
+      background: #eff6ff;
+      color: #1e3a8a;
+      border-radius: 14px;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 1fr 160px 190px;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .live-tools-title {
+      font-size: 11px;
+      font-weight: 1000;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #1d4ed8;
+      margin-bottom: 5px;
+    }
+
+    .live-tools input[type="text"] {
+      height: 38px;
+      border: 1px solid #bfdbfe;
+      background: white;
+      color: #0f172a;
+    }
+
+    .live-tools input[type="file"] {
+      height: auto;
+      padding: 8px;
+      border: 1px solid #bfdbfe;
+      border-radius: 8px;
+      background: white;
+      color: #0f172a;
+      font-size: 12px;
+    }
+
+    .live-path-list {
+      margin-top: 8px;
+      color: #334155;
+      font-size: 12px;
+      line-height: 1.45;
+      display: none;
+    }
+
+    .live-path-list.open {
+      display: block;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--panel);
+      box-shadow: 0 8px 30px rgba(15, 23, 42, .06);
+    }
+
+    .metric-card {
+      padding: 20px 20px;
+      min-height: 126px;
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 13px;
+      align-items: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .metric-card:last-child { border-right: 0; }
+
+    .metric-icon {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      font-size: 27px;
+      font-weight: 900;
+    }
+
+    .metric-label {
+      color: #0f172a;
+      font-size: 10px;
+      text-transform: uppercase;
+      font-weight: 1000;
+      letter-spacing: .05em;
+    }
+
+    .metric-value {
+      margin-top: 5px;
+      color: #020617;
+      font-size: 31px;
+      font-weight: 1000;
+      letter-spacing: -0.04em;
+    }
+
+    .metric-note {
+      margin-top: 4px;
+      color: #16a34a;
+      font-size: 12px;
+      font-weight: 850;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: 0 8px 30px rgba(15, 23, 42, .06);
+    }
+
+    .controls {
+      margin-top: 16px;
+      padding: 20px;
+    }
+
+    .panel-title {
+      font-size: 14px;
+      color: #0f172a;
+      font-weight: 1000;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+      margin-bottom: 16px;
+    }
+
+    .controls-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(130px, 1fr)) 130px 130px 170px;
+      gap: 14px;
+      align-items: end;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 850;
+      color: #334155;
+      margin-bottom: 7px;
+    }
+
+    select, input {
+      width: 100%;
+      height: 38px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 0 12px;
+      background: #ffffff;
+      color: #0f172a;
+      font-weight: 700;
+      outline: none;
+    }
+
+    .soft-btn,
+    .apply-btn,
+    .outline-blue,
+    .purple-btn,
+    .orange-btn {
+      min-height: 38px;
+      border-radius: 8px;
+      font-weight: 950;
+      cursor: pointer;
+      transition: .15s ease;
+    }
+
+    .soft-btn {
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
+      color: #0f172a;
+    }
+
+    .soft-btn.active {
+      border-color: #2563eb;
+      background: #eff6ff;
+      color: #2563eb;
+    }
+
+    .apply-btn {
+      border: 0;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+      box-shadow: 0 12px 24px rgba(37, 99, 235, .22);
+    }
+
+    .board-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 500px;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .board-panel {
+      overflow: hidden;
+    }
+
+    .board-header {
+      min-height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 12px 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .board-title {
+      font-size: 18px;
+      font-weight: 1000;
+      color: #020617;
+    }
+
+    .board-count {
+      margin-left: 12px;
+      color: #2563eb;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .view-controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .view-btn {
+      border: 1px solid #bfdbfe;
+      background: #ffffff;
+      color: #2563eb;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-weight: 900;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .view-btn.active {
+      background: #eff6ff;
+      border-color: #2563eb;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      max-height: 68vh;
+      overflow-y: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1040px;
+    }
+
+    thead {
+      background: #061426;
+      color: #e5e7eb;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+
+    th {
+      padding: 12px 14px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      text-align: left;
+      white-space: nowrap;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 13px;
+      vertical-align: middle;
+      white-space: nowrap;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #f8fafc;
+    }
+
+    tbody tr:hover {
+      background: #eff6ff;
+    }
+
+    .favorite {
+      color: #f59e0b;
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .player-btn {
+      border: 0;
+      background: transparent;
+      padding: 0;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .player {
+      font-weight: 1000;
+      color: #0f172a;
+    }
+
+    .player small {
+      display: block;
+      font-size: 10px;
+      color: #64748b;
+      margin-top: 2px;
+      font-weight: 850;
+    }
+
+    .team {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 900;
+    }
+
+    .team-logo {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: inline-grid;
+      place-items: center;
+      font-size: 11px;
+      font-weight: 1000;
+      color: white;
+      background: #2563eb;
+    }
+
+    .score-pill {
+      min-width: 66px;
+      display: inline-flex;
+      justify-content: center;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: #f0fdf4;
+      color: #16a34a;
+      font-weight: 1000;
+      font-size: 16px;
+    }
+
+    .yellow-pill {
+      background: #fffbeb;
+      color: #b45309;
+    }
+
+    .green-text {
+      color: #16a34a;
+      font-weight: 1000;
+    }
+
+    .qualified {
+      display: inline-flex;
+      padding: 5px 9px;
+      border-radius: 7px;
+      background: #dcfce7;
+      color: #16a34a;
+      font-size: 10px;
+      font-weight: 1000;
+      text-transform: uppercase;
+    }
+
+    .pending {
+      background: #fffbeb;
+      color: #b45309;
+    }
+
+    .arrow {
+      color: #2563eb;
+      font-size: 20px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .full-board-btn-wrap {
+      text-align: center;
+      padding: 10px 0 14px;
+    }
+
+    .outline-blue {
+      border: 1px solid #2563eb;
+      color: #2563eb;
+      background: #ffffff;
+      padding: 10px 22px;
+    }
+
+    .drawer {
+      overflow: hidden;
+      align-self: start;
+      position: sticky;
+      top: 92px;
+    }
+
+    .drawer-top {
+      background: linear-gradient(135deg, #061426, #09203d);
+      color: #ffffff;
+      padding: 20px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .drawer-name {
+      font-size: 21px;
+      font-weight: 1000;
+      margin-bottom: 4px;
+    }
+
+    .drawer-sub {
+      color: #cbd5e1;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .close {
+      font-size: 26px;
+      color: #ffffff;
+      opacity: .9;
+      cursor: pointer;
+    }
+
+    .drawer-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .drawer-metric {
+      padding: 16px 10px;
+      text-align: center;
+      border-right: 1px solid var(--border);
+    }
+
+    .drawer-metric:last-child { border-right: 0; }
+
+    .drawer-label {
+      font-size: 10px;
+      color: #64748b;
+      text-transform: uppercase;
+      font-weight: 1000;
+    }
+
+    .drawer-value {
+      margin-top: 6px;
+      font-size: 23px;
+      font-weight: 1000;
+    }
+
+    .drawer-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .drawer-tab {
+      padding: 14px 8px 11px;
+      text-align: center;
+      font-size: 12px;
+      font-weight: 1000;
+      color: #334155;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+    }
+
+    .drawer-tab.active {
+      color: #2563eb;
+      border-bottom-color: #2563eb;
+    }
+
+    .drawer-body {
+      padding: 18px;
+    }
+
+    .glance-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 22px;
+    }
+
+    .glance-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 13px;
+    }
+
+    .glance-item span:first-child {
+      color: #334155;
+      font-weight: 850;
+    }
+
+    .glance-item span:last-child {
+      color: #0f172a;
+      font-weight: 950;
+    }
+
+    .qualified-box {
+      margin-top: 18px;
+      border: 1px solid #86efac;
+      background: #f0fdf4;
+      color: #14532d;
+      border-radius: 9px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 1000;
+    }
+
+    .check {
+      width: 30px;
+      height: 30px;
+      border: 2px solid #16a34a;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+    }
+
+    .drawer-action {
+      margin-top: 16px;
+      width: 100%;
+      border: 0;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+      padding: 14px;
+      font-weight: 1000;
+      cursor: pointer;
+    }
+
+    .section-anchor {
+      scroll-margin-top: 90px;
+    }
+
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1fr 1fr .95fr;
+      gap: 14px;
+      margin-top: 16px;
+    }
+
+    .module {
+      padding: 18px;
+      min-height: 205px;
+    }
+
+    .module-title {
+      font-size: 16px;
+      font-weight: 1000;
+      color: #0f172a;
+      margin-bottom: 3px;
+    }
+
+    .module-sub {
+      font-size: 12px;
+      color: #2563eb;
+      font-weight: 850;
+      margin-bottom: 16px;
+    }
+
+    .mini-table {
+      width: 100%;
+      min-width: 0;
+      border-collapse: collapse;
+    }
+
+    .mini-table th {
+      background: transparent;
+      color: #334155;
+      padding: 8px 0;
+      font-size: 10px;
+      border-bottom: 1px solid #e2e8f0;
+      cursor: default;
+    }
+
+    .mini-table td {
+      padding: 9px 0;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 12px;
+      white-space: normal;
+    }
+
+    .mini-table td:not(:first-child) {
+      text-align: center;
+      font-weight: 900;
+    }
+
+    .module-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .module-copy {
+      font-size: 13px;
+      line-height: 1.55;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 16px 0;
+    }
+
+    .check-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 18px;
+      display: grid;
+      gap: 8px;
+      color: #0f172a;
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .check-list li::before {
+      content: "✓";
+      color: #16a34a;
+      font-weight: 1000;
+      margin-right: 9px;
+    }
+
+    .purple-btn {
+      border: 1px solid #a855f7;
+      color: #7c3aed;
+      background: #ffffff;
+      padding: 10px 16px;
+      width: 100%;
+    }
+
+    .orange-btn {
+      border: 1px solid #fb923c;
+      color: #f97316;
+      background: #ffffff;
+      padding: 10px 16px;
+      width: 100%;
+    }
+
+    .performance-list {
+      display: grid;
+      gap: 13px;
+      margin-top: 18px;
+    }
+
+    .performance-row {
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 10px;
+      color: #334155;
+      font-size: 13px;
+      font-weight: 850;
+    }
+
+    .performance-row span:last-child {
+      color: #16a34a;
+      font-weight: 1000;
+    }
+
+    .wide-section {
+      margin-top: 16px;
+      padding: 18px;
+    }
+
+    .lab-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr) 160px;
+      gap: 12px;
+      align-items: end;
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .small-card {
+      border: 1px solid #e2e8f0;
+      background: #f8fafc;
+      border-radius: 14px;
+      padding: 14px;
+    }
+
+    .small-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #64748b;
+      font-weight: 1000;
+    }
+
+    .small-value {
+      margin-top: 5px;
+      font-size: 25px;
+      font-weight: 1000;
+    }
+
+    .history-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      color: #64748b;
+      font-size: 12px;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    .empty-message {
+      padding: 28px;
+      color: #64748b;
+      text-align: center;
+      font-weight: 800;
+    }
+
+    @media (max-width: 1200px) {
+      .live-tools {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 1500px) {
+      .metric-grid { grid-template-columns: repeat(3, 1fr); }
+      .metric-card { border-bottom: 1px solid var(--border); }
+      .board-layout { grid-template-columns: 1fr; }
+      .drawer { position: static; }
+      .bottom-grid { grid-template-columns: repeat(2, 1fr); }
+      .lab-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 1100px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar { display: none; }
+      .topbar {
+        overflow-x: auto;
+        justify-content: flex-start;
+        gap: 20px;
+      }
+      .metric-grid { grid-template-columns: repeat(2, 1fr); }
+      .controls-grid { grid-template-columns: repeat(2, 1fr); }
+      .history-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 700px) {
+      .content { padding: 14px; }
+      .topbar { padding: 0 14px; }
+      .run-group { display: none; }
+      .metric-grid,
+      .bottom-grid,
+      .drawer-metrics,
+      .glance-grid,
+      .result-grid,
+      .history-grid { grid-template-columns: 1fr; }
+      .drawer-metric {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+      .controls-grid,
+      .lab-grid { grid-template-columns: 1fr; }
+      .metric-card { border-right: 0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-ball"></div>
+        <div class="brand-text">PropHit<span>LAB</span></div>
+      </div>
+
+      <div class="date-card">
+        <div>
+          <div class="date-main" id="sidebarDate">Today</div>
+          <div class="date-sub" id="sidebarSubDate">Live Board</div>
+        </div>
+        <div>⌄</div>
+      </div>
+
+      <div class="nav-list">
+        <a class="nav-item active" href="#today"><span class="nav-icon">⌂</span> Today’s Board</a>
+        <a class="nav-item" href="#top-plays"><span class="nav-icon">☆</span> Top Plays</a>
+        <a class="nav-item" href="#correlations"><span class="nav-icon">⌘</span> Correlation Board</a>
+        <a class="nav-item" href="#validation"><span class="nav-icon">▧</span> Validation Lab</a>
+        <a class="nav-item" href="#parlay"><span class="nav-icon">⌁</span> Parlay Builder</a>
+      </div>
+
+      <div class="nav-section-title">Data</div>
+      <div class="nav-list">
+        <a class="nav-item" href="#performance"><span class="nav-icon">▥</span> Model Performance</a>
+        <a class="nav-item" href="#history"><span class="nav-icon">▣</span> Graded History</a>
+        <a class="nav-item" href="#import-export"><span class="nav-icon">☷</span> Import / Export</a>
+      </div>
+
+      <div class="status-card">
+        <div class="status-title">Model Status</div>
+        <div class="status-line"><span class="dot"></span><span id="modelStatus">Loading data</span></div>
+        <div class="status-detail">
+          Projections: <span id="statusProjectionCount">—</span><br />
+          Games: <span id="statusGameCount">—</span><br />
+          Source: <span id="statusDataSource">—</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <nav class="tabs">
+          <a class="tab active" href="#today">Today’s Board</a>
+          <a class="tab" href="#correlations">Correlations</a>
+          <a class="tab" href="#validation">Validation Lab</a>
+          <a class="tab" href="#parlay">Parlay Builder</a>
+          <a class="tab" href="#performance">Performance</a>
+          <a class="tab" href="#history">History</a>
+        </nav>
+        <div class="run-group">
+          <div class="last-run">
+            Last Model Run<br />
+            <span id="lastRunText">Loading...</span>
+          </div>
+          <button class="run-btn" id="refreshBtn">↻ REFRESH DATA</button>
+        </div>
+      </header>
+
+      <section class="content" id="today">
+        <div id="dataAlert" class="alert info"></div>
+
+        <div class="live-tools" id="liveTools">
+          <div>
+            <div class="live-tools-title">Live HTML Mode</div>
+            <div style="font-size:13px; font-weight:800; line-height:1.45;">
+              This version does not require a separate JSON file. The model data is embedded directly inside this HTML file.
+              To update live, your Python model should regenerate this HTML after each run.
+            </div>
+            <div class="live-path-list open" id="pathList"></div>
+          </div>
+          <button class="apply-btn" id="refreshBtnInline">REFRESH EMBEDDED DATA</button>
+          <button class="soft-btn" id="downloadFilteredInline">EXPORT CSV</button>
+        </div>
+
+        <div class="metric-grid">
+          <div class="metric-card">
+            <div class="metric-icon" style="color:#2563eb;">◎</div>
+            <div>
+              <div class="metric-label">Model Qualified</div>
+              <div class="metric-value" id="metricQualified">—</div>
+              <div class="metric-note" id="metricQualifiedNote">—</div>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon" style="color:#f59e0b;">☆</div>
+            <div>
+              <div class="metric-label">Top Tier Plays</div>
+              <div class="metric-value" id="metricTopTier">—</div>
+              <div class="metric-note">Hit Score ≥ 75</div>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon" style="color:#4f46e5;">↗</div>
+            <div>
+              <div class="metric-label">Projected Hits</div>
+              <div class="metric-value" id="metricProjectedHits">—</div>
+              <div class="metric-note" id="metricAvgProj">—</div>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon" style="color:#2563eb;">◔</div>
+            <div>
+              <div class="metric-label">Avg Hit Probability</div>
+              <div class="metric-value" id="metricAvgProb">—</div>
+              <div class="metric-note">Board average</div>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon" style="color:#16a34a;">$</div>
+            <div>
+              <div class="metric-label">Best Fair Odds</div>
+              <div class="metric-value" id="metricBestOdds">—</div>
+              <div class="metric-note">Lowest fair price</div>
+            </div>
+          </div>
+          <div class="metric-card">
+            <div class="metric-icon" style="color:#2563eb;">♢</div>
+            <div>
+              <div class="metric-label">Avg Confidence</div>
+              <div class="metric-value" id="metricAvgConfidence">—</div>
+              <div class="metric-note">Model reliability</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel controls">
+          <div class="panel-title">Board Controls</div>
+          <div class="controls-grid">
+            <div>
+              <label for="minHitScore">Min Hit Score</label>
+              <select id="minHitScore">
+                <option value="0">Any</option>
+                <option value="60">60</option>
+                <option value="65">65</option>
+                <option value="70" selected>70</option>
+                <option value="75">75</option>
+                <option value="80">80</option>
+              </select>
+            </div>
+            <div>
+              <label for="minProb">Min 1+ Hit Prob</label>
+              <select id="minProb">
+                <option value="0">Any</option>
+                <option value=".55">55%</option>
+                <option value=".58" selected>58%</option>
+                <option value=".60">60%</option>
+                <option value=".65">65%</option>
+              </select>
+            </div>
+            <div>
+              <label for="minProjHits">Min Proj Hits</label>
+              <select id="minProjHits">
+                <option value="0">Any</option>
+                <option value="1.00">1.00</option>
+                <option value="1.10">1.10</option>
+                <option value="1.20" selected>1.20</option>
+                <option value="1.30">1.30</option>
+              </select>
+            </div>
+            <div>
+              <label for="minConfidence">Min Confidence</label>
+              <select id="minConfidence">
+                <option value="0">Any</option>
+                <option value="55">55</option>
+                <option value="60" selected>60</option>
+                <option value="65">65</option>
+                <option value="70">70</option>
+              </select>
+            </div>
+            <div>
+              <label for="maxOrder">Max Batting Order</label>
+              <select id="maxOrder">
+                <option value="99">Any</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6" selected>6</option>
+                <option value="7">7</option>
+              </select>
+            </div>
+            <button class="soft-btn" id="confirmedOnlyBtn">Confirmed Only</button>
+            <button class="soft-btn" id="futureOnlyBtn">Future Only</button>
+            <button class="apply-btn" id="applyFiltersBtn">APPLY FILTERS</button>
+          </div>
+        </div>
+
+        <div class="board-layout">
+          <div class="panel board-panel">
+            <div class="board-header">
+              <div>
+                <span class="board-title">TODAY’S BOARD</span>
+                <span class="board-count" id="boardCount">— Players</span>
+              </div>
+              <div class="view-controls">
+                <button class="view-btn active" id="standardViewBtn">▦ Standard View</button>
+                <button class="view-btn" id="compactViewBtn">☷ Compact View</button>
+                <button class="view-btn" id="exportCsvBtn">⇩ Export CSV</button>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th data-sort="pinned">★</th>
+                    <th data-sort="player">Player</th>
+                    <th data-sort="team">Team</th>
+                    <th data-sort="opponent">Opp</th>
+                    <th data-sort="order">Order</th>
+                    <th data-sort="hitScore">Hit Score</th>
+                    <th data-sort="prob">1+ Hit Prob</th>
+                    <th data-sort="projHits">Proj Hits</th>
+                    <th data-sort="fairOdds">Fair Odds</th>
+                    <th data-sort="confidence">Conf</th>
+                    <th data-sort="delta">Δ AVG</th>
+                    <th data-sort="qualified">Model</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="boardBody">
+                  <tr><td colspan="13" class="empty-message">Loading board...</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="full-board-btn-wrap">
+              <button class="outline-blue" id="viewAllBtn">VIEW ALL PLAYERS</button>
+            </div>
+          </div>
+
+          <aside class="panel drawer" id="player-drawer">
+            <div class="drawer-top">
+              <div>
+                <div class="drawer-name" id="drawerName">Select a Player</div>
+                <div class="drawer-sub" id="drawerSub">Click any row to view details</div>
+              </div>
+              <div class="close" id="drawerClose">×</div>
+            </div>
+
+            <div class="drawer-metrics">
+              <div class="drawer-metric">
+                <div class="drawer-label">Hit Score</div>
+                <div class="drawer-value" id="drawerHitScore" style="color:#16a34a;">—</div>
+              </div>
+              <div class="drawer-metric">
+                <div class="drawer-label">1+ Hit Prob</div>
+                <div class="drawer-value" id="drawerProb">—</div>
+              </div>
+              <div class="drawer-metric">
+                <div class="drawer-label">Proj Hits</div>
+                <div class="drawer-value" id="drawerProjHits">—</div>
+              </div>
+              <div class="drawer-metric">
+                <div class="drawer-label">Fair Odds</div>
+                <div class="drawer-value" id="drawerFairOdds" style="color:#16a34a;">—</div>
+              </div>
+            </div>
+
+            <div class="drawer-tabs">
+              <div class="drawer-tab active" data-tab="glance">At a Glance</div>
+              <div class="drawer-tab" data-tab="splits">Splits</div>
+              <div class="drawer-tab" data-tab="matchup">Matchup</div>
+              <div class="drawer-tab" data-tab="trends">Trends</div>
+            </div>
+
+            <div class="drawer-body" id="drawerBody">
+              <div class="empty-message">No player selected.</div>
+            </div>
+          </aside>
+        </div>
+
+        <div class="bottom-grid" id="top-plays">
+          <div class="panel module section-anchor" id="correlations">
+            <div class="module-title">DYNAMIC CORRELATION BOARD</div>
+            <div class="module-sub">Top Performing Multi-Variable Signals</div>
+            <table class="mini-table">
+              <thead>
+                <tr>
+                  <th>Signal</th>
+                  <th>Opps</th>
+                  <th>Hit Rate</th>
+                  <th>Today</th>
+                </tr>
+              </thead>
+              <tbody id="correlationBody">
+                <tr><td colspan="4" class="empty-message">Loading correlations...</td></tr>
+              </tbody>
+            </table>
+            <div style="margin-top: 14px;">
+              <button class="outline-blue" style="width:100%;" onclick="document.getElementById('correlations-full').scrollIntoView()">VIEW FULL CORRELATION BOARD</button>
+            </div>
+          </div>
+
+          <div class="panel module section-anchor" id="validation">
+            <div class="module-icon" style="color:#16a34a;">♧</div>
+            <div class="module-title">VALIDATION LAB</div>
+            <div class="module-sub">Custom Threshold Testing</div>
+            <div class="module-copy">Test your own board thresholds against graded history when historical data is available.</div>
+            <ul class="check-list">
+              <li>Uses the same filters as today’s board</li>
+              <li>Shows opportunities and hit rate</li>
+              <li>Finds today’s matching players</li>
+            </ul>
+            <button class="outline-blue" style="width:100%;" onclick="document.getElementById('validation-full').scrollIntoView()">OPEN VALIDATION LAB</button>
+          </div>
+
+          <div class="panel module section-anchor" id="parlay">
+            <div class="module-icon" style="color:#7c3aed;">⚛</div>
+            <div class="module-title">PARLAY BUILDER</div>
+            <div class="module-sub" style="color:#7c3aed;">Build Smarter Parlays</div>
+            <div class="module-copy">Generate model-qualified lists using current board players.</div>
+            <ul class="check-list">
+              <li>Conservative, balanced, and aggressive modes</li>
+              <li>Uses fair odds and probability</li>
+              <li>Creates copy-ready legs</li>
+            </ul>
+            <button class="purple-btn" onclick="document.getElementById('parlay-full').scrollIntoView()">OPEN PARLAY BUILDER</button>
+          </div>
+
+          <div class="panel module section-anchor" id="performance">
+            <div class="module-icon" style="color:#f97316;">♨</div>
+            <div class="module-title">MODEL PERFORMANCE</div>
+            <div class="module-sub" style="color:#f97316;">Recent Performance</div>
+            <div class="performance-list" id="performanceList">
+              <div class="performance-row"><span>Loaded Players</span><span id="perfLoaded">—</span></div>
+              <div class="performance-row"><span>Qualified Rate</span><span id="perfQualified">—</span></div>
+              <div class="performance-row"><span>Avg Hit Score</span><span id="perfAvgScore">—</span></div>
+              <div class="performance-row"><span>Avg Projection</span><span id="perfAvgProj">—</span></div>
+            </div>
+            <div style="margin-top:18px;">
+              <button class="orange-btn" onclick="document.getElementById('performance-full').scrollIntoView()">VIEW PERFORMANCE DASHBOARD</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel wide-section section-anchor" id="correlations-full">
+          <div class="module-title">Full Correlation Board</div>
+          <div class="module-sub">Generated from graded history when available. If no history file exists, this uses today’s board as a preview.</div>
+          <table class="mini-table">
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Signal</th>
+                <th>Opportunities</th>
+                <th>Hits</th>
+                <th>Hit Rate</th>
+                <th>Today Matches</th>
+                <th>Reliability</th>
+              </tr>
+            </thead>
+            <tbody id="correlationFullBody"></tbody>
+          </table>
+        </div>
+
+        <div class="panel wide-section section-anchor" id="validation-full">
+          <div class="module-title">Validation Lab</div>
+          <div class="module-sub">Uses your selected thresholds to validate historical hit rate and today’s matching player count.</div>
+          <div class="lab-grid">
+            <div>
+              <label for="labHitScore">Min Hit Score</label>
+              <select id="labHitScore">
+                <option value="60">60</option>
+                <option value="65">65</option>
+                <option value="70" selected>70</option>
+                <option value="75">75</option>
+              </select>
+            </div>
+            <div>
+              <label for="labProjHits">Min Proj Hits</label>
+              <select id="labProjHits">
+                <option value="1.0">1.00</option>
+                <option value="1.1">1.10</option>
+                <option value="1.2" selected>1.20</option>
+                <option value="1.3">1.30</option>
+              </select>
+            </div>
+            <div>
+              <label for="labProb">Min Probability</label>
+              <select id="labProb">
+                <option value=".55">55%</option>
+                <option value=".58" selected>58%</option>
+                <option value=".60">60%</option>
+                <option value=".65">65%</option>
+              </select>
+            </div>
+            <div>
+              <label for="labOrder">Max Batting Order</label>
+              <select id="labOrder">
+                <option value="99">Any</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6" selected>6</option>
+              </select>
+            </div>
+            <div>
+              <label for="labConfidence">Min Confidence</label>
+              <select id="labConfidence">
+                <option value="55">55</option>
+                <option value="60" selected>60</option>
+                <option value="65">65</option>
+                <option value="70">70</option>
+              </select>
+            </div>
+            <button class="apply-btn" id="runValidationBtn">RUN VALIDATION</button>
+          </div>
+          <div class="result-grid">
+            <div class="small-card">
+              <div class="small-label">Historical Opps</div>
+              <div class="small-value" id="valOpps">—</div>
+            </div>
+            <div class="small-card">
+              <div class="small-label">Historical Hit Rate</div>
+              <div class="small-value" id="valHitRate">—</div>
+            </div>
+            <div class="small-card">
+              <div class="small-label">Today Matches</div>
+              <div class="small-value" id="valToday">—</div>
+            </div>
+            <div class="small-card">
+              <div class="small-label">Reliability</div>
+              <div class="small-value" id="valReliability">—</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel wide-section section-anchor" id="parlay-full">
+          <div class="module-title">Parlay Builder</div>
+          <div class="module-sub">Generates example player combinations from current filtered board. This is not betting advice.</div>
+          <div class="lab-grid" style="grid-template-columns: repeat(3, 1fr) 160px;">
+            <div>
+              <label for="parlayLegs">Legs</label>
+              <select id="parlayLegs">
+                <option value="2">2 Legs</option>
+                <option value="3" selected>3 Legs</option>
+                <option value="4">4 Legs</option>
+                <option value="5">5 Legs</option>
+              </select>
+            </div>
+            <div>
+              <label for="parlayMode">Risk Mode</label>
+              <select id="parlayMode">
+                <option value="conservative">Conservative</option>
+                <option value="balanced" selected>Balanced</option>
+                <option value="aggressive">Aggressive</option>
+              </select>
+            </div>
+            <div>
+              <label for="parlayCount">Number of Lists</label>
+              <select id="parlayCount">
+                <option value="3">3</option>
+                <option value="5" selected>5</option>
+                <option value="8">8</option>
+              </select>
+            </div>
+            <button class="purple-btn" id="generateParlaysBtn">GENERATE</button>
+          </div>
+          <div id="parlayResults" style="margin-top:14px;"></div>
+        </div>
+
+        <div class="history-grid">
+          <div class="panel wide-section section-anchor" id="performance-full">
+            <div class="module-title">Performance Dashboard</div>
+            <div class="module-sub">Live summary from loaded board and optional graded history.</div>
+            <div class="result-grid">
+              <div class="small-card"><div class="small-label">Board Avg Score</div><div class="small-value" id="perfDashScore">—</div></div>
+              <div class="small-card"><div class="small-label">Board Avg Prob</div><div class="small-value" id="perfDashProb">—</div></div>
+              <div class="small-card"><div class="small-label">Graded Rows</div><div class="small-value" id="perfDashGraded">—</div></div>
+              <div class="small-card"><div class="small-label">Graded Hit Rate</div><div class="small-value" id="perfDashHitRate">—</div></div>
+            </div>
+          </div>
+
+          <div class="panel wide-section section-anchor" id="history">
+            <div class="module-title">Graded History</div>
+            <div class="module-sub">Uses graded history embedded directly inside this HTML file.</div>
+            <div id="historySummary" class="module-copy">Loading history summary...</div>
+          </div>
+        </div>
+
+        <div class="panel wide-section section-anchor" id="import-export">
+          <div class="module-title">Import / Export</div>
+          <div class="module-sub">Live data paths used by this standalone UI.</div>
+          <div class="module-copy">
+            This <strong>index.html</strong> version is HTML-first. It does not need <strong>prophit_latest.json</strong>.
+            Your model should write a fresh <strong>prophit_live_board.html</strong> file after every run with the newest player rows embedded in the page.
+            Upload/deploy that HTML file, and the board updates as the HTML file updates.
+          </div>
+          <button class="outline-blue" id="downloadFilteredBtn">DOWNLOAD FILTERED BOARD CSV</button>
+        </div>
+
+        <div class="footer-note">
+          PropHit Lab index.html. This page renders from embedded model data inside the HTML file, so no separate JSON file is required. To update the live site, regenerate and replace this index.html after each model run.
+        </div>
+      </section>
+    </main>
+  </div>
+
+<script>
+/* ============================================================
+   PropHit Live HTML Command Center
+   ------------------------------------------------------------
+   HTML-FIRST MODE:
+   - This file does not require a separate JSON file.
+   - Your Python model should regenerate this .html file after each run.
+   - Replace/overwrite window.PROPHIT_EMBEDDED_DATA.rows with today's model rows.
+   - Replace/overwrite window.PROPHIT_EMBEDDED_HISTORY.rows with graded history rows.
+   ============================================================ */
+
+window.PROPHIT_EMBEDDED_DATA = {
+  generated_at: "2026-05-25 21:10:52",
+  source: "embedded_html_preview_data",
+  rows: [
+    { player: "Trea Turner", team: "PHI", opponent: "@ ATL", position: "SS", batting_order: 1, hit_score: 82, one_plus_hit_probability: .68, projected_hits: 1.48, fair_odds: -152, confidence_score: 72, delta_avg: .032, batter_hand: "R", pitcher_hand: "RHP", opposing_pitcher: "Spencer Strider", status: "Confirmed", game_time_et: "7:20 PM", model_qualified: true, actual_hits: 1 },
+    { player: "Mookie Betts", team: "LAD", opponent: "vs SD", position: "RF", batting_order: 2, hit_score: 78, one_plus_hit_probability: .65, projected_hits: 1.42, fair_odds: -145, confidence_score: 70, delta_avg: .028, batter_hand: "R", pitcher_hand: "RHP", opposing_pitcher: "Yu Darvish", status: "Confirmed", game_time_et: "10:10 PM", model_qualified: true, actual_hits: 1 },
+    { player: "Bobby Witt Jr.", team: "KC", opponent: "vs CWS", position: "SS", batting_order: 2, hit_score: 76, one_plus_hit_probability: .63, projected_hits: 1.36, fair_odds: -138, confidence_score: 67, delta_avg: .026, batter_hand: "R", pitcher_hand: "RHP", opposing_pitcher: "Erick Fedde", status: "Confirmed", game_time_et: "8:10 PM", model_qualified: true, actual_hits: 1 },
+    { player: "Ronald Acuña Jr.", team: "ATL", opponent: "vs PHI", position: "RF", batting_order: 3, hit_score: 72, one_plus_hit_probability: .60, projected_hits: 1.31, fair_odds: -125, confidence_score: 64, delta_avg: .022, batter_hand: "R", pitcher_hand: "RHP", opposing_pitcher: "Aaron Nola", status: "Confirmed", game_time_et: "7:20 PM", model_qualified: true, actual_hits: 0 },
+    { player: "Juan Soto", team: "NYY", opponent: "@ TB", position: "RF", batting_order: 3, hit_score: 71, one_plus_hit_probability: .59, projected_hits: 1.28, fair_odds: -118, confidence_score: 62, delta_avg: .020, batter_hand: "L", pitcher_hand: "RHP", opposing_pitcher: "Zach Eflin", status: "Confirmed", game_time_et: "6:50 PM", model_qualified: true, actual_hits: 1 },
+    { player: "Freddie Freeman", team: "LAD", opponent: "vs SD", position: "1B", batting_order: 4, hit_score: 70, one_plus_hit_probability: .58, projected_hits: 1.25, fair_odds: -115, confidence_score: 61, delta_avg: .018, batter_hand: "L", pitcher_hand: "RHP", opposing_pitcher: "Yu Darvish", status: "Confirmed", game_time_et: "10:10 PM", model_qualified: true, actual_hits: 0 },
+    { player: "Jose Ramirez", team: "CLE", opponent: "vs DET", position: "3B", batting_order: 3, hit_score: 69, one_plus_hit_probability: .57, projected_hits: 1.22, fair_odds: -112, confidence_score: 60, delta_avg: .017, batter_hand: "S", pitcher_hand: "RHP", opposing_pitcher: "Casey Mize", status: "Confirmed", game_time_et: "6:40 PM", model_qualified: true, actual_hits: 1 },
+    { player: "Francisco Lindor", team: "NYM", opponent: "@ MIA", position: "SS", batting_order: 1, hit_score: 68, one_plus_hit_probability: .56, projected_hits: 1.20, fair_odds: -110, confidence_score: 59, delta_avg: .015, batter_hand: "S", pitcher_hand: "RHP", opposing_pitcher: "Sandy Alcantara", status: "Confirmed", game_time_et: "6:40 PM", model_qualified: true, actual_hits: 1 },
+    { player: "Pete Alonso", team: "NYM", opponent: "@ MIA", position: "1B", batting_order: null, hit_score: 63, one_plus_hit_probability: .52, projected_hits: 1.03, fair_odds: -102, confidence_score: 51, delta_avg: .006, batter_hand: "R", pitcher_hand: "RHP", opposing_pitcher: "Sandy Alcantara", status: "Pending Lineup", game_time_et: "6:40 PM", model_qualified: false, actual_hits: 0 }
+  ]
+};
+
+window.PROPHIT_EMBEDDED_HISTORY = {
+  generated_at: "2026-05-25 21:10:52",
+  rows: window.PROPHIT_EMBEDDED_DATA.rows
+};
+
+/* ============================================================
+   PropHit Live Command Center
+   - Put this HTML at your site root or in the same repo as /data.
+   - It attempts to fetch current board JSON and graded history JSON.
+   - If files are missing, it uses sample data so the page still previews.
+   ============================================================ */
+
+const fallbackRows = [
+  { player: "Trea Turner", team: "PHI", opponent: "@ ATL", position: "SS", batting_order: 1, hit_score: 82, one_plus_hit_probability: .68, projected_hits: 1.48, fair_odds: -152, confidence_score: 72, delta_avg: .032, batter_hand: "R", pitcher_hand: "RHP", opposing_pitcher: "Spencer Strider", status: "Confirmed", game_time_et: "7:20 PM", model_qualified: true, actual_hits: 1 },
+  { player: "Mookie Betts", team: "LAD", opponent: "vs SD", position: "RF", batting_order: 2, hit_score: 78, one_plus_hit_probability: .65, projected_hits: 1.42, fair_odds: -145, confidence_score: 70, delta_avg: .028, batter_hand: "R", pitcher_hand: "RHP", opposing_pitcher: "Yu Darvish", status: "Confirmed", game_time_et: "10:10 PM", model_qualified: true, actual_hits: 1 },
+  { player: "Bobby Witt Jr.", team: "KC", opponent: "vs CWS", position: "SS", batting_order: 2, hit_score: 76, one_plus_hit_probability: .63, projected_hits: 1.36, fair_odds: -138, confidence_score: 67, delta_avg: .026, batter_hand: "R", pitcher_hand: "RHP", opposing_pitcher: "Erick Fedde", status: "Confirmed", game_time_et: "8:10 PM", model_qualified: true, actual_hits: 1 },
+  { player: "Ronald Acuña Jr.", team: "ATL", opponent: "vs PHI", position: "RF", batting_order: 3, hit_score: 72, one_plus_hit_probability: .60, projected_hits: 1.31, fair_odds: -125, confidence_score: 64, delta_avg: .022, batter_hand: "R", pitcher_hand: "RHP", opposing_pitcher: "Aaron Nola", status: "Confirmed", game_time_et: "7:20 PM", model_qualified: true, actual_hits: 0 },
+  { player: "Juan Soto", team: "NYY", opponent: "@ TB", position: "RF", batting_order: 3, hit_score: 71, one_plus_hit_probability: .59, projected_hits: 1.28, fair_odds: -118, confidence_score: 62, delta_avg: .020, batter_hand: "L", pitcher_hand: "RHP", opposing_pitcher: "Zach Eflin", status: "Confirmed", game_time_et: "6:50 PM", model_qualified: true, actual_hits: 1 },
+  { player: "Freddie Freeman", team: "LAD", opponent: "vs SD", position: "1B", batting_order: 4, hit_score: 70, one_plus_hit_probability: .58, projected_hits: 1.25, fair_odds: -115, confidence_score: 61, delta_avg: .018, batter_hand: "L", pitcher_hand: "RHP", opposing_pitcher: "Yu Darvish", status: "Confirmed", game_time_et: "10:10 PM", model_qualified: true, actual_hits: 0 },
+  { player: "Jose Ramirez", team: "CLE", opponent: "vs DET", position: "3B", batting_order: 3, hit_score: 69, one_plus_hit_probability: .57, projected_hits: 1.22, fair_odds: -112, confidence_score: 60, delta_avg: .017, batter_hand: "S", pitcher_hand: "RHP", opposing_pitcher: "Casey Mize", status: "Confirmed", game_time_et: "6:40 PM", model_qualified: true, actual_hits: 1 },
+  { player: "Francisco Lindor", team: "NYM", opponent: "@ MIA", position: "SS", batting_order: 1, hit_score: 68, one_plus_hit_probability: .56, projected_hits: 1.20, fair_odds: -110, confidence_score: 59, delta_avg: .015, batter_hand: "S", pitcher_hand: "RHP", opposing_pitcher: "Sandy Alcantara", status: "Confirmed", game_time_et: "6:40 PM", model_qualified: true, actual_hits: 1 },
+  { player: "Pete Alonso", team: "NYM", opponent: "@ MIA", position: "1B", batting_order: null, hit_score: 63, one_plus_hit_probability: .52, projected_hits: 1.03, fair_odds: -102, confidence_score: 51, delta_avg: .006, batter_hand: "R", pitcher_hand: "RHP", opposing_pitcher: "Sandy Alcantara", status: "Pending Lineup", game_time_et: "6:40 PM", model_qualified: false, actual_hits: 0 },
+];
+
+let state = {
+  allRows: [],
+  filteredRows: [],
+  historyRows: [],
+  correlations: [],
+  pinned: new Set(),
+  sortKey: "hitScore",
+  sortDir: "desc",
+  compact: false,
+  confirmedOnly: false,
+  futureOnly: false,
+  selected: null,
+  dataSource: "fallback sample",
+  historySource: "fallback sample",
+};
+
+function $(id) {
+  return document.getElementById(id);
+}
+
+function num(value, fallback = 0) {
+  if (value === null || value === undefined || value === "") return fallback;
+  const parsed = Number(String(value).replace("%", ""));
+  return Number.isFinite(parsed) ? parsed : fallback;
+}
+
+function maybePercent(value) {
+  const n = num(value, null);
+  if (n === null) return null;
+  return n > 1 ? n / 100 : n;
+}
+
+function first(row, keys, fallback = "") {
+  for (const key of keys) {
+    if (row && row[key] !== undefined && row[key] !== null && row[key] !== "") return row[key];
+  }
+  return fallback;
+}
+
+function fmtNumber(value, digits = 0) {
+  const n = num(value, null);
+  if (n === null) return "—";
+  return n.toFixed(digits);
+}
+
+function fmtPercent(value) {
+  const n = maybePercent(value);
+  if (n === null) return "—";
+  return `${Math.round(n * 100)}%`;
+}
+
+function fmtAvg(value) {
+  const n = num(value, null);
+  if (n === null) return "—";
+  return `.${String(Math.round(n * 1000)).padStart(3, "0")}`;
+}
+
+function fmtOdds(value) {
+  const n = num(value, null);
+  if (n === null) return "—";
+  return n > 0 ? `+${Math.round(n)}` : String(Math.round(n));
+}
+
+function todayLabel() {
+  return new Date().toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+}
+
+function normalizeRows(payload) {
+  let rows = payload;
+
+  if (Array.isArray(payload?.players)) rows = payload.players;
+  else if (Array.isArray(payload?.rows)) rows = payload.rows;
+  else if (Array.isArray(payload?.data)) rows = payload.data;
+  else if (Array.isArray(payload?.projections)) rows = payload.projections;
+  else if (payload?.board && Array.isArray(payload.board)) rows = payload.board;
+
+  if (!Array.isArray(rows)) rows = [];
+
+  return rows.map((row, index) => {
+    const player = first(row, ["player", "player_name", "name", "batter_name"], `Player ${index + 1}`);
+    const team = first(row, ["team", "batter_team", "abbr", "player_team"], "");
+    const opponent = first(row, ["opponent", "opp", "matchup", "opposing_team"], "");
+    const orderRaw = first(row, ["batting_order", "lineup_spot", "order", "batting_order_slot"], null);
+    const order = orderRaw === "-" || orderRaw === "—" ? null : num(orderRaw, null);
+
+    const hitScore = num(first(row, ["hit_score", "Hit Score", "score", "model_score"], 0));
+    const prob = maybePercent(first(row, ["one_plus_hit_probability", "hit_probability", "probability_1_hit", "one_plus_prob", "prob_1plus"], 0));
+    const projHits = num(first(row, ["projected_hits", "proj_hits", "hits_projection", "proj_h"], 0));
+    const fairOdds = num(first(row, ["fair_odds", "model_fair_odds", "fairOdds"], null), null);
+    const confidence = num(first(row, ["confidence_score", "confidence", "conf_score"], 0));
+    const delta = num(first(row, ["delta_avg", "delta_ba", "avg_delta"], 0));
+    const status = first(row, ["status", "lineup_status", "game_status"], order ? "Confirmed" : "Pending Lineup");
+    const actualHits = first(row, ["actual_hits", "hits", "result_hits"], null);
+
+    const normalized = {
+      raw: row,
+      id: first(row, ["player_id", "mlb_id", "id"], `${player}_${team}_${index}`),
+      player,
+      team,
+      opponent,
+      position: first(row, ["position", "pos"], ""),
+      batting_order: order,
+      hit_score: hitScore,
+      one_plus_hit_probability: prob,
+      projected_hits: projHits,
+      fair_odds: fairOdds,
+      confidence_score: confidence,
+      delta_avg: delta,
+      batter_hand: first(row, ["batter_hand", "hand", "bats"], ""),
+      pitcher_hand: first(row, ["pitcher_hand", "opposing_pitcher_hand", "throws"], ""),
+      opposing_pitcher: first(row, ["opposing_pitcher", "pitcher", "starting_pitcher"], ""),
+      status,
+      game_time_et: first(row, ["game_time_et", "game_time", "time", "start_time"], ""),
+      game_started: Boolean(first(row, ["game_started", "started", "is_started"], false)),
+      model_qualified: Boolean(first(row, ["model_qualified", "qualified"], false)),
+      actual_hits: actualHits === null || actualHits === "" ? null : num(actualHits, null),
+      last30_one_plus_hit_rate: maybePercent(first(row, ["last30_one_plus_hit_rate", "last_30_hit_rate"], null)),
+      season_avg_vs_hand: num(first(row, ["season_avg_vs_hand", "season_vs_hand", "avg_vs_hand"], null), null),
+      pitcher_baa_vs_hand: num(first(row, ["pitcher_baa_vs_hand", "pitcher_baa", "pbaa"], null), null),
+    };
+
+    normalized.model_qualified = normalized.model_qualified || (
+      normalized.hit_score >= 70 &&
+      normalized.projected_hits >= 1.1 &&
+      (normalized.one_plus_hit_probability ?? 0) >= .55 &&
+      normalized.confidence_score >= 55 &&
+      normalized.batting_order !== null
+    );
+
+    return normalized;
+  });
+}
+
+function updatePathList(lines) {
+  const el = $("pathList");
+  if (!el) return;
+  el.classList.add("open");
+  el.innerHTML = lines.map(escapeHtml).join("<br>");
+}
+
+async function loadData() {
+  showAlert("info", "Embedded HTML data loaded. This page is live when your model regenerates this HTML file after each run.");
+
+  const embedded = window.PROPHIT_EMBEDDED_DATA || {};
+  const history = window.PROPHIT_EMBEDDED_HISTORY || {};
+
+  state.allRows = normalizeRows(embedded.rows || embedded.players || embedded.data || embedded.projections || fallbackRows);
+  state.dataSource = embedded.source || "embedded HTML data";
+
+  state.historyRows = normalizeRows(history.rows || history.players || history.data || history.projections || embedded.rows || fallbackRows);
+  state.historySource = history.source || "embedded HTML history";
+
+  updateRunStamp(embedded.generated_at || embedded.last_run || embedded.last_model_run || embedded.timestamp);
+  updatePathList([
+    "Mode: HTML-first embedded data",
+    "No separate JSON file is required",
+    "To update the live board, regenerate and redeploy this .html file after each model run",
+    `Rows embedded: ${state.allRows.length}`,
+    `Generated at: ${embedded.generated_at || "not provided"}`
+  ]);
+
+  applyFilters();
+  renderAll();
+}
+
+function showAlert(type, message) {
+  const el = $("dataAlert");
+  el.className = `alert ${type} show`;
+  el.textContent = message;
+}
+
+function updateRunStamp(value) {
+  const text = value ? String(value) : new Date().toLocaleString("en-US", { timeZoneName: "short" });
+  $("lastRunText").textContent = text;
+}
+
+function getFilterValues() {
+  return {
+    minHitScore: num($("minHitScore").value),
+    minProb: num($("minProb").value),
+    minProjHits: num($("minProjHits").value),
+    minConfidence: num($("minConfidence").value),
+    maxOrder: num($("maxOrder").value, 99),
+  };
+}
+
+function passesFilters(row) {
+  const f = getFilterValues();
+  if (row.hit_score < f.minHitScore) return false;
+  if ((row.one_plus_hit_probability ?? 0) < f.minProb) return false;
+  if (row.projected_hits < f.minProjHits) return false;
+  if (row.confidence_score < f.minConfidence) return false;
+  if (f.maxOrder < 99 && (row.batting_order === null || row.batting_order > f.maxOrder)) return false;
+  if (state.confirmedOnly && !String(row.status).toLowerCase().includes("confirm")) return false;
+  if (state.futureOnly && row.game_started) return false;
+  return true;
+}
+
+function applyFilters() {
+  state.filteredRows = state.allRows.filter(passesFilters);
+  sortRows();
+}
+
+function sortRows() {
+  const dir = state.sortDir === "asc" ? 1 : -1;
+  const key = state.sortKey;
+  state.filteredRows.sort((a, b) => {
+    if (state.pinned.has(a.id) && !state.pinned.has(b.id)) return -1;
+    if (!state.pinned.has(a.id) && state.pinned.has(b.id)) return 1;
+
+    const va = sortValue(a, key);
+    const vb = sortValue(b, key);
+    if (typeof va === "string" || typeof vb === "string") {
+      return String(va).localeCompare(String(vb)) * dir;
+    }
+    return ((va ?? -9999) - (vb ?? -9999)) * dir;
+  });
+}
+
+function sortValue(row, key) {
+  const map = {
+    pinned: state.pinned.has(row.id) ? 1 : 0,
+    player: row.player,
+    team: row.team,
+    opponent: row.opponent,
+    order: row.batting_order ?? 99,
+    hitScore: row.hit_score,
+    prob: row.one_plus_hit_probability ?? 0,
+    projHits: row.projected_hits,
+    fairOdds: row.fair_odds ?? 999,
+    confidence: row.confidence_score,
+    delta: row.delta_avg,
+    qualified: row.model_qualified ? 1 : 0,
+  };
+  return map[key];
+}
+
+function teamInitial(team) {
+  return String(team || "?").slice(0, 2).toUpperCase();
+}
+
+function renderBoard() {
+  $("boardCount").textContent = `${state.filteredRows.length} Players`;
+  const rows = state.filteredRows;
+  if (!rows.length) {
+    $("boardBody").innerHTML = `<tr><td colspan="13" class="empty-message">No players match the current filters.</td></tr>`;
+    return;
+  }
+
+  $("boardBody").innerHTML = rows.map(row => {
+    const pinned = state.pinned.has(row.id);
+    const scoreClass = row.hit_score >= 70 ? "score-pill" : "score-pill yellow-pill";
+    const statusClass = row.model_qualified ? "qualified" : "qualified pending";
+    const modelText = row.model_qualified ? "Qualified" : "Watch";
+    return `
+      <tr data-id="${escapeHtml(row.id)}">
+        <td class="favorite" data-pin="${escapeHtml(row.id)}">${pinned ? "★" : "☆"}</td>
+        <td>
+          <button class="player-btn" data-open="${escapeHtml(row.id)}">
+            <span class="player">${escapeHtml(row.player)}<small>${escapeHtml(row.position || row.opposing_pitcher || "")}</small></span>
+          </button>
+        </td>
+        <td><span class="team"><span class="team-logo">${escapeHtml(teamInitial(row.team))}</span> ${escapeHtml(row.team || "—")}</span></td>
+        <td>${escapeHtml(row.opponent || "—")}<br><small>${escapeHtml(row.pitcher_hand || "")}</small></td>
+        <td>${row.batting_order ?? "—"}</td>
+        <td><span class="${scoreClass}">${fmtNumber(row.hit_score, 0)}</span></td>
+        <td><strong>${fmtPercent(row.one_plus_hit_probability)}</strong></td>
+        <td><strong>${fmtNumber(row.projected_hits, 2)}</strong></td>
+        <td class="green-text">${fmtOdds(row.fair_odds)}</td>
+        <td>${fmtNumber(row.confidence_score, 0)}</td>
+        <td>${fmtAvg(row.delta_avg)}</td>
+        <td><span class="${statusClass}">${modelText}</span></td>
+        <td class="arrow" data-open="${escapeHtml(row.id)}">›</td>
+      </tr>
+    `;
+  }).join("");
+
+  document.querySelectorAll("[data-open]").forEach(el => {
+    el.addEventListener("click", () => openPlayer(el.dataset.open));
+  });
+
+  document.querySelectorAll("[data-pin]").forEach(el => {
+    el.addEventListener("click", (event) => {
+      event.stopPropagation();
+      togglePin(el.dataset.pin);
+    });
+  });
+}
+
+function renderMetrics() {
+  const rows = state.allRows;
+  const filtered = state.filteredRows;
+  const total = rows.length || 1;
+  const qualified = rows.filter(r => r.model_qualified).length;
+  const topTier = rows.filter(r => r.hit_score >= 75).length;
+  const sumProj = rows.reduce((acc, r) => acc + num(r.projected_hits), 0);
+  const avgProj = sumProj / total;
+  const avgProb = rows.reduce((acc, r) => acc + (r.one_plus_hit_probability ?? 0), 0) / total;
+  const fairOdds = rows.map(r => r.fair_odds).filter(v => v !== null && Number.isFinite(v));
+  const bestOdds = fairOdds.length ? Math.min(...fairOdds) : null;
+  const avgConf = rows.reduce((acc, r) => acc + num(r.confidence_score), 0) / total;
+  const avgScore = rows.reduce((acc, r) => acc + num(r.hit_score), 0) / total;
+
+  $("metricQualified").textContent = qualified;
+  $("metricQualifiedNote").textContent = `${Math.round((qualified / total) * 100)}% of board`;
+  $("metricTopTier").textContent = topTier;
+  $("metricProjectedHits").textContent = fmtNumber(sumProj, 1);
+  $("metricAvgProj").textContent = `Avg: ${fmtNumber(avgProj, 2)}`;
+  $("metricAvgProb").textContent = fmtPercent(avgProb);
+  $("metricBestOdds").textContent = fmtOdds(bestOdds);
+  $("metricAvgConfidence").textContent = fmtNumber(avgConf, 0);
+
+  $("perfLoaded").textContent = rows.length;
+  $("perfQualified").textContent = `${Math.round((qualified / total) * 100)}%`;
+  $("perfAvgScore").textContent = fmtNumber(avgScore, 1);
+  $("perfAvgProj").textContent = fmtNumber(avgProj, 2);
+  $("perfDashScore").textContent = fmtNumber(avgScore, 1);
+  $("perfDashProb").textContent = fmtPercent(avgProb);
+
+  $("statusProjectionCount").textContent = rows.length;
+  $("statusGameCount").textContent = new Set(rows.map(r => `${r.team}_${r.opponent}_${r.game_time_et}`)).size;
+  $("statusDataSource").textContent = state.dataSource;
+  $("modelStatus").textContent = "Embedded HTML Loaded";
+
+  $("sidebarDate").textContent = todayLabel();
+  $("sidebarSubDate").textContent = `${filtered.length} filtered plays`;
+}
+
+function openPlayer(id) {
+  const row = state.allRows.find(r => r.id === id) || state.filteredRows[0];
+  if (!row) return;
+  state.selected = row;
+  renderDrawer(row);
+}
+
+function renderDrawer(row) {
+  $("drawerName").textContent = row.player;
+  $("drawerSub").textContent = `${row.position || "Player"} • ${row.team || ""} ${row.opponent || ""} • ${row.game_time_et || ""}`;
+  $("drawerHitScore").textContent = fmtNumber(row.hit_score, 0);
+  $("drawerProb").textContent = fmtPercent(row.one_plus_hit_probability);
+  $("drawerProjHits").textContent = fmtNumber(row.projected_hits, 2);
+  $("drawerFairOdds").textContent = fmtOdds(row.fair_odds);
+
+  $("drawerBody").innerHTML = `
+    <div class="glance-grid">
+      <div>
+        ${glanceItem("Batting Order", row.batting_order ?? "—")}
+        ${glanceItem("Handedness", row.batter_hand || "—")}
+        ${glanceItem("Vs Pitcher Hand", row.pitcher_hand || "—")}
+        ${glanceItem("Opposing Pitcher", row.opposing_pitcher || "—")}
+        ${glanceItem("Δ AVG", fmtAvg(row.delta_avg))}
+      </div>
+      <div>
+        ${glanceItem("Last 30 1+ Hit Rate", fmtPercent(row.last30_one_plus_hit_rate))}
+        ${glanceItem("Confidence Score", fmtNumber(row.confidence_score, 0))}
+        ${glanceItem("Pitcher BAA vs Hand", row.pitcher_baa_vs_hand === null ? "—" : fmtAvg(row.pitcher_baa_vs_hand))}
+        ${glanceItem("Season Avg vs Hand", row.season_avg_vs_hand === null ? "—" : fmtAvg(row.season_avg_vs_hand))}
+        ${glanceItem("Status", row.status || "—")}
+      </div>
+    </div>
+
+    <div class="qualified-box">
+      <div class="check">${row.model_qualified ? "✓" : "!"}</div>
+      <div>
+        ${row.model_qualified ? "Model Qualified" : "Watchlist / Not Qualified"}
+        <div style="font-size:12px; font-weight:700; color:#166534;">
+          ${row.model_qualified ? "Meets core qualification criteria" : "Does not meet every core threshold yet"}
+        </div>
+      </div>
+    </div>
+
+    <button class="drawer-action" onclick="addSelectedToParlay()">ADD TO PARLAY BUILDER</button>
+  `;
+}
+
+function glanceItem(label, value) {
+  return `<div class="glance-item"><span>${escapeHtml(label)}</span><span>${escapeHtml(String(value))}</span></div>`;
+}
+
+function togglePin(id) {
+  if (state.pinned.has(id)) state.pinned.delete(id);
+  else state.pinned.add(id);
+  sortRows();
+  renderBoard();
+}
+
+function dynamicSignalMetrics() {
+  return [
+    { key: "hit_score", label: "Hit Score", thresholds: [65, 70, 75, 80], display: v => String(v), test: (r, v) => r.hit_score >= v },
+    { key: "projected_hits", label: "Proj Hits", thresholds: [1.00, 1.10, 1.20, 1.30], display: v => Number(v).toFixed(2), test: (r, v) => r.projected_hits >= v },
+    { key: "prob", label: "1+ Hit Prob", thresholds: [.55, .58, .60, .65], display: v => `${Math.round(v * 100)}%`, test: (r, v) => (r.one_plus_hit_probability ?? 0) >= v },
+    { key: "confidence", label: "Confidence", thresholds: [60, 65, 70], display: v => String(v), test: (r, v) => r.confidence_score >= v },
+    { key: "order", label: "Order", thresholds: [4, 5, 6], operator: "≤", display: v => String(v), test: (r, v) => r.batting_order !== null && r.batting_order <= v },
+    { key: "delta", label: "Δ AVG", thresholds: [.010, .020, .030], display: v => fmtAvg(v), test: (r, v) => r.delta_avg >= v },
+    { key: "fair", label: "Fair Odds", thresholds: [-110, -125, -140], operator: "≤", display: v => String(v), test: (r, v) => r.fair_odds !== null && r.fair_odds <= v },
+  ];
+}
+
+function combinations(items, size, start = 0, combo = [], out = []) {
+  if (combo.length === size) {
+    out.push([...combo]);
+    return out;
+  }
+  for (let i = start; i < items.length; i++) {
+    combo.push(items[i]);
+    combinations(items, size, i + 1, combo, out);
+    combo.pop();
+  }
+  return out;
+}
+
+function thresholdCombos(metrics, index = 0, current = [], out = []) {
+  if (index === metrics.length) {
+    out.push([...current]);
+    return out;
+  }
+  for (const threshold of metrics[index].thresholds) {
+    current.push({ metric: metrics[index], threshold });
+    thresholdCombos(metrics, index + 1, current, out);
+    current.pop();
+  }
+  return out;
+}
+
+function buildCorrelations() {
+  const metrics = dynamicSignalMetrics();
+  const candidates = [];
+  const historical = state.historyRows.length ? state.historyRows : state.allRows;
+  const current = state.allRows;
+
+  for (const size of [2, 3]) {
+    for (const metricCombo of combinations(metrics, size)) {
+      for (const parts of thresholdCombos(metricCombo)) {
+        const label = parts.map(p => `${p.metric.label} ${p.metric.operator || "≥"} ${p.metric.display(p.threshold)}`).join(" + ");
+        const test = row => parts.every(p => p.metric.test(row, p.threshold));
+        const hist = historical.filter(test);
+        const opps = hist.length;
+        const hits = hist.filter(row => gradedHitValue(row)).length;
+        const hitRate = opps ? hits / opps : null;
+        const todayCount = current.filter(test).length;
+
+        if (opps < 3 && todayCount === 0) continue;
+        if (opps >= 8 && hitRate !== null && hitRate < .50 && todayCount === 0) continue;
+
+        const reliabilityBonus = opps >= 50 ? 24 : opps >= 25 ? 15 : opps >= 10 ? 8 : 0;
+        const variableBonus = size === 3 ? 8 : 0;
+        const score = ((hitRate ?? .50) * 100) + Math.min(opps, 80) * .5 + reliabilityBonus + variableBonus + todayCount * 2;
+
+        candidates.push({ label, opps, hits, hitRate, todayCount, size, score });
+      }
+    }
+  }
+
+  state.correlations = candidates
+    .sort((a, b) => b.score - a.score)
+    .filter((item, index, arr) => arr.findIndex(x => x.label === item.label) === index)
+    .slice(0, 16);
+}
+
+function gradedHitValue(row) {
+  if (row.actual_hits !== null && row.actual_hits !== undefined) return Number(row.actual_hits) >= 1;
+  const rawResult = String(first(row.raw || row, ["result", "grade", "outcome", "hit_result"], "")).toLowerCase();
+  return ["hit", "win", "yes", "true", "1"].some(v => rawResult === v || rawResult.includes(v));
+}
+
+function renderCorrelations() {
+  buildCorrelations();
+  const top = state.correlations.slice(0, 3);
+  $("correlationBody").innerHTML = top.length
+    ? top.map(c => `
+      <tr>
+        <td>${escapeHtml(c.label)}</td>
+        <td>${c.opps}</td>
+        <td>${c.hitRate === null ? "—" : fmtPercent(c.hitRate)}</td>
+        <td>${c.todayCount}</td>
+      </tr>
+    `).join("")
+    : `<tr><td colspan="4" class="empty-message">No correlation patterns found yet.</td></tr>`;
+
+  $("correlationFullBody").innerHTML = state.correlations.length
+    ? state.correlations.map((c, i) => `
+      <tr>
+        <td>${i + 1}</td>
+        <td>${escapeHtml(c.label)}</td>
+        <td>${c.opps}</td>
+        <td>${c.hits}</td>
+        <td>${c.hitRate === null ? "—" : fmtPercent(c.hitRate)}</td>
+        <td>${c.todayCount}</td>
+        <td>${c.opps >= 25 ? "Strong" : c.opps >= 10 ? "Medium" : "Small Sample"}</td>
+      </tr>
+    `).join("")
+    : `<tr><td colspan="7" class="empty-message">No correlation patterns found yet.</td></tr>`;
+}
+
+function runValidation() {
+  const f = {
+    hitScore: num($("labHitScore").value),
+    projHits: num($("labProjHits").value),
+    prob: num($("labProb").value),
+    order: num($("labOrder").value, 99),
+    confidence: num($("labConfidence").value),
+  };
+
+  const test = row =>
+    row.hit_score >= f.hitScore &&
+    row.projected_hits >= f.projHits &&
+    (row.one_plus_hit_probability ?? 0) >= f.prob &&
+    row.confidence_score >= f.confidence &&
+    (f.order >= 99 || (row.batting_order !== null && row.batting_order <= f.order));
+
+  const hist = state.historyRows.filter(test);
+  const hits = hist.filter(gradedHitValue).length;
+  const rate = hist.length ? hits / hist.length : null;
+  const today = state.allRows.filter(test).length;
+
+  $("valOpps").textContent = hist.length;
+  $("valHitRate").textContent = rate === null ? "—" : fmtPercent(rate);
+  $("valToday").textContent = today;
+  $("valReliability").textContent = hist.length >= 50 ? "Strong" : hist.length >= 20 ? "Medium" : hist.length >= 8 ? "Small" : "Low";
+}
+
+function renderHistoryPerformance() {
+  const graded = state.historyRows.filter(r => r.actual_hits !== null || first(r.raw || r, ["result", "grade", "outcome"], "") !== "");
+  const hits = graded.filter(gradedHitValue).length;
+  const rate = graded.length ? hits / graded.length : null;
+
+  $("perfDashGraded").textContent = graded.length;
+  $("perfDashHitRate").textContent = rate === null ? "—" : fmtPercent(rate);
+  $("historySummary").innerHTML = `
+    <strong>History source:</strong> ${escapeHtml(state.historySource)}<br>
+    <strong>Rows loaded:</strong> ${state.historyRows.length}<br>
+    <strong>Rows with graded result:</strong> ${graded.length}<br>
+    <strong>Hit rate:</strong> ${rate === null ? "—" : fmtPercent(rate)}
+  `;
+}
+
+function generateParlays() {
+  const legs = num($("parlayLegs").value, 3);
+  const count = num($("parlayCount").value, 5);
+  const mode = $("parlayMode").value;
+
+  let pool = [...state.filteredRows].filter(r => r.model_qualified);
+  if (mode === "conservative") pool.sort((a, b) => (b.one_plus_hit_probability ?? 0) - (a.one_plus_hit_probability ?? 0));
+  else if (mode === "aggressive") pool.sort((a, b) => b.hit_score - a.hit_score);
+  else pool.sort((a, b) => (b.hit_score + b.confidence_score) - (a.hit_score + a.confidence_score));
+
+  const parlays = [];
+  for (let i = 0; i < count; i++) {
+    const start = i % Math.max(1, pool.length);
+    const list = [];
+    for (let j = 0; j < legs && j < pool.length; j++) {
+      list.push(pool[(start + j) % pool.length]);
+    }
+    if (list.length) parlays.push(list);
+  }
+
+  $("parlayResults").innerHTML = parlays.length ? parlays.map((list, i) => {
+    const combinedProb = list.reduce((acc, row) => acc * (row.one_plus_hit_probability ?? .5), 1);
+    return `
+      <div class="small-card" style="margin-bottom:10px;">
+        <div class="small-label">Parlay ${i + 1} • ${mode}</div>
+        <div style="font-weight:1000; margin-top:6px;">${list.map(r => escapeHtml(r.player)).join(" + ")}</div>
+        <div style="margin-top:7px; color:#64748b; font-size:12px; font-weight:800;">
+          Estimated combined probability: ${fmtPercent(combinedProb)}
+        </div>
+      </div>
+    `;
+  }).join("") : `<div class="empty-message">No qualified players available for parlay generation.</div>`;
+}
+
+function addSelectedToParlay() {
+  if (!state.selected) return;
+  document.getElementById("parlay-full").scrollIntoView();
+  showAlert("info", `${state.selected.player} is selected for parlay review. Use Generate to create lists from the current filtered board.`);
+}
+
+function exportCsv(rows = state.filteredRows) {
+  const headers = ["player","team","opponent","batting_order","hit_score","one_plus_hit_probability","projected_hits","fair_odds","confidence_score","delta_avg","model_qualified"];
+  const csv = [headers.join(",")]
+    .concat(rows.map(row => headers.map(h => csvValue(row[h])).join(",")))
+    .join("\n");
+
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "prophit_filtered_board.csv";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+
+function csvValue(value) {
+  const s = value === null || value === undefined ? "" : String(value);
+  return `"${s.replace(/"/g, '""')}"`;
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+function renderAll() {
+  renderMetrics();
+  renderBoard();
+  renderCorrelations();
+  runValidation();
+  renderHistoryPerformance();
+  generateParlays();
+
+  if (!state.selected && state.filteredRows.length) {
+    openPlayer(state.filteredRows[0].id);
+  }
+}
+
+function setupEvents() {
+  $("applyFiltersBtn").addEventListener("click", () => {
+    applyFilters();
+    renderAll();
+  });
+
+  ["minHitScore", "minProb", "minProjHits", "minConfidence", "maxOrder"].forEach(id => {
+    $(id).addEventListener("change", () => {
+      applyFilters();
+      renderAll();
+    });
+  });
+
+  $("confirmedOnlyBtn").addEventListener("click", () => {
+    state.confirmedOnly = !state.confirmedOnly;
+    $("confirmedOnlyBtn").classList.toggle("active", state.confirmedOnly);
+    applyFilters();
+    renderAll();
+  });
+
+  $("futureOnlyBtn").addEventListener("click", () => {
+    state.futureOnly = !state.futureOnly;
+    $("futureOnlyBtn").classList.toggle("active", state.futureOnly);
+    applyFilters();
+    renderAll();
+  });
+
+  $("standardViewBtn").addEventListener("click", () => {
+    state.compact = false;
+    $("standardViewBtn").classList.add("active");
+    $("compactViewBtn").classList.remove("active");
+  });
+
+  $("compactViewBtn").addEventListener("click", () => {
+    state.compact = true;
+    $("compactViewBtn").classList.add("active");
+    $("standardViewBtn").classList.remove("active");
+  });
+
+  $("viewAllBtn").addEventListener("click", () => {
+    ["minHitScore","minProb","minProjHits","minConfidence"].forEach(id => $(id).value = "0");
+    $("maxOrder").value = "99";
+    applyFilters();
+    renderAll();
+  });
+
+  $("exportCsvBtn").addEventListener("click", () => exportCsv());
+  $("downloadFilteredBtn").addEventListener("click", () => exportCsv());
+  $("refreshBtn").addEventListener("click", loadData);
+  $("refreshBtnInline").addEventListener("click", loadData);
+  $("downloadFilteredInline").addEventListener("click", () => exportCsv());
+  $("runValidationBtn").addEventListener("click", runValidation);
+  $("generateParlaysBtn").addEventListener("click", generateParlays);
+
+  $("drawerClose").addEventListener("click", () => {
+    state.selected = null;
+    $("drawerName").textContent = "Select a Player";
+    $("drawerSub").textContent = "Click any row to view details";
+    $("drawerHitScore").textContent = "—";
+    $("drawerProb").textContent = "—";
+    $("drawerProjHits").textContent = "—";
+    $("drawerFairOdds").textContent = "—";
+    $("drawerBody").innerHTML = `<div class="empty-message">No player selected.</div>`;
+  });
+
+  document.querySelectorAll("th[data-sort]").forEach(th => {
+    th.addEventListener("click", () => {
+      const key = th.dataset.sort;
+      if (state.sortKey === key) state.sortDir = state.sortDir === "asc" ? "desc" : "asc";
+      else {
+        state.sortKey = key;
+        state.sortDir = key === "player" || key === "team" ? "asc" : "desc";
+      }
+      sortRows();
+      renderBoard();
+    });
+  });
+
+  document.querySelectorAll(".nav-item, .tab").forEach(link => {
+    link.addEventListener("click", () => {
+      document.querySelectorAll(".nav-item, .tab").forEach(el => el.classList.remove("active"));
+      link.classList.add("active");
+    });
+  });
+}
+
+setupEvents();
+loadData();
+</script>
+</body>
+</html>
