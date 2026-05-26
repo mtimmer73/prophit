@@ -1,14 +1,117 @@
 {
-  "status": "live",
-  "updated_et": "2026-05-25 05:44:27 PM",
-  "target_date": "2026-05-25",
-  "total_players": 234,
-  "confirmed_starters": 234,
-  "confirmed_lineup_pct": 1.0,
-  "locked_rows": 126,
-  "top_play_count": 44,
-  "avg_top_play_probability": 0.6860975263762819,
-  "avg_top_play_confidence": 88.34462259992735,
-  "best_bet_rank_score_avg": 55.24568998960812,
-  "note": "Full-day board. Started games remain visible as frozen pregame projections; only upcoming games refresh on reruns."
+  "meta": {
+    "summary_type": "postgame_grading",
+    "target_date": "2026-05-25",
+    "generated_at_et": "2026-05-26 03:31:48 PM ET",
+    "rule": "Grades only the last eligible model snapshot where the player appeared before game start."
+  },
+  "overall": {
+    "graded": 337,
+    "wins": 143,
+    "losses": 194,
+    "pending": 4,
+    "one_plus_hit_rate": 0.4243
+  },
+  "by_hit_score_bucket": [
+    {
+      "bucket": "60-69",
+      "graded": 38,
+      "wins": 20,
+      "hit_rate": 0.5263
+    },
+    {
+      "bucket": "70-79",
+      "graded": 34,
+      "wins": 19,
+      "hit_rate": 0.5588
+    },
+    {
+      "bucket": "80-89",
+      "graded": 17,
+      "wins": 11,
+      "hit_rate": 0.6471
+    },
+    {
+      "bucket": "90+",
+      "graded": 6,
+      "wins": 5,
+      "hit_rate": 0.8333
+    },
+    {
+      "bucket": "<60",
+      "graded": 242,
+      "wins": 88,
+      "hit_rate": 0.3636
+    },
+    {
+      "bucket": "Unknown",
+      "graded": 0,
+      "wins": 0,
+      "hit_rate": null
+    }
+  ],
+  "by_confidence_bucket": [
+    {
+      "bucket": "A 80+",
+      "graded": 101,
+      "wins": 62,
+      "hit_rate": 0.6139
+    },
+    {
+      "bucket": "B 70-79",
+      "graded": 36,
+      "wins": 17,
+      "hit_rate": 0.4722
+    },
+    {
+      "bucket": "C 60-69",
+      "graded": 35,
+      "wins": 15,
+      "hit_rate": 0.4286
+    },
+    {
+      "bucket": "D 45-59",
+      "graded": 44,
+      "wins": 18,
+      "hit_rate": 0.4091
+    },
+    {
+      "bucket": "F <45",
+      "graded": 121,
+      "wins": 31,
+      "hit_rate": 0.2562
+    },
+    {
+      "bucket": "Unknown",
+      "graded": 0,
+      "wins": 0,
+      "hit_rate": null
+    }
+  ],
+  "by_lineup_bucket": [
+    {
+      "bucket": "Confirmed 1-4",
+      "graded": 104,
+      "wins": 64,
+      "hit_rate": 0.6154
+    },
+    {
+      "bucket": "Confirmed 5-9",
+      "graded": 130,
+      "wins": 73,
+      "hit_rate": 0.5615
+    },
+    {
+      "bucket": "Unconfirmed/Fallback",
+      "graded": 103,
+      "wins": 6,
+      "hit_rate": 0.0583
+    },
+    {
+      "bucket": "Unknown",
+      "graded": 0,
+      "wins": 0,
+      "hit_rate": null
+    }
+  ]
 }
