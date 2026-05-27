@@ -1,99 +1,14 @@
 {
-  "meta": {
-    "summary_type": "postgame_grading",
-    "target_date": "2026-05-26",
-    "generated_at_et": "2026-05-27 03:36:45 PM ET",
-    "rule": "Grades only the last eligible model snapshot where the player appeared before game start."
-  },
-  "overall": {
-    "graded": 294,
-    "wins": 185,
-    "losses": 109,
-    "pending": 0,
-    "one_plus_hit_rate": 0.6293
-  },
-  "by_hit_score_bucket": [
-    {
-      "bucket": "60-69",
-      "graded": 34,
-      "wins": 21,
-      "hit_rate": 0.6176
-    },
-    {
-      "bucket": "70-79",
-      "graded": 30,
-      "wins": 23,
-      "hit_rate": 0.7667
-    },
-    {
-      "bucket": "80-89",
-      "graded": 17,
-      "wins": 16,
-      "hit_rate": 0.9412
-    },
-    {
-      "bucket": "90+",
-      "graded": 6,
-      "wins": 5,
-      "hit_rate": 0.8333
-    },
-    {
-      "bucket": "<60",
-      "graded": 207,
-      "wins": 120,
-      "hit_rate": 0.5797
-    }
-  ],
-  "by_confidence_bucket": [
-    {
-      "bucket": "A 80+",
-      "graded": 88,
-      "wins": 60,
-      "hit_rate": 0.6818
-    },
-    {
-      "bucket": "B 70-79",
-      "graded": 52,
-      "wins": 31,
-      "hit_rate": 0.5962
-    },
-    {
-      "bucket": "C 60-69",
-      "graded": 31,
-      "wins": 24,
-      "hit_rate": 0.7742
-    },
-    {
-      "bucket": "D 45-59",
-      "graded": 35,
-      "wins": 25,
-      "hit_rate": 0.7143
-    },
-    {
-      "bucket": "F <45",
-      "graded": 88,
-      "wins": 45,
-      "hit_rate": 0.5114
-    }
-  ],
-  "by_lineup_bucket": [
-    {
-      "bucket": "Confirmed 1-4",
-      "graded": 96,
-      "wins": 72,
-      "hit_rate": 0.75
-    },
-    {
-      "bucket": "Confirmed 5-9",
-      "graded": 120,
-      "wins": 74,
-      "hit_rate": 0.6167
-    },
-    {
-      "bucket": "Unconfirmed/Fallback",
-      "graded": 78,
-      "wins": 39,
-      "hit_rate": 0.5
-    }
-  ]
+  "status": "live",
+  "updated_et": "2026-05-27 04:34:22 PM",
+  "target_date": "2026-05-27",
+  "total_players": 314,
+  "confirmed_starters": 171,
+  "confirmed_lineup_pct": 0.5445859872611465,
+  "locked_rows": 132,
+  "top_play_count": 28,
+  "avg_top_play_probability": 0.6821164571364907,
+  "avg_top_play_confidence": 89.37580495224367,
+  "best_bet_rank_score_avg": 43.339496035424936,
+  "note": "Full-day board. Started games remain visible as frozen pregame projections; only upcoming games refresh on reruns."
 }
