@@ -1,0 +1,319 @@
+name: Grade PropHit Postgame Results
+
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Optional target date to grade in YYYY-MM-DD. Leave blank for yesterday ET."
+        required: false
+        default: ""
+      force:
+        description: "Force regrade rows already in the ledger? true/false"
+        required: false
+        default: "false"
+
+  schedule:
+    # 7:30 AM ET during daylight time = 11:30 UTC.
+    # This grades yesterday's completed MLB games.
+    - cron: "30 11 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: prophit-postgame-grader
+  cancel-in-progress: false
+
+jobs:
+  grade-postgame:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pandas openpyxl
+
+      - name: Run PropHit postgame grader
+        run: |
+          if [ -n "${{ github.event.inputs.date }}" ]; then
+            TARGET_DATE="${{ github.event.inputs.date }}"
+          else
+            TARGET_DATE=""
+          fi
+
+          FORCE_FLAG=""
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then
+            FORCE_FLAG="--force"
+          fi
+
+          if [ -n "$TARGET_DATE" ]; then
+            python prophit_postgame_grader.py --date "$TARGET_DATE" $FORCE_FLAG
+          else
+            python prophit_postgame_grader.py $FORCE_FLAG
+          fi
+
+      - name: Verify grader outputs
+        run: |
+          echo "Checking outputs/grades..."
+          ls -lah outputs/grades || true
+
+          echo "Checking performance summary..."
+          ls -lah data/prophit_performance_summary.json || true
+
+          echo "Checking validation rows..."
+          ls -lah data/prophit_validation_rows.json || true
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("data/prophit_performance_summary.json")
+          if not path.exists():
+              raise FileNotFoundError("data/prophit_performance_summary.json missing after grader")
+
+          with path.open("r", encoding="utf-8") as f:
+              data = json.load(f)
+
+          print("Performance summary meta:", data.get("meta", {}))
+          print("Overall:", data.get("overall", {}))
+          PY
+
+      - name: Build UI grade-history file
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+
+          source = Path("data/prophit_validation_rows.json")
+          target = Path("data/prophit_grades.json")
+
+          if not source.exists():
+              raise FileNotFoundError("data/prophit_validation_rows.json missing. Cannot build UI grade-history file.")
+
+          with source.open("r", encoding="utf-8") as f:
+              raw = json.load(f)
+
+          if isinstance(raw, list):
+              rows = raw
+          elif isinstance(raw, dict):
+              rows = (
+                  raw.get("rows")
+                  or raw.get("data")
+                  or raw.get("results")
+                  or raw.get("validation_rows")
+                  or raw.get("grades")
+                  or []
+              )
+          else:
+              rows = []
+
+          def first(row, keys, default=""):
+              for key in keys:
+                  value = row.get(key)
+                  if value not in (None, ""):
+                      return value
+              return default
+
+          def parse_actual_hits(value):
+              try:
+                  if value in (None, ""):
+                      return None
+                  return int(float(value))
+              except Exception:
+                  return None
+
+          def normalize_result(row):
+              result_raw = str(first(row, [
+                  "result",
+                  "grade_result",
+                  "hit_result",
+                  "outcome",
+                  "status"
+              ], "")).upper()
+
+              actual_hits = parse_actual_hits(first(row, [
+                  "actual_hits",
+                  "hits_actual",
+                  "final_hits",
+                  "player_hits",
+                  "hits",
+                  "H"
+              ], None))
+
+              if result_raw in ("HIT", "WIN", "W", "YES", "TRUE", "CASH"):
+                  return "HIT"
+
+              if result_raw in ("MISS", "LOSS", "L", "NO", "FALSE", "FAIL"):
+                  return "MISS"
+
+              if actual_hits is not None:
+                  return "HIT" if actual_hits >= 1 else "MISS"
+
+              return result_raw or "UNKNOWN"
+
+          def normalize_bool(value):
+              if isinstance(value, bool):
+                  return value
+
+              if value in (1, "1"):
+                  return True
+
+              if value in (0, "0", None, ""):
+                  return False
+
+              raw = str(value).strip().lower()
+              return raw in ("true", "yes", "y", "top5", "top_5")
+
+          normalized = []
+
+          for row in rows:
+              if not isinstance(row, dict):
+                  continue
+
+              actual_hits_raw = first(row, [
+                  "actual_hits",
+                  "hits_actual",
+                  "final_hits",
+                  "player_hits",
+                  "hits",
+                  "H"
+              ], None)
+
+              actual_hits_num = parse_actual_hits(actual_hits_raw)
+
+              normalized.append({
+                  "date": first(row, [
+                      "date",
+                      "game_date",
+                      "target_date",
+                      "graded_date",
+                      "model_date"
+                  ]),
+                  "player": first(row, [
+                      "player",
+                      "player_name",
+                      "name",
+                      "batter",
+                      "hitter"
+                  ]),
+                  "team": first(row, [
+                      "team",
+                      "player_team",
+                      "batter_team"
+                  ]),
+                  "opponent": first(row, [
+                      "opponent",
+                      "opp",
+                      "Opponent",
+                      "opposing_team"
+                  ]),
+                  "grade": first(row, [
+                      "grade",
+                      "confidence_grade",
+                      "model_grade",
+                      "confidence"
+                  ]),
+                  "confidence_score": first(row, [
+                      "confidence_score",
+                      "model_confidence_score",
+                      "projection_confidence_score",
+                      "reliability_score"
+                  ]),
+                  "hit_score": first(row, [
+                      "hit_score",
+                      "Hit Score",
+                      "model_score",
+                      "score"
+                  ]),
+                  "proj_hits": first(row, [
+                      "proj_hits",
+                      "projected_hits",
+                      "Projected Hits",
+                      "x_hits"
+                  ]),
+                  "actual_hits": actual_hits_num if actual_hits_num is not None else actual_hits_raw,
+                  "result": normalize_result(row),
+                  "model_run_time": first(row, [
+                      "model_run_time",
+                      "model_run_time_et",
+                      "run_time",
+                      "snapshot_time",
+                      "last_run_et"
+                  ]),
+                  "top_5": normalize_bool(first(row, [
+                      "top_5",
+                      "top5",
+                      "is_top_5",
+                      "top_five"
+                  ], False))
+              })
+
+          target.parent.mkdir(parents=True, exist_ok=True)
+
+          output = {
+              "generated_at_et": datetime.now(ZoneInfo("America/New_York")).strftime("%Y-%m-%d %I:%M %p ET"),
+              "source": "data/prophit_validation_rows.json",
+              "row_count": len(normalized),
+              "rows": normalized
+          }
+
+          with target.open("w", encoding="utf-8") as f:
+              json.dump(output, f, indent=2)
+
+          print(f"Wrote {target} with {len(normalized)} rows.")
+          PY
+
+      - name: Verify UI grade-history file
+        run: |
+          echo "Checking UI grade-history file..."
+          ls -lah data/prophit_grades.json || true
+
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("data/prophit_grades.json")
+          if not path.exists():
+              raise FileNotFoundError("data/prophit_grades.json missing after UI history build")
+
+          with path.open("r", encoding="utf-8") as f:
+              data = json.load(f)
+
+          rows = data.get("rows", []) if isinstance(data, dict) else data
+          print("UI grade-history rows:", len(rows))
+          print("Generated at:", data.get("generated_at_et") if isinstance(data, dict) else "n/a")
+          PY
+
+      - name: Commit grading outputs
+        run: |
+          git config --global user.email "prophit-bot@example.com"
+          git config --global user.name "prophit-bot"
+
+          git add -f outputs/grades/*.json || true
+          git add -f outputs/grades/*.xlsx || true
+          git add data/prophit_performance_summary.json || true
+          git add data/prophit_validation_rows.json || true
+          git add data/prophit_grades.json || true
+
+          if git diff --cached --quiet; then
+            echo "No grading output changes to commit."
+          else
+            git commit -m "Auto grade PropHit postgame results"
+            git pull --rebase || true
+            git push
+          fi
