@@ -1,0 +1,1375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PropHit Lab | Live Model Board</title>
+  <style>
+    :root {
+      --bg: #071a2d;
+      --bg-2: #0b2540;
+      --panel: #ffffff;
+      --panel-soft: #f5f8fc;
+      --line: #dbe4ef;
+      --text: #071426;
+      --muted: #63758c;
+      --blue: #2458e6;
+      --blue-2: #163c9f;
+      --green: #09a94f;
+      --green-bg: #e9fbf0;
+      --amber: #ff9f1a;
+      --red: #ca2b2b;
+      --nav: #061629;
+      --shadow: 0 8px 26px rgba(8, 24, 46, 0.09);
+      --radius: 16px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: #eef3f8;
+      color: var(--text);
+      font-family: var(--sans);
+      font-size: 14px;
+    }
+
+    button, select, input {
+      font: inherit;
+    }
+
+    .app {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 210px minmax(0, 1fr);
+    }
+
+    .sidebar {
+      background: linear-gradient(180deg, #071a2d 0%, #06213b 100%);
+      color: #fff;
+      padding: 24px 18px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 2px;
+      font-weight: 950;
+      letter-spacing: -0.04em;
+      font-size: 30px;
+      margin-bottom: 28px;
+      white-space: nowrap;
+    }
+
+    .brand .hit { color: #fff; }
+    .brand .lab { color: #5ea0ff; font-size: 16px; letter-spacing: -0.02em; margin-left: 3px; }
+
+    .side-section {
+      color: #8eb2da;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin: 20px 0 8px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 16px;
+    }
+
+    .side-link {
+      display: block;
+      width: 100%;
+      padding: 11px 12px;
+      border-radius: 10px;
+      color: #cfe1f7;
+      background: transparent;
+      border: 0;
+      text-align: left;
+      font-weight: 800;
+      cursor: pointer;
+      margin-bottom: 6px;
+    }
+
+    .side-link.active,
+    .side-link:hover {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    .main {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      height: 78px;
+      background: var(--nav);
+      color: #fff;
+      display: flex;
+      align-items: end;
+      gap: 8px;
+      padding: 0 28px;
+      box-shadow: 0 1px 0 rgba(255,255,255,0.08);
+      overflow-x: auto;
+    }
+
+    .top-tab {
+      color: #d6e4f7;
+      background: transparent;
+      border: 0;
+      border-bottom: 4px solid transparent;
+      padding: 0 10px 22px;
+      height: 60px;
+      font-weight: 900;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .top-tab.active {
+      color: #fff;
+      border-bottom-color: #3e73ff;
+    }
+
+    .content {
+      padding: 24px;
+      min-width: 0;
+    }
+
+    .alert {
+      background: #eaf3ff;
+      border: 1px solid #b9d7ff;
+      color: #0c3b82;
+      border-radius: 14px;
+      padding: 15px 17px;
+      font-weight: 750;
+      margin-bottom: 18px;
+      line-height: 1.45;
+    }
+
+    .alert strong { color: #064dc2; }
+    .alert small { display:block; color:#365b85; margin-top:4px; font-weight:650; }
+
+    .alert.error {
+      background: #fff0f0;
+      border-color: #ffc2c2;
+      color: #8d1515;
+    }
+
+    .alert.success {
+      background: #ecfff4;
+      border-color: #bdeed0;
+      color: #08753a;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .kpi-grid {
+      grid-template-columns: repeat(5, minmax(170px, 1fr));
+      margin-bottom: 18px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .kpi {
+      padding: 22px 24px;
+      min-height: 118px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .kpi-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      font-weight: 950;
+      color: #09172b;
+      margin-bottom: 8px;
+    }
+
+    .kpi-value {
+      font-size: 31px;
+      line-height: 1;
+      font-weight: 950;
+      color: #041024;
+    }
+
+    .kpi-sub {
+      margin-top: 8px;
+      color: var(--green);
+      font-weight: 850;
+      font-size: 13px;
+    }
+
+    .controls {
+      padding: 18px;
+      margin-bottom: 18px;
+    }
+
+    .controls-title {
+      font-weight: 950;
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+
+    .control-grid {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(150px, 1fr));
+      gap: 12px;
+      align-items: end;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 7px;
+      color: #17233a;
+    }
+
+    select, input {
+      width: 100%;
+      border: 1px solid #cfd9e7;
+      border-radius: 9px;
+      padding: 11px 12px;
+      background: #fff;
+      color: #0b1628;
+      outline: none;
+      font-weight: 700;
+    }
+
+    select:focus, input:focus {
+      border-color: #5b85ff;
+      box-shadow: 0 0 0 3px rgba(36, 88, 230, .12);
+    }
+
+    .toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 18px 20px 10px;
+      flex-wrap: wrap;
+    }
+
+    .title {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-weight: 950;
+      font-size: 22px;
+      letter-spacing: -0.03em;
+    }
+
+    .count {
+      color: var(--blue);
+      font-size: 13px;
+      letter-spacing: 0;
+      font-weight: 950;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      border: 1px solid #bfd0ea;
+      color: var(--blue);
+      background: #fff;
+      border-radius: 9px;
+      padding: 10px 12px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .btn.active, .btn:hover {
+      background: #eef4ff;
+      border-color: #76a0ff;
+    }
+
+    .btn.primary {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+    }
+
+    .table-wrap {
+      overflow: auto;
+      max-height: calc(100vh - 320px);
+      border-top: 1px solid var(--line);
+      border-radius: 0 0 var(--radius) var(--radius);
+    }
+
+    table {
+      width: 100%;
+      min-width: 1220px;
+      border-collapse: separate;
+      border-spacing: 0;
+      background: #fff;
+    }
+
+    th, td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+
+    th {
+      background: #061629;
+      color: #fff;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+      font-weight: 950;
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      cursor: pointer;
+    }
+
+    th:first-child,
+    td:first-child {
+      position: sticky;
+      left: 0;
+      z-index: 4;
+    }
+
+    td:first-child {
+      background: #fff;
+      box-shadow: 1px 0 0 var(--line);
+    }
+
+    th:first-child {
+      background: #061629;
+      z-index: 5;
+    }
+
+    tbody tr:nth-child(even) td {
+      background: #f8fbff;
+    }
+
+    tbody tr:nth-child(even) td:first-child {
+      background: #f8fbff;
+    }
+
+    tbody tr:hover td,
+    tbody tr:hover td:first-child {
+      background: #eef5ff;
+    }
+
+    .player-name {
+      font-weight: 950;
+      color: #061629;
+    }
+
+    .small {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 800;
+      margin-top: 2px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 34px;
+      height: 23px;
+      padding: 0 8px;
+      border-radius: 999px;
+      background: #2d6be8;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 950;
+    }
+
+    .score {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 58px;
+      padding: 9px 12px;
+      border-radius: 10px;
+      background: var(--green-bg);
+      color: var(--green);
+      font-weight: 950;
+      font-size: 16px;
+    }
+
+    .model-badge {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 9px;
+      background: #d9fae4;
+      color: #05883f;
+      font-size: 11px;
+      font-weight: 950;
+      text-transform: uppercase;
+    }
+
+    .model-badge.watch {
+      background: #fff3d6;
+      color: #a76600;
+    }
+
+    .model-badge.fade {
+      background: #f1f4f8;
+      color: #6d7a8a;
+    }
+
+    .money {
+      color: var(--green);
+      font-weight: 950;
+    }
+
+    .star {
+      color: var(--amber);
+      font-size: 18px;
+      font-weight: 950;
+    }
+
+    .drawer {
+      border-radius: 12px;
+      padding: 14px;
+      background: #f4f8fd;
+      border: 1px solid #d9e5f4;
+      margin: 8px 0 4px;
+      color: #243449;
+      line-height: 1.55;
+      white-space: normal;
+    }
+
+    .drawer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(150px, 1fr));
+      gap: 10px;
+    }
+
+    .drawer-item {
+      background: #fff;
+      border: 1px solid #e0e8f2;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .drawer-item b { display: block; color: #071426; margin-bottom: 3px; }
+
+    .hidden { display: none !important; }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .empty {
+      padding: 32px;
+      color: #52657d;
+      line-height: 1.55;
+      font-weight: 700;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 16px;
+    }
+
+    .panel-pad {
+      padding: 20px;
+    }
+
+    .list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .list-item {
+      padding: 13px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+      line-height: 1.45;
+    }
+
+    .muted {
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .pill {
+      border-radius: 999px;
+      background: #eef4ff;
+      color: #1947be;
+      padding: 7px 10px;
+      font-weight: 850;
+      font-size: 12px;
+    }
+
+    .footer-note {
+      color: #66778f;
+      font-size: 12px;
+      line-height: 1.5;
+      margin-top: 18px;
+    }
+
+    @media (max-width: 1050px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar { position: relative; height: auto; display: none; }
+      .topbar { height: auto; align-items: center; padding-top: 12px; }
+      .top-tab { height: auto; padding-bottom: 14px; }
+      .kpi-grid { grid-template-columns: repeat(2, minmax(160px, 1fr)); }
+      .control-grid { grid-template-columns: repeat(2, minmax(160px, 1fr)); }
+      .two-col { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 620px) {
+      .content { padding: 14px; }
+      .kpi-grid { grid-template-columns: 1fr; }
+      .control-grid { grid-template-columns: 1fr; }
+    }
+
+    @media print {
+      .sidebar, .topbar, .controls, .button-row { display: none; }
+      .app { display: block; }
+      .content { padding: 0; }
+      .table-wrap { max-height: none; overflow: visible; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand"><span>Prop</span><span class="hit">Hit</span><span class="lab">LAB</span></div>
+
+      <div class="side-section">Model</div>
+      <button class="side-link active" data-tab="today">Today’s Board</button>
+      <button class="side-link" data-tab="correlations">Correlations</button>
+      <button class="side-link" data-tab="validation">Validation Lab</button>
+      <button class="side-link" data-tab="parlay">Parlay Builder</button>
+
+      <div class="side-section">Results</div>
+      <button class="side-link" data-tab="performance">Model Performance</button>
+      <button class="side-link" data-tab="history">Board History</button>
+      <button class="side-link" id="exportCsvBtn">Export CSV</button>
+    </aside>
+
+    <main class="main">
+      <nav class="topbar">
+        <button class="top-tab active" data-tab="today">TODAY’S BOARD</button>
+        <button class="top-tab" data-tab="correlations">CORRELATIONS</button>
+        <button class="top-tab" data-tab="validation">VALIDATION LAB</button>
+        <button class="top-tab" data-tab="parlay">PARLAY BUILDER</button>
+        <button class="top-tab" data-tab="performance">PERFORMANCE</button>
+        <button class="top-tab" data-tab="history">HISTORY</button>
+      </nav>
+
+      <div class="content">
+        <div id="dataStatus" class="alert">Loading live PropHit model data…</div>
+
+        <section id="today" class="section active">
+          <div class="grid kpi-grid">
+            <div class="card kpi">
+              <div class="kpi-label">Model Qualified</div>
+              <div class="kpi-value" id="kpiQualified">—</div>
+              <div class="kpi-sub" id="kpiQualifiedSub">Live board</div>
+            </div>
+            <div class="card kpi">
+              <div class="kpi-label">Top Tier Plays</div>
+              <div class="kpi-value" id="kpiTopTier">—</div>
+              <div class="kpi-sub">Hit Score ≥ 75</div>
+            </div>
+            <div class="card kpi">
+              <div class="kpi-label">Projected Hits</div>
+              <div class="kpi-value" id="kpiProjHits">—</div>
+              <div class="kpi-sub" id="kpiProjAvg">Avg: —</div>
+            </div>
+            <div class="card kpi">
+              <div class="kpi-label">Avg Hit Probability</div>
+              <div class="kpi-value" id="kpiHitProb">—</div>
+              <div class="kpi-sub">Board average</div>
+            </div>
+            <div class="card kpi">
+              <div class="kpi-label">Best Fair Odds</div>
+              <div class="kpi-value" id="kpiBestOdds">—</div>
+              <div class="kpi-sub">Lowest model fair line</div>
+            </div>
+          </div>
+
+          <div class="card controls">
+            <div class="controls-title">Board Controls</div>
+            <div class="control-grid">
+              <div>
+                <label for="minHitScore">Min Hit Score</label>
+                <select id="minHitScore">
+                  <option value="0">All</option>
+                  <option value="60">60</option>
+                  <option value="65">65</option>
+                  <option value="70" selected>70</option>
+                  <option value="75">75</option>
+                  <option value="80">80</option>
+                </select>
+              </div>
+              <div>
+                <label for="minHitProb">Min 1+ Hit Prob</label>
+                <select id="minHitProb">
+                  <option value="0">All</option>
+                  <option value="55">55%</option>
+                  <option value="58" selected>58%</option>
+                  <option value="60">60%</option>
+                  <option value="65">65%</option>
+                  <option value="70">70%</option>
+                </select>
+              </div>
+              <div>
+                <label for="minProjHits">Min Proj Hits</label>
+                <select id="minProjHits">
+                  <option value="0">All</option>
+                  <option value="1.00">1.00</option>
+                  <option value="1.10">1.10</option>
+                  <option value="1.20" selected>1.20</option>
+                  <option value="1.30">1.30</option>
+                  <option value="1.40">1.40</option>
+                </select>
+              </div>
+              <div>
+                <label for="minConfidence">Min Confidence</label>
+                <select id="minConfidence">
+                  <option value="0">All</option>
+                  <option value="55">55</option>
+                  <option value="60" selected>60</option>
+                  <option value="65">65</option>
+                  <option value="70">70</option>
+                </select>
+              </div>
+              <div>
+                <label for="maxOrder">Max Batting Order</label>
+                <select id="maxOrder">
+                  <option value="99">All</option>
+                  <option value="9">1-9</option>
+                  <option value="6" selected>1-6</option>
+                  <option value="5">1-5</option>
+                  <option value="4">1-4</option>
+                </select>
+              </div>
+              <div>
+                <label for="searchBox">Search</label>
+                <input id="searchBox" placeholder="Player/team" />
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="toolbar">
+              <div class="title">TODAY’S BOARD <span class="count" id="rowCount">0 Players</span></div>
+              <div class="button-row">
+                <button class="btn active" id="standardViewBtn">Standard View</button>
+                <button class="btn" id="compactViewBtn">Compact View</button>
+                <button class="btn" id="refreshBtn">Refresh Live Data</button>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table id="boardTable">
+                <thead>
+                  <tr>
+                    <th data-sort="star">★</th>
+                    <th data-sort="player">Player</th>
+                    <th data-sort="team">Team</th>
+                    <th data-sort="opp">Opp</th>
+                    <th data-sort="batting_order">Order</th>
+                    <th data-sort="hit_score">Hit Score</th>
+                    <th data-sort="hit_prob">1+ Hit Prob</th>
+                    <th data-sort="proj_hits">Proj Hits</th>
+                    <th data-sort="fair_odds">Fair Odds</th>
+                    <th data-sort="confidence">Conf</th>
+                    <th data-sort="delta_avg">Δ Avg</th>
+                    <th data-sort="model_status">Model</th>
+                    <th data-sort="game_time">Time</th>
+                    <th data-sort="pitcher_hand">Pitcher</th>
+                  </tr>
+                </thead>
+                <tbody id="boardBody">
+                  <tr><td colspan="14" class="empty">Loading board…</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section id="correlations" class="section">
+          <div class="two-col">
+            <div class="card panel-pad">
+              <div class="title">Dynamic Correlation Board <span class="count" id="corrCount">Live Signals</span></div>
+              <p class="muted">These are recalculated from the currently loaded board so this page never relies on old hardcoded correlation examples.</p>
+              <div id="correlationList" class="list"></div>
+            </div>
+            <div class="card panel-pad">
+              <div class="title">Signal Buckets</div>
+              <div id="signalBuckets" class="pill-row"></div>
+              <p class="footer-note">For true historical hit-rate validation, connect this page to your graded ledger JSON, then the same rules can show sample size, hit rate, miss rate, and trend.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="validation" class="section">
+          <div class="card panel-pad">
+            <div class="title">Validation Lab</div>
+            <p class="muted">User-driven rule tester using the currently loaded board. This is ready for your graded ledger once your workflow writes it to <code>data/prophit_grades.json</code>.</p>
+            <div class="control-grid" style="margin-top:16px">
+              <div>
+                <label for="valHitScore">Hit Score ≥</label>
+                <input id="valHitScore" type="number" value="70" />
+              </div>
+              <div>
+                <label for="valProjHits">Projected Hits ≥</label>
+                <input id="valProjHits" type="number" step="0.01" value="1.20" />
+              </div>
+              <div>
+                <label for="valHitProb">1+ Hit Probability ≥</label>
+                <input id="valHitProb" type="number" value="58" />
+              </div>
+              <div>
+                <label for="valConf">Confidence ≥</label>
+                <input id="valConf" type="number" value="60" />
+              </div>
+              <div>
+                <button class="btn primary" id="runValidationBtn" style="margin-top:23px;width:100%">Run Rule</button>
+              </div>
+            </div>
+            <div id="validationResult" class="list" style="margin-top:16px"></div>
+          </div>
+        </section>
+
+        <section id="parlay" class="section">
+          <div class="two-col">
+            <div class="card panel-pad">
+              <div class="title">Parlay Builder</div>
+              <p class="muted">Select legs from the live board. This does not place bets; it only organizes model leans.</p>
+              <div id="parlayCandidates" class="list"></div>
+            </div>
+            <div class="card panel-pad">
+              <div class="title">Selected Legs <span class="count" id="parlayLegCount">0</span></div>
+              <div id="selectedLegs" class="list"></div>
+              <button class="btn" id="clearParlayBtn" style="margin-top:14px">Clear</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="performance" class="section">
+          <div class="card panel-pad">
+            <div class="title">Model Performance</div>
+            <div id="performanceContent" class="empty">Performance data will appear here once your workflow writes a graded ledger file.</div>
+          </div>
+        </section>
+
+        <section id="history" class="section">
+          <div class="card panel-pad">
+            <div class="title">Board History</div>
+            <div id="historyContent" class="empty">History data will appear here once your workflow writes historical model runs.</div>
+          </div>
+        </section>
+
+        <p class="footer-note">
+          PropHit Lab is a model visualization tool. It does not guarantee outcomes. Use responsibly.
+        </p>
+      </div>
+    </main>
+  </div>
+
+<script>
+/*
+  PropHit Lab Live JSON Index
+  ------------------------------------------------------------
+  This file intentionally DOES NOT contain old embedded player rows.
+  It loads the current model output from:
+    1) ./data/prophit_today.json
+    2) ./prophit_today.json
+    3) ./data/today.json
+
+  Your GitHub Action should commit:
+    docs/data/prophit_today.json
+
+  Expected shape:
+    {
+      "generated_at": "2026-05-29 09:45:00 ET",
+      "players": [ ...rows... ]
+    }
+
+  It also accepts rows under "rows", "board", or "data".
+*/
+
+const DATA_CANDIDATES = [
+  "./data/prophit_today.json",
+  "./prophit_today.json",
+  "./data/today.json"
+];
+
+let rawPayload = null;
+let allRows = [];
+let filteredRows = [];
+let selectedLegs = [];
+let compactMode = false;
+let sortState = { key: "hit_score", dir: "desc" };
+
+const els = {
+  dataStatus: document.getElementById("dataStatus"),
+  boardBody: document.getElementById("boardBody"),
+  rowCount: document.getElementById("rowCount"),
+  kpiQualified: document.getElementById("kpiQualified"),
+  kpiQualifiedSub: document.getElementById("kpiQualifiedSub"),
+  kpiTopTier: document.getElementById("kpiTopTier"),
+  kpiProjHits: document.getElementById("kpiProjHits"),
+  kpiProjAvg: document.getElementById("kpiProjAvg"),
+  kpiHitProb: document.getElementById("kpiHitProb"),
+  kpiBestOdds: document.getElementById("kpiBestOdds"),
+};
+
+function n(value, fallback = 0) {
+  if (value === null || value === undefined || value === "") return fallback;
+  if (typeof value === "number") return Number.isFinite(value) ? value : fallback;
+  const cleaned = String(value).replace(/[%,$]/g, "").trim();
+  const parsed = Number(cleaned);
+  return Number.isFinite(parsed) ? parsed : fallback;
+}
+
+function text(value, fallback = "—") {
+  if (value === null || value === undefined || value === "") return fallback;
+  return String(value);
+}
+
+function pct(value) {
+  const num = n(value, null);
+  if (num === null) return "—";
+  if (num <= 1 && num > 0) return Math.round(num * 100) + "%";
+  return Math.round(num) + "%";
+}
+
+function moneyline(value) {
+  const num = n(value, null);
+  if (num === null) return "—";
+  if (num > 0) return "+" + Math.round(num);
+  return String(Math.round(num));
+}
+
+function decimal(value, places = 2) {
+  const num = n(value, null);
+  if (num === null) return "—";
+  return num.toFixed(places);
+}
+
+function first(row, keys, fallback = undefined) {
+  for (const key of keys) {
+    if (row[key] !== undefined && row[key] !== null && row[key] !== "") return row[key];
+  }
+  return fallback;
+}
+
+function normalizeRow(row, index) {
+  const player = first(row, ["player", "player_name", "name", "batter", "hitter"], `Player ${index + 1}`);
+  const team = first(row, ["team", "team_abbr", "batting_team", "abbr"], "");
+  const opp = first(row, ["opp", "opponent", "opponent_team", "vs"], "");
+  const bats = first(row, ["bats", "bat_side", "stand", "batter_hand"], "");
+  const pos = first(row, ["position", "pos"], "");
+  const pitcherHand = first(row, ["pitcher_hand", "opp_pitcher_hand", "starter_hand", "throws"], "");
+  const order = n(first(row, ["batting_order", "order", "lineup_spot", "lineup"], 99), 99);
+  const hitScore = n(first(row, ["hit_score", "score", "model_score"], 0), 0);
+  const hitProb = n(first(row, ["hit_prob", "one_plus_hit_prob", "hit_probability", "prob_1_hit", "last30_one_hit_rate"], 0), 0);
+  const projHits = n(first(row, ["proj_hits", "projected_hits", "consensus_proj_hits", "projection"], 0), 0);
+  const fairOdds = n(first(row, ["fair_odds", "model_fair_odds", "fair_line"], 0), 0);
+  const conf = n(first(row, ["confidence", "projection_confidence", "conf", "confidence_score"], 0), 0);
+  const deltaAvg = n(first(row, ["delta_avg", "delta", "avg_delta", "edge_avg"], 0), 0);
+  const modelStatus = first(row, ["model_status", "status", "qualified", "model"], hitScore >= 70 ? "QUALIFIED" : "WATCH");
+  const gameTime = first(row, ["game_time", "time", "start_time", "game_start"], "");
+  const pitcher = first(row, ["pitcher", "opp_pitcher", "starter"], "");
+  const rawNotes = first(row, ["notes", "reason", "positives", "risks", "summary"], "");
+
+  return {
+    ...row,
+    id: first(row, ["id", "player_id"], `${player}-${team}-${index}`),
+    player,
+    team,
+    opp,
+    bats,
+    pos,
+    pitcher_hand: pitcherHand,
+    batting_order: order,
+    hit_score: hitScore,
+    hit_prob: hitProb,
+    proj_hits: projHits,
+    fair_odds: fairOdds,
+    confidence: conf,
+    delta_avg: deltaAvg,
+    model_status: String(modelStatus).toUpperCase(),
+    game_time: gameTime,
+    pitcher,
+    notes: rawNotes
+  };
+}
+
+function extractRows(payload) {
+  const possible = payload?.players || payload?.rows || payload?.board || payload?.data || [];
+  if (Array.isArray(possible)) return possible;
+  if (possible && typeof possible === "object") return Object.values(possible);
+  return [];
+}
+
+async function fetchFirstAvailableJson() {
+  let lastError = null;
+
+  for (const url of DATA_CANDIDATES) {
+    try {
+      const response = await fetch(`${url}?v=${Date.now()}`, { cache: "no-store" });
+      if (!response.ok) throw new Error(`${url} returned ${response.status}`);
+      const payload = await response.json();
+      return { payload, url };
+    } catch (error) {
+      lastError = error;
+      console.warn("Data source failed:", url, error);
+    }
+  }
+
+  throw lastError || new Error("No live model JSON source found.");
+}
+
+async function loadLiveModelData() {
+  els.dataStatus.className = "alert";
+  els.dataStatus.innerHTML = "Loading live PropHit model data…";
+
+  try {
+    const { payload, url } = await fetchFirstAvailableJson();
+    rawPayload = payload;
+
+    const rows = extractRows(payload);
+    allRows = rows.map(normalizeRow);
+
+    const generatedAt = payload.generated_at || payload.run_timestamp || payload.timestamp || payload.updated_at || "Unknown";
+    const modelName = payload.model || payload.model_name || "PropHit live model";
+
+    els.dataStatus.className = "alert success";
+    els.dataStatus.innerHTML = `
+      <strong>LIVE JSON DATA LOADED</strong><br>
+      Source: <code>${url}</code><br>
+      Model: ${modelName}<br>
+      Generated at: ${generatedAt}<br>
+      Rows loaded: ${allRows.length}
+      <small>This page does not use embedded old player rows. Refresh uses cache-busting so GitHub Pages/browser cache does not hold stale data.</small>
+    `;
+
+    applyFilters();
+  } catch (error) {
+    console.error(error);
+    allRows = [];
+    filteredRows = [];
+    els.dataStatus.className = "alert error";
+    els.dataStatus.innerHTML = `
+      <strong>Live data failed to load.</strong><br>
+      ${error.message}<br>
+      Check that your model workflow commits <code>docs/data/prophit_today.json</code>. This index file is looking for <code>./data/prophit_today.json</code>.
+    `;
+    renderAll();
+  }
+}
+
+function applyFilters() {
+  const minScore = n(document.getElementById("minHitScore").value, 0);
+  const minProb = n(document.getElementById("minHitProb").value, 0);
+  const minProj = n(document.getElementById("minProjHits").value, 0);
+  const minConf = n(document.getElementById("minConfidence").value, 0);
+  const maxOrder = n(document.getElementById("maxOrder").value, 99);
+  const q = document.getElementById("searchBox").value.toLowerCase().trim();
+
+  filteredRows = allRows.filter(row => {
+    const prob = row.hit_prob <= 1 && row.hit_prob > 0 ? row.hit_prob * 100 : row.hit_prob;
+    const haystack = `${row.player} ${row.team} ${row.opp}`.toLowerCase();
+
+    return row.hit_score >= minScore
+      && prob >= minProb
+      && row.proj_hits >= minProj
+      && row.confidence >= minConf
+      && row.batting_order <= maxOrder
+      && (!q || haystack.includes(q));
+  });
+
+  sortRows();
+  renderAll();
+}
+
+function sortRows() {
+  const { key, dir } = sortState;
+  const multiplier = dir === "asc" ? 1 : -1;
+
+  filteredRows.sort((a, b) => {
+    const av = a[key];
+    const bv = b[key];
+
+    if (typeof av === "number" || typeof bv === "number") {
+      return (n(av, 0) - n(bv, 0)) * multiplier;
+    }
+
+    return String(av || "").localeCompare(String(bv || "")) * multiplier;
+  });
+}
+
+function setSort(key) {
+  if (sortState.key === key) {
+    sortState.dir = sortState.dir === "asc" ? "desc" : "asc";
+  } else {
+    sortState = { key, dir: "desc" };
+  }
+  sortRows();
+  renderBoard();
+}
+
+function renderAll() {
+  renderKpis();
+  renderBoard();
+  renderCorrelations();
+  renderValidation();
+  renderParlayCandidates();
+  renderPerformance();
+  renderHistory();
+}
+
+function renderKpis() {
+  const rows = filteredRows;
+  const total = allRows.length || 0;
+  const qualified = rows.filter(r => r.hit_score >= 70).length;
+  const topTier = rows.filter(r => r.hit_score >= 75).length;
+  const projTotal = rows.reduce((sum, r) => sum + n(r.proj_hits), 0);
+  const probAvg = rows.length ? rows.reduce((sum, r) => {
+    const p = r.hit_prob <= 1 && r.hit_prob > 0 ? r.hit_prob * 100 : r.hit_prob;
+    return sum + n(p);
+  }, 0) / rows.length : 0;
+  const bestOdds = rows.length ? Math.min(...rows.map(r => n(r.fair_odds, 9999)).filter(v => v !== 0)) : null;
+
+  els.kpiQualified.textContent = String(qualified);
+  els.kpiQualifiedSub.textContent = total ? `${Math.round((qualified / total) * 100)}% of board` : "No rows loaded";
+  els.kpiTopTier.textContent = String(topTier);
+  els.kpiProjHits.textContent = projTotal ? decimal(projTotal, 1) : "—";
+  els.kpiProjAvg.textContent = rows.length ? `Avg: ${decimal(projTotal / rows.length, 2)}` : "Avg: —";
+  els.kpiHitProb.textContent = rows.length ? `${Math.round(probAvg)}%` : "—";
+  els.kpiBestOdds.textContent = bestOdds && bestOdds !== 9999 ? moneyline(bestOdds) : "—";
+}
+
+function modelBadgeClass(status) {
+  const s = String(status || "").toUpperCase();
+  if (s.includes("QUAL")) return "model-badge";
+  if (s.includes("WATCH")) return "model-badge watch";
+  return "model-badge fade";
+}
+
+function rowDetails(row) {
+  const positives = first(row, ["positives", "positive_factors"], "");
+  const risks = first(row, ["risks", "risk_factors"], "");
+  const splitBa = first(row, ["split_ba", "split_avg", "batter_split_avg"], "");
+  const pitcherBaa = first(row, ["pitcher_baa", "pitcher_baa_vs_hand", "starter_baa_vs_hand"], "");
+  const last30 = first(row, ["last30_one_hit_rate", "last30_hit_rate"], "");
+  const reliability = first(row, ["reliability", "reliability_score"], "");
+
+  return `
+    <div class="drawer hidden" id="drawer-${safeId(row.id)}">
+      <div class="drawer-grid">
+        <div class="drawer-item"><b>Split BA</b>${text(splitBa)}</div>
+        <div class="drawer-item"><b>Pitcher BAA</b>${text(pitcherBaa)}</div>
+        <div class="drawer-item"><b>Last 30 1+ Hit</b>${last30 === "" ? "—" : pct(last30)}</div>
+        <div class="drawer-item"><b>Reliability</b>${text(reliability)}</div>
+      </div>
+      <div class="pill-row">
+        ${positives ? `<span class="pill">Positive: ${positives}</span>` : ""}
+        ${risks ? `<span class="pill">Risk: ${risks}</span>` : ""}
+        ${row.notes ? `<span class="pill">${row.notes}</span>` : ""}
+      </div>
+    </div>
+  `;
+}
+
+function safeId(value) {
+  return String(value).replace(/[^a-zA-Z0-9_-]/g, "_");
+}
+
+function renderBoard() {
+  els.rowCount.textContent = `${filteredRows.length} Player${filteredRows.length === 1 ? "" : "s"}`;
+
+  if (!filteredRows.length) {
+    els.boardBody.innerHTML = `<tr><td colspan="14" class="empty">No players match the current filters. If this is unexpected, check that the live JSON file has current rows and field names.</td></tr>`;
+    return;
+  }
+
+  els.boardBody.innerHTML = filteredRows.map(row => {
+    const prob = row.hit_prob <= 1 && row.hit_prob > 0 ? row.hit_prob * 100 : row.hit_prob;
+    const star = row.hit_score >= 75 ? "★" : "☆";
+    const details = compactMode ? "" : rowDetails(row);
+    const hiddenClass = compactMode ? "hidden" : "";
+
+    return `
+      <tr>
+        <td><span class="star">${star}</span></td>
+        <td>
+          <div class="player-name">${text(row.player)}</div>
+          <span class="small">${text(row.pos, "")}${row.bats ? " · " + row.bats : ""}</span>
+          ${details}
+        </td>
+        <td><span class="badge">${text(row.team, "—")}</span></td>
+        <td>${text(row.opp)}<span class="small">${row.pitcher_hand ? row.pitcher_hand : ""}</span></td>
+        <td>${row.batting_order === 99 ? "—" : row.batting_order}</td>
+        <td><span class="score">${Math.round(row.hit_score)}</span></td>
+        <td><b>${pct(prob)}</b></td>
+        <td><b>${decimal(row.proj_hits, 2)}</b></td>
+        <td class="money">${moneyline(row.fair_odds)}</td>
+        <td>${Math.round(row.confidence) || "—"}</td>
+        <td>${row.delta_avg ? decimal(row.delta_avg, 3) : "—"}</td>
+        <td><span class="${modelBadgeClass(row.model_status)}">${text(row.model_status)}</span></td>
+        <td class="${hiddenClass}">${text(row.game_time)}</td>
+        <td class="${hiddenClass}">${text(row.pitcher)}<span class="small">${text(row.pitcher_hand, "")}</span></td>
+      </tr>
+    `;
+  }).join("");
+}
+
+function renderCorrelations() {
+  const list = document.getElementById("correlationList");
+  const buckets = document.getElementById("signalBuckets");
+  const rows = allRows;
+
+  const signals = [
+    {
+      name: "High Score + Strong Projection",
+      rule: r => r.hit_score >= 75 && r.proj_hits >= 1.25,
+      desc: "Hit Score ≥ 75 and projected hits ≥ 1.25"
+    },
+    {
+      name: "Probability + Confidence",
+      rule: r => normalizedProb(r) >= 60 && r.confidence >= 65,
+      desc: "1+ hit probability ≥ 60% and confidence ≥ 65"
+    },
+    {
+      name: "Top Order Stability",
+      rule: r => r.batting_order <= 3 && r.hit_score >= 70,
+      desc: "Batting order 1-3 and Hit Score ≥ 70"
+    },
+    {
+      name: "Model Qualified Core",
+      rule: r => r.hit_score >= 70 && r.proj_hits >= 1.20 && normalizedProb(r) >= 58,
+      desc: "Hit Score ≥ 70, projected hits ≥ 1.20, and 1+ hit probability ≥ 58%"
+    }
+  ];
+
+  const rendered = signals.map(sig => {
+    const matches = rows.filter(sig.rule);
+    const avgScore = matches.length ? matches.reduce((s, r) => s + r.hit_score, 0) / matches.length : 0;
+    const names = matches.slice(0, 5).map(r => r.player).join(", ");
+
+    return `
+      <div class="list-item">
+        <b>${sig.name}</b>
+        <div class="muted">${sig.desc}</div>
+        <div class="pill-row">
+          <span class="pill">${matches.length} current matches</span>
+          <span class="pill">Avg score ${avgScore ? Math.round(avgScore) : "—"}</span>
+        </div>
+        ${names ? `<div style="margin-top:8px">${names}${matches.length > 5 ? "…" : ""}</div>` : `<div class="muted" style="margin-top:8px">No current matches.</div>`}
+      </div>
+    `;
+  }).join("");
+
+  list.innerHTML = rendered || `<div class="empty">No correlation signals available.</div>`;
+  buckets.innerHTML = signals.map(sig => `<span class="pill">${sig.name}</span>`).join("");
+}
+
+function normalizedProb(row) {
+  return row.hit_prob <= 1 && row.hit_prob > 0 ? row.hit_prob * 100 : row.hit_prob;
+}
+
+function renderValidation() {
+  const out = document.getElementById("validationResult");
+  if (!out.innerHTML) {
+    out.innerHTML = `<div class="list-item">Set your thresholds and run the rule to see which current players qualify.</div>`;
+  }
+}
+
+function runValidation() {
+  const s = n(document.getElementById("valHitScore").value, 0);
+  const ph = n(document.getElementById("valProjHits").value, 0);
+  const hp = n(document.getElementById("valHitProb").value, 0);
+  const c = n(document.getElementById("valConf").value, 0);
+
+  const matches = allRows.filter(r =>
+    r.hit_score >= s &&
+    r.proj_hits >= ph &&
+    normalizedProb(r) >= hp &&
+    r.confidence >= c
+  );
+
+  document.getElementById("validationResult").innerHTML = `
+    <div class="list-item">
+      <b>${matches.length} current board players match this rule.</b>
+      <div class="muted">Rule: Hit Score ≥ ${s}, Projected Hits ≥ ${ph}, 1+ Hit Probability ≥ ${hp}%, Confidence ≥ ${c}</div>
+      <div class="pill-row">
+        ${matches.slice(0, 20).map(r => `<span class="pill">${r.player} · ${r.team}</span>`).join("") || `<span class="pill">No matches</span>`}
+      </div>
+    </div>
+  `;
+}
+
+function renderParlayCandidates() {
+  const wrap = document.getElementById("parlayCandidates");
+  const candidates = allRows
+    .filter(r => r.hit_score >= 70)
+    .sort((a, b) => b.hit_score - a.hit_score)
+    .slice(0, 20);
+
+  wrap.innerHTML = candidates.map(row => `
+    <div class="list-item">
+      <b>${row.player}</b> <span class="muted">${row.team} ${row.opp ? "vs " + row.opp : ""}</span>
+      <div class="pill-row">
+        <span class="pill">Score ${Math.round(row.hit_score)}</span>
+        <span class="pill">Proj ${decimal(row.proj_hits, 2)}</span>
+        <span class="pill">${pct(normalizedProb(row))}</span>
+        <button class="btn" onclick="addLeg('${safeJs(row.id)}')">Add Leg</button>
+      </div>
+    </div>
+  `).join("") || `<div class="empty">No qualified parlay candidates loaded.</div>`;
+
+  renderSelectedLegs();
+}
+
+function safeJs(value) {
+  return String(value).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+}
+
+function addLeg(id) {
+  const row = allRows.find(r => String(r.id) === String(id));
+  if (!row) return;
+  if (!selectedLegs.some(r => String(r.id) === String(id))) {
+    selectedLegs.push(row);
+  }
+  renderSelectedLegs();
+}
+
+function renderSelectedLegs() {
+  document.getElementById("parlayLegCount").textContent = selectedLegs.length;
+  document.getElementById("selectedLegs").innerHTML = selectedLegs.map(row => `
+    <div class="list-item">
+      <b>${row.player}</b>
+      <div class="muted">${row.team} · Score ${Math.round(row.hit_score)} · Proj ${decimal(row.proj_hits, 2)}</div>
+    </div>
+  `).join("") || `<div class="empty">No legs selected.</div>`;
+}
+
+function renderPerformance() {
+  const meta = rawPayload?.performance || rawPayload?.summary || null;
+  const target = document.getElementById("performanceContent");
+  if (!meta) {
+    target.innerHTML = "Performance data will appear here once your workflow writes a graded ledger file.";
+    return;
+  }
+  target.innerHTML = `<pre style="white-space:pre-wrap;font-family:var(--mono)">${JSON.stringify(meta, null, 2)}</pre>`;
+}
+
+function renderHistory() {
+  const hist = rawPayload?.history || rawPayload?.runs || null;
+  const target = document.getElementById("historyContent");
+  if (!hist) {
+    target.innerHTML = "History data will appear here once your workflow writes historical model runs.";
+    return;
+  }
+  target.innerHTML = `<pre style="white-space:pre-wrap;font-family:var(--mono)">${JSON.stringify(hist, null, 2)}</pre>`;
+}
+
+function switchTab(tab) {
+  document.querySelectorAll(".section").forEach(el => el.classList.toggle("active", el.id === tab));
+  document.querySelectorAll("[data-tab]").forEach(el => el.classList.toggle("active", el.dataset.tab === tab));
+}
+
+function exportCsv() {
+  const rows = filteredRows.length ? filteredRows : allRows;
+  const headers = ["player","team","opp","batting_order","hit_score","hit_prob","proj_hits","fair_odds","confidence","delta_avg","model_status","game_time","pitcher","pitcher_hand"];
+  const csv = [
+    headers.join(","),
+    ...rows.map(row => headers.map(h => `"${String(row[h] ?? "").replace(/"/g, '""')}"`).join(","))
+  ].join("\n");
+
+  const blob = new Blob([csv], { type: "text/csv;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `prophit_board_${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+document.querySelectorAll("[data-tab]").forEach(btn => {
+  btn.addEventListener("click", () => switchTab(btn.dataset.tab));
+});
+
+["minHitScore","minHitProb","minProjHits","minConfidence","maxOrder","searchBox"].forEach(id => {
+  document.getElementById(id).addEventListener("input", applyFilters);
+  document.getElementById(id).addEventListener("change", applyFilters);
+});
+
+document.querySelectorAll("th[data-sort]").forEach(th => {
+  th.addEventListener("click", () => setSort(th.dataset.sort));
+});
+
+document.getElementById("refreshBtn").addEventListener("click", loadLiveModelData);
+document.getElementById("runValidationBtn").addEventListener("click", runValidation);
+document.getElementById("clearParlayBtn").addEventListener("click", () => {
+  selectedLegs = [];
+  renderSelectedLegs();
+});
+document.getElementById("exportCsvBtn").addEventListener("click", exportCsv);
+
+document.getElementById("compactViewBtn").addEventListener("click", () => {
+  compactMode = true;
+  document.getElementById("compactViewBtn").classList.add("active");
+  document.getElementById("standardViewBtn").classList.remove("active");
+  renderBoard();
+});
+
+document.getElementById("standardViewBtn").addEventListener("click", () => {
+  compactMode = false;
+  document.getElementById("standardViewBtn").classList.add("active");
+  document.getElementById("compactViewBtn").classList.remove("active");
+  renderBoard();
+});
+
+window.addLeg = addLeg;
+
+loadLiveModelData();
+setInterval(loadLiveModelData, 5 * 60 * 1000);
+</script>
+</body>
+</html>
