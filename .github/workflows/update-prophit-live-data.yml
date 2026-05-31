@@ -1,0 +1,130 @@
+name: Update PropHit Live Model Data
+
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Optional target date in YYYY-MM-DD. Leave blank for today ET."
+        required: false
+        default: ""
+      commit_message:
+        description: "Optional commit message."
+        required: false
+        default: "Update PropHit live model data"
+
+  schedule:
+    # Pregame run: 7:05 AM ET during daylight time = 11:05 UTC.
+    - cron: "5 11 * * *"
+
+    # Hourly refresh window: 11:05 AM through 10:05 PM ET during daylight time.
+    # GitHub Actions uses UTC. During EDT, this is 15:05 through 02:05 UTC.
+    - cron: "5 15-23 * * *"
+    - cron: "5 0-2 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: prophit-live-model
+  cancel-in-progress: false
+
+jobs:
+  update-live-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pandas numpy pytz
+
+      - name: Ensure live data directory exists
+        run: |
+          mkdir -p docs/data
+
+      - name: Run PropHit model if available
+        env:
+          TARGET_DATE: ${{ github.event.inputs.date }}
+        run: |
+          set -e
+
+          echo "Looking for PropHit model script..."
+
+          if [ -f "scripts/run_prophit_model.py" ]; then
+            echo "Running scripts/run_prophit_model.py"
+            python scripts/run_prophit_model.py --date "${TARGET_DATE}" --output "docs/data/prophit_today.json"
+
+          elif [ -f "run_prophit_model.py" ]; then
+            echo "Running run_prophit_model.py"
+            python run_prophit_model.py --date "${TARGET_DATE}" --output "docs/data/prophit_today.json"
+
+          elif [ -f "scripts/build_prophit_today.py" ]; then
+            echo "Running scripts/build_prophit_today.py"
+            python scripts/build_prophit_today.py --date "${TARGET_DATE}" --output "docs/data/prophit_today.json"
+
+          elif [ -f "build_prophit_today.py" ]; then
+            echo "Running build_prophit_today.py"
+            python build_prophit_today.py --date "${TARGET_DATE}" --output "docs/data/prophit_today.json"
+
+          else
+            echo "No model script found. Writing emergency placeholder JSON so GitHub Pages does not 404."
+            python scripts/write_prophit_placeholder_json.py
+          fi
+
+      - name: Validate live JSON file
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path("docs/data/prophit_today.json")
+
+          if not path.exists():
+              raise SystemExit("ERROR: docs/data/prophit_today.json was not created.")
+
+          with path.open("r", encoding="utf-8") as f:
+              data = json.load(f)
+
+          rows = data.get("players") or data.get("rows") or data.get("board") or data.get("data") or []
+
+          if not isinstance(rows, list):
+              raise SystemExit("ERROR: live JSON rows must be a list under players, rows, board, or data.")
+
+          required_top_keys = ["generated_at", "model"]
+          for key in required_top_keys:
+              if key not in data:
+                  print(f"WARNING: Missing top-level key: {key}")
+
+          print(f"Validated docs/data/prophit_today.json with {len(rows)} rows.")
+          PY
+
+      - name: Commit updated live model data
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add docs/data/prophit_today.json
+
+          if git diff --cached --quiet; then
+            echo "No live model data changes to commit."
+          else
+            COMMIT_MESSAGE="${{ github.event.inputs.commit_message }}"
+            if [ -z "$COMMIT_MESSAGE" ]; then
+              COMMIT_MESSAGE="Update PropHit live model data"
+            fi
+
+            git commit -m "$COMMIT_MESSAGE"
+            git push
+          fi
