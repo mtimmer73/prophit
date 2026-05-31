@@ -1,0 +1,83 @@
+name: Publish PropHit Live Data
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    # Runs 10 minutes after your likely model refresh times.
+    # This copies the newest model JSON into the exact filename the live UI needs.
+    - cron: "15 11 * * *"
+    - cron: "15 15-23 * * *"
+    - cron: "15 0-2 * * *"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-prophit-live-data
+  cancel-in-progress: false
+
+jobs:
+  publish-live-data:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build live UI JSON from newest model output
+        run: |
+          python scripts/publish_prophit_live_json.py
+
+      - name: Validate published files
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          required = [
+              Path("data/prophit_today.json"),
+              Path("docs/data/prophit_today.json"),
+              Path("proppulse-ui-app/public/data/prophit_today.json"),
+          ]
+
+          for path in required:
+              if not path.exists():
+                  raise SystemExit(f"Missing required live JSON: {path}")
+
+              with path.open("r", encoding="utf-8") as f:
+                  data = json.load(f)
+
+              rows = data.get("players") or data.get("rows") or data.get("board") or data.get("data") or []
+              if not isinstance(rows, list):
+                  raise SystemExit(f"{path} does not contain a valid rows list")
+
+              print(f"{path}: {len(rows)} rows")
+
+          print("Live JSON validation complete.")
+          PY
+
+      - name: Commit live JSON aliases
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          git add data/prophit_today.json
+          git add docs/data/prophit_today.json
+          git add proppulse-ui-app/public/data/prophit_today.json
+
+          if git diff --cached --quiet; then
+            echo "No live JSON changes to commit."
+          else
+            git commit -m "Publish PropHit live JSON for UI"
+            git push
+          fi
