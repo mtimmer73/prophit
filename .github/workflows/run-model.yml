@@ -203,8 +203,8 @@ jobs:
             cp index-Bcz-ZUx5.js site/index-Bcz-ZUx5.js
           fi
 
-          if [ -f index-nqMpl4T3.css ]; then
-            cp index-nqMpl4T3.css site/index-nqMpl4T3.css
+          if [ -f index-nqMpL4T3.css ]; then
+            cp index-nqMpL4T3.css site/index-nqMpL4T3.css
           fi
 
           echo "Prepared GitHub Pages artifact:"
