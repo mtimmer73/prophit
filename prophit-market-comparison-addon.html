@@ -1,0 +1,773 @@
+<!-- ============================================================
+  PropHit Market Comparison Add-On
+  Install: paste this entire block directly above the closing </body>
+  tag in your current index.html.
+
+  What it adds:
+  - Compare button beside each player on Today's Board
+  - Right-side Market Comparison drawer
+  - PropHit model summary
+  - Free public comparison-site search links
+  - Manual external lean / odds / notes entry
+  - PropHit vs market agreement + estimated edge check
+
+  This add-on does NOT scrape, copy, or republish third-party picks.
+  It only opens public search/research links and lets you enter notes manually.
+============================================================ -->
+<style id="prophit-market-comparison-addon-style">
+  .market-compare-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    border: 1px solid rgba(52, 211, 153, .35);
+    background: rgba(16, 185, 129, .12);
+    color: #bbf7d0;
+    border-radius: 999px;
+    padding: 5px 8px;
+    font-size: 10px;
+    line-height: 1;
+    font-weight: 1000;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    white-space: nowrap;
+    flex: 0 0 auto;
+  }
+
+  .market-compare-btn:hover {
+    background: rgba(16, 185, 129, .22);
+    border-color: rgba(52, 211, 153, .60);
+    color: #ffffff;
+    transform: translateY(-1px);
+  }
+
+  .market-drawer-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: 1000002;
+    background: rgba(0,0,0,.72);
+    backdrop-filter: blur(5px);
+    display: none;
+    justify-content: flex-end;
+  }
+
+  .market-drawer-backdrop.open {
+    display: flex;
+  }
+
+  .market-drawer {
+    width: min(980px, 96vw);
+    height: 100vh;
+    overflow-y: auto;
+    background:
+      radial-gradient(circle at top left, rgba(14,165,233,.16), transparent 36%),
+      linear-gradient(180deg, #061326 0%, #020617 100%);
+    border-left: 1px solid rgba(56,189,248,.25);
+    box-shadow: -30px 0 80px rgba(0,0,0,.55);
+    padding: 22px;
+    color: #ffffff;
+  }
+
+  .market-drawer-header {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background: rgba(6,19,38,.97);
+    border-bottom: 1px solid rgba(56,189,248,.16);
+    padding-bottom: 16px;
+    margin-bottom: 18px;
+  }
+
+  .market-drawer-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .market-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(52,211,153,.24);
+    background: rgba(16,185,129,.10);
+    color: #bbf7d0;
+    border-radius: 999px;
+    padding: 7px 11px;
+    font-size: 11px;
+    font-weight: 1000;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .market-title {
+    margin: 0;
+    font-size: clamp(28px, 4vw, 42px);
+    line-height: 1;
+    letter-spacing: -.04em;
+    font-weight: 1000;
+  }
+
+  .market-subtitle {
+    color: #94a3b8;
+    font-size: 13px;
+    margin-top: 8px;
+    line-height: 1.45;
+  }
+
+  .market-close-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    border: 1px solid rgba(56,189,248,.24);
+    background: rgba(15,23,42,.82);
+    color: #ffffff;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    flex: 0 0 auto;
+  }
+
+  .market-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 12px;
+    margin: 14px 0;
+  }
+
+  .market-metric {
+    border: 1px solid rgba(56,189,248,.14);
+    background: rgba(15,23,42,.68);
+    border-radius: 18px;
+    padding: 14px;
+  }
+
+  .market-metric-label {
+    color: #94a3b8;
+    font-size: 10px;
+    font-weight: 1000;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+  }
+
+  .market-metric-value {
+    margin-top: 6px;
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: 1000;
+    letter-spacing: -.03em;
+  }
+
+  .market-section {
+    border: 1px solid rgba(56,189,248,.14);
+    background: rgba(15,23,42,.56);
+    border-radius: 22px;
+    padding: 16px;
+    margin-top: 14px;
+  }
+
+  .market-section-title {
+    color: #bae6fd;
+    font-size: 12px;
+    font-weight: 1000;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .market-link-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 10px;
+  }
+
+  .market-link-card {
+    display: block;
+    text-decoration: none;
+    border: 1px solid rgba(56,189,248,.16);
+    background: rgba(2,6,23,.40);
+    border-radius: 16px;
+    padding: 13px;
+    color: #e0f2fe;
+  }
+
+  .market-link-card:hover {
+    border-color: rgba(125,211,252,.42);
+    background: rgba(14,165,233,.12);
+    transform: translateY(-1px);
+  }
+
+  .market-link-name {
+    font-size: 14px;
+    font-weight: 1000;
+    color: #ffffff;
+  }
+
+  .market-link-note {
+    color: #94a3b8;
+    font-size: 12px;
+    line-height: 1.4;
+    margin-top: 5px;
+  }
+
+  .market-form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 10px;
+  }
+
+  .market-form-grid label,
+  .market-notes-label {
+    display: block;
+    color: #94a3b8;
+    font-size: 10px;
+    font-weight: 1000;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+  }
+
+  .market-form-grid input,
+  .market-form-grid select,
+  .market-notes-area {
+    width: 100%;
+    margin-top: 6px;
+    border: 1px solid rgba(56,189,248,.20);
+    background: rgba(2,6,23,.70);
+    color: #ffffff;
+    border-radius: 14px;
+    padding: 11px 12px;
+    outline: none;
+    font-family: inherit;
+  }
+
+  .market-form-grid input:focus,
+  .market-form-grid select:focus,
+  .market-notes-area:focus {
+    border-color: rgba(125,211,252,.70);
+    box-shadow: 0 0 0 3px rgba(125,211,252,.10);
+  }
+
+  .market-notes-area {
+    min-height: 96px;
+    resize: vertical;
+  }
+
+  .market-action-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 12px;
+  }
+
+  .market-save-btn,
+  .market-clear-btn {
+    border-radius: 999px;
+    padding: 10px 13px;
+    font-size: 12px;
+    font-weight: 1000;
+    cursor: pointer;
+  }
+
+  .market-save-btn {
+    border: 1px solid rgba(52,211,153,.38);
+    background: rgba(16,185,129,.16);
+    color: #bbf7d0;
+  }
+
+  .market-clear-btn {
+    border: 1px solid rgba(251,113,133,.32);
+    background: rgba(251,113,133,.10);
+    color: #fecdd3;
+  }
+
+  .market-pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .market-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 1px solid rgba(56,189,248,.18);
+    background: rgba(2,6,23,.42);
+    color: #cbd5e1;
+    border-radius: 999px;
+    padding: 7px 10px;
+    font-size: 12px;
+    font-weight: 900;
+  }
+
+  .market-pill.good {
+    border-color: rgba(52,211,153,.35);
+    background: rgba(16,185,129,.12);
+    color: #bbf7d0;
+  }
+
+  .market-pill.warn {
+    border-color: rgba(251,191,36,.35);
+    background: rgba(251,191,36,.10);
+    color: #fde68a;
+  }
+
+  .market-pill.bad {
+    border-color: rgba(251,113,133,.35);
+    background: rgba(251,113,133,.10);
+    color: #fecdd3;
+  }
+
+  .market-disclaimer {
+    color: #94a3b8;
+    font-size: 12px;
+    line-height: 1.55;
+    margin-top: 14px;
+  }
+
+  .market-disclaimer strong {
+    color: #e0f2fe;
+  }
+
+  @media (max-width: 700px) {
+    .market-drawer {
+      width: 100vw;
+      padding: 15px;
+    }
+
+    .market-grid,
+    .market-form-grid,
+    .market-link-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script id="prophit-market-comparison-addon-script">
+(function () {
+  "use strict";
+
+  if (window.__PROPHIT_MARKET_COMPARISON_ADDON__) return;
+  window.__PROPHIT_MARKET_COMPARISON_ADDON__ = true;
+
+  const ADDON_VERSION = "1.0.0";
+  const STORAGE_PREFIX = "prophit_market_compare_";
+
+  function safeText(value, fallback = "—") {
+    const text = String(value ?? "").trim();
+    return text || fallback;
+  }
+
+  function escapeHtml(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+  }
+
+  function num(value) {
+    if (value === null || value === undefined || value === "") return null;
+    const n = Number(String(value).replace(/[%,$]/g, ""));
+    return Number.isFinite(n) ? n : null;
+  }
+
+  function fmtNum(value, digits = 2) {
+    const n = num(value);
+    return n === null ? "—" : n.toFixed(digits);
+  }
+
+  function fmtPct(value) {
+    const n = num(value);
+    if (n === null) return "—";
+    return `${(n <= 1 ? n * 100 : n).toFixed(1)}%`;
+  }
+
+  function fmtOdds(value) {
+    const n = num(value);
+    if (n === null) return "—";
+    return n > 0 ? `+${Math.round(n)}` : `${Math.round(n)}`;
+  }
+
+  function americanToProb(odds) {
+    const o = num(odds);
+    if (o === null || o === 0) return null;
+    if (o > 0) return 100 / (o + 100);
+    return Math.abs(o) / (Math.abs(o) + 100);
+  }
+
+  function getModelProb(row) {
+    return num(row?.one_plus_hit_probability ?? row?.one_plus_hit_prob ?? row?.hit_probability);
+  }
+
+  function getPlayer(row) {
+    return safeText(row?.player ?? row?.player_name ?? row?.name);
+  }
+
+  function getTeam(row) {
+    return safeText(row?.team ?? row?.player_team ?? row?.batting_team);
+  }
+
+  function getOpponent(row) {
+    if (typeof window.formatOpponent === "function") return safeText(window.formatOpponent(row));
+    return safeText(row?.opp ?? row?.opponent ?? row?.opposing_team);
+  }
+
+  function getRowKey(row) {
+    const date = safeText(window.prophitMeta?.date ?? window.prophitMeta?.run_date ?? row?.date ?? "today", "today");
+    return [date, getPlayer(row), getTeam(row), getOpponent(row)].join("__").toLowerCase().replace(/[^a-z0-9_]+/g, "_");
+  }
+
+  function getStored(row) {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_PREFIX + getRowKey(row)) || "{}");
+    } catch {
+      return {};
+    }
+  }
+
+  function setStored(row, data) {
+    try {
+      localStorage.setItem(STORAGE_PREFIX + getRowKey(row), JSON.stringify(data || {}));
+    } catch {}
+  }
+
+  function clearStored(row) {
+    try {
+      localStorage.removeItem(STORAGE_PREFIX + getRowKey(row));
+    } catch {}
+  }
+
+  function sourceLinks(row) {
+    const player = getPlayer(row);
+    const team = getTeam(row);
+    const opponent = getOpponent(row);
+    const query = encodeURIComponent(`${player} ${team} ${opponent} MLB hits prop today`);
+    const playerOnly = encodeURIComponent(`${player} MLB player props hits`);
+    return [
+      {
+        name: "BettingPros",
+        note: "Public prop pages, odds, trends, and betting tools.",
+        url: `https://www.google.com/search?q=site%3Abettingpros.com%2Fmlb%2Fprops%20${query}`
+      },
+      {
+        name: "Covers",
+        note: "Free MLB player prop pages and article-style picks.",
+        url: `https://www.google.com/search?q=site%3Acovers.com%2Fsport%2Fbaseball%2Fmlb%2Fplayer-props%20${query}`
+      },
+      {
+        name: "RotoWire",
+        note: "Player prop board, odds pages, and free betting articles.",
+        url: `https://www.google.com/search?q=site%3Arotowire.com%2Fbetting%2Fmlb%20${playerOnly}`
+      },
+      {
+        name: "OddsTrader",
+        note: "Market odds and best-line style comparison.",
+        url: `https://www.google.com/search?q=site%3Aoddstrader.com%2Fmlb%2Fplayer-props%20${query}`
+      },
+      {
+        name: "DraftKings Network Trends",
+        note: "Free trend tracker / public prop research pages.",
+        url: `https://www.google.com/search?q=site%3Adknetwork.draftkings.com%20${query}`
+      },
+      {
+        name: "CBS Sports",
+        note: "Free MLB picks pages and public player-prop writeups.",
+        url: `https://www.google.com/search?q=site%3Acbssports.com%2Fmlb%2Fpicks%20${query}`
+      }
+    ];
+  }
+
+  function modelLean(row) {
+    const prob = getModelProb(row);
+    const hitScore = num(row?.hit_score);
+    const projectedHits = num(row?.projected_hits);
+    if ((prob !== null && prob >= 0.62) || (hitScore !== null && hitScore >= 70) || (projectedHits !== null && projectedHits >= 1.15)) return "Over 0.5 Hit";
+    if ((prob !== null && prob < 0.54) || (hitScore !== null && hitScore < 58)) return "No Play / Weak";
+    return "Monitor";
+  }
+
+  function buildValuePills(row, stored) {
+    const pills = [];
+    const propHitLean = modelLean(row);
+    const externalLean = safeText(stored.lean, "");
+    const marketOdds = num(stored.odds);
+    const modelProb = getModelProb(row);
+    const fairOdds = num(row?.fair_odds_american ?? row?.fair_odds);
+
+    if (externalLean) {
+      const externalOver = /over|yes|hit/i.test(externalLean);
+      const modelOver = /over/i.test(propHitLean);
+      const cls = externalOver === modelOver ? "good" : "warn";
+      pills.push(`<span class="market-pill ${cls}">Agreement: ${externalOver === modelOver ? "Yes" : "Review"}</span>`);
+    } else {
+      pills.push(`<span class="market-pill warn">Manual lean not entered</span>`);
+    }
+
+    if (modelProb !== null && marketOdds !== null) {
+      const marketProb = americanToProb(marketOdds);
+      if (marketProb !== null) {
+        const edge = modelProb - marketProb;
+        const cls = edge >= 0.03 ? "good" : edge >= 0 ? "warn" : "bad";
+        pills.push(`<span class="market-pill ${cls}">Estimated edge: ${(edge * 100).toFixed(1)} pts</span>`);
+        pills.push(`<span class="market-pill">Market implied: ${(marketProb * 100).toFixed(1)}%</span>`);
+      }
+    } else if (fairOdds !== null && marketOdds !== null) {
+      const modelImplied = americanToProb(fairOdds);
+      const marketImplied = americanToProb(marketOdds);
+      if (modelImplied !== null && marketImplied !== null) {
+        const edge = modelImplied - marketImplied;
+        const cls = edge >= 0.03 ? "good" : edge >= 0 ? "warn" : "bad";
+        pills.push(`<span class="market-pill ${cls}">Fair odds gap: ${(edge * 100).toFixed(1)} pts</span>`);
+      }
+    } else {
+      pills.push(`<span class="market-pill">Enter odds to check value</span>`);
+    }
+
+    return pills.join("");
+  }
+
+  function ensureDrawer() {
+    if (document.getElementById("marketCompareBackdrop")) return;
+    const wrap = document.createElement("div");
+    wrap.id = "marketCompareBackdrop";
+    wrap.className = "market-drawer-backdrop";
+    wrap.innerHTML = `
+      <aside class="market-drawer" role="dialog" aria-modal="true" aria-label="Market Comparison">
+        <div id="marketCompareContent"></div>
+      </aside>
+    `;
+    document.body.appendChild(wrap);
+    wrap.addEventListener("click", (event) => {
+      if (event.target === wrap) closeMarketCompare();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closeMarketCompare();
+    });
+  }
+
+  function openMarketCompare(index) {
+    ensureDrawer();
+    const rows = Array.isArray(window.currentRows) ? window.currentRows : [];
+    const row = rows[index];
+    if (!row) return;
+
+    window.__PROPHIT_MARKET_ROW_INDEX__ = index;
+    const stored = getStored(row);
+    const links = sourceLinks(row);
+    const content = document.getElementById("marketCompareContent");
+
+    content.innerHTML = `
+      <div class="market-drawer-header">
+        <div class="market-drawer-top">
+          <div>
+            <div class="market-kicker">Market Comparison</div>
+            <h2 class="market-title">${escapeHtml(getPlayer(row))}</h2>
+            <div class="market-subtitle">
+              ${escapeHtml(getTeam(row))} vs ${escapeHtml(getOpponent(row))} • ${escapeHtml(safeText(row?.game_time_et ?? row?.game_time ?? row?.time))} • Prop: 1+ Hit
+            </div>
+          </div>
+          <button class="market-close-btn" onclick="closeMarketCompare()" aria-label="Close market comparison">×</button>
+        </div>
+      </div>
+
+      <div class="market-grid">
+        <div class="market-metric">
+          <div class="market-metric-label">PropHit projected hits</div>
+          <div class="market-metric-value">${escapeHtml(fmtNum(row?.projected_hits, 2))}</div>
+        </div>
+        <div class="market-metric">
+          <div class="market-metric-label">PropHit probability</div>
+          <div class="market-metric-value">${escapeHtml(fmtPct(getModelProb(row)))}</div>
+        </div>
+        <div class="market-metric">
+          <div class="market-metric-label">Hit Score</div>
+          <div class="market-metric-value">${escapeHtml(fmtNum(row?.hit_score, 1))}</div>
+        </div>
+        <div class="market-metric">
+          <div class="market-metric-label">Fair odds</div>
+          <div class="market-metric-value">${escapeHtml(fmtOdds(row?.fair_odds_american ?? row?.fair_odds))}</div>
+        </div>
+        <div class="market-metric">
+          <div class="market-metric-label">Confidence</div>
+          <div class="market-metric-value">${escapeHtml(safeText(row?.confidence_letter ?? row?.confidence_grade ?? row?.confidence_score))}</div>
+        </div>
+        <div class="market-metric">
+          <div class="market-metric-label">PropHit lean</div>
+          <div class="market-metric-value">${escapeHtml(modelLean(row))}</div>
+        </div>
+      </div>
+
+      <div class="market-section">
+        <div class="market-section-title">Free public research links</div>
+        <div class="market-link-grid">
+          ${links.map(link => `
+            <a class="market-link-card" href="${escapeHtml(link.url)}" target="_blank" rel="noopener noreferrer">
+              <div class="market-link-name">${escapeHtml(link.name)}</div>
+              <div class="market-link-note">${escapeHtml(link.note)}</div>
+            </a>
+          `).join("")}
+        </div>
+        <div class="market-disclaimer">
+          <strong>Research-only links:</strong> this drawer does not scrape or republish third-party projections. It opens public search links so you can manually compare PropHit against free public pages.
+        </div>
+      </div>
+
+      <div class="market-section">
+        <div class="market-section-title">Manual external lean</div>
+        <div class="market-form-grid">
+          <label>
+            Source
+            <select id="marketSourceInput">
+              ${["", "BettingPros", "Covers", "RotoWire", "OddsTrader", "DraftKings Network", "CBS Sports", "Other"].map(v => `<option value="${escapeHtml(v)}" ${stored.source === v ? "selected" : ""}>${v || "Select source"}</option>`).join("")}
+            </select>
+          </label>
+          <label>
+            External lean
+            <select id="marketLeanInput">
+              ${["", "Over 0.5 Hit", "Under 0.5 Hit", "No Play", "Conflicting", "Monitor"].map(v => `<option value="${escapeHtml(v)}" ${stored.lean === v ? "selected" : ""}>${v || "Select lean"}</option>`).join("")}
+            </select>
+          </label>
+          <label>
+            Market odds
+            <input id="marketOddsInput" placeholder="Example: -135" value="${escapeHtml(stored.odds || "")}" />
+          </label>
+          <label>
+            Strength / rating
+            <input id="marketStrengthInput" placeholder="Example: strong, 4/5, A" value="${escapeHtml(stored.strength || "")}" />
+          </label>
+        </div>
+
+        <label class="market-notes-label" style="margin-top:12px;">
+          Notes
+          <textarea id="marketNotesInput" class="market-notes-area" placeholder="Add what the other site says, line movement, sportsbook price, or why you agree/disagree.">${escapeHtml(stored.notes || "")}</textarea>
+        </label>
+
+        <div class="market-action-row">
+          <div class="market-pill-row" id="marketValuePills">${buildValuePills(row, stored)}</div>
+          <div>
+            <button class="market-clear-btn" onclick="clearMarketCompareNote()">Clear Notes</button>
+            <button class="market-save-btn" onclick="saveMarketCompareNote()">Save Comparison</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="market-section">
+        <div class="market-section-title">How to use this</div>
+        <div class="market-disclaimer">
+          Compare PropHit's fair odds and 1+ hit probability against the public pages above. Enter the best available market odds and any outside lean manually. A positive edge means PropHit's estimated hit probability is higher than the market-implied probability from the odds you entered.
+        </div>
+      </div>
+    `;
+
+    document.getElementById("marketCompareBackdrop").classList.add("open");
+    document.body.classList.add("market-compare-pinned");
+  }
+
+  function closeMarketCompare() {
+    const backdrop = document.getElementById("marketCompareBackdrop");
+    if (backdrop) backdrop.classList.remove("open");
+    document.body.classList.remove("market-compare-pinned");
+  }
+
+  function saveMarketCompareNote() {
+    const rows = Array.isArray(window.currentRows) ? window.currentRows : [];
+    const row = rows[window.__PROPHIT_MARKET_ROW_INDEX__];
+    if (!row) return;
+
+    const data = {
+      source: document.getElementById("marketSourceInput")?.value || "",
+      lean: document.getElementById("marketLeanInput")?.value || "",
+      odds: document.getElementById("marketOddsInput")?.value || "",
+      strength: document.getElementById("marketStrengthInput")?.value || "",
+      notes: document.getElementById("marketNotesInput")?.value || "",
+      savedAt: new Date().toISOString()
+    };
+    setStored(row, data);
+
+    const pills = document.getElementById("marketValuePills");
+    if (pills) pills.innerHTML = buildValuePills(row, data) + `<span class="market-pill good">Saved</span>`;
+  }
+
+  function clearMarketCompareNote() {
+    const rows = Array.isArray(window.currentRows) ? window.currentRows : [];
+    const row = rows[window.__PROPHIT_MARKET_ROW_INDEX__];
+    if (!row) return;
+    clearStored(row);
+    openMarketCompare(window.__PROPHIT_MARKET_ROW_INDEX__);
+  }
+
+  function addCompareButtonsTo(scopeSelector, rows) {
+    const scope = document.querySelector(scopeSelector);
+    if (!scope || !Array.isArray(rows)) return;
+
+    const playerWraps = scope.querySelectorAll(".player-name-wrap");
+    playerWraps.forEach((wrap, index) => {
+      if (wrap.querySelector(".market-compare-btn")) return;
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "market-compare-btn";
+      btn.title = "Open Market Comparison drawer";
+      btn.textContent = "Compare";
+      btn.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const currentIndex = index;
+        openMarketCompare(currentIndex);
+      });
+      wrap.appendChild(btn);
+    });
+  }
+
+  function addCompareButtons() {
+    const rows = Array.isArray(window.currentRows) ? window.currentRows : [];
+    addCompareButtonsTo("#tableBody", rows);
+    addCompareButtonsTo("#popTableBody", rows);
+  }
+
+  function wrapRenderFunction(name) {
+    const original = window[name];
+    if (typeof original !== "function" || original.__marketWrapped) return;
+    const wrapped = function () {
+      const result = original.apply(this, arguments);
+      setTimeout(addCompareButtons, 0);
+      return result;
+    };
+    wrapped.__marketWrapped = true;
+    window[name] = wrapped;
+  }
+
+  function installObserver() {
+    const observer = new MutationObserver(() => addCompareButtons());
+    ["tableBody", "popTableBody"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el, { childList: true, subtree: true });
+    });
+  }
+
+  function installAddon() {
+    ensureDrawer();
+    wrapRenderFunction("render");
+    wrapRenderFunction("renderPopout");
+    installObserver();
+    addCompareButtons();
+    console.log(`PropHit Market Comparison Add-On loaded v${ADDON_VERSION}`);
+  }
+
+  window.openMarketCompare = openMarketCompare;
+  window.closeMarketCompare = closeMarketCompare;
+  window.saveMarketCompareNote = saveMarketCompareNote;
+  window.clearMarketCompareNote = clearMarketCompareNote;
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", installAddon);
+  } else {
+    installAddon();
+  }
+})();
+</script>
