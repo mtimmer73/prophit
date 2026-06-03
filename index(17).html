@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PropHit Lab | Player Correlations</title>
+<style>
+:root{
+  --nav:#061629;--side:#08233d;--bg:#eef3f8;--card:#fff;--soft:#f6f9fd;--line:#dbe4ef;--text:#061629;
+  --muted:#66778f;--blue:#2458e6;--blue2:#153fa8;--green:#059b49;--greenBg:#e6faef;--red:#b42318;
+  --amber:#f59e0b;--purple:#6d4aff;--shadow:0 8px 26px rgba(8,24,46,.08)
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Arial,sans-serif;font-size:14px}
+button,select,input{font:inherit}
+.app{display:grid;grid-template-columns:214px minmax(0,1fr);min-height:100vh}
+.side{background:linear-gradient(180deg,#071a2d,#06213b);color:#fff;padding:24px 18px;position:sticky;top:0;height:100vh;overflow:auto}
+.logo{font-size:29px;font-weight:950;letter-spacing:-.05em;margin-bottom:28px;white-space:nowrap}.logo span{color:#62a5ff;font-size:15px;letter-spacing:-.02em}
+.side button{display:block;width:100%;border:0;background:transparent;color:#d2e3f8;text-align:left;padding:11px 12px;margin:6px 0;border-radius:10px;font-weight:850;cursor:pointer}
+.side button.active,.side button:hover{background:var(--blue);color:white}
+.side .section{font-size:11px;color:#8eb2da;text-transform:uppercase;font-weight:900;letter-spacing:.08em;border-top:1px solid rgba(255,255,255,.08);padding-top:16px;margin-top:18px}
+.main{min-width:0}.top{height:78px;background:var(--nav);color:#fff;display:flex;align-items:end;gap:12px;padding:0 28px;position:sticky;top:0;z-index:10;overflow:auto}
+.top button{height:60px;border:0;border-bottom:4px solid transparent;background:transparent;color:#d6e4f7;font-weight:950;padding:0 8px 21px;white-space:nowrap;cursor:pointer}
+.top button.active{border-bottom-color:#3e73ff;color:#fff}
+.content{padding:24px;min-width:0}.notice{background:#eaf3ff;border:1px solid #b9d7ff;color:#063f8d;border-radius:14px;padding:14px 16px;font-weight:800;margin-bottom:18px;line-height:1.45}
+.notice.error{background:#fff1f0;border-color:#ffc9c2;color:#9f1f17}.notice.ok{background:#ecfff4;border-color:#bdeed0;color:#08753a}
+.kpis{display:grid;grid-template-columns:repeat(5,minmax(155px,1fr));gap:16px;margin-bottom:18px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+.kpi{padding:22px}.kpi .label{font-size:11px;text-transform:uppercase;font-weight:950;letter-spacing:.06em}.kpi .value{font-size:31px;font-weight:950;margin-top:8px}.kpi .sub{color:var(--green);font-weight:850;margin-top:7px;font-size:13px}
+.controls{padding:18px;margin-bottom:18px}.controls h3{margin:0 0 14px}.grid{display:grid;grid-template-columns:repeat(6,minmax(130px,1fr));gap:12px;align-items:end}
+label{display:block;font-size:12px;font-weight:900;margin-bottom:7px}select,input{width:100%;border:1px solid #cfd9e7;border-radius:9px;padding:11px 12px;background:#fff;font-weight:750}
+.toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px 10px;flex-wrap:wrap}.title{font-size:22px;font-weight:950;letter-spacing:-.03em}.count{color:var(--blue);font-size:13px;font-weight:950;margin-left:8px}
+.btn{border:1px solid #bfd0ea;color:var(--blue);background:#fff;border-radius:9px;padding:10px 12px;font-weight:900;cursor:pointer}.btn:hover,.btn.active{background:#eef4ff;border-color:#76a0ff}.btn.primary{background:var(--blue);color:#fff;border-color:var(--blue)}
+.tablewrap{overflow:auto;max-height:calc(100vh - 330px);border-top:1px solid var(--line);border-radius:0 0 16px 16px}
+table{width:100%;min-width:1320px;border-collapse:separate;border-spacing:0;background:#fff}
+th,td{padding:13px 14px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap;vertical-align:middle}
+th{position:sticky;top:0;z-index:3;background:#061629;color:#fff;font-size:11px;text-transform:uppercase;letter-spacing:.04em;cursor:pointer}
+th:first-child,td:first-child{position:sticky;left:0;z-index:4}td:first-child{background:#fff;box-shadow:1px 0 0 var(--line)}th:first-child{z-index:5}
+tbody tr:nth-child(even) td{background:#f8fbff}tbody tr:nth-child(even) td:first-child{background:#f8fbff}tbody tr:hover td,tbody tr:hover td:first-child{background:#eef5ff}
+.player{font-weight:950}.small{display:block;color:var(--muted);font-size:11px;font-weight:800;margin-top:2px}
+.badge{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:#2d6be8;color:white;font-size:11px;font-weight:950;padding:5px 8px;min-width:33px}
+.score{display:inline-flex;background:var(--greenBg);color:var(--green);border-radius:10px;padding:8px 12px;font-weight:950;min-width:58px;justify-content:center}
+.money{color:var(--green);font-weight:950}.tag{display:inline-flex;border-radius:9px;padding:7px 10px;font-size:11px;font-weight:950;text-transform:uppercase;background:#d9fae4;color:#05883f}.tag.watch{background:#fff3d6;color:#9a6200}.tag.low{background:#f1f4f8;color:#68788b}
+.star{color:var(--amber);font-size:18px}.tab{display:none}.tab.active{display:block}.panel{padding:20px}.list{display:grid;gap:10px}.item{border:1px solid var(--line);border-radius:12px;background:white;padding:13px;line-height:1.45}.muted{color:var(--muted);font-weight:750}
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:9px}.pill{background:#eef4ff;color:#1947be;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:850}.pill.green{background:#e6faef;color:#08783c}.pill.amber{background:#fff5dc;color:#8d5a00}.pill.purple{background:#f0edff;color:#5736c9}
+.empty{padding:28px;color:#52657d;font-weight:750;line-height:1.5}.details{white-space:normal;background:#f4f8fd;border:1px solid #d9e5f4;border-radius:12px;padding:12px;margin-top:8px;line-height:1.5;min-width:620px}
+.drawer-grid{display:grid;grid-template-columns:repeat(3,minmax(180px,1fr));gap:10px;margin-top:10px}.drawer-box{background:#fff;border:1px solid #e0e8f2;border-radius:10px;padding:10px}.drawer-box b{display:block;margin-bottom:4px}
+.signal{border:1px solid #dbe7ff;background:#fbfdff;border-radius:10px;padding:10px;margin-top:8px}.signal-title{font-weight:950}.signal-rate{font-size:20px;font-weight:950;color:var(--green);margin-top:4px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.subtabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.subtabs button{border:1px solid #bfd0ea;background:#fff;color:var(--blue);border-radius:999px;padding:9px 12px;font-weight:900;cursor:pointer}.subtabs button.active{background:var(--blue);color:#fff}
+@media(max-width:1100px){.app{display:block}.side{display:none}.kpis{grid-template-columns:repeat(2,minmax(150px,1fr))}.grid{grid-template-columns:repeat(2,minmax(150px,1fr))}.content{padding:14px}.two,.three{grid-template-columns:1fr}}
+@media(max-width:600px){.kpis,.grid{grid-template-columns:1fr}.top{padding:12px;height:auto}.top button{height:auto;padding-bottom:12px}.details{min-width:520px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="logo">PropHit<span>LAB</span></div>
+    <div class="section">Model</div>
+    <button class="nav active" data-tab="today">Today’s Board</button>
+    <button class="nav" data-tab="correlations">Correlations</button>
+    <button class="nav" data-tab="playerSignals">Player Signals</button>
+    <button class="nav" data-tab="validation">Validation Lab</button>
+    <button class="nav" data-tab="parlay">Parlay Builder</button>
+    <div class="section">Results</div>
+    <button class="nav" data-tab="performance">Performance</button>
+    <button id="exportBtn">Export CSV</button>
+  </aside>
+  <main class="main">
+    <nav class="top">
+      <button class="nav active" data-tab="today">TODAY’S BOARD</button>
+      <button class="nav" data-tab="correlations">CORRELATIONS</button>
+      <button class="nav" data-tab="playerSignals">PLAYER SIGNALS</button>
+      <button class="nav" data-tab="validation">VALIDATION LAB</button>
+      <button class="nav" data-tab="parlay">PARLAY BUILDER</button>
+      <button class="nav" data-tab="performance">PERFORMANCE</button>
+    </nav>
+    <div class="content">
+      <div id="status" class="notice">Loading PropHit data…</div>
+
+      <section id="today" class="tab active">
+        <div class="kpis">
+          <div class="card kpi"><div class="label">Model Qualified</div><div id="kQual" class="value">—</div><div id="kQualSub" class="sub">Live board</div></div>
+          <div class="card kpi"><div class="label">Top Tier Plays</div><div id="kTop" class="value">—</div><div class="sub">Hit Score ≥ 75</div></div>
+          <div class="card kpi"><div class="label">Projected Hits</div><div id="kProj" class="value">—</div><div id="kProjSub" class="sub">Avg: —</div></div>
+          <div class="card kpi"><div class="label">Avg Hit Probability</div><div id="kProb" class="value">—</div><div class="sub">Board average</div></div>
+          <div class="card kpi"><div class="label">Player Signals</div><div id="kSignals" class="value">—</div><div class="sub">Player-specific patterns</div></div>
+        </div>
+
+        <div class="card controls">
+          <h3>Board Controls</h3>
+          <div class="grid">
+            <div><label>Min Hit Score</label><select id="minScore"><option value="0">All</option><option>60</option><option>65</option><option selected>70</option><option>75</option><option>80</option></select></div>
+            <div><label>Min 1+ Hit Prob</label><select id="minProb"><option value="0">All</option><option>55</option><option selected>58</option><option>60</option><option>65</option><option>70</option></select></div>
+            <div><label>Min Proj Hits</label><select id="minProj"><option value="0">All</option><option>1.00</option><option>1.10</option><option selected>1.20</option><option>1.30</option><option>1.40</option></select></div>
+            <div><label>Min Confidence</label><select id="minConf"><option value="0">All</option><option>55</option><option selected>60</option><option>65</option><option>70</option><option>80</option><option>90</option></select></div>
+            <div><label>Max Batting Order</label><select id="maxOrder"><option value="99">All</option><option value="9">1-9</option><option selected value="6">1-6</option><option value="5">1-5</option><option value="4">1-4</option></select></div>
+            <div><label>Search</label><input id="search" placeholder="Player/team" /></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="toolbar">
+            <div class="title">TODAY’S BOARD <span id="count" class="count">0 Players</span></div>
+            <div><button class="btn" id="reload">Reload Data</button></div>
+          </div>
+          <div class="tablewrap">
+            <table>
+              <thead><tr>
+                <th data-sort="star">★</th><th data-sort="player">Player</th><th data-sort="team">Team</th><th data-sort="opp">Opp</th><th data-sort="batting_order">Order</th>
+                <th data-sort="hit_score">Hit Score</th><th data-sort="one_plus_hit_probability">1+ Hit Prob</th><th data-sort="projected_hits">Proj Hits</th>
+                <th data-sort="fair_odds_american">Fair Odds</th><th data-sort="confidence_score">Conf</th><th data-sort="player_signal_rate">Player Signal</th>
+                <th data-sort="best_bet_tier">Tier</th><th data-sort="game_time_et">Time</th><th data-sort="opp_pitcher">Pitcher</th>
+              </tr></thead>
+              <tbody id="body"><tr><td colspan="14" class="empty">Loading…</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section id="correlations" class="tab">
+        <div class="card panel">
+          <div class="title">Correlation Board</div>
+          <p class="muted">Board-wide model signals plus player-specific signals. Board-wide = all players. Player-specific = this exact player in similar historical spots.</p>
+          <div class="subtabs">
+            <button id="showBoardCorr" class="active">Board-Wide Signals</button>
+            <button id="showPlayerCorr">Player-Specific Signals</button>
+          </div>
+          <div id="boardCorr" class="list"></div>
+          <div id="playerCorr" class="list" style="display:none"></div>
+        </div>
+      </section>
+
+      <section id="playerSignals" class="tab">
+        <div class="card panel">
+          <div class="toolbar" style="padding:0 0 14px">
+            <div class="title">Player-Specific Signal Board</div>
+            <div><input id="signalSearch" placeholder="Search player" style="min-width:240px"></div>
+          </div>
+          <p class="muted">Shows the best available historical patterns for each player. Percentages always include sample size and reliability so small samples do not look stronger than they are.</p>
+          <div id="playerSignalList" class="list"></div>
+        </div>
+      </section>
+
+      <section id="validation" class="tab">
+        <div class="card panel">
+          <div class="title">Validation Lab</div>
+          <p class="muted">Current-board rule test. This remains user-driven; Player Signals are automatic.</p>
+          <div class="three">
+            <div><label>Hit Score ≥</label><input id="valScore" type="number" value="70"></div>
+            <div><label>Projected Hits ≥</label><input id="valProj" type="number" step=".01" value="1.20"></div>
+            <div><label>Confidence ≥</label><input id="valConf" type="number" value="60"></div>
+          </div>
+          <button id="runVal" class="btn primary" style="margin-top:12px">Run Rule</button>
+          <div id="val" class="list" style="margin-top:14px"></div>
+        </div>
+      </section>
+
+      <section id="parlay" class="tab"><div class="card panel"><div class="title">Parlay Builder</div><div id="parlay" class="list" style="margin-top:14px"></div></div></section>
+      <section id="performance" class="tab"><div class="card panel"><div class="title">Performance</div><div id="perf" class="empty">Loading performance summary…</div></div></section>
+    </div>
+  </main>
+</div>
+
+<script>
+const DATA_URLS=["./data/prophit_latest.json","./data/latest.json","./data/prophit_all_players.json","./data/prophit_today.json"];
+const PLAYER_CORR_URLS=["./data/prophit_player_correlations.json","./data/player_correlations.json"];
+const GRADES_URLS=["./data/prophit_validation_rows.json","./data/prophit_grades.json"];
+let payload=null, rows=[], filtered=[], sort={key:"hit_score",dir:"desc"};
+let playerCorrPayload=null, playerCorrMap=new Map(), gradeRows=[], derivedSignals=new Map();
+
+const $=id=>document.getElementById(id);
+const num=(v,d=0)=>{if(v===null||v===undefined||v==="")return d; const n=Number(String(v).replace(/[%,$]/g,"")); return Number.isFinite(n)?n:d};
+const first=(r,ks,d="")=>{for(const k of ks){if(r && r[k]!==undefined && r[k]!==null && r[k]!=="") return r[k]} return d};
+const pct=v=>{let n=num(v,null); if(n===null)return"—"; if(n<=1&&n>0)n*=100; return Math.round(n)+"%"};
+const dec=(v,p=2)=>{let n=num(v,null); return n===null?"—":n.toFixed(p)};
+const odds=v=>{let n=num(v,null); if(n===null||n===0)return"—"; return n>0?"+"+Math.round(n):String(Math.round(n))};
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
+const keyName=s=>String(s||"").trim().toLowerCase();
+
+async function tryFetchJson(urls){
+  for(const u of urls){
+    try{
+      const r=await fetch(u+"?v="+Date.now(),{cache:"no-store"});
+      if(!r.ok) throw new Error(u+" returned "+r.status);
+      const j=await r.json();
+      return {j,u};
+    }catch(e){}
+  }
+  return {j:null,u:null};
+}
+function getRows(j){
+  if(Array.isArray(j))return j;
+  for(const k of ["players","rows","data","board","signals"]){
+    const v=j?.[k];
+    if(Array.isArray(v))return v;
+    if(v&&typeof v==="object")return Object.values(v);
+  }
+  return [];
+}
+function nrow(r,i){
+  const prob=first(r,["one_plus_hit_probability","hit_prob","last30_one_plus_hit_rate"],0);
+  return {...r,
+    _id:first(r,["row_key","id","player_id"],i),
+    player:first(r,["player","player_name","name"],"Player "+(i+1)),
+    team:first(r,["team","team_abbr"],""),
+    opp:first(r,["opp","opponent","opponent_team"],""),
+    pos:first(r,["position","pos"],""),
+    bats:first(r,["bats","bat_side"],""),
+    batting_order:num(first(r,["batting_order","lineup_spot_num","order"],99),99),
+    hit_score:num(first(r,["hit_score","score"],0),0),
+    one_plus_hit_probability:num(prob,0),
+    projected_hits:num(first(r,["projected_hits","proj_hits"],0),0),
+    fair_odds_american:num(first(r,["fair_odds_american","fair_odds"],0),0),
+    confidence_score:num(first(r,["confidence_score","confidence","projection_confidence"],0),0),
+    model_vs_market_avg_delta:num(first(r,["model_vs_market_avg_delta","delta_avg"],0),0),
+    best_bet_tier:first(r,["best_bet_tier","confidence_tier","model_status"],""),
+    game_time_et:first(r,["game_time_et","game_time","time"],""),
+    opp_pitcher:first(r,["opp_pitcher","pitcher"],""),
+    opp_pitcher_hand:first(r,["opp_pitcher_hand","pitcher_hand"],""),
+    why:first(r,["summary_blurb","why_it_grades_well","positives"],""),
+    risks:first(r,["risk_factors","risks"],""),
+    player_signal_rate:0,
+    player_signal_sample:0,
+    player_signal_label:""
+  }
+}
+function gradeHit(r){
+  return num(first(r,["actual_hits","hits","hit_result","recorded_hit","one_plus_hit_actual"],0),0) >= 1 ||
+         String(first(r,["result","outcome"],"")).toLowerCase().includes("hit");
+}
+function normalizeGradeRow(r){
+  return {
+    player:first(r,["player","player_name","name"],""),
+    team:first(r,["team","team_abbr"],""),
+    projected_hits:num(first(r,["projected_hits","proj_hits"],0),0),
+    confidence_score:num(first(r,["confidence_score","confidence","projection_confidence"],0),0),
+    hit_score:num(first(r,["hit_score","score"],0),0),
+    one_plus_hit_probability:num(first(r,["one_plus_hit_probability","hit_prob"],0),0),
+    batting_order:num(first(r,["batting_order","lineup_spot_num","order"],99),99),
+    opp_pitcher_hand:first(r,["opp_pitcher_hand","pitcher_hand"],""),
+    projected_ab:num(first(r,["projected_ab","proj_ab"],0),0),
+    split_ba:num(first(r,["split_ba","split_avg","batter_split_avg"],0),0),
+    pitcher_baa:num(first(r,["pitcher_baa","pitcher_baa_vs_hand"],0),0),
+    hit:gradeHit(r)
+  }
+}
+function reliability(sample){
+  if(sample>=25)return"Strong";
+  if(sample>=15)return"Medium-High";
+  if(sample>=10)return"Medium";
+  if(sample>=5)return"Small Sample";
+  return"Too Small";
+}
+function relClass(rel){
+  if(["Strong","Medium-High","Medium"].includes(rel))return"green";
+  if(rel==="Small Sample")return"amber";
+  return"";
+}
+function normalizeSignal(s){
+  const sample=num(first(s,["sample_size","samples","n"],0),0);
+  const hits=num(first(s,["hits","hit_count","successes"],0),0);
+  const hitRate= first(s,["hit_rate","success_rate","rate"],"")!=="" ? num(first(s,["hit_rate","success_rate","rate"],0),0) : (sample?hits/sample*100:0);
+  const rel=first(s,["reliability","sample_reliability"], reliability(sample));
+  return {
+    label:first(s,["label","name","signal"],"Player-specific signal"),
+    sample_size:sample,
+    hits:hits,
+    hit_rate:hitRate<=1&&hitRate>0?hitRate*100:hitRate,
+    miss_rate:sample?100-(hitRate<=1&&hitRate>0?hitRate*100:hitRate):0,
+    reliability:rel,
+    conditions:first(s,["conditions","rules"],{}),
+    source:first(s,["source"],"model")
+  };
+}
+function loadPlayerCorrMap(j){
+  playerCorrMap=new Map();
+  const list=getRows(j);
+  for(const p of list){
+    const name=first(p,["player","player_name","name"],"");
+    const sigs=getRows({players:first(p,["signals","player_signals","top_signals"],[])});
+    if(name && sigs.length) playerCorrMap.set(keyName(name), sigs.map(normalizeSignal).sort((a,b)=>b.hit_rate-a.hit_rate||b.sample_size-a.sample_size).slice(0,3));
+  }
+}
+function deriveSignalsFromGrades(){
+  derivedSignals=new Map();
+  if(!gradeRows.length || !rows.length) return;
+  const byPlayer=new Map();
+  for(const gr of gradeRows.map(normalizeGradeRow).filter(r=>r.player)){
+    const k=keyName(gr.player);
+    if(!byPlayer.has(k)) byPlayer.set(k,[]);
+    byPlayer.get(k).push(gr);
+  }
+  for(const row of rows){
+    const hist=byPlayer.get(keyName(row.player))||[];
+    if(hist.length<5) continue;
+    const candidates=[
+      {
+        label:`Proj Hits ≥ ${Math.max(1, row.projected_hits-0.1).toFixed(2)} + Conf ≥ ${Math.max(50, row.confidence_score-5).toFixed(0)}`,
+        fn:r=>r.projected_hits>=Math.max(1,row.projected_hits-0.1)&&r.confidence_score>=Math.max(50,row.confidence_score-5)
+      },
+      {
+        label:`Hit Score ≥ ${Math.max(60,row.hit_score-5).toFixed(0)} + Top ${Math.min(6,Math.max(1,row.batting_order+1))} Order`,
+        fn:r=>r.hit_score>=Math.max(60,row.hit_score-5)&&r.batting_order<=Math.min(6,Math.max(1,row.batting_order+1))
+      },
+      {
+        label:`Similar Projection + Same Pitcher Hand`,
+        fn:r=>Math.abs(r.projected_hits-row.projected_hits)<=0.15 && (!row.opp_pitcher_hand || r.opp_pitcher_hand===row.opp_pitcher_hand)
+      },
+      {
+        label:`Confidence ≥ ${Math.max(60,row.confidence_score-10).toFixed(0)} + Hit Prob ≥ ${Math.max(55,(row.one_plus_hit_probability<=1?row.one_plus_hit_probability*100:row.one_plus_hit_probability)-5).toFixed(0)}%`,
+        fn:r=>r.confidence_score>=Math.max(60,row.confidence_score-10) && (r.one_plus_hit_probability<=1?r.one_plus_hit_probability*100:r.one_plus_hit_probability)>=Math.max(55,(row.one_plus_hit_probability<=1?row.one_plus_hit_probability*100:row.one_plus_hit_probability)-5)
+      }
+    ];
+    const sigs=[];
+    for(const c of candidates){
+      const m=hist.filter(c.fn);
+      if(m.length>=5){
+        const hits=m.filter(r=>r.hit).length;
+        const rate=hits/m.length*100;
+        sigs.push({label:c.label,sample_size:m.length,hits:hits,hit_rate:rate,miss_rate:100-rate,reliability:reliability(m.length),source:"derived from grades"});
+      }
+    }
+    if(sigs.length) derivedSignals.set(keyName(row.player), sigs.sort((a,b)=>b.hit_rate-a.hit_rate||b.sample_size-a.sample_size).slice(0,3));
+  }
+}
+function signalsFor(row){
+  return playerCorrMap.get(keyName(row.player)) || derivedSignals.get(keyName(row.player)) || [];
+}
+function attachSignalSummary(){
+  for(const r of rows){
+    const sig=signalsFor(r)[0];
+    r.player_signal_rate=sig?num(sig.hit_rate):0;
+    r.player_signal_sample=sig?num(sig.sample_size):0;
+    r.player_signal_label=sig?sig.label:"";
+  }
+}
+async function load(){
+  $("status").className="notice"; $("status").innerHTML="Loading PropHit data…";
+  try{
+    const main=await tryFetchJson(DATA_URLS);
+    if(!main.j) throw new Error("Could not load data/prophit_latest.json or backup data files.");
+    payload=main.j; rows=getRows(main.j).map(nrow);
+
+    const pc=await tryFetchJson(PLAYER_CORR_URLS);
+    playerCorrPayload=pc.j;
+    if(pc.j) loadPlayerCorrMap(pc.j);
+
+    const gr=await tryFetchJson(GRADES_URLS);
+    gradeRows=gr.j?getRows(gr.j):[];
+    deriveSignalsFromGrades();
+    attachSignalSummary();
+
+    const meta=main.j.meta||{};
+    const run=meta.run_as_of_et||meta.generated_at||main.j.generated_at||main.j.run_as_of_et||rows[0]?.run_as_of_et||rows[0]?.last_refreshed_et||"Loaded";
+    const signalCount=rows.filter(r=>signalsFor(r).length).length;
+    $("status").className="notice ok";
+    $("status").innerHTML=`<b>PropHit UI loaded.</b> ${rows.length} rows from <code>${main.u}</code>. Player signals: ${signalCount}. Latest run: ${esc(run)}.`;
+    apply(); loadPerf();
+  }catch(e){
+    $("status").className="notice error"; $("status").innerHTML=`<b>Data failed to load.</b> ${esc(e.message)}`;
+    $("body").innerHTML=`<tr><td colspan="14" class="empty">Could not load data. Check that <code>data/prophit_latest.json</code> exists.</td></tr>`;
+  }
+}
+function apply(){
+  const ms=num($("minScore").value), mp=num($("minProb").value), mh=num($("minProj").value), mc=num($("minConf").value), mo=num($("maxOrder").value,99), q=$("search").value.toLowerCase().trim();
+  filtered=rows.filter(r=>{
+    let p=r.one_plus_hit_probability; if(p<=1&&p>0)p*=100;
+    return r.hit_score>=ms && p>=mp && r.projected_hits>=mh && r.confidence_score>=mc && r.batting_order<=mo && (!q || `${r.player} ${r.team} ${r.opp}`.toLowerCase().includes(q));
+  });
+  sortRows(); render();
+}
+function sortRows(){
+  const k=sort.key, m=sort.dir==="asc"?1:-1;
+  filtered.sort((a,b)=>{
+    const av=a[k], bv=b[k];
+    if(typeof av==="number"||typeof bv==="number") return (num(av)-num(bv))*m;
+    return String(av||"").localeCompare(String(bv||""))*m;
+  });
+}
+function setSort(k){ if(sort.key===k) sort.dir=sort.dir==="asc"?"desc":"asc"; else sort={key:k,dir:"desc"}; sortRows(); renderTable(); }
+function render(){
+  const qual=filtered.filter(r=>r.hit_score>=70).length, top=filtered.filter(r=>r.hit_score>=75).length;
+  const proj=filtered.reduce((s,r)=>s+r.projected_hits,0);
+  const avgp=filtered.length?filtered.reduce((s,r)=>s+(r.one_plus_hit_probability<=1?r.one_plus_hit_probability*100:r.one_plus_hit_probability),0)/filtered.length:0;
+  const sigCount=filtered.filter(r=>signalsFor(r).length).length;
+  $("kQual").textContent=qual; $("kQualSub").textContent=rows.length?Math.round(qual/rows.length*100)+"% of board":"No rows";
+  $("kTop").textContent=top; $("kProj").textContent=proj?dec(proj,1):"—"; $("kProjSub").textContent=filtered.length?"Avg: "+dec(proj/filtered.length,2):"Avg: —";
+  $("kProb").textContent=filtered.length?Math.round(avgp)+"%":"—"; $("kSignals").textContent=sigCount; 
+  renderTable(); renderBoardCorr(); renderPlayerCorr(); renderPlayerSignalList(); renderVal(); renderParlay();
+}
+function signalHtml(sig){
+  return `<div class="signal">
+    <div class="signal-title">${esc(sig.label)}</div>
+    <div class="signal-rate">${dec(sig.hit_rate,1)}%</div>
+    <div class="pills">
+      <span class="pill green">${sig.hits}/${sig.sample_size} hit</span>
+      <span class="pill ${relClass(sig.reliability)}">${esc(sig.reliability)}</span>
+      <span class="pill">${dec(sig.miss_rate,1)}% miss</span>
+      <span class="pill purple">${esc(sig.source||"model")}</span>
+    </div>
+  </div>`;
+}
+function drawer(row){
+  const sigs=signalsFor(row);
+  const why=Array.isArray(row.why)?row.why.join("; "):row.why;
+  const risks=Array.isArray(row.risks)?row.risks.join("; "):row.risks;
+  return `<div class="details">
+    <b>Player-Specific Signal History</b>
+    ${sigs.length?sigs.map(signalHtml).join(""):`<div class="muted" style="margin-top:8px">No player-specific sample yet. Add <code>data/prophit_player_correlations.json</code> or keep building graded history.</div>`}
+    <div class="drawer-grid">
+      <div class="drawer-box"><b>Why</b>${esc(why||"—")}</div>
+      <div class="drawer-box"><b>Risks</b>${esc(risks||"—")}</div>
+      <div class="drawer-box"><b>Signal Guardrail</b>Minimum 5 samples shown. 10+ samples needed for medium reliability.</div>
+    </div>
+  </div>`;
+}
+function renderTable(){
+  $("count").textContent=`${filtered.length} Player${filtered.length===1?"":"s"}`;
+  if(!filtered.length){$("body").innerHTML=`<tr><td colspan="14" class="empty">No players match current filters.</td></tr>`; return;}
+  $("body").innerHTML=filtered.map(r=>{
+    const p=r.one_plus_hit_probability<=1?r.one_plus_hit_probability*100:r.one_plus_hit_probability;
+    const sig=signalsFor(r)[0];
+    return `<tr>
+      <td><span class="star">${r.hit_score>=75?"★":"☆"}</span></td>
+      <td><div class="player">${esc(r.player)}</div><span class="small">${esc(r.pos)} ${r.bats? "· "+esc(r.bats):""}</span>${drawer(r)}</td>
+      <td><span class="badge">${esc(r.team||"—")}</span></td><td>${esc(r.opp||"—")}<span class="small">${esc(r.opp_pitcher_hand||"")}</span></td><td>${r.batting_order===99?"—":r.batting_order}</td>
+      <td><span class="score">${Math.round(r.hit_score)}</span></td><td><b>${pct(p)}</b></td><td><b>${dec(r.projected_hits,2)}</b></td><td class="money">${odds(r.fair_odds_american)}</td>
+      <td>${Math.round(r.confidence_score)||"—"}</td>
+      <td>${sig?`<b>${dec(sig.hit_rate,1)}%</b><span class="small">${sig.hits}/${sig.sample_size} · ${esc(sig.reliability)}</span>`:"—"}</td>
+      <td><span class="tag ${String(r.best_bet_tier).includes("A")?"":"watch"}">${esc(r.best_bet_tier||"WATCH")}</span></td>
+      <td>${esc(r.game_time_et||"—")}</td><td>${esc(r.opp_pitcher||"—")}<span class="small">${esc(r.opp_pitcher_hand||"")}</span></td>
+    </tr>`
+  }).join("");
+}
+function renderBoardCorr(){
+  const rules=[
+    ["A Tier + 1.30 Projection",r=>String(r.best_bet_tier).includes("A")&&r.projected_hits>=1.30],
+    ["Score 75+ + Prob 60%+",r=>r.hit_score>=75&&(r.one_plus_hit_probability<=1?r.one_plus_hit_probability*100:r.one_plus_hit_probability)>=60],
+    ["Top 3 Order + Qualified",r=>r.batting_order<=3&&r.hit_score>=70],
+    ["High Confidence Core",r=>r.confidence_score>=70&&r.projected_hits>=1.20]
+  ];
+  $("boardCorr").innerHTML=rules.map(([name,fn])=>{
+    const m=rows.filter(fn).sort((a,b)=>b.hit_score-a.hit_score);
+    return `<div class="item"><b>${name}</b><div class="muted">${m.length} current matches</div><div class="pills">${m.slice(0,12).map(r=>`<span class="pill">${esc(r.player)} · ${Math.round(r.hit_score)}</span>`).join("")||'<span class="pill">No matches</span>'}</div></div>`
+  }).join("");
+}
+function renderPlayerCorr(){
+  const withSig=rows.filter(r=>signalsFor(r).length).sort((a,b)=>(signalsFor(b)[0]?.hit_rate||0)-(signalsFor(a)[0]?.hit_rate||0));
+  $("playerCorr").innerHTML=withSig.slice(0,40).map(r=>{
+    const sig=signalsFor(r)[0];
+    return `<div class="item"><b>${esc(r.player)}</b> <span class="muted">${esc(r.team)} · ${esc(r.opp)}</span>${signalHtml(sig)}</div>`
+  }).join("") || `<div class="empty">No player-specific signals found yet. Add <code>data/prophit_player_correlations.json</code> or let graded history build.</div>`;
+}
+function renderPlayerSignalList(){
+  const q=($("signalSearch")?.value||"").toLowerCase().trim();
+  const list=rows.filter(r=>signalsFor(r).length && (!q || r.player.toLowerCase().includes(q))).sort((a,b)=>(signalsFor(b)[0]?.hit_rate||0)-(signalsFor(a)[0]?.hit_rate||0));
+  $("playerSignalList").innerHTML=list.map(r=>{
+    const sigs=signalsFor(r);
+    return `<div class="item"><b>${esc(r.player)}</b> <span class="muted">${esc(r.team)} · ${esc(r.opp)} · Proj ${dec(r.projected_hits,2)} · Conf ${Math.round(r.confidence_score)}</span>${sigs.map(signalHtml).join("")}</div>`
+  }).join("") || `<div class="empty">No player-specific signals match.</div>`;
+}
+function renderVal(){
+  if(!$("val").innerHTML) runValidation();
+}
+function runValidation(){
+  const s=num($("valScore").value,70), p=num($("valProj").value,1.2), c=num($("valConf").value,60);
+  const m=rows.filter(r=>r.hit_score>=s && r.projected_hits>=p && r.confidence_score>=c);
+  $("val").innerHTML=`<div class="item"><b>${m.length} players match this rule.</b><div class="muted">Hit Score ≥ ${s}, Projected Hits ≥ ${p}, Confidence ≥ ${c}</div><div class="pills">${m.slice(0,30).map(r=>`<span class="pill">${esc(r.player)} · ${esc(r.team)}</span>`).join("")||'<span class="pill">No matches</span>'}</div></div>`;
+}
+function renderParlay(){
+  const m=rows.filter(r=>r.hit_score>=75).sort((a,b)=>b.hit_score-a.hit_score).slice(0,20);
+  $("parlay").innerHTML=m.map(r=>`<div class="item"><b>${esc(r.player)}</b><div class="muted">${esc(r.team)} ${esc(r.opp)} · Score ${Math.round(r.hit_score)} · Proj ${dec(r.projected_hits,2)} · ${pct(r.one_plus_hit_probability)}</div></div>`).join("")||'<div class="empty">No top-tier candidates loaded.</div>';
+}
+async function loadPerf(){
+  const p=await tryFetchJson(["./data/prophit_performance_summary.json"]);
+  if(p.j){$("perf").innerHTML=`<pre style="white-space:pre-wrap;font:12px ui-monospace,Consolas,monospace">${esc(JSON.stringify(p.j,null,2))}</pre>`;}
+  else {$("perf").textContent="No performance summary available."}
+}
+function exportCsv(){
+  const hs=["player","team","opp","batting_order","hit_score","one_plus_hit_probability","projected_hits","fair_odds_american","confidence_score","player_signal_rate","player_signal_sample","player_signal_label","best_bet_tier","game_time_et","opp_pitcher"];
+  const csv=[hs.join(","),...filtered.map(r=>hs.map(h=>`"${String(r[h]??"").replace(/"/g,'""')}"`).join(","))].join("\n");
+  const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv"})); a.download="prophit_board_with_player_signals.csv"; a.click(); URL.revokeObjectURL(a.href);
+}
+document.querySelectorAll(".nav").forEach(b=>b.onclick=()=>{document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.id===b.dataset.tab));document.querySelectorAll(".nav").forEach(n=>n.classList.toggle("active",n.dataset.tab===b.dataset.tab));});
+["minScore","minProb","minProj","minConf","maxOrder","search"].forEach(id=>{$(id).addEventListener("input",apply);$(id).addEventListener("change",apply)});
+document.querySelectorAll("th[data-sort]").forEach(th=>th.onclick=()=>setSort(th.dataset.sort));
+$("reload").onclick=load; $("exportBtn").onclick=exportCsv; $("runVal").onclick=runValidation; $("signalSearch").addEventListener("input",renderPlayerSignalList);
+$("showBoardCorr").onclick=()=>{$("boardCorr").style.display="grid";$("playerCorr").style.display="none";$("showBoardCorr").classList.add("active");$("showPlayerCorr").classList.remove("active");};
+$("showPlayerCorr").onclick=()=>{$("boardCorr").style.display="none";$("playerCorr").style.display="grid";$("showPlayerCorr").classList.add("active");$("showBoardCorr").classList.remove("active");};
+load();
+</script>
+</body>
+</html>
