@@ -1,4 +1,4 @@
-name: Deploy UI
+name: Run PropHit Model and Deploy UI
 
 on:
   workflow_dispatch:
