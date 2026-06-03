@@ -7,9 +7,11 @@ on:
         description: "Optional target date in YYYY-MM-DD. Leave blank for today ET."
         required: false
         default: ""
+
   schedule:
     # 7:05 AM ET during daylight time = 11:05 UTC.
     - cron: "5 11 * * *"
+
     # Hourly refreshes from 11:05 AM-10:05 PM ET during daylight time = 15:05-02:05 UTC.
     - cron: "5 15-23 * * *"
     - cron: "5 0-2 * * *"
@@ -18,8 +20,6 @@ permissions:
   contents: write
   pages: write
   id-token: write
-
-timezone: America/New_York
 
 concurrency:
   group: prophit-run-model-and-deploy
