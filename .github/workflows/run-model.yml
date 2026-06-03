@@ -1,0 +1,264 @@
+name: Run PropHit Model and Deploy UI
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_date:
+        description: "Optional target date in YYYY-MM-DD. Leave blank for today ET."
+        required: false
+        default: ""
+
+  schedule:
+    # 7:05 AM ET during daylight time = 11:05 UTC.
+    - cron: "5 11 * * *"
+
+    # Hourly refreshes from 11:05 AM-10:05 PM ET during daylight time = 15:05-02:05 UTC.
+    - cron: "5 15-23 * * *"
+    - cron: "5 0-2 * * *"
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: prophit-model-and-ui
+  cancel-in-progress: true
+
+jobs:
+  run-model-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests pandas numpy openpyxl pytz
+
+      - name: Show repo structure
+        run: |
+          echo "Root files:"
+          ls -lah
+          echo ""
+          echo "Python model candidates:"
+          find . -maxdepth 2 -type f -name "*.py" | sort
+
+      - name: Run PropHit model
+        timeout-minutes: 25
+        env:
+          TARGET_DATE: ${{ github.event.inputs.target_date }}
+        run: |
+          set -euo pipefail
+
+          echo "TARGET_DATE=${TARGET_DATE}"
+
+          if [ -f "prophit_model_full_day_freeze_update.py" ]; then
+            echo "Running prophit_model_full_day_freeze_update.py"
+            python prophit_model_full_day_freeze_update.py
+
+          elif [ -f "prophit_model_full_day_freeze_updatea.py" ]; then
+            echo "Running prophit_model_full_day_freeze_updatea.py"
+            python prophit_model_full_day_freeze_updatea.py
+
+          elif [ -f "run_prophit.py" ]; then
+            echo "Running run_prophit.py"
+            python run_prophit.py
+
+          elif [ -f "proppulse-ui-app/public/run_prophit.py" ]; then
+            echo "Running proppulse-ui-app/public/run_prophit.py"
+            python proppulse-ui-app/public/run_prophit.py
+
+          elif [ -f "scripts/run_model.py" ]; then
+            echo "Running scripts/run_model.py"
+            python scripts/run_model.py
+
+          elif [ -f "scripts/prophit_model.py" ]; then
+            echo "Running scripts/prophit_model.py"
+            python scripts/prophit_model.py
+
+          elif [ -f "prophit_model.py" ]; then
+            echo "Running prophit_model.py"
+            python prophit_model.py
+
+          elif [ -f "run_model.py" ]; then
+            echo "Running run_model.py"
+            python run_model.py
+
+          elif [ -f "model.py" ]; then
+            echo "Running model.py"
+            python model.py
+
+          else
+            echo "ERROR: Could not find a PropHit model script to run."
+            echo "Expected one of:"
+            echo "  prophit_model_full_day_freeze_update.py"
+            echo "  prophit_model_full_day_freeze_updatea.py"
+            echo "  run_prophit.py"
+            echo "  proppulse-ui-app/public/run_prophit.py"
+            echo "  scripts/run_model.py"
+            echo "  scripts/prophit_model.py"
+            echo "  prophit_model.py"
+            echo "  run_model.py"
+            echo "  model.py"
+            exit 1
+          fi
+
+      - name: Verify key UI/data files
+        run: |
+          echo "Checking root index.html..."
+          test -f index.html || (echo "ERROR: index.html is missing" && exit 1)
+
+          echo "Checking data folder..."
+          ls -lah data || true
+
+          echo "Checking live model JSON..."
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          candidates = [
+              Path("data/prophit_latest.json"),
+              Path("data/latest.json"),
+              Path("data/prophit_all_players.json"),
+              Path("data/prophit_today.json"),
+          ]
+
+          found = None
+          for path in candidates:
+              if path.exists():
+                  found = path
+                  break
+
+          if found is None:
+              raise SystemExit("ERROR: No live model JSON found in data/.")
+
+          with found.open("r", encoding="utf-8") as f:
+              data = json.load(f)
+
+          rows = []
+          if isinstance(data, list):
+              rows = data
+          elif isinstance(data, dict):
+              for key in ("players", "rows", "data", "board"):
+                  value = data.get(key)
+                  if isinstance(value, list):
+                      rows = value
+                      break
+
+          print(f"Found live data file: {found}")
+          print(f"Rows detected: {len(rows)}")
+          PY
+
+      - name: Make live JSON aliases
+        run: |
+          mkdir -p data
+
+          if [ -f "data/prophit_latest.json" ]; then
+            cp data/prophit_latest.json data/latest.json
+            cp data/prophit_latest.json data/prophit_today.json
+          elif [ -f "data/latest.json" ]; then
+            cp data/latest.json data/prophit_latest.json
+            cp data/latest.json data/prophit_today.json
+          elif [ -f "data/prophit_all_players.json" ]; then
+            cp data/prophit_all_players.json data/prophit_latest.json
+            cp data/prophit_all_players.json data/latest.json
+            cp data/prophit_all_players.json data/prophit_today.json
+          fi
+
+      - name: Build static UI files if build script exists
+        run: |
+          if [ -f "package.json" ]; then
+            echo "package.json found. Installing/building only if scripts are available."
+            npm install || true
+            npm run build || true
+          else
+            echo "No package.json found. Skipping JS build."
+          fi
+
+      - name: Commit and push updated model/UI data
+        run: |
+          git config --global user.email "prophit-bot@example.com"
+          git config --global user.name "prophit-bot"
+
+          git add index.html || true
+          git add data/prophit_latest.json || true
+          git add data/latest.json || true
+          git add data/prophit_today.json || true
+          git add data/prophit_all_players.json || true
+          git add data/prophit_schema.json || true
+          git add data/prophit_performance_summary.json || true
+          git add data/prophit_validation_rows.json || true
+
+          git add -f outputs/snapshots/*.json || true
+          git add -f outputs/snapshots/*.xlsx || true
+          git add -f outputs/prophit_today.xlsx || true
+          git add -f outputs/prophit_run_log.json || true
+          git add -f outputs/prophit_freeze_state.json || true
+
+          if git diff --cached --quiet; then
+            echo "No model/UI output changes to commit."
+          else
+            git commit -m "Auto update PropHit model output and UI data"
+            git pull --rebase || true
+            git push
+          fi
+
+      - name: Refresh repo after commit
+        run: |
+          git pull --rebase || true
+
+      - name: Prepare GitHub Pages artifact
+        run: |
+          rm -rf site
+          mkdir -p site
+
+          cp index.html site/index.html
+          echo "prophitlab.com" > site/CNAME
+
+          if [ -d data ]; then
+            cp -r data site/data
+          fi
+
+          if [ -d assets ]; then
+            cp -r assets site/assets
+          fi
+
+          if [ -f favicon.svg ]; then
+            cp favicon.svg site/favicon.svg
+          fi
+
+          if [ -f icons.svg ]; then
+            cp icons.svg site/icons.svg
+          fi
+
+          if [ -f .nojekyll ]; then
+            cp .nojekyll site/.nojekyll
+          else
+            touch site/.nojekyll
+          fi
+
+          echo "Prepared site:"
+          find site -maxdepth 3 -type f | sort | head -100
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy UI to GitHub Pages
+        uses: actions/deploy-pages@v4
