@@ -14,7 +14,6 @@ on:
 
   schedule:
     # 7:30 AM ET during daylight time = 11:30 UTC.
-    # This grades yesterday's completed MLB games.
     - cron: "30 11 * * *"
 
 permissions:
@@ -44,64 +43,128 @@ jobs:
       - name: Install Python dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests pandas openpyxl
+          pip install pandas requests openpyxl numpy pytz
 
       - name: Run PropHit postgame grader
+        env:
+          TARGET_DATE: ${{ github.event.inputs.date }}
+          FORCE_REGRADE: ${{ github.event.inputs.force }}
         run: |
-          if [ -n "${{ github.event.inputs.date }}" ]; then
-            TARGET_DATE="${{ github.event.inputs.date }}"
-          else
-            TARGET_DATE=""
-          fi
+          set -e
 
-          FORCE_FLAG=""
-          if [ "${{ github.event.inputs.force }}" = "true" ]; then
-            FORCE_FLAG="--force"
-          fi
-
-          if [ -n "$TARGET_DATE" ]; then
-            python prophit_postgame_grader.py --date "$TARGET_DATE" $FORCE_FLAG
+          if [ -f "scripts/grade_prophit_postgame.py" ]; then
+            python scripts/grade_prophit_postgame.py --date "${TARGET_DATE}" --force "${FORCE_REGRADE}"
+          elif [ -f "grade_prophit_postgame.py" ]; then
+            python grade_prophit_postgame.py --date "${TARGET_DATE}" --force "${FORCE_REGRADE}"
+          elif [ -f "scripts/grade_postgame.py" ]; then
+            python scripts/grade_postgame.py --date "${TARGET_DATE}" --force "${FORCE_REGRADE}"
+          elif [ -f "grade_postgame.py" ]; then
+            python grade_postgame.py --date "${TARGET_DATE}" --force "${FORCE_REGRADE}"
           else
-            python prophit_postgame_grader.py $FORCE_FLAG
+            echo "ERROR: Could not find a postgame grader script."
+            echo "Expected one of:"
+            echo "  scripts/grade_prophit_postgame.py"
+            echo "  grade_prophit_postgame.py"
+            echo "  scripts/grade_postgame.py"
+            echo "  grade_postgame.py"
+            exit 1
           fi
 
       - name: Verify grader outputs
         run: |
-          echo "Checking outputs/grades..."
-          ls -lah outputs/grades || true
-
-          echo "Checking performance summary..."
-          ls -lah data/prophit_performance_summary.json || true
-
           python - <<'PY'
-          import json
           from pathlib import Path
+          import json
 
-          path = Path("data/prophit_performance_summary.json")
-          if not path.exists():
-              raise FileNotFoundError("data/prophit_performance_summary.json missing after grader")
+          required_any = [
+              Path("data/prophit_grades.json"),
+              Path("data/prophit_validation_rows.json"),
+              Path("data/prophit_performance_summary.json"),
+          ]
 
-          with path.open("r", encoding="utf-8") as f:
-              data = json.load(f)
+          found = []
+          for path in required_any:
+              if path.exists():
+                  found.append(str(path))
+                  try:
+                      with path.open("r", encoding="utf-8") as f:
+                          json.load(f)
+                  except Exception as exc:
+                      raise SystemExit(f"ERROR: {path} exists but is not valid JSON: {exc}")
 
-          print("Performance summary meta:", data.get("meta", {}))
-          print("Overall:", data.get("overall", {}))
+          if not found:
+              raise SystemExit("ERROR: No expected grader output JSON files were found in data/.")
+
+          print("Verified grader JSON outputs:")
+          for item in found:
+              print(f" - {item}")
           PY
+
+      - name: Remove oversized ledger files before commit
+        run: |
+          echo "GitHub blocks files over 100 MB. Removing oversized raw ledgers from commit."
+          rm -f outputs/grades/graded_ledger.json
+          rm -f outputs/grades/*graded_ledger*.json
+          rm -f outputs/grades/*ledger*.json
+
+          # Keep folder if needed, but prevent future accidental tracking of huge ledgers.
+          mkdir -p outputs/grades
+          touch outputs/grades/.gitkeep
 
       - name: Commit grading outputs
         run: |
-          git config --global user.email "prophit-bot@example.com"
-          git config --global user.name "prophit-bot"
+          git config user.name "prophit-bot"
+          git config user.email "prophit-bot@example.com"
 
-          git add -f outputs/grades/*.json || true
-          git add -f outputs/grades/*.xlsx || true
-          git add data/prophit_performance_summary.json || true
+          # Make sure large raw ledgers are never committed.
+          {
+            echo ""
+            echo "# PropHit grading raw ledgers can exceed GitHub's 100 MB file limit"
+            echo "outputs/grades/graded_ledger.json"
+            echo "outputs/grades/*graded_ledger*.json"
+            echo "outputs/grades/*ledger*.json"
+          } >> .gitignore
+
+          # Add only small UI-facing grade files and daily summaries.
+          git add .gitignore
+          git add data/prophit_grades.json || true
           git add data/prophit_validation_rows.json || true
+          git add data/prophit_performance_summary.json || true
+          git add data/prophit_grade_history.json || true
+          git add outputs/grades/*.json || true
+          git add outputs/grades/*.xlsx || true
+          git add outputs/grades/.gitkeep || true
+
+          # Unstage oversized ledger files if any glob above caught them.
+          git reset -- outputs/grades/graded_ledger.json 2>/dev/null || true
+          git reset -- outputs/grades/*graded_ledger*.json 2>/dev/null || true
+          git reset -- outputs/grades/*ledger*.json 2>/dev/null || true
+
+          # Hard safety check: fail before push if any staged file is over 95 MB.
+          python - <<'PY'
+          import subprocess
+          from pathlib import Path
+
+          result = subprocess.run(
+              ["git", "diff", "--cached", "--name-only"],
+              check=True,
+              capture_output=True,
+              text=True,
+          )
+
+          too_large = []
+          for name in result.stdout.splitlines():
+              path = Path(name)
+              if path.exists() and path.is_file() and path.stat().st_size > 95 * 1024 * 1024:
+                  too_large.append(f"{name} ({path.stat().st_size / 1024 / 1024:.1f} MB)")
+
+          if too_large:
+              raise SystemExit("ERROR: Refusing to commit oversized files:\n" + "\n".join(too_large))
+          PY
 
           if git diff --cached --quiet; then
             echo "No grading output changes to commit."
           else
-            git commit -m "Auto grade PropHit postgame results"
-            git pull --rebase || true
+            git commit -m "Update PropHit postgame grading results"
             git push
           fi
