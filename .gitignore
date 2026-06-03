@@ -1,22 +1,82 @@
+# Python
 __pycache__/
-*.pyc
-
+*.py[cod]
+*$py.class
+*.so
+.Python
 venv/
-.env/
+env/
+.env
+.venv/
+pip-wheel-metadata/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
+# Jupyter / notebooks
+.ipynb_checkpoints/
+
+# Node / React / Vite
 node_modules/
-proppulse-ui-app/node_modules/
-proppulse-ui-app/dist/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+dist/
+build/
+.vite/
 
-outputs/
-*.csv
-*.xlsx
+# Local environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# keep UI data file
-!proppulse-ui-app/public/data/prophit_latest.json
-
+# OS files
 .DS_Store
 Thumbs.db
+desktop.ini
 
-.vscode/
-.idea/
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.bak
+*.old
+
+# PropHit oversized grading ledgers
+# GitHub blocks files over 100 MB, so do not commit raw grading ledgers.
+outputs/grades/graded_ledger.json
+outputs/grades/*graded_ledger*.json
+outputs/grades/*ledger*.json
+
+# Optional large raw output files
+outputs/**/*.parquet
+outputs/**/*.pkl
+outputs/**/*.pickle
+outputs/**/*.sqlite
+outputs/**/*.db
+
+# Keep normal PropHit UI data files tracked
+!data/prophit_latest.json
+!data/prophit_all_players.json
+!data/prophit_grades.json
+!data/prophit_validation_rows.json
+!data/prophit_performance_summary.json
+!data/prophit_schema.json
+!data/latest.json
+!data/prophit_today.json
+
+# Keep workflow files tracked
+!.github/
+!.github/workflows/
+!.github/workflows/*.yml
+!.github/workflows/*.yaml
+
+# Keep empty grade folder marker if used
+!outputs/grades/.gitkeep
