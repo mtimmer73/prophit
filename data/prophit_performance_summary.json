@@ -1,6 +1,6 @@
 {
   "status": "live",
-  "updated_et": "2026-06-09 09:58:27 AM",
+  "updated_et": "2026-06-09 01:39:28 PM",
   "target_date": "2026-06-09",
   "total_players": 391,
   "confirmed_starters": 0,
@@ -9,6 +9,6 @@
   "top_play_count": 0,
   "avg_top_play_probability": null,
   "avg_top_play_confidence": null,
-  "best_bet_rank_score_avg": 32.05312367938439,
+  "best_bet_rank_score_avg": 31.968379449012204,
   "note": "Full-day board. Started games remain visible as frozen pregame projections; only upcoming games refresh on reruns."
 }
