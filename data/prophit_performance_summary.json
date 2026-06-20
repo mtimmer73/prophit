@@ -1,14 +1,14 @@
 {
   "status": "live",
-  "updated_et": "2026-06-20 12:38:49 PM",
+  "updated_et": "2026-06-20 02:29:51 PM",
   "target_date": "2026-06-20",
-  "total_players": 336,
-  "confirmed_starters": 63,
-  "confirmed_lineup_pct": 0.1875,
-  "locked_rows": 0,
-  "top_play_count": 14,
-  "avg_top_play_probability": 0.6865496145922542,
-  "avg_top_play_confidence": 86.40005215024453,
-  "best_bet_rank_score_avg": 35.92685450818646,
+  "total_players": 312,
+  "confirmed_starters": 117,
+  "confirmed_lineup_pct": 0.375,
+  "locked_rows": 58,
+  "top_play_count": 20,
+  "avg_top_play_probability": 0.6873128002676185,
+  "avg_top_play_confidence": 87.30087405010786,
+  "best_bet_rank_score_avg": 40.41397324900851,
   "note": "Full-day board. Started games remain visible as frozen pregame projections; only upcoming games refresh on reruns."
 }
