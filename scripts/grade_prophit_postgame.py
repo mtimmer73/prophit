@@ -54,9 +54,9 @@ PREDICTION_CANDIDATES = [
     ROOT / "model_output.json",
 ]
 
-OUTPUT_DIR = ROOT / "data"
-OUTPUT_RESULTS = OUTPUT_DIR / "graded_results.json"
-OUTPUT_BY_DATE_DIR = OUTPUT_DIR / "graded"
+OUTPUT_DIR = ROOT / "outputs" / "grades"
+OUTPUT_RESULTS = OUTPUT_DIR / "prophit_grades.json"
+OUTPUT_BY_DATE_DIR = OUTPUT_DIR
 
 MLB_SCHEDULE_URL = "https://statsapi.mlb.com/api/v1/schedule"
 MLB_BOXSCORE_URL = "https://statsapi.mlb.com/api/v1/game/{game_pk}/boxscore"
