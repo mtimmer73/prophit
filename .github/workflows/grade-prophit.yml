@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       date:
-        description: "Optional target date to grade in YYYY-MM-DD. Leave blank for yesterday ET."
+        description: "Optional target date to grade in YYYY-MM-DD. Leave blank for default."
         required: false
         default: ""
       force:
@@ -77,37 +77,49 @@ jobs:
           import json
 
           required_any = [
+              Path("data/graded_results.json"),
+              Path("data/graded"),
               Path("data/prophit_grades.json"),
               Path("data/prophit_validation_rows.json"),
               Path("data/prophit_performance_summary.json"),
           ]
 
           found = []
+
           for path in required_any:
               if path.exists():
                   found.append(str(path))
-                  try:
-                      with path.open("r", encoding="utf-8") as f:
-                          json.load(f)
-                  except Exception as exc:
-                      raise SystemExit(f"ERROR: {path} exists but is not valid JSON: {exc}")
+
+                  if path.is_file() and path.suffix == ".json":
+                      try:
+                          with path.open("r", encoding="utf-8") as f:
+                              json.load(f)
+                      except Exception as exc:
+                          raise SystemExit(f"ERROR: {path} exists but is not valid JSON: {exc}")
 
           if not found:
-              raise SystemExit("ERROR: No expected grader output JSON files were found in data/.")
+              raise SystemExit("ERROR: No expected grader output files were found.")
 
-          print("Verified grader JSON outputs:")
+          print("Verified grader outputs:")
           for item in found:
               print(f" - {item}")
+
+          graded_dir = Path("data/graded")
+          if graded_dir.exists():
+              daily_files = sorted(graded_dir.glob("*.json"))
+              print(f"Daily graded files found: {len(daily_files)}")
+              for item in daily_files[-10:]:
+                  print(f" - {item}")
           PY
 
       - name: Remove oversized ledger files before commit
         run: |
           echo "GitHub blocks files over 100 MB. Removing oversized raw ledgers from commit."
+
           rm -f outputs/grades/graded_ledger.json
           rm -f outputs/grades/*graded_ledger*.json
           rm -f outputs/grades/*ledger*.json
 
-          # Keep folder if needed, but prevent future accidental tracking of huge ledgers.
           mkdir -p outputs/grades
           touch outputs/grades/.gitkeep
 
@@ -116,7 +128,6 @@ jobs:
           git config user.name "prophit-bot"
           git config user.email "prophit-bot@example.com"
 
-          # Make sure large raw ledgers are never committed.
           {
             echo ""
             echo "# PropHit grading raw ledgers can exceed GitHub's 100 MB file limit"
@@ -125,20 +136,33 @@ jobs:
             echo "outputs/grades/*ledger*.json"
           } >> .gitignore
 
-          # Add only small UI-facing grade files and daily summaries.
-          git add .gitignore
+          echo "Changed files before add:"
+          git status --short
+
+          # Add replacement grader outputs.
+          git add data/graded_results.json || true
+          git add data/graded/*.json || true
+
+          # Add older PropHit output files if they exist.
           git add data/prophit_grades.json || true
           git add data/prophit_validation_rows.json || true
           git add data/prophit_performance_summary.json || true
           git add data/prophit_grade_history.json || true
+
+          # Add outputs folder files except large ledgers.
           git add outputs/grades/*.json || true
           git add outputs/grades/*.xlsx || true
           git add outputs/grades/.gitkeep || true
+
+          git add .gitignore
 
           # Unstage oversized ledger files if any glob above caught them.
           git reset -- outputs/grades/graded_ledger.json 2>/dev/null || true
           git reset -- outputs/grades/*graded_ledger*.json 2>/dev/null || true
           git reset -- outputs/grades/*ledger*.json 2>/dev/null || true
+
+          echo "Staged files:"
+          git diff --cached --name-only
 
           # Hard safety check: fail before push if any staged file is over 95 MB.
           python - <<'PY'
@@ -153,6 +177,7 @@ jobs:
           )
 
           too_large = []
+
           for name in result.stdout.splitlines():
               path = Path(name)
               if path.exists() and path.is_file() and path.stat().st_size > 95 * 1024 * 1024:
