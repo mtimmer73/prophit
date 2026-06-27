@@ -412,16 +412,24 @@ def merge_results(
 
 
 def main() -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--date", dest="date", default=None, help="Date to grade, YYYY-MM-DD")
-    parser.add_argument("--force", action="store_true", help="Overwrite existing grades for date")
-    args = parser.parse_args()
+    parser = argparse.ArgumentParser(add_help=True)
 
-    target_date = parse_date(args.date)
-    force = env_force(args.force)
+parser.add_argument("--date", dest="date", default=None, help="Date to grade, YYYY-MM-DD")
+parser.add_argument("--game-date", dest="game_date", default=None)
+parser.add_argument("--grade-date", dest="grade_date", default=None)
 
-    log(f"PropHit grader starting for {target_date}")
-    log(f"Force mode: {force}")
+parser.add_argument("--force", action="store_true", help="Overwrite existing grades for date")
+parser.add_argument("--force-grade", action="store_true")
+parser.add_argument("--overwrite", action="store_true")
+
+# Accept extra unknown workflow arguments instead of crashing.
+args, unknown = parser.parse_known_args()
+
+if unknown:
+    log(f"WARNING: Ignoring unknown workflow arguments: {unknown}")
+
+target_date = parse_date(args.date or args.game_date or args.grade_date)
+force = env_force(args.force or args.force_grade or args.overwrite)
 
     prediction_file = find_prediction_file()
     if not prediction_file:
