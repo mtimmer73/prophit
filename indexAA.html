@@ -171,6 +171,25 @@
       margin: 8px auto 0;
     }
 
+    .model-run-stamp {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 10px auto 0;
+      padding: 8px 12px;
+      border: 1px solid rgba(52,211,153,.28);
+      background: rgba(52,211,153,.10);
+      color: #d1fae5;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      width: fit-content;
+      max-width: 100%;
+    }
+
+    .model-run-stamp span { color: #34d399; }
+
+
     .badge {
       display: inline-flex;
       align-items: center;
@@ -184,6 +203,29 @@
       font-weight: 800;
       letter-spacing: .18em;
       text-transform: uppercase;
+    }
+
+
+    .metric-index-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border: 1px solid rgba(56,189,248,.30);
+      background: rgba(14,165,233,.16);
+      color: #ffffff;
+      border-radius: 999px;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 900;
+      text-decoration: none;
+      margin-top: 10px;
+      box-shadow: 0 10px 26px rgba(14,165,233,.10);
+    }
+
+    .metric-index-link:hover {
+      background: rgba(14,165,233,.28);
+      transform: translateY(-1px);
     }
 
     .card-grid {
@@ -741,6 +783,82 @@
       .word-logo-ball { width: 38px; height: 38px; }
       .page { padding: 14px; }
     }
+  
+    .metric-index-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 1000000;
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: stretch;
+      justify-content: flex-end;
+    }
+
+    .metric-index-backdrop.open {
+      display: flex;
+    }
+
+    .metric-index-drawer {
+      width: min(1180px, 96vw);
+      height: 100vh;
+      background: #061326;
+      border-left: 1px solid rgba(56,189,248,.25);
+      box-shadow: -30px 0 80px rgba(0,0,0,.55);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .metric-index-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      padding: 16px 18px;
+      border-bottom: 1px solid rgba(56,189,248,.18);
+      background: linear-gradient(90deg, rgba(8,47,73,.92), rgba(2,6,23,.96));
+    }
+
+    .metric-index-title {
+      font-weight: 1000;
+      color: #e0f2fe;
+      letter-spacing: -.02em;
+      font-size: 20px;
+    }
+
+    .metric-index-subtitle {
+      color: #94a3b8;
+      font-size: 12px;
+      margin-top: 3px;
+    }
+
+    .metric-index-close {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      border: 1px solid rgba(56,189,248,.28);
+      background: rgba(15,23,42,.82);
+      color: #ffffff;
+      font-size: 24px;
+      line-height: 1;
+      cursor: pointer;
+      display: inline-grid;
+      place-items: center;
+    }
+
+    .metric-index-frame {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      background: #020617;
+      flex: 1 1 auto;
+    }
+
+    body.metric-index-locked {
+      overflow: hidden;
+    }
+
   </style>
 </head>
 
@@ -757,6 +875,7 @@
 
         <div>
           <div class="badge">MLB Hitter Projection Board</div>
+          <button class="metric-index-link" type="button" onclick="openMetricIndexPopout()">Metric Index</button>
           <div class="word-logo">
             <span>Pr</span>
             <span class="word-logo-ball"></span>
@@ -765,6 +884,9 @@
           <div class="subtitle">Daily hitter board powered by matchup probability, splits, lineup opportunity, and confidence.</div>
           <div class="model-statement">
             Live GitHub build reading <strong>data/prophit_latest.json</strong>. Pitcher BAA and Season AVG are mapped from the JSON fields already being written by the model.
+          </div>
+          <div class="model-run-stamp">
+            Latest Model Run: <span id="latestModelRun">Loading...</span>
           </div>
         </div>
       </div>
@@ -930,7 +1052,7 @@
         <div class="drawer-top">
           <div>
             <h2 class="drawer-title">PropHit Board Popout</h2>
-            <div style="color:#94a3b8;margin-top:8px;">Compact view based on yesterday's local popout columns.</div>
+            <div style="color:#94a3b8;margin-top:8px;">Expanded popout view using the same columns as the main board.</div>
           </div>
           <button class="close-btn" onclick="closeBoardPopout()">×</button>
         </div>
@@ -956,7 +1078,7 @@
       </div>
 
       <div class="table-scroll" style="max-height:78vh;">
-        <table style="min-width:1660px;">
+        <table style="min-width:3200px;">
           <thead id="popHead"></thead>
           <tbody id="popBody"></tbody>
         </table>
@@ -964,8 +1086,44 @@
     </aside>
   </div>
 
+
+  <div id="metricIndexBackdrop" class="metric-index-backdrop" onclick="closeMetricIndexPopout()">
+    <aside class="metric-index-drawer" onclick="event.stopPropagation()">
+      <div class="metric-index-header">
+        <div>
+          <div class="metric-index-title">PropHit Metric Index</div>
+          <div class="metric-index-subtitle">Definitions for board columns, scores, splits, pitcher metrics, risk factors, and run rules.</div>
+        </div>
+        <button class="metric-index-close" type="button" onclick="closeMetricIndexPopout()">×</button>
+      </div>
+      <iframe class="metric-index-frame" src="./metrics.html" title="PropHit Metric Index"></iframe>
+    </aside>
+  </div>
+
+
   <script>
     const DATA_URL = "./data/prophit_latest.json";
+
+    function openMetricIndexPopout() {
+      const backdrop = document.getElementById("metricIndexBackdrop");
+      if (!backdrop) return;
+      backdrop.classList.add("open");
+      document.body.classList.add("metric-index-locked");
+    }
+
+    function closeMetricIndexPopout() {
+      const backdrop = document.getElementById("metricIndexBackdrop");
+      if (!backdrop) return;
+      backdrop.classList.remove("open");
+      document.body.classList.remove("metric-index-locked");
+    }
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Escape") {
+        closeMetricIndexPopout();
+      }
+    });
+
     const PERF_URL = "./data/prophit_performance_summary.json";
 
     let allRows = [];
@@ -1009,26 +1167,8 @@
       ["confidence_score", "Conf Score", 115, "Confidence score."],
     ];
 
-    const popoutColumns = [
-      ["team", "Tm", 46],
-      ["opp", "Opp", 54],
-      ["game_time_et", "Time", 72],
-      ["order_display", "Ord", 44],
-      ["bats", "B", 34],
-      ["opp_pitcher", "Pitcher", 116],
-      ["opp_pitcher_hand", "H", 34],
-      ["pitcher_season_baa_allowed_vs_batter_hand", "SBAA", 58],
-      ["projected_ab", "AB", 48],
-      ["projected_hits", "Hits", 52],
-      ["season_market_avg", "S AVG", 58],
-      ["season_avg_vs_pitcher_hand", "VsH", 52],
-      ["model_avg", "M AVG", 58],
-      ["model_vs_market_avg_delta", "Δ", 50],
-      ["one_plus_hit_probability", "1+%", 58],
-      ["fair_odds_american", "Odds", 58],
-      ["hit_score", "Hit", 48],
-      ["confidence_score", "Conf", 50],
-    ];
+    const popoutColumns = columns;
+
 
     const stickyLeftByKey = {
       player: 86,
@@ -1859,10 +1999,23 @@
       const popBody = document.getElementById("popBody");
       if (!popHead || !popBody) return;
 
+      // Popout mirrors the main board:
+      // Lock column + same column keys, labels, widths, values, colors, links, and drilldown.
       popHead.innerHTML = `<tr>
-        <th style="width:80px;">Lock</th>
-        <th style="width:190px;">Player</th>
-        ${popoutColumns.map(([key, label, width]) => `<th style="width:${width}px;">${label}</th>`).join("")}
+        <th class="sticky-lock-header" style="width:86px;">Lock</th>
+        ${columns.map(([key, label, width, tooltip]) => {
+          const sticky = stickyKeys.includes(key);
+          const left = stickyLeftByKey[key];
+          const style = `width:${width}px;${sticky ? `left:${left}px;` : ""}`;
+          const cls = sticky ? "sticky-head" : "";
+          const active = sortKey === key ? (sortDir === "desc" ? "▼" : "▲") : "⌄";
+
+          return `<th class="${cls}" style="${style}" title="${tooltip || label}">
+            <button onclick="setSort('${key}')" style="background:transparent;border:0;color:${sortKey === key ? "#fff" : "#dbeafe"};font-weight:900;cursor:pointer;text-transform:uppercase;letter-spacing:.14em;font-size:11px;padding:0;">
+              ${label} ${active}
+            </button>
+          </th>`;
+        }).join("")}
       </tr>`;
 
       const q = (document.getElementById("popSearch")?.value || "").toLowerCase().trim();
@@ -1879,12 +2032,49 @@
         return true;
       });
 
+      if (!rows.length) {
+        popBody.innerHTML = `<tr><td colspan="${columns.length + 1}" style="padding:20px;">No visible plays meet the current popout filters.</td></tr>`;
+        return;
+      }
+
       popBody.innerHTML = rows.map((row, index) => {
         const rowKey = getRowKey(row, index);
-        return `<tr>
-          <td><button class="lock-btn ${lockedRows[rowKey] ? "active" : ""}" onclick="toggleRowLock('${rowKey.replace(/'/g, "\\'")}')"><span class="lock-dot"></span>${lockedRows[rowKey] ? "ON" : "LOCK"}</button></td>
-          <td><button class="player-btn" onclick="openDrawer(${currentRows.indexOf(row)})">${row.player || "—"}</button></td>
-          ${popoutColumns.map(([key]) => `<td style="color:${tableCellColor(row, key)};">${renderTableValue(row, key)}</td>`).join("")}
+        const locked = !!lockedRows[rowKey];
+
+        const cells = columns.map(([key, label, width]) => {
+          const sticky = stickyKeys.includes(key);
+          const left = stickyLeftByKey[key];
+          const style = `width:${width}px;color:${tableCellColor(row, key)};${sticky ? `left:${left}px;` : ""}`;
+          const cls = sticky ? "sticky-cell" : "";
+
+          if (key === "player") {
+            return `<td class="${cls}" style="${style}">
+              <div class="player-name-wrap">
+                <button class="player-btn" onclick="openDrawer(${currentRows.indexOf(row)})">${row.player || "—"}</button>
+                ${linkDots(row, "player")}
+              </div>
+            </td>`;
+          }
+
+          if (key === "opp_pitcher") {
+            return `<td class="${cls}" style="${style}">
+              <div class="pitcher-cell-wrap">
+                <span class="pitcher-name-text">${row.opp_pitcher || "—"}</span>
+                ${linkDots(row, "pitcher")}
+              </div>
+            </td>`;
+          }
+
+          return `<td class="${cls}" style="${style}" title="${label}: ${renderTableValue(row, key)}">${renderTableValue(row, key)}</td>`;
+        }).join("");
+
+        return `<tr class="${locked ? "locked-row" : ""}">
+          <td class="sticky-lock-cell" style="width:86px;">
+            <button class="lock-btn ${locked ? "active" : ""}" onclick="toggleRowLock('${rowKey.replace(/'/g, "\\'")}')">
+              <span class="lock-dot"></span>${locked ? "ON" : "LOCK"}
+            </button>
+          </td>
+          ${cells}
         </tr>`;
       }).join("");
     }
@@ -1970,6 +2160,16 @@
         if (!res.ok) throw new Error(`Unable to load ${DATA_URL}. Status: ${res.status}`);
 
         const json = await res.json();
+
+        const latestRunEl = document.getElementById("latestModelRun");
+        if (latestRunEl) {
+          latestRunEl.textContent =
+            json?.meta?.last_model_run_et ||
+            json?.meta?.last_run_et ||
+            json?.meta?.generated_at_et ||
+            "Not available in JSON";
+        }
+
         allRows = Array.isArray(json)
           ? json
           : Array.isArray(json.players)
@@ -1983,6 +2183,8 @@
         render();
       } catch (err) {
         console.error(err);
+        const latestRunEl = document.getElementById("latestModelRun");
+        if (latestRunEl) latestRunEl.textContent = "Unable to load";
         errorBox.innerHTML = `<div class="error">${err.message}</div>`;
         body.innerHTML = `<tr><td style="padding:20px;">No data loaded.</td></tr>`;
       }
