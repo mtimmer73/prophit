@@ -1,14 +1,442 @@
 {
-  "status": "live",
-  "updated_et": "2026-06-27 04:44:36 PM",
-  "target_date": "2026-06-27",
-  "total_players": 302,
-  "confirmed_starters": 198,
-  "confirmed_lineup_pct": 0.6556291390728477,
-  "locked_rows": 108,
-  "top_play_count": 36,
-  "avg_top_play_probability": 0.6909568063939484,
-  "avg_top_play_confidence": 89.57175363948652,
-  "best_bet_rank_score_avg": 46.76654031905948,
-  "note": "Full-day board. Started games remain visible as frozen pregame projections; only upcoming games refresh on reruns."
+  "updated_at": "2026-06-27 17:03:52 ET",
+  "source": "publish_prophit_live_json.py",
+  "all_time": {
+    "graded": 9875,
+    "hits": 4416,
+    "misses": 5459,
+    "hit_rate": 44.72,
+    "one_plus_hit_rate": 0.4472
+  },
+  "recent_10_days": {
+    "days": 10,
+    "graded": 151,
+    "hits": 95,
+    "misses": 56,
+    "hit_rate": 62.91,
+    "one_plus_hit_rate": 0.6291
+  },
+  "history": [
+    {
+      "date": "2025-06-05",
+      "graded": 15,
+      "hits": 11,
+      "misses": 4,
+      "hit_rate": 73.33
+    },
+    {
+      "date": "2026-04-29",
+      "graded": 18,
+      "hits": 12,
+      "misses": 6,
+      "hit_rate": 66.67
+    },
+    {
+      "date": "2026-04-30",
+      "graded": 285,
+      "hits": 130,
+      "misses": 155,
+      "hit_rate": 45.61
+    },
+    {
+      "date": "2026-05-01",
+      "graded": 381,
+      "hits": 172,
+      "misses": 209,
+      "hit_rate": 45.14
+    },
+    {
+      "date": "2026-05-02",
+      "graded": 389,
+      "hits": 184,
+      "misses": 205,
+      "hit_rate": 47.3
+    },
+    {
+      "date": "2026-05-03",
+      "graded": 387,
+      "hits": 179,
+      "misses": 208,
+      "hit_rate": 46.25
+    },
+    {
+      "date": "2026-05-04",
+      "graded": 309,
+      "hits": 138,
+      "misses": 171,
+      "hit_rate": 44.66
+    },
+    {
+      "date": "2026-05-05",
+      "graded": 336,
+      "hits": 137,
+      "misses": 199,
+      "hit_rate": 40.77
+    },
+    {
+      "date": "2026-05-06",
+      "graded": 388,
+      "hits": 153,
+      "misses": 235,
+      "hit_rate": 39.43
+    },
+    {
+      "date": "2026-05-07",
+      "graded": 259,
+      "hits": 124,
+      "misses": 135,
+      "hit_rate": 47.88
+    },
+    {
+      "date": "2026-05-08",
+      "graded": 389,
+      "hits": 158,
+      "misses": 231,
+      "hit_rate": 40.62
+    },
+    {
+      "date": "2026-05-09",
+      "graded": 361,
+      "hits": 156,
+      "misses": 205,
+      "hit_rate": 43.21
+    },
+    {
+      "date": "2026-05-10",
+      "graded": 389,
+      "hits": 148,
+      "misses": 241,
+      "hit_rate": 38.05
+    },
+    {
+      "date": "2026-05-11",
+      "graded": 154,
+      "hits": 60,
+      "misses": 94,
+      "hit_rate": 38.96
+    },
+    {
+      "date": "2026-05-12",
+      "graded": 386,
+      "hits": 166,
+      "misses": 220,
+      "hit_rate": 43.01
+    },
+    {
+      "date": "2026-05-13",
+      "graded": 388,
+      "hits": 162,
+      "misses": 226,
+      "hit_rate": 41.75
+    },
+    {
+      "date": "2026-05-14",
+      "graded": 284,
+      "hits": 119,
+      "misses": 165,
+      "hit_rate": 41.9
+    },
+    {
+      "date": "2026-05-15",
+      "graded": 389,
+      "hits": 166,
+      "misses": 223,
+      "hit_rate": 42.67
+    },
+    {
+      "date": "2026-05-16",
+      "graded": 387,
+      "hits": 175,
+      "misses": 212,
+      "hit_rate": 45.22
+    },
+    {
+      "date": "2026-05-17",
+      "graded": 387,
+      "hits": 178,
+      "misses": 209,
+      "hit_rate": 45.99
+    },
+    {
+      "date": "2026-05-18",
+      "graded": 360,
+      "hits": 169,
+      "misses": 191,
+      "hit_rate": 46.94
+    },
+    {
+      "date": "2026-05-19",
+      "graded": 383,
+      "hits": 163,
+      "misses": 220,
+      "hit_rate": 42.56
+    },
+    {
+      "date": "2026-05-20",
+      "graded": 388,
+      "hits": 168,
+      "misses": 220,
+      "hit_rate": 43.3
+    },
+    {
+      "date": "2026-05-21",
+      "graded": 180,
+      "hits": 71,
+      "misses": 109,
+      "hit_rate": 39.44
+    },
+    {
+      "date": "2026-05-22",
+      "graded": 358,
+      "hits": 151,
+      "misses": 207,
+      "hit_rate": 42.18
+    },
+    {
+      "date": "2026-05-23",
+      "graded": 363,
+      "hits": 141,
+      "misses": 222,
+      "hit_rate": 38.84
+    },
+    {
+      "date": "2026-05-24",
+      "graded": 390,
+      "hits": 164,
+      "misses": 226,
+      "hit_rate": 42.05
+    },
+    {
+      "date": "2026-05-25",
+      "graded": 337,
+      "hits": 143,
+      "misses": 194,
+      "hit_rate": 42.43
+    },
+    {
+      "date": "2026-05-26",
+      "graded": 294,
+      "hits": 185,
+      "misses": 109,
+      "hit_rate": 62.93
+    },
+    {
+      "date": "2026-05-27",
+      "graded": 21,
+      "hits": 12,
+      "misses": 9,
+      "hit_rate": 57.14
+    },
+    {
+      "date": "2026-05-28",
+      "graded": 10,
+      "hits": 4,
+      "misses": 6,
+      "hit_rate": 40.0
+    },
+    {
+      "date": "2026-05-29",
+      "graded": 22,
+      "hits": 11,
+      "misses": 11,
+      "hit_rate": 50.0
+    },
+    {
+      "date": "2026-05-30",
+      "graded": 22,
+      "hits": 17,
+      "misses": 5,
+      "hit_rate": 77.27
+    },
+    {
+      "date": "2026-06-01",
+      "graded": 14,
+      "hits": 9,
+      "misses": 5,
+      "hit_rate": 64.29
+    },
+    {
+      "date": "2026-06-02",
+      "graded": 22,
+      "hits": 12,
+      "misses": 10,
+      "hit_rate": 54.55
+    },
+    {
+      "date": "2026-06-03",
+      "graded": 21,
+      "hits": 13,
+      "misses": 8,
+      "hit_rate": 61.9
+    },
+    {
+      "date": "2026-06-04",
+      "graded": 14,
+      "hits": 11,
+      "misses": 3,
+      "hit_rate": 78.57
+    },
+    {
+      "date": "2026-06-05",
+      "graded": 21,
+      "hits": 9,
+      "misses": 12,
+      "hit_rate": 42.86
+    },
+    {
+      "date": "2026-06-06",
+      "graded": 22,
+      "hits": 16,
+      "misses": 6,
+      "hit_rate": 72.73
+    },
+    {
+      "date": "2026-06-07",
+      "graded": 20,
+      "hits": 10,
+      "misses": 10,
+      "hit_rate": 50.0
+    },
+    {
+      "date": "2026-06-08",
+      "graded": 7,
+      "hits": 7,
+      "misses": 0,
+      "hit_rate": 100.0
+    },
+    {
+      "date": "2026-06-09",
+      "graded": 23,
+      "hits": 15,
+      "misses": 8,
+      "hit_rate": 65.22
+    },
+    {
+      "date": "2026-06-10",
+      "graded": 22,
+      "hits": 14,
+      "misses": 8,
+      "hit_rate": 63.64
+    },
+    {
+      "date": "2026-06-11",
+      "graded": 13,
+      "hits": 11,
+      "misses": 2,
+      "hit_rate": 84.62
+    },
+    {
+      "date": "2026-06-12",
+      "graded": 21,
+      "hits": 14,
+      "misses": 7,
+      "hit_rate": 66.67
+    },
+    {
+      "date": "2026-06-13",
+      "graded": 22,
+      "hits": 10,
+      "misses": 12,
+      "hit_rate": 45.45
+    },
+    {
+      "date": "2026-06-14",
+      "graded": 18,
+      "hits": 11,
+      "misses": 7,
+      "hit_rate": 61.11
+    },
+    {
+      "date": "2026-06-15",
+      "graded": 16,
+      "hits": 7,
+      "misses": 9,
+      "hit_rate": 43.75
+    },
+    {
+      "date": "2026-06-16",
+      "graded": 21,
+      "hits": 12,
+      "misses": 9,
+      "hit_rate": 57.14
+    },
+    {
+      "date": "2026-06-17",
+      "graded": 18,
+      "hits": 13,
+      "misses": 5,
+      "hit_rate": 72.22
+    },
+    {
+      "date": "2026-06-18",
+      "graded": 10,
+      "hits": 6,
+      "misses": 4,
+      "hit_rate": 60.0
+    },
+    {
+      "date": "2026-06-19",
+      "graded": 18,
+      "hits": 13,
+      "misses": 5,
+      "hit_rate": 72.22
+    },
+    {
+      "date": "2026-06-20",
+      "graded": 17,
+      "hits": 9,
+      "misses": 8,
+      "hit_rate": 52.94
+    },
+    {
+      "date": "2026-06-21",
+      "graded": 18,
+      "hits": 13,
+      "misses": 5,
+      "hit_rate": 72.22
+    },
+    {
+      "date": "2026-06-22",
+      "graded": 18,
+      "hits": 10,
+      "misses": 8,
+      "hit_rate": 55.56
+    },
+    {
+      "date": "2026-06-23",
+      "graded": 17,
+      "hits": 14,
+      "misses": 3,
+      "hit_rate": 82.35
+    },
+    {
+      "date": "2026-06-24",
+      "graded": 21,
+      "hits": 11,
+      "misses": 10,
+      "hit_rate": 52.38
+    },
+    {
+      "date": "2026-06-25",
+      "graded": 11,
+      "hits": 8,
+      "misses": 3,
+      "hit_rate": 72.73
+    },
+    {
+      "date": "2026-06-26",
+      "graded": 19,
+      "hits": 11,
+      "misses": 8,
+      "hit_rate": 57.89
+    },
+    {
+      "date": "2026-06-27",
+      "graded": 2,
+      "hits": 0,
+      "misses": 2,
+      "hit_rate": 0.0
+    }
+  ],
+  "last_updated": "2026-06-27 17:03:50 ET"
 }
