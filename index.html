@@ -4423,7 +4423,7 @@
           <div class="combined-correlation-controls">
             <label>
               <span class="input-label">Min Combo</span>
-              <input id="combinedMinScore" type="number" value="70" min="0" max="100" onchange="renderCombinedCorrelationEdgeBoard()" oninput="renderCombinedCorrelationEdgeBoard()">
+              <input id="combinedMinScore" type="number" value="55" min="0" max="100" onchange="renderCombinedCorrelationEdgeBoard()" oninput="renderCombinedCorrelationEdgeBoard()">
             </label>
             <label>
               <span class="input-label">Min Player Corr</span>
@@ -4435,7 +4435,7 @@
             </label>
             <label>
               <span class="input-label">Min Player Sample</span>
-              <input id="combinedMinPlayerSample" type="number" value="1" min="0" onchange="renderCombinedCorrelationEdgeBoard()" oninput="renderCombinedCorrelationEdgeBoard()">
+              <input id="combinedMinPlayerSample" type="number" value="0" min="0" onchange="renderCombinedCorrelationEdgeBoard()" oninput="renderCombinedCorrelationEdgeBoard()">
             </label>
             <label>
               <span class="input-label">Min General Sample</span>
@@ -7597,17 +7597,49 @@ const COLUMN_TOOLTIPS = {
       const seen = new Set();
 
       return rows.map((row) => {
-        const signal = bestPlayerSignal(row);
-        const score = playerSpecificCorrelationScore(row, signal);
-        if (!signal || score === null) return null;
-        const playerKey = String(row.player || row.player_name || "").trim().toLowerCase();
+        const playerKey = normalizeCombinedPlayerName(row.player || row.player_name || "");
         if (!playerKey || seen.has(playerKey)) return null;
         seen.add(playerKey);
+
+        const realSignal = bestPlayerSignal(row);
+        const hitScore = combinedGetHitScore(row);
+        const todayProb = combinedPct(row.one_plus_hit_probability);
+        const confidence = num(row.confidence_score);
+        const projectedHits = num(row.projected_hits);
+        const fairOdds = num(getFairOdds(row));
+        const order = toNum(getOrder(row));
+        const historyCount = samePlayerRows(row).length;
+
+        const fallbackScore =
+          hitScore * 1.05 +
+          (todayProb !== null ? todayProb * 0.45 : 0) +
+          projectedHits * 7 +
+          confidence * 0.12 +
+          (fairOdds && fairOdds < 0 ? Math.min(10, Math.abs(fairOdds) / 30) : 0) +
+          (order !== null ? Math.max(0, 7 - order) * 1.1 : 0) +
+          Math.min(historyCount, 12) * 0.4;
+
+        const signal = realSignal || {
+          label: "Fallback player signal",
+          hitRate: null,
+          opportunities: 0,
+          hits: 0,
+          misses: 0,
+          source: "fallback",
+          reason: historyCount
+            ? `${historyCount} graded row(s) exist for this player, but no close same-player profile matched today's row. Using Hit Score fallback instead of hiding.`
+            : "No same-player graded history yet. Using today's Hit Score fallback instead of hiding.",
+          rel: { label: "Fallback", cls: "warn" }
+        };
+
+        const score = realSignal ? playerSpecificCorrelationScore(row, realSignal) : fallbackScore;
+
         return {
           row,
           signal,
-          score,
-          historyCount: samePlayerRows(row).length,
+          score: score === null ? fallbackScore : score,
+          historyCount,
+          isFallback: !realSignal,
         };
       })
       .filter(Boolean)
@@ -7953,14 +7985,49 @@ const COLUMN_TOOLTIPS = {
       renderCombinedCorrelationEdgeBoard();
     }
 
+    function combinedSafeSample(value) {
+      const n = Number(value);
+      return Number.isFinite(n) && n > 0 ? n : 0;
+    }
+
+    function combinedSampleTrust(sample, fullTrustAt = 10) {
+      return Math.max(0, Math.min(1, combinedSafeSample(sample) / fullTrustAt));
+    }
+
+    function normalizeCombinedPlayerName(name) {
+      return String(name || "")
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[.'’]/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function combinedGetHitScore(row) {
+      return combinedClampScore(
+        row?.hitScore ??
+        row?.hit_score ??
+        row?.score ??
+        row?.model_score ??
+        row?.overall_score ??
+        50
+      );
+    }
+
+    function combinedSignalPct(signal) {
+      const raw = signal?.hitRatePct ?? signal?.corr ?? signal?.rate ?? signal?.hit_rate ?? signal?.success_rate;
+      return combinedPct(raw);
+    }
+
     function findGeneralCorrelationSignal(row) {
-      const directCorr = combinedPct(row.generalCorrelation ?? row.general_correlation ?? row.generalCorr ?? row.general_corr ?? row.model_wide_correlation ?? row.general_hit_rate);
-      const directSample = toNum(row.generalCorrelationSample ?? row.general_correlation_sample ?? row.generalCorrSample ?? row.general_corr_sample ?? row.model_wide_sample ?? row.general_sample);
+      const directCorr = combinedPct(row.generalCorrelation ?? row.general_correlation ?? row.generalCorr ?? row.general_corr ?? row.board_correlation ?? row.general_hit_rate);
+      const directSample = toNum(row.generalCorrelationSample ?? row.general_correlation_sample ?? row.generalCorrSample ?? row.general_corr_sample ?? row.board_correlation_sample ?? row.general_sample);
       if (directCorr !== null && directSample !== null) {
         return {
           label: row.general_correlation_label || row.general_signal || "Model-wide correlation",
           hitRatePct: combinedClampScore(directCorr),
-          opportunities: directSample,
+          opportunities: combinedSafeSample(directSample),
           source: "direct",
           reason: row.general_correlation_reason || row.general_reason || "Direct model-wide correlation value from today's row."
         };
@@ -7987,8 +8054,8 @@ const COLUMN_TOOLTIPS = {
       const best = matches[0];
       return {
         label: best.label || "Top 5 board-wide signal",
-        hitRatePct: best.hitRate === null ? combinedPct(row.one_plus_hit_probability) : combinedClampScore(best.hitRate * 100),
-        opportunities: best.opportunities || 0,
+        hitRatePct: best.hitRate === null ? null : combinedClampScore(best.hitRate * 100),
+        opportunities: combinedSafeSample(best.opportunities),
         source: best.source || "board",
         reason: best.label || "Matched one of the board-wide Top 5 correlation profiles."
       };
@@ -8000,7 +8067,7 @@ const COLUMN_TOOLTIPS = {
         return {
           label: signal.label || "Best same-player signal",
           hitRatePct: combinedClampScore(signal.hitRate * 100),
-          opportunities: signal.opportunities || 0,
+          opportunities: combinedSafeSample(signal.opportunities),
           hits: signal.hits || 0,
           misses: signal.misses || 0,
           source: signal.source || "player",
@@ -8014,7 +8081,7 @@ const COLUMN_TOOLTIPS = {
         return {
           label: row.player_correlation_label || row.player_signal || "Player-specific correlation",
           hitRatePct: combinedClampScore(directCorr),
-          opportunities: directSample,
+          opportunities: combinedSafeSample(directSample),
           hits: null,
           misses: null,
           source: "direct",
@@ -8025,60 +8092,97 @@ const COLUMN_TOOLTIPS = {
       return null;
     }
 
-    function calculateCombinedCorrelationScore(playerPct, generalPct, hitScore, playerSample) {
-      const playerCorr = combinedClampScore(playerPct);
-      const generalCorr = combinedClampScore(generalPct);
+    function calculateCombinedCorrelationScore(playerPct, generalPct, hitScore, playerSample, generalSample) {
       const baseScore = combinedClampScore(hitScore);
-      const sample = Number(playerSample || 0);
-      let playerWeight = 0.25;
-      let generalWeight = 0.50;
-      let hitWeight = 0.25;
+      const pTrust = combinedSampleTrust(playerSample, 8);
+      const gTrust = combinedSampleTrust(generalSample, 20);
 
-      if (sample >= 25) {
-        playerWeight = 0.60;
-        generalWeight = 0.25;
-        hitWeight = 0.15;
-      } else if (sample >= 10) {
-        playerWeight = 0.45;
-        generalWeight = 0.35;
-        hitWeight = 0.20;
-      }
+      const playerScore = playerPct === null || playerPct === undefined
+        ? baseScore * 0.92
+        : combinedClampScore(playerPct) * pTrust + baseScore * (1 - pTrust);
 
-      return Math.round(playerCorr * playerWeight + generalCorr * generalWeight + baseScore * hitWeight);
+      const generalScore = generalPct === null || generalPct === undefined
+        ? baseScore * 0.88
+        : combinedClampScore(generalPct) * gTrust + baseScore * (1 - gTrust);
+
+      const boost = combinedAgreementBoost(baseScore, playerPct, generalPct);
+      const penalty = combinedRiskPenalty(playerSample, generalSample, playerPct, generalPct);
+
+      return Math.round(combinedClampScore(
+        baseScore * 0.50 +
+        playerScore * 0.30 +
+        generalScore * 0.20 +
+        boost -
+        penalty
+      ));
     }
 
-    function combinedTier(score) {
-      if (score >= 85) return "Elite";
-      if (score >= 80) return "Strong";
-      if (score >= 74) return "Playable";
-      if (score >= 68) return "Risky";
-      return "Avoid";
+    function combinedAgreementBoost(hitScore, playerPct, generalPct) {
+      let boost = 0;
+      if (hitScore >= 75) boost += 2;
+      if (playerPct !== null && playerPct >= 70 && hitScore >= 70) boost += 3;
+      if (generalPct !== null && generalPct >= 70 && hitScore >= 70) boost += 2;
+      if (playerPct !== null && generalPct !== null && playerPct >= 70 && generalPct >= 70) boost += 3;
+      return boost;
     }
 
-    function combinedAgreement(playerPct, generalPct, playerSample) {
-      const p = combinedClampScore(playerPct);
-      const g = combinedClampScore(generalPct);
-      const diff = Math.abs(p - g);
-      if ((playerSample || 0) < 5) return "Small Sample";
-      if (p >= 75 && g >= 70 && diff <= 15) return "Strong";
-      if (p >= 80 && g < 65) return "Player Lean";
-      if (g >= 80 && p < 65) return "Model Lean";
-      if (diff >= 25) return "Mixed";
-      return "Neutral";
+    function combinedRiskPenalty(playerSample, generalSample, playerPct, generalPct) {
+      let penalty = 0;
+      if (combinedSafeSample(playerSample) === 0 && playerPct === null) penalty += 2;
+      if (combinedSafeSample(generalSample) === 0 && generalPct === null) penalty += 1.5;
+      if (playerSample > 0 && playerSample < 3) penalty += 2;
+      if (generalSample > 0 && generalSample < 5) penalty += 1;
+      if (playerPct !== null && playerPct < 50) penalty += 4;
+      if (generalPct !== null && generalPct < 50) penalty += 2;
+      return penalty;
+    }
+
+    function combinedTier(score, playerSample = 0, generalSample = 0) {
+      if (score >= 85 && playerSample >= 3) return "Elite";
+      if (score >= 78) return "Strong";
+      if (score >= 70) return "Playable";
+      if (score >= 62) return "Lean";
+      return "Watch";
+    }
+
+    function combinedAgreement(playerPct, generalPct, hitScore) {
+      const signals = [];
+      if (hitScore >= 70) signals.push("Hit Score");
+      if (playerPct !== null && playerPct >= 70) signals.push("Player Corr");
+      if (generalPct !== null && generalPct >= 70) signals.push("General Corr");
+      if (signals.length >= 3) return "Full Agreement";
+      if (signals.length === 2) return "Partial Agreement";
+      if (signals.length === 1) return `${signals[0]} Only`;
+      return "Weak Agreement";
     }
 
     function combinedRisk(score, playerPct, generalPct, playerSample, generalSample) {
-      if ((playerSample || 0) < 5) return "Low player sample";
-      if ((generalSample || 0) < 12) return "Low general sample";
-      if (score >= 82 && playerPct >= 75 && generalPct >= 70) return "Parlay eligible";
-      if (playerPct >= 85 && generalPct < 60) return "Player-only trend";
-      if (generalPct >= 85 && playerPct < 60) return "Model-only trend";
-      if (score < 68) return "Avoid";
-      return "Lean only";
+      const pSample = combinedSafeSample(playerSample);
+      const gSample = combinedSafeSample(generalSample);
+      if (pSample === 0 && gSample === 0) return "Model Only";
+      if (pSample < 3 && gSample < 5) return "Thin Sample";
+      if (playerPct !== null && playerPct < 50) return "Player Conflict";
+      if (generalPct !== null && generalPct < 50) return "General Conflict";
+      if (score >= 82 && playerPct !== null && playerPct >= 70 && generalPct !== null && generalPct >= 70) return "Parlay eligible";
+      return "Normal";
     }
 
     function combinedClassName(value) {
       return String(value || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    }
+
+    function combinedDisplayPct(value) {
+      return value === null || value === undefined ? "Fallback" : `${fmtNum(value, 1)}%`;
+    }
+
+    function buildCombinedReason(item) {
+      const playerText = item.playerSignal
+        ? `${item.playerSignal.label} (${fmtNum(item.playerPct, 1)}% / ${item.playerSample})`
+        : "player fallback used";
+      const generalText = item.generalSignal
+        ? `${item.generalSignal.label} (${fmtNum(item.generalPct, 1)}% / ${item.generalSample})`
+        : "general fallback used";
+      return `Hit Score ${fmtNum(item.hitScore, 1)} · ${playerText} · ${generalText}`;
     }
 
     function buildCombinedCorrelationRows() {
@@ -8087,26 +8191,24 @@ const COLUMN_TOOLTIPS = {
       const output = [];
 
       rows.forEach(row => {
-        const playerKey = String(row.player || row.player_name || "").trim().toLowerCase();
+        const playerKey = normalizeCombinedPlayerName(row.player || row.player_name || "");
         if (!playerKey || seen.has(playerKey)) return;
         seen.add(playerKey);
 
         const playerSignal = findPlayerCorrelationSignal(row);
         const generalSignal = findGeneralCorrelationSignal(row);
-        if (!playerSignal && !generalSignal) return;
-
-        const hitScore = num(row.hit_score);
-        const playerPct = playerSignal ? playerSignal.hitRatePct : 0;
-        const generalPct = generalSignal ? generalSignal.hitRatePct : combinedPct(row.one_plus_hit_probability) || 0;
-        const playerSample = playerSignal ? (playerSignal.opportunities || 0) : 0;
-        const generalSample = generalSignal ? (generalSignal.opportunities || 0) : 0;
-        const comboScore = calculateCombinedCorrelationScore(playerPct, generalPct, hitScore, playerSample);
-        const tier = combinedTier(comboScore);
-        const agreement = combinedAgreement(playerPct, generalPct, playerSample);
+        const hitScore = combinedGetHitScore(row);
+        const playerPct = playerSignal ? combinedSignalPct(playerSignal) : null;
+        const generalPct = generalSignal ? combinedSignalPct(generalSignal) : null;
+        const playerSample = playerSignal ? combinedSafeSample(playerSignal.opportunities) : 0;
+        const generalSample = generalSignal ? combinedSafeSample(generalSignal.opportunities) : 0;
+        const comboScore = calculateCombinedCorrelationScore(playerPct, generalPct, hitScore, playerSample, generalSample);
+        const tier = combinedTier(comboScore, playerSample, generalSample);
+        const agreement = combinedAgreement(playerPct, generalPct, hitScore);
         const risk = combinedRisk(comboScore, playerPct, generalPct, playerSample, generalSample);
         const visibleIndex = currentRows.findIndex(r => getRowKey(r) === getRowKey(row));
 
-        output.push({
+        const item = {
           row,
           visibleIndex,
           playerSignal,
@@ -8120,31 +8222,42 @@ const COLUMN_TOOLTIPS = {
           tier,
           agreement,
           risk,
-          reason: `${playerSignal ? playerSignal.label : "No same-player match"} + ${generalSignal ? generalSignal.label : "no board-wide match"}`
-        });
+          reason: ""
+        };
+        item.reason = buildCombinedReason(item);
+        output.push(item);
       });
 
       return output.sort((a, b) => {
         if (b.comboScore !== a.comboScore) return b.comboScore - a.comboScore;
-        if (b.playerPct !== a.playerPct) return b.playerPct - a.playerPct;
-        if (b.generalPct !== a.generalPct) return b.generalPct - a.generalPct;
+        const ap = a.playerPct === null ? -1 : a.playerPct;
+        const bp = b.playerPct === null ? -1 : b.playerPct;
+        if (bp !== ap) return bp - ap;
+        const ag = a.generalPct === null ? -1 : a.generalPct;
+        const bg = b.generalPct === null ? -1 : b.generalPct;
+        if (bg !== ag) return bg - ag;
         return b.hitScore - a.hitScore;
       });
     }
 
     function filteredCombinedCorrelationRows() {
-      const minScore = combinedReadNumber("combinedMinScore", 70);
+      const minScore = combinedReadNumber("combinedMinScore", 55);
       const minPlayer = combinedReadNumber("combinedMinPlayerCorr", 0);
       const minGeneral = combinedReadNumber("combinedMinGeneralCorr", 0);
-      const minPlayerSample = combinedReadNumber("combinedMinPlayerSample", 1);
+      const minPlayerSample = combinedReadNumber("combinedMinPlayerSample", 0);
       const minGeneralSample = combinedReadNumber("combinedMinGeneralSample", 0);
 
       return buildCombinedCorrelationRows().filter(item => {
         if (item.comboScore < minScore) return false;
-        if (item.playerPct < minPlayer) return false;
-        if (item.generalPct < minGeneral) return false;
-        if (item.playerSample < minPlayerSample) return false;
-        if (item.generalSample < minGeneralSample) return false;
+
+        // Corr filters only apply when a real correlation exists.
+        // Missing/fallback correlations never auto-hide the player.
+        if (item.playerPct !== null && item.playerPct < minPlayer) return false;
+        if (item.generalPct !== null && item.generalPct < minGeneral) return false;
+
+        // Sample filters only become strict when the user sets them above zero.
+        if (minPlayerSample > 0 && item.playerSample < minPlayerSample) return false;
+        if (minGeneralSample > 0 && item.generalSample < minGeneralSample) return false;
         return true;
       });
     }
@@ -8158,19 +8271,21 @@ const COLUMN_TOOLTIPS = {
       const rows = filteredCombinedCorrelationRows();
       const visibleRows = combinedCorrelationMode === "all" ? rows : rows.slice(0, 5);
       const gradedCount = (validationRows || []).filter(row => gradedHitValue(row) !== null).length;
+      const totalFuture = (allRows || []).filter(row => isFutureEligibleGame(row)).length;
 
       if (!rows.length) {
         cardsEl.innerHTML = "";
-        tableBody.innerHTML = `<tr><td colspan="14">No combined correlation plays meet the current filters yet.</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="14">No combined plays meet the current Min Combo. Lower Min Combo to 45–50 to show more model-fallback plays.</td></tr>`;
         summary.textContent = gradedCount
-          ? `No combined plays match the filters. Try lowering Min Combo, Min Player Sample, or Min General Sample. ${gradedCount} graded rows are available.`
-          : "Combined plays need graded history for player-specific and board-wide correlation signals. The board will populate after validation rows load.";
+          ? `No combined plays match Min Combo yet, but ${gradedCount} graded rows and ${totalFuture} current rows are loaded. Missing correlations are now fallback-scored instead of hidden.`
+          : "Current rows are loaded, but graded validation history has not loaded yet. Missing correlations will still use fallback scoring once today rows are available.";
         return;
       }
 
       const avgCombo = rows.reduce((sum, item) => sum + item.comboScore, 0) / rows.length;
+      const fallbackCount = rows.filter(item => !item.playerSignal || !item.generalSignal).length;
       const parlayCount = rows.filter(item => item.risk === "Parlay eligible").length;
-      summary.textContent = `Showing ${visibleRows.length} of ${rows.length} combined plays. Average Combo Score: ${fmtNum(avgCombo, 1)}. Parlay eligible: ${parlayCount}.`;
+      summary.textContent = `Showing ${visibleRows.length} of ${rows.length} combined plays. Average Combo Score: ${fmtNum(avgCombo, 1)}. Fallback used on ${fallbackCount}. Parlay eligible: ${parlayCount}.`;
 
       cardsEl.innerHTML = rows.slice(0, 5).map((item, index) => {
         const row = item.row;
@@ -8194,8 +8309,8 @@ const COLUMN_TOOLTIPS = {
               <span class="correlation-pill">${item.risk}</span>
             </div>
             <div class="combined-edge-reason">
-              <strong>Player:</strong> ${fmtNum(item.playerPct, 1)}% over ${item.playerSample} opps<br>
-              <strong>General:</strong> ${fmtNum(item.generalPct, 1)}% over ${item.generalSample} opps<br>
+              <strong>Player:</strong> ${combinedDisplayPct(item.playerPct)} over ${item.playerSample} opps<br>
+              <strong>General:</strong> ${combinedDisplayPct(item.generalPct)} over ${item.generalSample} opps<br>
               <strong>Reason:</strong> ${item.reason}
             </div>
             ${openButton}
@@ -8214,9 +8329,9 @@ const COLUMN_TOOLTIPS = {
             <td>${row.team || "—"}</td>
             <td>${formatOpponent(row)}</td>
             <td>${fmtNum(item.hitScore, 1)}</td>
-            <td>${fmtNum(item.playerPct, 1)}%</td>
+            <td>${combinedDisplayPct(item.playerPct)}</td>
             <td>${item.playerSample}</td>
-            <td>${fmtNum(item.generalPct, 1)}%</td>
+            <td>${combinedDisplayPct(item.generalPct)}</td>
             <td>${item.generalSample}</td>
             <td class="combined-score-cell">${item.comboScore}</td>
             <td><span class="correlation-pill ${tierClass}">${item.tier}</span></td>
