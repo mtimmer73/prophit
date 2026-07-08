@@ -3295,6 +3295,99 @@
     }
 
 
+
+
+    /* Best Player-Specific Correlations Today */
+    .player-correlation-dashboard {
+      border-color: rgba(52,211,153,.22);
+      background: linear-gradient(135deg, rgba(16,185,129,.09), rgba(14,165,233,.07));
+    }
+
+    .player-correlation-card {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .player-correlation-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: rgba(52,211,153,.72);
+    }
+
+    .player-correlation-player {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .player-correlation-name {
+      color: #ffffff;
+      font-size: 17px;
+      font-weight: 1000;
+      line-height: 1.15;
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+
+    .player-correlation-context {
+      color: #94a3b8;
+      font-size: 12px;
+      font-weight: 800;
+      margin-top: 3px;
+    }
+
+    .player-correlation-rank {
+      display: inline-grid;
+      place-items: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      border: 1px solid rgba(52,211,153,.35);
+      background: rgba(16,185,129,.14);
+      color: #bbf7d0;
+      font-size: 12px;
+      font-weight: 1000;
+      flex: 0 0 auto;
+    }
+
+    .player-correlation-signal {
+      color: #e0f2fe;
+      font-size: 12px;
+      font-weight: 1000;
+      line-height: 1.3;
+      margin: 8px 0 10px;
+    }
+
+    .player-correlation-reason {
+      color: #94a3b8;
+      font-size: 12px;
+      line-height: 1.45;
+      margin-top: 10px;
+    }
+
+    .player-correlation-open {
+      border: 1px solid rgba(56,189,248,.22);
+      background: rgba(14,165,233,.10);
+      color: #bae6fd;
+      border-radius: 999px;
+      padding: 7px 9px;
+      font-size: 11px;
+      font-weight: 1000;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .player-correlation-open:hover {
+      background: rgba(14,165,233,.20);
+    }
+
+
     /* Dynamic Correlation Dashboard popout */
     .correlation-more-btn {
       margin-top: 8px;
@@ -3839,278 +3932,160 @@
 
 
 
-    /* Combined Correlation Edge Board */
-    .combined-edge-dashboard {
-      margin: 0 0 18px;
-      padding: 18px;
-      border-radius: 18px;
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(2, 6, 23, 0.96));
-      border: 1px solid rgba(34, 197, 94, 0.28);
-      box-shadow: 0 18px 38px rgba(0, 0, 0, 0.24);
+    /* ============================================================
+       Combined Correlation Edge Board
+       Blends player-specific same-player signals with model-wide
+       Top 5 correlation patterns and the base Hit Score.
+       ============================================================ */
+
+    .combined-correlation-dashboard {
+      border-color: rgba(52,211,153,.24);
+      background: linear-gradient(180deg, rgba(6,78,59,.18), rgba(15,23,42,.74));
     }
 
-    .combined-edge-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 16px;
-      margin-bottom: 14px;
-    }
-
-    .combined-edge-title {
-      font-size: 1.05rem;
-      font-weight: 900;
-      color: #f8fafc;
-      letter-spacing: 0.01em;
-    }
-
-    .combined-edge-subtitle {
-      margin-top: 4px;
-      font-size: 0.82rem;
-      color: #cbd5e1;
-      max-width: 920px;
-      line-height: 1.45;
-    }
-
-    .combined-edge-actions {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-    }
-
-    .combined-edge-filters {
+    .combined-correlation-controls {
       display: grid;
-      grid-template-columns: repeat(5, minmax(120px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(132px, 1fr));
       gap: 10px;
-      margin: 12px 0 14px;
+      margin: 14px 0 12px;
     }
 
-    .combined-edge-filter {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      color: #cbd5e1;
-      font-size: 0.72rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
+    .combined-correlation-controls label {
+      min-width: 0;
     }
 
-    .combined-edge-filter input {
-      background: rgba(2, 6, 23, 0.9);
-      color: #f8fafc;
-      border: 1px solid rgba(148, 163, 184, 0.32);
-      border-radius: 10px;
-      padding: 8px 9px;
-      font-size: 0.85rem;
-    }
-
-    .combined-edge-summary {
-      margin: 8px 0 14px;
-      padding: 10px 12px;
+    .combined-correlation-controls input {
+      padding: 9px 10px;
       border-radius: 12px;
-      background: rgba(2, 6, 23, 0.72);
-      border: 1px solid rgba(148, 163, 184, 0.18);
-      color: #cbd5e1;
-      font-size: 0.82rem;
-      line-height: 1.45;
+      font-size: 13px;
     }
 
-    .combined-edge-grid {
+    .combined-correlation-cards {
       display: grid;
-      grid-template-columns: repeat(5, minmax(170px, 1fr));
+      grid-template-columns: repeat(5, minmax(180px, 1fr));
       gap: 10px;
-      margin-bottom: 16px;
+      margin-top: 12px;
     }
 
     .combined-edge-card {
-      border-radius: 15px;
-      padding: 12px;
-      background: rgba(2, 6, 23, 0.82);
-      border: 1px solid rgba(148, 163, 184, 0.22);
-      min-height: 174px;
+      border: 1px solid rgba(56,189,248,.16);
+      background: rgba(2,6,23,.50);
+      border-radius: 18px;
+      padding: 14px;
+      min-width: 0;
+      overflow: hidden;
     }
 
     .combined-edge-card.elite {
-      border-color: rgba(34, 197, 94, 0.78);
-      background: linear-gradient(180deg, rgba(34, 197, 94, 0.17), rgba(2, 6, 23, 0.86));
+      border-color: rgba(52,211,153,.68);
+      background: linear-gradient(180deg, rgba(52,211,153,.18), rgba(2,6,23,.52));
+      box-shadow: 0 14px 34px rgba(16,185,129,.10);
     }
 
-    .combined-edge-card.strong {
-      border-color: rgba(59, 130, 246, 0.70);
-    }
-
-    .combined-edge-card.playable {
-      border-color: rgba(234, 179, 8, 0.66);
-    }
-
+    .combined-edge-card.strong { border-color: rgba(96,165,250,.55); }
+    .combined-edge-card.playable { border-color: rgba(251,191,36,.45); }
     .combined-edge-card.risky,
-    .combined-edge-card.avoid {
-      border-color: rgba(248, 113, 113, 0.66);
+    .combined-edge-card.avoid { border-color: rgba(251,113,133,.48); }
+
+    .combined-edge-topline {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      align-items: flex-start;
     }
 
     .combined-edge-rank {
-      font-size: 0.72rem;
       color: #94a3b8;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    .combined-edge-player {
-      margin-top: 3px;
-      color: #f8fafc;
-      font-size: 0.98rem;
+      font-size: 11px;
       font-weight: 900;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .combined-edge-meta {
-      margin-top: 2px;
-      color: #cbd5e1;
-      font-size: 0.76rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
     }
 
     .combined-edge-score {
-      margin-top: 8px;
-      color: #f8fafc;
-      font-size: 1.75rem;
+      font-size: 34px;
       line-height: 1;
-      font-weight: 950;
+      font-weight: 1000;
+      color: #ffffff;
+      text-align: right;
     }
 
-    .combined-edge-score-label {
-      margin-top: 1px;
+    .combined-edge-player {
+      margin-top: 6px;
+      color: #ffffff;
+      font-size: 18px;
+      line-height: 1.08;
+      font-weight: 1000;
+      overflow-wrap: anywhere;
+    }
+
+    .combined-edge-context {
+      margin-top: 4px;
       color: #94a3b8;
-      font-size: 0.70rem;
+      font-size: 12px;
       font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      line-height: 1.35;
     }
 
-    .combined-edge-detail {
-      margin-top: 8px;
+    .combined-edge-meta {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .combined-edge-reason {
+      margin-top: 10px;
       color: #cbd5e1;
-      font-size: 0.73rem;
-      line-height: 1.38;
+      font-size: 12px;
+      line-height: 1.45;
     }
 
-    .combined-edge-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      border-radius: 999px;
-      padding: 3px 8px;
-      margin: 7px 4px 0 0;
-      font-size: 0.70rem;
-      font-weight: 900;
-      white-space: nowrap;
-    }
-
-    .combined-edge-badge.elite,
-    .combined-edge-badge.strong,
-    .combined-edge-badge.parlay-eligible {
-      background: rgba(34, 197, 94, 0.16);
-      color: #bbf7d0;
-      border: 1px solid rgba(34, 197, 94, 0.30);
-    }
-
-    .combined-edge-badge.playable,
-    .combined-edge-badge.player-lean,
-    .combined-edge-badge.model-lean,
-    .combined-edge-badge.lean-only,
-    .combined-edge-badge.neutral {
-      background: rgba(234, 179, 8, 0.16);
-      color: #fde68a;
-      border: 1px solid rgba(234, 179, 8, 0.28);
-    }
-
-    .combined-edge-badge.risky,
-    .combined-edge-badge.avoid,
-    .combined-edge-badge.low-sample,
-    .combined-edge-badge.mixed,
-    .combined-edge-badge.small-sample,
-    .combined-edge-badge.player-only-trend,
-    .combined-edge-badge.model-only-trend {
-      background: rgba(248, 113, 113, 0.16);
-      color: #fecaca;
-      border: 1px solid rgba(248, 113, 113, 0.28);
+    .combined-edge-open {
+      margin-top: 11px;
+      width: 100%;
+      border-radius: 12px;
+      padding: 9px 10px;
+      font-size: 12px;
     }
 
     .combined-edge-table-wrap {
       overflow-x: auto;
-      border-radius: 12px;
-      border: 1px solid rgba(148, 163, 184, 0.14);
+      margin-top: 14px;
+      border: 1px solid rgba(56,189,248,.12);
+      border-radius: 18px;
     }
 
     .combined-edge-table {
       width: 100%;
-      border-collapse: collapse;
-      font-size: 0.79rem;
       min-width: 1180px;
+      table-layout: auto;
     }
 
     .combined-edge-table th,
     .combined-edge-table td {
-      padding: 9px 10px;
-      border-bottom: 1px solid rgba(148, 163, 184, 0.14);
-      text-align: left;
       white-space: nowrap;
-      color: #e2e8f0;
+      padding: 11px 10px;
     }
 
-    .combined-edge-table th {
-      color: #94a3b8;
-      background: rgba(15, 23, 42, 0.98);
-      font-weight: 900;
-      position: sticky;
-      top: 0;
-      z-index: 1;
-    }
-
-    .combined-edge-table td.reason-cell {
+    .combined-edge-table td.combined-reason-cell {
       white-space: normal;
-      min-width: 290px;
+      min-width: 260px;
       line-height: 1.35;
     }
 
-    .combined-edge-score-cell {
-      font-weight: 950;
-      color: #f8fafc !important;
-    }
-
-    .combined-edge-empty {
-      padding: 18px !important;
-      text-align: center !important;
-      color: #94a3b8 !important;
+    .combined-score-cell {
+      color: #ffffff;
+      font-weight: 1000;
+      font-size: 16px;
     }
 
     @media (max-width: 1200px) {
-      .combined-edge-grid {
-        grid-template-columns: repeat(2, minmax(170px, 1fr));
-      }
-
-      .combined-edge-filters {
-        grid-template-columns: repeat(2, minmax(120px, 1fr));
-      }
+      .combined-correlation-cards { grid-template-columns: repeat(2, minmax(180px, 1fr)); }
     }
 
-    @media (max-width: 680px) {
-      .combined-edge-header {
-        flex-direction: column;
-      }
-
-      .combined-edge-actions {
-        justify-content: flex-start;
-      }
-
-      .combined-edge-grid,
-      .combined-edge-filters {
-        grid-template-columns: 1fr;
-      }
+    @media (max-width: 640px) {
+      .combined-correlation-cards { grid-template-columns: 1fr; }
     }
 
   </style>
@@ -4404,50 +4379,75 @@
     </div>
 
     <section class="table-wrap">
-
-        <div class="combined-edge-dashboard">
-          <div class="combined-edge-header">
+<div class="correlation-dashboard">
+          <div class="correlation-header">
             <div>
-              <div class="combined-edge-title">Top 5 Combined Correlation Plays</div>
-              <div class="combined-edge-subtitle">
-                Blends player-specific graded history, board-wide correlation signals, and base Hit Score into one Combo Score. This is designed to identify the strongest 3–4 legs before building a parlay.
+              <div class="correlation-title">Top 5 Correlation Board</div>
+              <div class="correlation-subtitle">
+                Model-driven multi-point patterns from graded history. The board now ranks the five strongest signal profiles instead of showing a long list. Filter Lab tests criteria you pick; this board surfaces the best combinations automatically.
               </div>
             </div>
-            <div class="combined-edge-actions">
-              <button id="combinedTop5Btn" class="chip active" type="button" onclick="setCombinedEdgeMode('top5')">Top 5</button>
-              <button id="combinedAllBtn" class="chip" type="button" onclick="setCombinedEdgeMode('all')">Show All</button>
-              <button class="chip" type="button" onclick="renderCombinedEdgeBoard()">Refresh Combo Board</button>
+
+            <div class="correlation-actions">
+              <select id="correlationWindow" class="correlation-select" onchange="renderCorrelationDashboard()">
+                <option value="7">Last 7 Days</option>
+                <option value="14">Last 14 Days</option>
+                <option value="all">All Graded</option>
+              </select>
+              <button class="chip" onclick="renderCorrelationDashboard()">Refresh Correlations</button>
             </div>
           </div>
 
-          <div class="combined-edge-filters">
-            <label class="combined-edge-filter">
-              Min Combo Score
-              <input id="combinedMinScore" type="number" min="0" max="100" value="70" oninput="renderCombinedEdgeBoard()">
+          <div id="correlationSummary" class="correlation-empty">
+            Showing the top 5 graded correlation profiles. Multi-point signals combine opportunity, probability, splits, pitcher contact profile, confidence, value, and recent form.
+          </div>
+
+          <div id="correlationGrid" class="correlation-grid"></div>
+        </div>
+
+        <div class="correlation-dashboard combined-correlation-dashboard">
+          <div class="correlation-header">
+            <div>
+              <div class="correlation-title">Top 5 Combined Correlation Plays</div>
+              <div class="correlation-subtitle">
+                Combines each player's best same-player signal, the board-wide Top 5 correlation patterns, and the base Hit Score into one Combo Score. This is designed to help cut the weakest parlay legs.
+              </div>
+            </div>
+            <div class="correlation-actions">
+              <button id="combinedTop5Btn" class="chip active" type="button" onclick="setCombinedCorrelationMode('top5')">Top 5</button>
+              <button id="combinedAllBtn" class="chip" type="button" onclick="setCombinedCorrelationMode('all')">Show All</button>
+              <button class="chip" type="button" onclick="renderCombinedCorrelationEdgeBoard()">Refresh Combo</button>
+            </div>
+          </div>
+
+          <div class="combined-correlation-controls">
+            <label>
+              <span class="input-label">Min Combo</span>
+              <input id="combinedMinScore" type="number" value="70" min="0" max="100" onchange="renderCombinedCorrelationEdgeBoard()" oninput="renderCombinedCorrelationEdgeBoard()">
             </label>
-            <label class="combined-edge-filter">
-              Min Player Corr
-              <input id="combinedMinPlayerCorr" type="number" min="0" max="100" value="0" oninput="renderCombinedEdgeBoard()">
+            <label>
+              <span class="input-label">Min Player Corr</span>
+              <input id="combinedMinPlayerCorr" type="number" value="0" min="0" max="100" onchange="renderCombinedCorrelationEdgeBoard()" oninput="renderCombinedCorrelationEdgeBoard()">
             </label>
-            <label class="combined-edge-filter">
-              Min General Corr
-              <input id="combinedMinGeneralCorr" type="number" min="0" max="100" value="0" oninput="renderCombinedEdgeBoard()">
+            <label>
+              <span class="input-label">Min General Corr</span>
+              <input id="combinedMinGeneralCorr" type="number" value="0" min="0" max="100" onchange="renderCombinedCorrelationEdgeBoard()" oninput="renderCombinedCorrelationEdgeBoard()">
             </label>
-            <label class="combined-edge-filter">
-              Min Player Sample
-              <input id="combinedMinPlayerSample" type="number" min="0" value="0" oninput="renderCombinedEdgeBoard()">
+            <label>
+              <span class="input-label">Min Player Sample</span>
+              <input id="combinedMinPlayerSample" type="number" value="1" min="0" onchange="renderCombinedCorrelationEdgeBoard()" oninput="renderCombinedCorrelationEdgeBoard()">
             </label>
-            <label class="combined-edge-filter">
-              Min General Sample
-              <input id="combinedMinGeneralSample" type="number" min="0" value="0" oninput="renderCombinedEdgeBoard()">
+            <label>
+              <span class="input-label">Min General Sample</span>
+              <input id="combinedMinGeneralSample" type="number" value="0" min="0" onchange="renderCombinedCorrelationEdgeBoard()" oninput="renderCombinedCorrelationEdgeBoard()">
             </label>
           </div>
 
-          <div id="combinedEdgeSummary" class="combined-edge-summary">
-            Waiting for current rows and graded correlation history. If player-specific samples are thin, the board automatically leans more on general correlation and base Hit Score.
+          <div id="combinedCorrelationSummary" class="correlation-empty">
+            Waiting for current rows, player-specific signals, and model-wide correlation profiles.
           </div>
 
-          <div id="combinedEdgeGrid" class="combined-edge-grid"></div>
+          <div id="combinedCorrelationCards" class="combined-correlation-cards"></div>
 
           <div class="combined-edge-table-wrap">
             <table class="combined-edge-table">
@@ -4469,37 +4469,30 @@
                   <th>Best Reason</th>
                 </tr>
               </thead>
-              <tbody id="combinedEdgeTableBody">
-                <tr><td colspan="14" class="combined-edge-empty">Combined correlation plays will appear here after data loads.</td></tr>
+              <tbody id="combinedCorrelationTableBody">
+                <tr><td colspan="14">Combined plays will appear after data loads.</td></tr>
               </tbody>
             </table>
           </div>
         </div>
 
-<div class="correlation-dashboard">
+
+        <div class="correlation-dashboard player-correlation-dashboard">
           <div class="correlation-header">
             <div>
-              <div class="correlation-title">Correlation Dashboard</div>
+              <div class="correlation-title">Best Player-Specific Correlations Today</div>
               <div class="correlation-subtitle">
-                Model-driven patterns from graded history. This is different from Filter Lab: Filter Lab tests criteria you pick; Correlation Dashboard surfaces strong signal combinations automatically.
+                Ranks today’s hitters by their own graded PropHit history when today’s profile closely matches prior runs. This is separate from the board-wide Top 5 Correlation Board.
               </div>
             </div>
-
             <div class="correlation-actions">
-              <select id="correlationWindow" class="correlation-select" onchange="renderCorrelationDashboard()">
-                <option value="7">Last 7 Days</option>
-                <option value="14">Last 14 Days</option>
-                <option value="all">All Graded</option>
-              </select>
-              <button class="chip" onclick="renderCorrelationDashboard()">Refresh Correlations</button>
+              <button class="chip" onclick="renderBestPlayerSpecificCorrelations()">Refresh Player Signals</button>
             </div>
           </div>
-
-          <div id="correlationSummary" class="correlation-empty">
-            When a signal has no graded history yet, the card shows today’s matching count, average probability, average projected hits, and top score instead of blank dashes.
+          <div id="playerCorrelationSummary" class="correlation-empty">
+            Waiting for current rows and graded player history. This will favor same-player signals with higher hit rate, usable sample size, and stronger current model profile.
           </div>
-
-          <div id="correlationGrid" class="correlation-grid"></div>
+          <div id="playerCorrelationGrid" class="correlation-grid"></div>
         </div>
 
         <div class="parlay-builder">
@@ -6469,6 +6462,8 @@ const COLUMN_TOOLTIPS = {
       bindValidationLabInputs();
       renderValidationLab();
       renderCorrelationDashboard();
+      renderBestPlayerSpecificCorrelations();
+      renderCombinedCorrelationEdgeBoard();
       renderParlayBuilder();
 
       syncBoardTableWidth();
@@ -6615,12 +6610,16 @@ const COLUMN_TOOLTIPS = {
         renderValidationLab();
         loadPerformanceSummary();
         renderCorrelationDashboard();
+        renderBestPlayerSpecificCorrelations();
+        renderCombinedCorrelationEdgeBoard();
       } catch (err) {
         validationRows = [];
         const status = document.getElementById("valStatus");
         if (status) status.textContent = "Validation history will appear after the postgame grader creates data/prophit_validation_rows.json.";
         loadPerformanceSummary();
         renderCorrelationDashboard();
+        renderBestPlayerSpecificCorrelations();
+        renderCombinedCorrelationEdgeBoard();
       }
     }
 
@@ -6985,10 +6984,67 @@ const COLUMN_TOOLTIPS = {
     function baseCorrelationDefinitions() {
       return [
         {
+          id: "elite_volume_skill_pitcher",
+          label: "Elite Profile: Score ≥ 70 + Prob ≥ 60% + Proj Hits ≥ 1.15 + Top 5 Order",
+          test: row => {
+            const order = toNum(getOrder(row));
+            return num(row.hit_score) >= 70 &&
+              num(row.one_plus_hit_probability) >= 0.60 &&
+              num(row.projected_hits) >= 1.15 &&
+              order !== null && order <= 5;
+          },
+          source: "base",
+          variableCount: 4,
+        },
+        {
+          id: "validated_split_contact",
+          label: "Validated Matchup: Last30 ≥ 60% + Season Split ≥ .260 + Pitcher BAA ≥ .260 + Conf ≥ 65",
+          test: row => num(row.last30_one_plus_hit_rate) >= 0.60 &&
+            num(getSeasonAvgVsPitcherHand(row)) >= 0.260 &&
+            num(getPitcherSeasonBaaAllowedVsBatterHand(row)) >= 0.260 &&
+            num(row.confidence_score) >= 65,
+          source: "base",
+          variableCount: 4,
+        },
+        {
+          id: "reliable_value_profile",
+          label: "Reliable Value: Fair Odds ≤ -120 + Conf ≥ 65 + Proj Hits ≥ 1.10 + Score ≥ 70",
+          test: row => num(getFairOdds(row)) <= -120 &&
+            num(row.confidence_score) >= 65 &&
+            num(row.projected_hits) >= 1.10 &&
+            num(row.hit_score) >= 70,
+          source: "base",
+          variableCount: 4,
+        },
+        {
+          id: "split_reliability_pitcher_contact",
+          label: "Split Edge: 3-Year Split ≥ .260 + Split Reliability ≥ 60 + Pitcher BAA ≥ .250 + Score ≥ 65",
+          test: row => num(row.split_hits_per_ab_3yr_vs_opp_hand) >= 0.260 &&
+            num(row.split_reliability_score) >= 60 &&
+            num(getPitcherSeasonBaaAllowedVsBatterHand(row)) >= 0.250 &&
+            num(row.hit_score) >= 65,
+          source: "base",
+          variableCount: 4,
+        },
+        {
+          id: "low_risk_opportunity",
+          label: "Low-Risk Opportunity: Top 5 Order + Proj Hits ≥ 1.15 + Confidence ≥ 70 + Last30 ≥ 55%",
+          test: row => {
+            const order = toNum(getOrder(row));
+            return order !== null && order <= 5 &&
+              num(row.projected_hits) >= 1.15 &&
+              num(row.confidence_score) >= 70 &&
+              num(row.last30_one_plus_hit_rate) >= 0.55;
+          },
+          source: "base",
+          variableCount: 4,
+        },
+        {
           id: "score70_proj120",
           label: "Hit Score ≥ 70 + Projected Hits ≥ 1.20",
           test: row => num(row.hit_score) >= 70 && num(row.projected_hits) >= 1.20,
           source: "base",
+          variableCount: 2,
         },
         {
           id: "score75_conf65",
@@ -7127,6 +7183,27 @@ const COLUMN_TOOLTIPS = {
           display: v => `${Math.round(v * 100)}%`,
           test: (row, v) => num(row.last30_one_plus_hit_rate) >= v,
         },
+        {
+          key: "split3yr",
+          label: "3-Year Split",
+          thresholds: [0.250, 0.260, 0.270],
+          display: v => `.${String(Math.round(v * 1000)).padStart(3, "0")}`,
+          test: (row, v) => num(row.split_hits_per_ab_3yr_vs_opp_hand) >= v,
+        },
+        {
+          key: "splitrel",
+          label: "Split Reliability",
+          thresholds: [55, 60, 65],
+          display: v => String(v),
+          test: (row, v) => num(row.split_reliability_score) >= v,
+        },
+        {
+          key: "ph9",
+          label: "Pitcher Hits/9",
+          thresholds: [8.0, 8.5, 9.0],
+          display: v => v.toFixed(1),
+          test: (row, v) => num(row.opp_pitcher_hits_per_9) >= v,
+        },
       ];
     }
 
@@ -7189,6 +7266,10 @@ const COLUMN_TOOLTIPS = {
     function buildDynamicCorrelationDefinitions(gradedRows, currentRows) {
       const metrics = dynamicSignalMetrics();
       const candidates = [];
+      const gradedWithResult = gradedRows.filter(row => gradedHitValue(row) !== null);
+      const baselineHitRate = gradedWithResult.length
+        ? gradedWithResult.filter(row => gradedHitValue(row) === true).length / gradedWithResult.length
+        : 0.50;
 
       /*
         Dynamic Correlation Engine
@@ -7196,17 +7277,33 @@ const COLUMN_TOOLTIPS = {
         This checks:
         - 2-variable signal combinations
         - 3-variable signal combinations
+        - guarded 4-variable signal combinations
 
         Example:
         Hit Score ≥ 70 + Projected Hits ≥ 1.20 + Batting Order ≤ 5
 
-        Keep this capped at 3 variables for now. Four or more variables can
-        create tiny sample sizes and misleading hit rates.
+        Four-variable combinations are allowed only with stronger sample guardrails
+        so the board can find richer profiles without overfitting tiny samples.
       */
-      const combinationSizes = [2, 3];
+      const combinationSizes = [2, 3, 4];
+
+      const metricsByKey = Object.fromEntries(metrics.map(metric => [metric.key, metric]));
+      const fourPointMetricKeyCombos = [
+        ["score", "prob", "proj", "order"],
+        ["last30", "seasonhand", "pbaa", "conf"],
+        ["fair", "conf", "proj", "score"],
+        ["split3yr", "splitrel", "pbaa", "score"],
+        ["prob", "last30", "score", "conf"],
+        ["proj", "order", "pbaa", "seasonhand"],
+        ["score", "delta", "fair", "conf"],
+      ];
 
       for (const size of combinationSizes) {
-        const metricCombos = getMetricCombinations(metrics, size);
+        const metricCombos = size === 4
+          ? fourPointMetricKeyCombos
+              .map(keys => keys.map(key => metricsByKey[key]).filter(Boolean))
+              .filter(combo => combo.length === 4)
+          : getMetricCombinations(metrics, size);
 
         for (const metricCombo of metricCombos) {
           const thresholdCombos = getThresholdCombinations(metricCombo);
@@ -7219,29 +7316,35 @@ const COLUMN_TOOLTIPS = {
             const hitRate = opps ? hits / opps : null;
             const todayCount = currentRows.filter(def.test).length;
 
-            // Guardrail: avoid tiny historical samples unless there are current matches.
-            if (opps < 12 && todayCount === 0) continue;
+            // Guardrails: richer 4-point rules need more proof before they can rank.
+            const minOpps = size === 4 ? 20 : size === 3 ? 14 : 12;
+            if (opps < minOpps && todayCount === 0) continue;
 
-            // Guardrail: suppress weak historical patterns unless they are currently relevant.
-            if (opps >= 12 && hitRate !== null && hitRate < 0.54 && todayCount === 0) continue;
+            // Suppress weak historical patterns unless they are currently relevant.
+            if (opps >= minOpps && hitRate !== null && hitRate < Math.max(0.54, baselineHitRate - 0.02) && todayCount === 0) continue;
 
             const reliabilityBonus =
-              opps >= 60 ? 28 :
+              opps >= 90 ? 34 :
+              opps >= 70 ? 30 :
               opps >= 50 ? 24 :
               opps >= 35 ? 18 :
               opps >= 20 ? 12 :
               opps >= 12 ? 6 :
               0;
 
-            const variableBonus = size === 3 ? 8 : 0;
-            const currentBonus = Math.min(todayCount, 12) * 2;
+            const variableBonus = size === 4 ? 14 : size === 3 ? 8 : 0;
+            const currentBonus = Math.min(todayCount, 10) * 2;
+            const liftBonus = hitRate === null ? 0 : Math.max(0, (hitRate - baselineHitRate) * 100);
+            const samplePenalty = opps > 0 && opps < 20 ? (20 - opps) * 0.8 : 0;
 
             const score =
-              ((hitRate ?? 0.50) * 100) +
-              Math.min(opps, 80) * 0.55 +
+              ((hitRate ?? baselineHitRate) * 100) +
+              liftBonus +
+              Math.min(opps, 90) * 0.50 +
               reliabilityBonus +
               variableBonus +
-              currentBonus;
+              currentBonus -
+              samplePenalty;
 
             candidates.push({
               def,
@@ -7265,7 +7368,7 @@ const COLUMN_TOOLTIPS = {
           seenLabels.add(item.def.label);
           return true;
         })
-        .slice(0, 16)
+        .slice(0, 24)
         .map(item => item.def);
     }
 
@@ -7460,6 +7563,132 @@ const COLUMN_TOOLTIPS = {
       return signals.length ? signals[0] : null;
     }
 
+    function jsAttr(value) {
+      return String(value || "").replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/\n/g, " ");
+    }
+
+    function playerSpecificCorrelationScore(row, signal) {
+      if (!row || !signal || signal.hitRate === null) return null;
+
+      const opportunities = signal.opportunities || 0;
+      const hitRate = signal.hitRate || 0;
+      const prob = num(row.one_plus_hit_probability);
+      const score = num(row.hit_score);
+      const projectedHits = num(row.projected_hits);
+      const confidence = num(row.confidence_score);
+      const fairOdds = num(getFairOdds(row));
+      const order = toNum(getOrder(row));
+
+      const sampleScore = Math.min(opportunities, 30) * 1.25;
+      const samplePenalty = opportunities < 3 ? 28 : opportunities < 5 ? 18 : opportunities < 10 ? 8 : 0;
+      const currentProfileScore =
+        (prob * 30) +
+        (score * 0.28) +
+        (projectedHits * 8) +
+        (confidence * 0.14) +
+        (fairOdds && fairOdds < 0 ? Math.min(12, Math.abs(fairOdds) / 25) : 0) +
+        (order !== null ? Math.max(0, 7 - order) * 1.2 : 0);
+
+      return (hitRate * 100) + sampleScore + currentProfileScore - samplePenalty;
+    }
+
+    function bestPlayerSpecificCorrelationRows(limit = 5) {
+      const rows = (allRows || []).filter(row => isFutureEligibleGame(row));
+      const seen = new Set();
+
+      return rows.map((row) => {
+        const signal = bestPlayerSignal(row);
+        const score = playerSpecificCorrelationScore(row, signal);
+        if (!signal || score === null) return null;
+        const playerKey = String(row.player || row.player_name || "").trim().toLowerCase();
+        if (!playerKey || seen.has(playerKey)) return null;
+        seen.add(playerKey);
+        return {
+          row,
+          signal,
+          score,
+          historyCount: samePlayerRows(row).length,
+        };
+      })
+      .filter(Boolean)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, limit);
+    }
+
+    function renderBestPlayerSpecificCorrelations() {
+      const grid = document.getElementById("playerCorrelationGrid");
+      const summary = document.getElementById("playerCorrelationSummary");
+      if (!grid || !summary) return;
+
+      const cards = bestPlayerSpecificCorrelationRows(5);
+      const gradedCount = (validationRows || []).filter(row => gradedHitValue(row) !== null).length;
+
+      if (!cards.length) {
+        grid.innerHTML = "";
+        summary.textContent = gradedCount
+          ? `No current player-specific correlation cards met the guardrails yet. ${gradedCount} graded rows are available, but today’s players need closer same-player profile matches.`
+          : "Player-specific correlations need data/prophit_validation_rows.json from the postgame grader. Once graded rows exist, this card will rank today's strongest same-player signals.";
+        return;
+      }
+
+      const avgHitRate = cards.reduce((sum, item) => sum + (item.signal.hitRate || 0), 0) / cards.length;
+      const totalOpps = cards.reduce((sum, item) => sum + (item.signal.opportunities || 0), 0);
+      summary.textContent = `Showing the top ${cards.length} same-player correlation signals today. Average signal hit rate: ${fmtPct(avgHitRate)} across ${totalOpps} matched player-specific graded opportunities.`;
+
+      grid.innerHTML = cards.map((item, index) => {
+        const row = item.row;
+        const signal = item.signal;
+        const rateText = signal.hitRate === null ? "—" : fmtPct(signal.hitRate);
+        const rel = signal.rel || reliabilityLabel(signal.opportunities || 0, signal.hitRate || 0);
+        const visibleIndex = currentRows.findIndex(r => getRowKey(r) === getRowKey(row));
+        const openButton = visibleIndex >= 0
+          ? `<button class="player-correlation-open" type="button" onclick="openDrawer(${visibleIndex})">Open Player Signals</button>`
+          : `<button class="player-correlation-open" type="button" onclick="searchInput.value='${jsAttr(row.player)}'; render();">Show on Board</button>`;
+
+        return `
+          <div class="correlation-card player-correlation-card">
+            <div class="player-correlation-player">
+              <div>
+                <div class="player-correlation-name">${row.player || "—"}</div>
+                <div class="player-correlation-context">${row.team || "—"} ${formatOpponent(row) ? `vs ${formatOpponent(row)}` : ""} • ${row.opp_pitcher || "Pitcher TBD"}</div>
+              </div>
+              <div class="player-correlation-rank">#${index + 1}</div>
+            </div>
+
+            <div class="correlation-stats">
+              <div class="correlation-stat">
+                <div class="correlation-stat-label">Hit Rate</div>
+                <div class="correlation-stat-value">${rateText}</div>
+              </div>
+              <div class="correlation-stat">
+                <div class="correlation-stat-label">Sample</div>
+                <div class="correlation-stat-value">${signal.hits}/${signal.opportunities}</div>
+              </div>
+              <div class="correlation-stat">
+                <div class="correlation-stat-label">Today Prob</div>
+                <div class="correlation-stat-value">${fmtPct(row.one_plus_hit_probability)}</div>
+              </div>
+              <div class="correlation-stat">
+                <div class="correlation-stat-label">Hit Score</div>
+                <div class="correlation-stat-value">${fmtNum(row.hit_score, 1)}</div>
+              </div>
+            </div>
+
+            <div class="player-correlation-signal">${signal.label}</div>
+            <div class="correlation-meta">
+              <span class="correlation-pill ${rel.cls}">${rel.label}</span>
+              <span class="correlation-pill">${item.historyCount} graded rows</span>
+              <span class="correlation-pill">Proj ${fmtNum(row.projected_hits, 2)}</span>
+              <span class="correlation-pill">Fair ${fmtOdds(getFairOdds(row))}</span>
+              <span class="correlation-pill">${signal.source === "direct" ? "Model Output" : "Derived"}</span>
+            </div>
+            <div class="player-correlation-reason">${signal.reason || "Matched today's row against this player's prior graded PropHit profiles."}</div>
+            ${openButton}
+          </div>
+        `;
+      }).join("");
+    }
+
     function playerSignalSummaryHtml(row) {
       const signals = calculatedPlayerSignals(row);
       if (!signals.length) {
@@ -7545,320 +7774,6 @@ const COLUMN_TOOLTIPS = {
 
     let lastCorrelationCards = [];
 
-    /* Combined Correlation Edge Board */
-    let combinedEdgeMode = "top5";
-    let lastCombinedEdgeRows = [];
-
-    function comboSafeNumber(value, fallback = 0) {
-      const n = Number(value);
-      return Number.isFinite(n) ? n : fallback;
-    }
-
-    function comboClampScore(value) {
-      return Math.max(0, Math.min(100, comboSafeNumber(value, 0)));
-    }
-
-    function comboSlug(value) {
-      return String(value || "")
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, "-")
-        .replace(/^-+|-+$/g, "");
-    }
-
-    function comboPercentText(percentNumber) {
-      const n = comboSafeNumber(percentNumber, 0);
-      return `${Math.round(n)}%`;
-    }
-
-    function setCombinedEdgeMode(mode) {
-      combinedEdgeMode = mode === "all" ? "all" : "top5";
-      const topBtn = document.getElementById("combinedTop5Btn");
-      const allBtn = document.getElementById("combinedAllBtn");
-      if (topBtn) topBtn.classList.toggle("active", combinedEdgeMode === "top5");
-      if (allBtn) allBtn.classList.toggle("active", combinedEdgeMode === "all");
-      renderCombinedEdgeBoard();
-    }
-
-    function combinedFilterValue(id, fallback) {
-      const el = document.getElementById(id);
-      return comboSafeNumber(el?.value, fallback);
-    }
-
-    function combinedEdgeFilters() {
-      return {
-        minComboScore: combinedFilterValue("combinedMinScore", 70),
-        minPlayerCorr: combinedFilterValue("combinedMinPlayerCorr", 0),
-        minGeneralCorr: combinedFilterValue("combinedMinGeneralCorr", 0),
-        minPlayerSample: combinedFilterValue("combinedMinPlayerSample", 0),
-        minGeneralSample: combinedFilterValue("combinedMinGeneralSample", 0),
-      };
-    }
-
-    function comboPlayerSignal(row) {
-      if (typeof calculatedPlayerSignals !== "function") {
-        return null;
-      }
-      const signals = calculatedPlayerSignals(row) || [];
-      return signals.length ? signals[0] : null;
-    }
-
-    function comboGeneralSignal(row) {
-      const gradedRows = filterRowsByCorrelationWindow(getPerformanceSourceRows()).filter(item => gradedHitValue(item) !== null);
-      const definitions = correlationDefinitions(gradedRows, allRows);
-      const matched = definitions.map(def => {
-        const historicalMatches = gradedRows.filter(def.test);
-        const opportunities = historicalMatches.length;
-        const hits = historicalMatches.filter(item => gradedHitValue(item) === true).length;
-        const hitRate = opportunities ? hits / opportunities : null;
-        const isTodayMatch = def.test(row);
-        if (!isTodayMatch && !opportunities) return null;
-        const todayMatches = allRows.filter(def.test);
-        const sourceBoost = def.source === "dynamic" ? 12 : 0;
-        const score = ((hitRate ?? 0.50) * 100) + Math.min(opportunities, 80) * 0.65 + Math.min(todayMatches.length, 12) * 2.5 + sourceBoost;
-        return { ...def, opportunities, hits, hitRate, todayMatches, score, isTodayMatch };
-      }).filter(Boolean)
-        .sort((a, b) => {
-          if (Number(b.isTodayMatch) !== Number(a.isTodayMatch)) return Number(b.isTodayMatch) - Number(a.isTodayMatch);
-          return b.score - a.score;
-        });
-      return matched.length ? matched[0] : null;
-    }
-
-    function calculateCombinedEdgeScore(playerCorr, generalCorr, hitScore, playerSample, generalSample) {
-      const p = comboClampScore(playerCorr);
-      const g = comboClampScore(generalCorr);
-      const h = comboClampScore(hitScore);
-      const ps = comboSafeNumber(playerSample, 0);
-      const gs = comboSafeNumber(generalSample, 0);
-
-      let playerWeight = 0.25;
-      let generalWeight = 0.50;
-      let hitWeight = 0.25;
-
-      if (ps >= 25) {
-        playerWeight = 0.60;
-        generalWeight = 0.25;
-        hitWeight = 0.15;
-      } else if (ps >= 10) {
-        playerWeight = 0.45;
-        generalWeight = 0.35;
-        hitWeight = 0.20;
-      }
-
-      if (!gs) {
-        playerWeight += generalWeight * 0.65;
-        hitWeight += generalWeight * 0.35;
-        generalWeight = 0;
-      }
-
-      if (!ps) {
-        generalWeight += playerWeight * 0.70;
-        hitWeight += playerWeight * 0.30;
-        playerWeight = 0;
-      }
-
-      return Math.round((p * playerWeight) + (g * generalWeight) + (h * hitWeight));
-    }
-
-    function combinedAgreementLabel(playerCorr, generalCorr, playerSample, generalSample) {
-      const p = comboClampScore(playerCorr);
-      const g = comboClampScore(generalCorr);
-      const ps = comboSafeNumber(playerSample, 0);
-      const gs = comboSafeNumber(generalSample, 0);
-      const diff = Math.abs(p - g);
-
-      if (ps < 5 && gs < 10) return "Small Sample";
-      if (p >= 75 && g >= 70 && diff <= 15) return "Strong";
-      if (p >= 80 && g < 65 && ps >= 5) return "Player Lean";
-      if (g >= 80 && p < 65 && gs >= 10) return "Model Lean";
-      if (diff >= 25 && ps && gs) return "Mixed";
-      if (ps < 7) return "Small Sample";
-      return "Neutral";
-    }
-
-    function combinedRiskFlag(comboScore, playerCorr, generalCorr, playerSample, generalSample) {
-      const score = comboClampScore(comboScore);
-      const p = comboClampScore(playerCorr);
-      const g = comboClampScore(generalCorr);
-      const ps = comboSafeNumber(playerSample, 0);
-      const gs = comboSafeNumber(generalSample, 0);
-
-      if (ps < 5 && gs < 10) return "Low sample";
-      if (score >= 82 && p >= 75 && g >= 70) return "Parlay eligible";
-      if (p >= 85 && g < 60 && ps >= 5) return "Player-only trend";
-      if (g >= 85 && p < 60 && gs >= 10) return "Model-only trend";
-      if (score < 68) return "Avoid";
-      return "Lean only";
-    }
-
-    function combinedTier(score) {
-      const s = comboClampScore(score);
-      if (s >= 85) return "Elite";
-      if (s >= 80) return "Strong";
-      if (s >= 74) return "Playable";
-      if (s >= 68) return "Risky";
-      return "Avoid";
-    }
-
-    function combinedBestReason(row, playerSignal, generalSignal) {
-      const parts = [];
-      if (playerSignal?.label) parts.push(`Player: ${playerSignal.label}`);
-      if (generalSignal?.label) parts.push(`General: ${generalSignal.label}`);
-      if (!parts.length) {
-        const conf = row.confidence_letter ? `Conf ${row.confidence_letter}` : "model profile";
-        return `${conf}, projected AB, hit probability, score, split, and pitcher profile reviewed.`;
-      }
-      return parts.join(" | ");
-    }
-
-    function buildCombinedEdgeRows(rows) {
-      const source = Array.isArray(rows) && rows.length ? rows : allRows;
-      return source.map(row => {
-        const playerSignal = comboPlayerSignal(row);
-        const generalSignal = comboGeneralSignal(row);
-
-        const hitScore = comboClampScore(num(row.hit_score, 0));
-        const playerCorr = playerSignal?.hitRate !== null && playerSignal?.hitRate !== undefined ? Math.round(playerSignal.hitRate * 100) : 0;
-        const playerSample = comboSafeNumber(playerSignal?.opportunities, 0);
-        const generalCorr = generalSignal?.hitRate !== null && generalSignal?.hitRate !== undefined ? Math.round(generalSignal.hitRate * 100) : 0;
-        const generalSample = comboSafeNumber(generalSignal?.opportunities, 0);
-        const comboScore = calculateCombinedEdgeScore(playerCorr, generalCorr, hitScore, playerSample, generalSample);
-        const agreement = combinedAgreementLabel(playerCorr, generalCorr, playerSample, generalSample);
-        const risk = combinedRiskFlag(comboScore, playerCorr, generalCorr, playerSample, generalSample);
-        const tier = combinedTier(comboScore);
-
-        return {
-          row,
-          player: row.player || "—",
-          team: row.team || "—",
-          opp: formatOpponent(row),
-          hitScore,
-          playerCorr,
-          playerSample,
-          playerHits: comboSafeNumber(playerSignal?.hits, 0),
-          generalCorr,
-          generalSample,
-          generalHits: comboSafeNumber(generalSignal?.hits, 0),
-          comboScore,
-          agreement,
-          risk,
-          tier,
-          reason: combinedBestReason(row, playerSignal, generalSignal),
-          playerSignal,
-          generalSignal,
-        };
-      });
-    }
-
-    function filterCombinedEdgeRows(rows) {
-      const filters = combinedEdgeFilters();
-      return rows.filter(item => {
-        if (item.comboScore < filters.minComboScore) return false;
-        if (item.playerCorr < filters.minPlayerCorr) return false;
-        if (item.generalCorr < filters.minGeneralCorr) return false;
-        if (item.playerSample < filters.minPlayerSample) return false;
-        if (item.generalSample < filters.minGeneralSample) return false;
-        return true;
-      });
-    }
-
-    function sortCombinedEdgeRows(rows) {
-      return [...rows].sort((a, b) => {
-        if (b.comboScore !== a.comboScore) return b.comboScore - a.comboScore;
-        if (b.playerCorr !== a.playerCorr) return b.playerCorr - a.playerCorr;
-        if (b.generalCorr !== a.generalCorr) return b.generalCorr - a.generalCorr;
-        if (b.hitScore !== a.hitScore) return b.hitScore - a.hitScore;
-        return a.player.localeCompare(b.player);
-      });
-    }
-
-    function renderCombinedEdgeCards(rows) {
-      const grid = document.getElementById("combinedEdgeGrid");
-      if (!grid) return;
-      const topRows = rows.slice(0, 5);
-      if (!topRows.length) {
-        grid.innerHTML = `<div class="combined-edge-card"><div class="combined-edge-player">No qualified plays yet</div><div class="combined-edge-detail">Lower the filters or run/grade more model history.</div></div>`;
-        return;
-      }
-      grid.innerHTML = topRows.map((item, index) => {
-        const tierClass = comboSlug(item.tier);
-        const agreementClass = comboSlug(item.agreement);
-        const riskClass = comboSlug(item.risk);
-        return `
-          <div class="combined-edge-card ${tierClass}">
-            <div class="combined-edge-rank">#${index + 1} Combined Play</div>
-            <div class="combined-edge-player" title="${item.player}">${item.player}</div>
-            <div class="combined-edge-meta">${item.team} vs ${item.opp}</div>
-            <div class="combined-edge-score">${item.comboScore}</div>
-            <div class="combined-edge-score-label">Combo Score</div>
-            <span class="combined-edge-badge ${agreementClass}">${item.agreement}</span>
-            <span class="combined-edge-badge ${riskClass}">${item.risk}</span>
-            <div class="combined-edge-detail">
-              <strong>Player Corr:</strong> ${comboPercentText(item.playerCorr)} over ${item.playerSample} games<br>
-              <strong>General Corr:</strong> ${comboPercentText(item.generalCorr)} over ${item.generalSample} matches<br>
-              <strong>Reason:</strong> ${item.reason}
-            </div>
-          </div>
-        `;
-      }).join("");
-    }
-
-    function renderCombinedEdgeTable(rows) {
-      const body = document.getElementById("combinedEdgeTableBody");
-      if (!body) return;
-      const displayRows = combinedEdgeMode === "top5" ? rows.slice(0, 5) : rows;
-      if (!displayRows.length) {
-        body.innerHTML = `<tr><td colspan="14" class="combined-edge-empty">No players match the current combined correlation filters.</td></tr>`;
-        return;
-      }
-      body.innerHTML = displayRows.map((item, index) => {
-        const tierClass = comboSlug(item.tier);
-        const agreementClass = comboSlug(item.agreement);
-        const riskClass = comboSlug(item.risk);
-        return `
-          <tr>
-            <td>${index + 1}</td>
-            <td><button class="player-btn" type="button" onclick="openDrawer(${currentRows.indexOf(item.row)})">${item.player}</button></td>
-            <td>${item.team}</td>
-            <td>${item.opp}</td>
-            <td>${fmtNum(item.hitScore, 0)}</td>
-            <td>${comboPercentText(item.playerCorr)}</td>
-            <td>${item.playerSample}</td>
-            <td>${comboPercentText(item.generalCorr)}</td>
-            <td>${item.generalSample}</td>
-            <td class="combined-edge-score-cell">${item.comboScore}</td>
-            <td><span class="combined-edge-badge ${tierClass}">${item.tier}</span></td>
-            <td><span class="combined-edge-badge ${agreementClass}">${item.agreement}</span></td>
-            <td><span class="combined-edge-badge ${riskClass}">${item.risk}</span></td>
-            <td class="reason-cell">${item.reason}</td>
-          </tr>
-        `;
-      }).join("");
-    }
-
-    function renderCombinedEdgeBoard(rowsOverride = null) {
-      const summary = document.getElementById("combinedEdgeSummary");
-      const rows = rowsOverride || currentRows || allRows;
-      const built = buildCombinedEdgeRows(rows);
-      const filtered = filterCombinedEdgeRows(built);
-      const sorted = sortCombinedEdgeRows(filtered);
-      lastCombinedEdgeRows = sorted;
-
-      const parlayEligible = sorted.filter(item => item.risk === "Parlay eligible").length;
-      const strongAgreement = sorted.filter(item => item.agreement === "Strong").length;
-      const smallSample = sorted.filter(item => item.agreement === "Small Sample" || item.risk === "Low sample").length;
-
-      if (summary) {
-        summary.textContent = sorted.length
-          ? `Showing ${combinedEdgeMode === "top5" ? Math.min(5, sorted.length) : sorted.length} combined plays from ${built.length} visible hitters. ${strongAgreement} strong agreement, ${parlayEligible} parlay eligible, ${smallSample} small-sample caution.`
-          : `No combined plays match the current filters. Lower the Combo Score or sample filters, or wait for more graded player-specific history.`;
-      }
-
-      renderCombinedEdgeCards(sorted);
-      renderCombinedEdgeTable(sorted);
-    }
-
-
     function renderTodayNamesPreview(rows, limit = 8) {
       if (!rows || !rows.length) return "No current matches";
       const preview = rows.slice(0, limit).map(row => `${row.player || "—"} (${row.team || "—"})`).join(", ");
@@ -7882,13 +7797,24 @@ const COLUMN_TOOLTIPS = {
         const misses = Math.max(opportunities - hits, 0);
         const hitRate = opportunities ? hits / opportunities : null;
         const todayMatches = allRows.filter(def.test);
-        const sourceBoost = def.source === "dynamic" ? 12 : 0;
-        const score = ((hitRate ?? 0.50) * 100) + Math.min(opportunities, 80) * 0.65 + Math.min(todayMatches.length, 12) * 2.5 + sourceBoost;
+        const sourceBoost = def.source === "dynamic" ? 12 : 4;
+        const variableBonus = (def.variableCount || 2) >= 4 ? 10 : (def.variableCount || 2) === 3 ? 6 : 0;
+        const reliabilityBonus =
+          opportunities >= 90 ? 20 :
+          opportunities >= 50 ? 14 :
+          opportunities >= 25 ? 8 :
+          opportunities >= 12 ? 4 :
+          0;
+        const samplePenalty = opportunities > 0 && opportunities < 12 ? (12 - opportunities) * 1.1 : 0;
+        const score = ((hitRate ?? 0.50) * 100) +
+          Math.min(opportunities, 90) * 0.55 +
+          Math.min(todayMatches.length, 10) * 2.25 +
+          sourceBoost + variableBonus + reliabilityBonus - samplePenalty;
         return { ...def, opportunities, hits, misses, hitRate, todayMatches, score };
       })
       .filter(item => item.opportunities > 0 || item.todayMatches.length > 0)
       .sort((a, b) => b.score - a.score)
-      .slice(0, 12);
+      .slice(0, 5);
 
       lastCorrelationCards = cards;
 
@@ -7901,8 +7827,8 @@ const COLUMN_TOOLTIPS = {
       const dynamicCount = cards.filter(card => card.source === "dynamic").length;
       const totalOpportunities = cards.reduce((sum, card) => sum + card.opportunities, 0);
       summary.textContent = totalOpportunities
-        ? `Showing ${cards.length} signal combinations, including ${dynamicCount} dynamic model-discovered signals, using ${totalOpportunities} graded opportunities from the selected window.`
-        : `Showing ${cards.length} current signal combinations. Graded hit rates will appear once validation history is available.`;
+        ? `Showing the top ${cards.length} correlation profiles, including ${dynamicCount} dynamic model-discovered signals, using ${totalOpportunities} graded opportunities from the selected window.`
+        : `Showing the top ${cards.length} current signal profiles. Graded hit rates will appear once validation history is available.`;
 
       grid.innerHTML = cards.map((card, index) => {
         const rateText = card.hitRate === null ? "—" : fmtPct(card.hitRate);
@@ -7942,6 +7868,7 @@ const COLUMN_TOOLTIPS = {
               <span class="correlation-pill ${rel.cls}">${rel.label}</span>
               <span class="correlation-pill">${card.todayMatches.length} today</span>
               ${card.source === "dynamic" ? `<span class="correlation-pill good">Dynamic</span>` : `<span class="correlation-pill">Base</span>`}
+              <span class="correlation-pill">${card.variableCount || 2}-Point</span>
             </div>
 
             <div class="correlation-matches">
@@ -7966,7 +7893,7 @@ const COLUMN_TOOLTIPS = {
       if (!backdrop || !title || !sub || !body) return;
 
       title.textContent = card.label;
-      sub.textContent = `${card.todayMatches.length} current players match this signal. Historical sample: ${card.opportunities || 0} opportunities${card.hitRate !== null ? `, ${fmtPct(card.hitRate)} hit rate` : ""}.`;
+      sub.textContent = `${card.todayMatches.length} current players match this top-5 signal. Historical sample: ${card.opportunities || 0} opportunities${card.hitRate !== null ? `, ${fmtPct(card.hitRate)} hit rate` : ""}.`;
 
       const rows = [...card.todayMatches].sort((a, b) => {
         const scoreA = num(a.hit_score) + num(a.one_plus_hit_probability) * 25 + num(a.projected_hits) * 8;
@@ -7994,6 +7921,311 @@ const COLUMN_TOOLTIPS = {
 
     function closeCorrelationPlayersPopout() {
       document.getElementById("correlationPopoutBackdrop")?.classList.remove("open");
+    }
+
+
+    let combinedCorrelationMode = "top5";
+
+    function combinedReadNumber(id, fallback) {
+      const el = document.getElementById(id);
+      const raw = el ? String(el.value || "").trim() : "";
+      const n = Number(raw);
+      return Number.isFinite(n) ? n : fallback;
+    }
+
+    function combinedPct(value) {
+      const n = toNum(value);
+      if (n === null) return null;
+      if (n > 0 && n <= 1) return Math.round(n * 1000) / 10;
+      return Math.round(n * 10) / 10;
+    }
+
+    function combinedClampScore(value) {
+      const n = Number(value);
+      if (!Number.isFinite(n)) return 0;
+      return Math.max(0, Math.min(100, n));
+    }
+
+    function setCombinedCorrelationMode(mode) {
+      combinedCorrelationMode = mode === "all" ? "all" : "top5";
+      document.getElementById("combinedTop5Btn")?.classList.toggle("active", combinedCorrelationMode === "top5");
+      document.getElementById("combinedAllBtn")?.classList.toggle("active", combinedCorrelationMode === "all");
+      renderCombinedCorrelationEdgeBoard();
+    }
+
+    function findGeneralCorrelationSignal(row) {
+      const directCorr = combinedPct(row.generalCorrelation ?? row.general_correlation ?? row.generalCorr ?? row.general_corr ?? row.model_wide_correlation ?? row.general_hit_rate);
+      const directSample = toNum(row.generalCorrelationSample ?? row.general_correlation_sample ?? row.generalCorrSample ?? row.general_corr_sample ?? row.model_wide_sample ?? row.general_sample);
+      if (directCorr !== null && directSample !== null) {
+        return {
+          label: row.general_correlation_label || row.general_signal || "Model-wide correlation",
+          hitRatePct: combinedClampScore(directCorr),
+          opportunities: directSample,
+          source: "direct",
+          reason: row.general_correlation_reason || row.general_reason || "Direct model-wide correlation value from today's row."
+        };
+      }
+
+      const cards = Array.isArray(lastCorrelationCards) ? lastCorrelationCards : [];
+      const rowKey = getRowKey(row);
+      const matches = cards.filter(card => {
+        if (!card) return false;
+        if (Array.isArray(card.todayMatches) && card.todayMatches.some(match => getRowKey(match) === rowKey)) return true;
+        try { return typeof card.test === "function" && card.test(row); } catch (err) { return false; }
+      });
+
+      if (!matches.length) return null;
+
+      matches.sort((a, b) => {
+        const aRate = a.hitRate === null ? 0 : a.hitRate;
+        const bRate = b.hitRate === null ? 0 : b.hitRate;
+        const aScore = aRate * 100 + Math.min(a.opportunities || 0, 90) * 0.25 + (a.variableCount || 2) * 2;
+        const bScore = bRate * 100 + Math.min(b.opportunities || 0, 90) * 0.25 + (b.variableCount || 2) * 2;
+        return bScore - aScore;
+      });
+
+      const best = matches[0];
+      return {
+        label: best.label || "Top 5 board-wide signal",
+        hitRatePct: best.hitRate === null ? combinedPct(row.one_plus_hit_probability) : combinedClampScore(best.hitRate * 100),
+        opportunities: best.opportunities || 0,
+        source: best.source || "board",
+        reason: best.label || "Matched one of the board-wide Top 5 correlation profiles."
+      };
+    }
+
+    function findPlayerCorrelationSignal(row) {
+      const signal = bestPlayerSignal(row);
+      if (signal && signal.hitRate !== null) {
+        return {
+          label: signal.label || "Best same-player signal",
+          hitRatePct: combinedClampScore(signal.hitRate * 100),
+          opportunities: signal.opportunities || 0,
+          hits: signal.hits || 0,
+          misses: signal.misses || 0,
+          source: signal.source || "player",
+          reason: signal.reason || "Matched today's row against this player's prior graded PropHit profiles."
+        };
+      }
+
+      const directCorr = combinedPct(row.playerCorrelation ?? row.player_correlation ?? row.playerCorr ?? row.player_corr ?? row.player_specific_correlation ?? row.player_specific_corr ?? row.player_specific_hit_rate);
+      const directSample = toNum(row.playerCorrelationSample ?? row.player_correlation_sample ?? row.playerCorrSample ?? row.player_corr_sample ?? row.player_specific_sample ?? row.similar_player_games);
+      if (directCorr !== null && directSample !== null) {
+        return {
+          label: row.player_correlation_label || row.player_signal || "Player-specific correlation",
+          hitRatePct: combinedClampScore(directCorr),
+          opportunities: directSample,
+          hits: null,
+          misses: null,
+          source: "direct",
+          reason: row.player_correlation_reason || row.player_reason || "Direct player-specific correlation value from today's row."
+        };
+      }
+
+      return null;
+    }
+
+    function calculateCombinedCorrelationScore(playerPct, generalPct, hitScore, playerSample) {
+      const playerCorr = combinedClampScore(playerPct);
+      const generalCorr = combinedClampScore(generalPct);
+      const baseScore = combinedClampScore(hitScore);
+      const sample = Number(playerSample || 0);
+      let playerWeight = 0.25;
+      let generalWeight = 0.50;
+      let hitWeight = 0.25;
+
+      if (sample >= 25) {
+        playerWeight = 0.60;
+        generalWeight = 0.25;
+        hitWeight = 0.15;
+      } else if (sample >= 10) {
+        playerWeight = 0.45;
+        generalWeight = 0.35;
+        hitWeight = 0.20;
+      }
+
+      return Math.round(playerCorr * playerWeight + generalCorr * generalWeight + baseScore * hitWeight);
+    }
+
+    function combinedTier(score) {
+      if (score >= 85) return "Elite";
+      if (score >= 80) return "Strong";
+      if (score >= 74) return "Playable";
+      if (score >= 68) return "Risky";
+      return "Avoid";
+    }
+
+    function combinedAgreement(playerPct, generalPct, playerSample) {
+      const p = combinedClampScore(playerPct);
+      const g = combinedClampScore(generalPct);
+      const diff = Math.abs(p - g);
+      if ((playerSample || 0) < 5) return "Small Sample";
+      if (p >= 75 && g >= 70 && diff <= 15) return "Strong";
+      if (p >= 80 && g < 65) return "Player Lean";
+      if (g >= 80 && p < 65) return "Model Lean";
+      if (diff >= 25) return "Mixed";
+      return "Neutral";
+    }
+
+    function combinedRisk(score, playerPct, generalPct, playerSample, generalSample) {
+      if ((playerSample || 0) < 5) return "Low player sample";
+      if ((generalSample || 0) < 12) return "Low general sample";
+      if (score >= 82 && playerPct >= 75 && generalPct >= 70) return "Parlay eligible";
+      if (playerPct >= 85 && generalPct < 60) return "Player-only trend";
+      if (generalPct >= 85 && playerPct < 60) return "Model-only trend";
+      if (score < 68) return "Avoid";
+      return "Lean only";
+    }
+
+    function combinedClassName(value) {
+      return String(value || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+    }
+
+    function buildCombinedCorrelationRows() {
+      const rows = (allRows || []).filter(row => isFutureEligibleGame(row));
+      const seen = new Set();
+      const output = [];
+
+      rows.forEach(row => {
+        const playerKey = String(row.player || row.player_name || "").trim().toLowerCase();
+        if (!playerKey || seen.has(playerKey)) return;
+        seen.add(playerKey);
+
+        const playerSignal = findPlayerCorrelationSignal(row);
+        const generalSignal = findGeneralCorrelationSignal(row);
+        if (!playerSignal && !generalSignal) return;
+
+        const hitScore = num(row.hit_score);
+        const playerPct = playerSignal ? playerSignal.hitRatePct : 0;
+        const generalPct = generalSignal ? generalSignal.hitRatePct : combinedPct(row.one_plus_hit_probability) || 0;
+        const playerSample = playerSignal ? (playerSignal.opportunities || 0) : 0;
+        const generalSample = generalSignal ? (generalSignal.opportunities || 0) : 0;
+        const comboScore = calculateCombinedCorrelationScore(playerPct, generalPct, hitScore, playerSample);
+        const tier = combinedTier(comboScore);
+        const agreement = combinedAgreement(playerPct, generalPct, playerSample);
+        const risk = combinedRisk(comboScore, playerPct, generalPct, playerSample, generalSample);
+        const visibleIndex = currentRows.findIndex(r => getRowKey(r) === getRowKey(row));
+
+        output.push({
+          row,
+          visibleIndex,
+          playerSignal,
+          generalSignal,
+          hitScore,
+          playerPct,
+          generalPct,
+          playerSample,
+          generalSample,
+          comboScore,
+          tier,
+          agreement,
+          risk,
+          reason: `${playerSignal ? playerSignal.label : "No same-player match"} + ${generalSignal ? generalSignal.label : "no board-wide match"}`
+        });
+      });
+
+      return output.sort((a, b) => {
+        if (b.comboScore !== a.comboScore) return b.comboScore - a.comboScore;
+        if (b.playerPct !== a.playerPct) return b.playerPct - a.playerPct;
+        if (b.generalPct !== a.generalPct) return b.generalPct - a.generalPct;
+        return b.hitScore - a.hitScore;
+      });
+    }
+
+    function filteredCombinedCorrelationRows() {
+      const minScore = combinedReadNumber("combinedMinScore", 70);
+      const minPlayer = combinedReadNumber("combinedMinPlayerCorr", 0);
+      const minGeneral = combinedReadNumber("combinedMinGeneralCorr", 0);
+      const minPlayerSample = combinedReadNumber("combinedMinPlayerSample", 1);
+      const minGeneralSample = combinedReadNumber("combinedMinGeneralSample", 0);
+
+      return buildCombinedCorrelationRows().filter(item => {
+        if (item.comboScore < minScore) return false;
+        if (item.playerPct < minPlayer) return false;
+        if (item.generalPct < minGeneral) return false;
+        if (item.playerSample < minPlayerSample) return false;
+        if (item.generalSample < minGeneralSample) return false;
+        return true;
+      });
+    }
+
+    function renderCombinedCorrelationEdgeBoard() {
+      const cardsEl = document.getElementById("combinedCorrelationCards");
+      const tableBody = document.getElementById("combinedCorrelationTableBody");
+      const summary = document.getElementById("combinedCorrelationSummary");
+      if (!cardsEl || !tableBody || !summary) return;
+
+      const rows = filteredCombinedCorrelationRows();
+      const visibleRows = combinedCorrelationMode === "all" ? rows : rows.slice(0, 5);
+      const gradedCount = (validationRows || []).filter(row => gradedHitValue(row) !== null).length;
+
+      if (!rows.length) {
+        cardsEl.innerHTML = "";
+        tableBody.innerHTML = `<tr><td colspan="14">No combined correlation plays meet the current filters yet.</td></tr>`;
+        summary.textContent = gradedCount
+          ? `No combined plays match the filters. Try lowering Min Combo, Min Player Sample, or Min General Sample. ${gradedCount} graded rows are available.`
+          : "Combined plays need graded history for player-specific and board-wide correlation signals. The board will populate after validation rows load.";
+        return;
+      }
+
+      const avgCombo = rows.reduce((sum, item) => sum + item.comboScore, 0) / rows.length;
+      const parlayCount = rows.filter(item => item.risk === "Parlay eligible").length;
+      summary.textContent = `Showing ${visibleRows.length} of ${rows.length} combined plays. Average Combo Score: ${fmtNum(avgCombo, 1)}. Parlay eligible: ${parlayCount}.`;
+
+      cardsEl.innerHTML = rows.slice(0, 5).map((item, index) => {
+        const row = item.row;
+        const tierClass = combinedClassName(item.tier);
+        const agreementClass = combinedClassName(item.agreement);
+        const openButton = item.visibleIndex >= 0
+          ? `<button class="combined-edge-open" type="button" onclick="openDrawer(${item.visibleIndex})">Open Signals</button>`
+          : `<button class="combined-edge-open" type="button" onclick="searchInput.value='${jsAttr(row.player)}'; render();">Show on Board</button>`;
+
+        return `
+          <div class="combined-edge-card ${tierClass}">
+            <div class="combined-edge-topline">
+              <div class="combined-edge-rank">#${index + 1} Combo Play</div>
+              <div class="combined-edge-score">${item.comboScore}</div>
+            </div>
+            <div class="combined-edge-player">${row.player || "—"}</div>
+            <div class="combined-edge-context">${row.team || "—"} ${formatOpponent(row) ? `vs ${formatOpponent(row)}` : ""} • ${row.opp_pitcher || "Pitcher TBD"}</div>
+            <div class="combined-edge-meta">
+              <span class="correlation-pill ${tierClass}">${item.tier}</span>
+              <span class="correlation-pill ${agreementClass}">${item.agreement}</span>
+              <span class="correlation-pill">${item.risk}</span>
+            </div>
+            <div class="combined-edge-reason">
+              <strong>Player:</strong> ${fmtNum(item.playerPct, 1)}% over ${item.playerSample} opps<br>
+              <strong>General:</strong> ${fmtNum(item.generalPct, 1)}% over ${item.generalSample} opps<br>
+              <strong>Reason:</strong> ${item.reason}
+            </div>
+            ${openButton}
+          </div>
+        `;
+      }).join("");
+
+      tableBody.innerHTML = visibleRows.map((item, index) => {
+        const row = item.row;
+        const tierClass = combinedClassName(item.tier);
+        const agreementClass = combinedClassName(item.agreement);
+        return `
+          <tr>
+            <td>${index + 1}</td>
+            <td class="player-cell">${row.player || "—"}</td>
+            <td>${row.team || "—"}</td>
+            <td>${formatOpponent(row)}</td>
+            <td>${fmtNum(item.hitScore, 1)}</td>
+            <td>${fmtNum(item.playerPct, 1)}%</td>
+            <td>${item.playerSample}</td>
+            <td>${fmtNum(item.generalPct, 1)}%</td>
+            <td>${item.generalSample}</td>
+            <td class="combined-score-cell">${item.comboScore}</td>
+            <td><span class="correlation-pill ${tierClass}">${item.tier}</span></td>
+            <td><span class="correlation-pill ${agreementClass}">${item.agreement}</span></td>
+            <td>${item.risk}</td>
+            <td class="combined-reason-cell">${item.reason}</td>
+          </tr>
+        `;
+      }).join("");
     }
 
 
@@ -8256,7 +8488,6 @@ const COLUMN_TOOLTIPS = {
 
       const filtered = sortRows(applyFilters(allRows));
       currentRows = filtered;
-      renderCombinedEdgeBoard(filtered);
 
       document.getElementById("totalLoaded").textContent = allRows.length;
       document.getElementById("visiblePlays").textContent = filtered.length;
@@ -8290,6 +8521,8 @@ const COLUMN_TOOLTIPS = {
         } else {
           body.innerHTML = `<tr><td colspan="${activeColumns().length + 1}" style="padding:20px;">No visible plays meet the current filters. Clear filters or lower thresholds.</td></tr>`;
         }
+        renderBestPlayerSpecificCorrelations();
+        renderCombinedCorrelationEdgeBoard();
         renderPopout();
         return;
       }
@@ -8344,6 +8577,8 @@ const COLUMN_TOOLTIPS = {
         </tr>`;
       }).join("");
 
+      renderBestPlayerSpecificCorrelations();
+      renderCombinedCorrelationEdgeBoard();
       renderPopout();
     }
 
