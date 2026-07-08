@@ -4526,6 +4526,8 @@
                 <option value="score">Highest Hit Score</option>
                 <option value="confidence">Highest Confidence</option>
                 <option value="value">Best Fair Value</option>
+                <option value="playerSpecific">Best Player-Specific Correlations</option>
+                <option value="combinedCorrelation">Combined Correlation Plays</option>
               </select>
             </label>
 
@@ -8414,22 +8416,94 @@ const COLUMN_TOOLTIPS = {
       if (strategy === "confidence") return confidence * 1.20 + p * 55 + hitScore * .35 + orderBonus;
       if (strategy === "value") return delta * 450 + fairProb * 80 + hitScore * .55 + projectedHits * 8 + confidence * .15;
 
+      // These two strategies are mainly handled inside makeModelParlays() so their
+      // precomputed correlation scores are not recalculated for every row. This
+      // fallback keeps the manual picker and any direct calls working.
+      if (strategy === "playerSpecific") {
+        const signal = bestPlayerSignal(row);
+        const signalScore = signal ? playerSpecificCorrelationScore(row, signal) : null;
+        const fallback = hitScore * 1.05 + p * 45 + projectedHits * 7 + confidence * .12 + orderBonus;
+        return (signalScore === null ? fallback : signalScore) + p * 35 + hitScore * .25;
+      }
+
+      if (strategy === "combinedCorrelation") {
+        const playerSignal = findPlayerCorrelationSignal(row);
+        const generalSignal = findGeneralCorrelationSignal(row);
+        const playerPct = playerSignal ? combinedSignalPct(playerSignal) : null;
+        const generalPct = generalSignal ? combinedSignalPct(generalSignal) : null;
+        const playerSample = playerSignal ? combinedSafeSample(playerSignal.opportunities) : 0;
+        const generalSample = generalSignal ? combinedSafeSample(generalSignal.opportunities) : 0;
+        const comboScore = calculateCombinedCorrelationScore(playerPct, generalPct, hitScore, playerSample, generalSample);
+        return comboScore * 1.6 + p * 45 + projectedHits * 5 + confidence * .10;
+      }
+
       return p * 95 + hitScore * .85 + confidence * .35 + projectedHits * 10 + delta * 350 + orderBonus;
     }
 
     function eligibleParlayRows() {
-      return currentRows
+      const source = Array.isArray(currentRows) && currentRows.length
+        ? currentRows
+        : combinedCandidateRows();
+
+      return source
         .filter(row => {
           const p = toNum(row.one_plus_hit_probability);
           if (p === null || p <= 0 || p >= 1) return false;
-          if (hideStartedGames && !isFutureEligibleGame(row)) return false;
+          if (hideStartedGames && !isFutureEligibleGame(row)) {
+            // If there are no future/current rows left, let the parlay builder use
+            // loaded model rows anyway so correlation strategies do not go blank.
+            const hasFuture = (allRows || []).some(r => isFutureEligibleGame(r));
+            if (hasFuture) return false;
+          }
           return true;
         });
     }
 
+    function parlayStrategyLabel(strategy) {
+      if (strategy === "probability") return "Highest Probability";
+      if (strategy === "score") return "Highest Hit Score";
+      if (strategy === "confidence") return "Highest Confidence";
+      if (strategy === "value") return "Best Fair Value";
+      if (strategy === "playerSpecific") return "Best Player-Specific Correlations";
+      if (strategy === "combinedCorrelation") return "Combined Correlation Plays";
+      return "Balanced Score";
+    }
+
+    function parlayPoolForStrategy(strategy) {
+      if (strategy === "playerSpecific") {
+        return bestPlayerSpecificCorrelationRows(9999)
+          .filter(item => {
+            const p = toNum(item.row.one_plus_hit_probability);
+            return p !== null && p > 0 && p < 1;
+          })
+          .map((item, index) => ({
+            row: item.row,
+            index,
+            score: item.score + num(item.row.one_plus_hit_probability) * 35 + num(item.row.hit_score) * .25,
+            sourceLabel: item.isFallback ? "Player fallback" : "Player-specific"
+          }));
+      }
+
+      if (strategy === "combinedCorrelation") {
+        return buildCombinedCorrelationRows()
+          .filter(item => {
+            const p = toNum(item.row.one_plus_hit_probability);
+            return p !== null && p > 0 && p < 1;
+          })
+          .map((item, index) => ({
+            row: item.row,
+            index,
+            score: item.comboScore * 1.6 + num(item.row.one_plus_hit_probability) * 45 + num(item.row.projected_hits) * 5 + num(item.row.confidence_score) * .10,
+            sourceLabel: `Combo ${item.comboScore}`
+          }));
+      }
+
+      return eligibleParlayRows()
+        .map((row, index) => ({ row, index, score: parlayLegScore(row, strategy), sourceLabel: parlayStrategyLabel(strategy) }));
+    }
+
     function makeModelParlays(legCount, strategy, maxSameTeam) {
-      const pool = eligibleParlayRows()
-        .map((row, index) => ({ row, index, score: parlayLegScore(row, strategy) }))
+      const pool = parlayPoolForStrategy(strategy)
         .sort((a, b) => b.score - a.score);
 
       const parlays = [];
@@ -8526,11 +8600,11 @@ const COLUMN_TOOLTIPS = {
       const parlays = makeModelParlays(legCount, strategy, maxSameTeam);
 
       if (!parlays.length) {
-        grid.innerHTML = `<div class="parlay-card"><div class="parlay-card-title">No model parlays available</div><div class="parlay-note">Try lowering filters or selecting fewer legs.</div></div>`;
+        grid.innerHTML = `<div class="parlay-card"><div class="parlay-card-title">No ${parlayStrategyLabel(strategy)} parlays available</div><div class="parlay-note">Try fewer legs, raise Max Same Team, or refresh after model rows load.</div></div>`;
         return;
       }
 
-      grid.innerHTML = parlays.map((rows, i) => parlayCardHtml(rows, `Model Parlay ${i + 1}`)).join("");
+      grid.innerHTML = parlays.map((rows, i) => parlayCardHtml(rows, `${parlayStrategyLabel(strategy)} Parlay ${i + 1}`)).join("");
     }
 
     function toggleManualParlay(rowKey) {
@@ -8591,7 +8665,7 @@ const COLUMN_TOOLTIPS = {
 
       const search = String(document.getElementById("parlaySearch")?.value || "").toLowerCase().trim();
       const rows = eligibleParlayRows()
-        .map((row, index) => ({ row, index, key: getRowKey(row, index), score: parlayLegScore(row, "balanced") }))
+        .map((row, index) => ({ row, index, key: getRowKey(row, index), score: parlayLegScore(row, document.getElementById("parlayStrategy")?.value || "balanced") }))
         .filter(item => {
           if (!search) return true;
           const haystack = `${item.row.player || ""} ${item.row.team || ""} ${formatOpponent(item.row)} ${item.row.opp_pitcher || ""}`.toLowerCase();
