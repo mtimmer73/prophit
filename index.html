@@ -7593,7 +7593,7 @@ const COLUMN_TOOLTIPS = {
     }
 
     function bestPlayerSpecificCorrelationRows(limit = 5) {
-      const rows = (allRows || []).filter(row => isFutureEligibleGame(row));
+      const rows = combinedCandidateRows();
       const seen = new Set();
 
       return rows.map((row) => {
@@ -7665,7 +7665,9 @@ const COLUMN_TOOLTIPS = {
 
       const avgHitRate = cards.reduce((sum, item) => sum + (item.signal.hitRate || 0), 0) / cards.length;
       const totalOpps = cards.reduce((sum, item) => sum + (item.signal.opportunities || 0), 0);
-      summary.textContent = `Showing the top ${cards.length} same-player correlation signals today. Average signal hit rate: ${fmtPct(avgHitRate)} across ${totalOpps} matched player-specific graded opportunities.`;
+      const candidateCount = combinedCandidateRows().length;
+      const futureCount = (allRows || []).filter(row => isFutureEligibleGame(row)).length;
+      summary.textContent = `Showing the top ${cards.length} player signal cards from ${candidateCount} loaded model row(s). Future rows: ${futureCount}. Average real signal hit rate: ${fmtPct(avgHitRate)} across ${totalOpps} matched player-specific graded opportunities. Fallback cards stay visible when close same-player matches are missing.`;
 
       grid.innerHTML = cards.map((item, index) => {
         const row = item.row;
@@ -7712,7 +7714,7 @@ const COLUMN_TOOLTIPS = {
               <span class="correlation-pill">${item.historyCount} graded rows</span>
               <span class="correlation-pill">Proj ${fmtNum(row.projected_hits, 2)}</span>
               <span class="correlation-pill">Fair ${fmtOdds(getFairOdds(row))}</span>
-              <span class="correlation-pill">${signal.source === "direct" ? "Model Output" : "Derived"}</span>
+              <span class="correlation-pill">${signal.source === "fallback" ? "Fallback" : (signal.source === "direct" ? "Model Output" : "Derived")}</span>
             </div>
             <div class="player-correlation-reason">${signal.reason || "Matched today's row against this player's prior graded PropHit profiles."}</div>
             ${openButton}
@@ -8004,6 +8006,24 @@ const COLUMN_TOOLTIPS = {
         .trim();
     }
 
+    function combinedCandidateRows() {
+      const source = Array.isArray(allRows) ? allRows : [];
+      if (!source.length) return [];
+
+      // First choice: true upcoming games.
+      const futureRows = source.filter(row => isFutureEligibleGame(row));
+      if (futureRows.length) return futureRows;
+
+      // Second choice: whatever the main board currently has visible.
+      // This prevents the combo panels from going blank late at night when every game is marked started/final.
+      if (Array.isArray(currentRows) && currentRows.length) return currentRows;
+
+      // Last choice: use the latest loaded model rows anyway.
+      // Correlation sections should never be blank just because games are started/frozen.
+      return source;
+    }
+
+
     function combinedGetHitScore(row) {
       return combinedClampScore(
         row?.hitScore ??
@@ -8186,7 +8206,7 @@ const COLUMN_TOOLTIPS = {
     }
 
     function buildCombinedCorrelationRows() {
-      const rows = (allRows || []).filter(row => isFutureEligibleGame(row));
+      const rows = combinedCandidateRows();
       const seen = new Set();
       const output = [];
 
@@ -8272,20 +8292,22 @@ const COLUMN_TOOLTIPS = {
       const visibleRows = combinedCorrelationMode === "all" ? rows : rows.slice(0, 5);
       const gradedCount = (validationRows || []).filter(row => gradedHitValue(row) !== null).length;
       const totalFuture = (allRows || []).filter(row => isFutureEligibleGame(row)).length;
+      const candidateCount = combinedCandidateRows().length;
+      const loadedCount = (allRows || []).length;
 
       if (!rows.length) {
         cardsEl.innerHTML = "";
-        tableBody.innerHTML = `<tr><td colspan="14">No combined plays meet the current Min Combo. Lower Min Combo to 45–50 to show more model-fallback plays.</td></tr>`;
+        tableBody.innerHTML = `<tr><td colspan="14">No combined plays meet the current Min Combo. If loaded model rows are 0, the live JSON did not load. If loaded rows exist, lower Min Combo or clear main board filters.</td></tr>`;
         summary.textContent = gradedCount
-          ? `No combined plays match Min Combo yet, but ${gradedCount} graded rows and ${totalFuture} current rows are loaded. Missing correlations are now fallback-scored instead of hidden.`
-          : "Current rows are loaded, but graded validation history has not loaded yet. Missing correlations will still use fallback scoring once today rows are available.";
+          ? `No combined plays match Min Combo yet, but ${gradedCount} graded rows, ${loadedCount} loaded model rows, and ${candidateCount} combo candidate rows are available. Future rows: ${totalFuture}. Missing correlations are fallback-scored instead of hidden.`
+          : `Loaded model rows: ${loadedCount}. Combo candidate rows: ${candidateCount}. Graded validation history has not loaded yet, but fallback scoring still works from today's Hit Score.`;
         return;
       }
 
       const avgCombo = rows.reduce((sum, item) => sum + item.comboScore, 0) / rows.length;
       const fallbackCount = rows.filter(item => !item.playerSignal || !item.generalSignal).length;
       const parlayCount = rows.filter(item => item.risk === "Parlay eligible").length;
-      summary.textContent = `Showing ${visibleRows.length} of ${rows.length} combined plays. Average Combo Score: ${fmtNum(avgCombo, 1)}. Fallback used on ${fallbackCount}. Parlay eligible: ${parlayCount}.`;
+      summary.textContent = `Showing ${visibleRows.length} of ${rows.length} combined plays from ${candidateCount} candidate row(s). Loaded model rows: ${loadedCount}. Future rows: ${totalFuture}. Average Combo Score: ${fmtNum(avgCombo, 1)}. Fallback used on ${fallbackCount}. Parlay eligible: ${parlayCount}.`;
 
       cardsEl.innerHTML = rows.slice(0, 5).map((item, index) => {
         const row = item.row;
