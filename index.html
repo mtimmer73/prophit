@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>PropHit Board</title>
+<style>
+  :root{
+    --bg:#07111f;
+    --panel:#0a1526;
+    --panel-2:#0e1d33;
+    --line:#19324f;
+    --line-soft:#122942;
+    --text:#d7e3f2;
+    --muted:#8da3bd;
+    --cyan:#58d5ff;
+    --blue:#48a7ff;
+    --green:#12f0bd;
+    --yellow:#ffc400;
+    --red:#ff416c;
+    --purple:#ab7cff;
+    --sticky-shadow:12px 0 24px rgba(0,0,0,.26);
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+  body{min-height:100vh}
+
+  .app-shell{padding:14px}
+  .toolbar{
+    display:flex;gap:10px;align-items:center;flex-wrap:wrap;
+    padding:12px;border:1px solid var(--line);background:linear-gradient(180deg,#0d1b30,#091526);
+    border-radius:14px 14px 0 0;
+  }
+  .brand{font-weight:900;letter-spacing:.8px;color:#fff;margin-right:10px}
+  .brand span{color:var(--cyan)}
+  .search,.select,.range-wrap{
+    background:#07111f;border:1px solid var(--line);color:var(--text);border-radius:9px;
+    min-height:38px;padding:0 11px;
+  }
+  .search{min-width:240px;outline:none}
+  .select{outline:none}
+  .range-wrap{display:flex;align-items:center;gap:8px}
+  .range-wrap input{width:110px}
+  .count{margin-left:auto;color:var(--muted);font-size:13px}
+  .reset{
+    border:1px solid #28517d;background:#0c2139;color:#b9ddff;border-radius:9px;
+    min-height:38px;padding:0 13px;font-weight:800;cursor:pointer
+  }
+  .reset:hover{background:#123052}
+
+  .board-wrap{
+    border:1px solid var(--line);border-top:0;border-radius:0 0 14px 14px;
+    overflow:auto;max-height:calc(100vh - 100px);background:#07111f;
+  }
+
+  table{border-collapse:separate;border-spacing:0;min-width:1900px;width:100%}
+  thead th{
+    position:sticky;top:0;z-index:5;
+    background:#102447;color:#eaf4ff;font-size:11px;letter-spacing:1px;
+    text-transform:uppercase;padding:13px 10px;border-bottom:1px solid #24466d;
+    white-space:nowrap;cursor:pointer;user-select:none;
+  }
+  thead th:hover{background:#15305b}
+  tbody td{
+    background:#091426;padding:10px;border-bottom:1px solid var(--line-soft);
+    font-size:13px;white-space:nowrap;height:53px;
+  }
+  tbody tr:nth-child(even) td{background:#0a1629}
+  tbody tr:hover td{background:#0d1e36}
+  tbody tr.is-pinned td{background:#0e2038}
+
+  .sticky-1,.sticky-2,.sticky-3,.sticky-4,.sticky-5{
+    position:sticky;z-index:3;
+  }
+  thead .sticky-1, thead .sticky-2, thead .sticky-3, thead .sticky-4, thead .sticky-5{z-index:7}
+  .sticky-1{left:0;width:70px;min-width:70px}
+  .sticky-2{left:70px;width:240px;min-width:240px}
+  .sticky-3{left:310px;width:72px;min-width:72px}
+  .sticky-4{left:382px;width:76px;min-width:76px}
+  .sticky-5{left:458px;width:75px;min-width:75px;box-shadow:var(--sticky-shadow)}
+
+  .pin-btn{
+    border:1px solid #27517b;background:#071827;color:#b8d7f5;border-radius:999px;
+    padding:7px 10px;font-weight:900;font-size:11px;letter-spacing:.8px;cursor:pointer
+  }
+  .pin-btn.active{color:#07111f;background:var(--cyan);border-color:var(--cyan)}
+  .player-cell,.pitcher-cell{font-weight:900;color:#72d9ff}
+  .player-row{display:flex;align-items:center;gap:8px}
+  .name{overflow:hidden;text-overflow:ellipsis;max-width:126px}
+  .signal{
+    color:#cceeff;border:1px solid #205781;background:#0b2941;border-radius:999px;
+    padding:3px 7px;font-size:9px;font-weight:900
+  }
+  .badges{display:inline-flex;gap:5px;margin-left:auto}
+  .badge{
+    width:22px;height:22px;border-radius:999px;display:inline-flex;align-items:center;justify-content:center;
+    font-size:10px;font-weight:900;color:white
+  }
+  .badge.m{background:#2a8fe8}.badge.b{background:#24b96f}
+  .num{text-align:center;font-variant-numeric:tabular-nums}
+  .good{color:var(--green)} .mid{color:var(--blue)} .warn{color:var(--yellow)} .bad{color:var(--red)}
+  .delta.pos{color:var(--green)} .delta.neg{color:var(--red)} .delta.flat{color:var(--yellow)}
+  .sort-indicator{margin-left:4px;color:#8db3d9}
+
+  .tooltip{
+    position:fixed;pointer-events:none;opacity:0;transition:opacity .12s;
+    background:#06101d;border:1px solid #2a527a;color:#dcecff;border-radius:8px;
+    padding:8px 10px;font-size:12px;max-width:260px;z-index:50;box-shadow:0 10px 25px rgba(0,0,0,.35)
+  }
+
+  @media (max-width:900px){
+    .app-shell{padding:0}
+    .toolbar{border-radius:0}
+    .board-wrap{border-radius:0;max-height:calc(100vh - 130px)}
+    .search{min-width:180px;flex:1}
+    .count{width:100%;margin-left:0}
+  }
+</style>
+</head>
+<body>
+<div class="app-shell">
+  <div class="toolbar">
+    <div class="brand">PROP<span>HIT</span> BOARD</div>
+    <input id="search" class="search" placeholder="Search player, team, opponent, pitcher..." />
+    <select id="teamFilter" class="select">
+      <option value="">All teams</option>
+    </select>
+    <select id="handFilter" class="select">
+      <option value="">All pitcher hands</option>
+      <option value="R">vs RHP</option>
+      <option value="L">vs LHP</option>
+    </select>
+    <div class="range-wrap" title="Minimum projected 1+ hit probability">
+      <span>Min 1+ Hit</span>
+      <input id="hitRange" type="range" min="50" max="90" value="50" />
+      <strong id="hitRangeLabel">50%</strong>
+    </div>
+    <button id="reset" class="reset">Reset</button>
+    <div id="count" class="count"></div>
+  </div>
+
+  <div class="board-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th class="sticky-1" data-key="pinned">Pin</th>
+          <th class="sticky-2" data-key="player">Player <span class="sort-indicator">↕</span></th>
+          <th class="sticky-3" data-key="team">Team <span class="sort-indicator">↕</span></th>
+          <th class="sticky-4" data-key="opp">Opp <span class="sort-indicator">↕</span></th>
+          <th class="sticky-5" data-key="time">Time <span class="sort-indicator">↕</span></th>
+          <th data-key="bats">Bats <span class="sort-indicator">↕</span></th>
+          <th data-key="pitcher">Pitcher <span class="sort-indicator">↕</span></th>
+          <th data-key="hand">Hand <span class="sort-indicator">↕</span></th>
+          <th data-key="ab" data-tip="Projected plate appearances / at-bats available for the hitter.">AB <span class="sort-indicator">↕</span></th>
+          <th data-key="hits" data-tip="Model-projected hits.">Hits <span class="sort-indicator">↕</span></th>
+          <th data-key="delta" data-tip="Difference between projected batting average and the hitter's baseline.">Δ Avg <span class="sort-indicator">↕</span></th>
+          <th data-key="l30" data-tip="Percentage of the hitter's last 30 starts with at least one hit.">L30 Hit% <span class="sort-indicator">↕</span></th>
+          <th data-key="splitAvg" data-tip="Three-year batting average versus the pitcher's handedness.">Split Avg <span class="sort-indicator">↕</span></th>
+          <th data-key="pbaa" data-tip="Starting pitcher's batting average allowed versus the hitter's handedness. Higher is better for the hitter.">P BAA <span class="sort-indicator">↕</span></th>
+          <th data-key="contact" data-tip="Hitter contact rate versus the pitcher's handedness when available.">Contact% <span class="sort-indicator">↕</span></th>
+          <th data-key="hitProb">1+ Hit <span class="sort-indicator">↕</span></th>
+          <th data-key="fairOdds">Fair Odds <span class="sort-indicator">↕</span></th>
+          <th data-key="hitScore">Hit Score <span class="sort-indicator">↕</span></th>
+          <th data-key="confScore">Conf Score <span class="sort-indicator">↕</span></th>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+</div>
+
+<div id="tooltip" class="tooltip"></div>
+
+<script>
+const players = [
+  {player:"Joshua Kurland",team:"ATH",opp:"WSH",time:"9:40 PM",bats:"R",pitcher:"Cade Cavalli",hand:"R",ab:3.95,hits:1.63,delta:-.010,l30:80.4,splitAvg:.301,pbaa:.281,contact:84.7,hitProb:80.4,fairOdds:-409,hitScore:97.1,confScore:40},
+  {player:"Ernie Clement",team:"TOR",opp:"CWS",time:"7:15 PM",bats:"R",pitcher:"Anthony Kay",hand:"L",ab:4.67,hits:1.38,delta:0,l30:74.9,splitAvg:.284,pbaa:.269,contact:88.1,hitProb:74.9,fairOdds:-299,hitScore:88.1,confScore:94},
+  {player:"Mickey Moniak",team:"COL",opp:"CIN",time:"8:40 PM",bats:"L",pitcher:"Brady Singer",hand:"R",ab:4.43,hits:1.36,delta:.030,l30:74.3,splitAvg:.278,pbaa:.257,contact:77.3,hitProb:74.3,fairOdds:-290,hitScore:86.6,confScore:91},
+  {player:"TJ Rumfield",team:"COL",opp:"CIN",time:"8:40 PM",bats:"L",pitcher:"Brady Singer",hand:"R",ab:4.01,hits:1.35,delta:.042,l30:74.2,splitAvg:.292,pbaa:.257,contact:75.8,hitProb:74.2,fairOdds:-288,hitScore:79.4,confScore:54},
+  {player:"Jake McCarthy",team:"COL",opp:"CIN",time:"8:40 PM",bats:"L",pitcher:"Brady Singer",hand:"R",ab:4.56,hits:1.34,delta:-.008,l30:73.7,splitAvg:.263,pbaa:.257,contact:81.2,hitProb:73.7,fairOdds:-280,hitScore:66.7,confScore:81},
+  {player:"Yandy Díaz",team:"TB",opp:"@BOS",time:"1:35 PM",bats:"R",pitcher:"Jake Bennett",hand:"L",ab:4.00,hits:1.32,delta:.010,l30:73.4,splitAvg:.322,pbaa:.277,contact:89.3,hitProb:73.4,fairOdds:-276,hitScore:92.2,confScore:92},
+  {player:"Trevor Larnach",team:"MIN",opp:"@CHC",time:"8:05 PM",bats:"L",pitcher:"Colin Rea",hand:"R",ab:4.48,hits:1.32,delta:.007,l30:73.4,splitAvg:.274,pbaa:.248,contact:78.5,hitProb:73.4,fairOdds:-276,hitScore:75.8,confScore:87},
+  {player:"Brewer Hicklen",team:"ATL",opp:"TEX",time:"7:15 PM",bats:"R",pitcher:"Cal Quantrill",hand:"R",ab:3.42,hits:1.29,delta:-.123,l30:72.5,splitAvg:.231,pbaa:.272,contact:69.8,hitProb:72.5,fairOdds:-263,hitScore:63.0,confScore:28},
+  {player:"Fernando Tatis Jr.",team:"SD",opp:"@KC",time:"8:10 PM",bats:"R",pitcher:"Seth Lugo",hand:"R",ab:4.57,hits:1.28,delta:.004,l30:72.2,splitAvg:.289,pbaa:.244,contact:80.4,hitProb:72.2,fairOdds:-260,hitScore:79.5,confScore:96},
+  {player:"Vladimir Guerrero Jr.",team:"TOR",opp:"CWS",time:"7:15 PM",bats:"R",pitcher:"Anthony Kay",hand:"L",ab:4.13,hits:1.24,delta:.039,l30:71.2,splitAvg:.315,pbaa:.269,contact:90.1,hitProb:71.2,fairOdds:-247,hitScore:87.5,confScore:87},
+  {player:"Pete Alonso",team:"NYM",opp:"PHI",time:"7:10 PM",bats:"R",pitcher:"Ranger Suárez",hand:"L",ab:4.21,hits:1.21,delta:.015,l30:70.6,splitAvg:.286,pbaa:.251,contact:76.9,hitProb:70.6,fairOdds:-240,hitScore:78.2,confScore:90},
+  {player:"Bobby Witt Jr.",team:"KC",opp:"SD",time:"8:10 PM",bats:"R",pitcher:"Michael King",hand:"R",ab:4.69,hits:1.31,delta:.012,l30:76.7,splitAvg:.302,pbaa:.239,contact:83.6,hitProb:76.7,fairOdds:-329,hitScore:90.4,confScore:95}
+].map((p,i)=>({...p,id:i,pinned:false}));
+
+let sortKey = "hitProb";
+let sortDir = -1;
+
+const tbody = document.getElementById("tbody");
+const search = document.getElementById("search");
+const teamFilter = document.getElementById("teamFilter");
+const handFilter = document.getElementById("handFilter");
+const hitRange = document.getElementById("hitRange");
+const hitRangeLabel = document.getElementById("hitRangeLabel");
+const count = document.getElementById("count");
+
+[...new Set(players.map(p=>p.team))].sort().forEach(t=>{
+  const o=document.createElement("option"); o.value=t;o.textContent=t;teamFilter.appendChild(o);
+});
+
+function cls(value, thresholds, inverse=false){
+  const [g,b,y] = thresholds;
+  if(!inverse){
+    if(value>=g)return "good"; if(value>=b)return "mid"; if(value>=y)return "warn"; return "bad";
+  } else {
+    if(value<=g)return "good"; if(value<=b)return "mid"; if(value<=y)return "warn"; return "bad";
+  }
+}
+function fmtAvg(v){return v.toFixed(3).replace(/^0/,"")}
+function render(){
+  const q=search.value.toLowerCase().trim();
+  const minHit=Number(hitRange.value);
+  let rows=players.filter(p=>{
+    const hay=[p.player,p.team,p.opp,p.pitcher].join(" ").toLowerCase();
+    return (!q||hay.includes(q)) &&
+           (!teamFilter.value||p.team===teamFilter.value) &&
+           (!handFilter.value||p.hand===handFilter.value) &&
+           p.hitProb>=minHit;
+  });
+
+  rows.sort((a,b)=>{
+    if(a.pinned!==b.pinned) return a.pinned ? -1 : 1;
+    let av=a[sortKey], bv=b[sortKey];
+    if(typeof av==="string"){av=av.toLowerCase();bv=bv.toLowerCase()}
+    return av>bv?sortDir:av<bv?-sortDir:0;
+  });
+
+  tbody.innerHTML=rows.map(p=>`
+    <tr class="${p.pinned?"is-pinned":""}">
+      <td class="sticky-1"><button class="pin-btn ${p.pinned?"active":""}" data-pin="${p.id}">${p.pinned?"PINNED":"| PIN"}</button></td>
+      <td class="sticky-2 player-cell">
+        <div class="player-row">
+          <span class="name" title="${p.player}">${p.player}</span>
+          <span class="signal">Signals</span>
+          <span class="badges"><span class="badge m">M</span><span class="badge b">B</span></span>
+        </div>
+      </td>
+      <td class="sticky-3">${p.team}</td>
+      <td class="sticky-4">${p.opp}</td>
+      <td class="sticky-5">${p.time}</td>
+      <td class="num">${p.bats}</td>
+      <td class="pitcher-cell">${p.pitcher}</td>
+      <td class="num">${p.hand}</td>
+      <td class="num ${cls(p.ab,[4.5,4.1,3.7])}">${p.ab.toFixed(2)}</td>
+      <td class="num">${p.hits.toFixed(2)}</td>
+      <td class="num delta ${p.delta>0?"pos":p.delta<0?"neg":"flat"}">${p.delta>=0?"+":""}${p.delta.toFixed(3)}</td>
+      <td class="num ${cls(p.l30,[73,63,55])}">${p.l30.toFixed(1)}%</td>
+      <td class="num ${cls(p.splitAvg,[.290,.260,.235])}">${fmtAvg(p.splitAvg)}</td>
+      <td class="num ${cls(p.pbaa,[.270,.245,.220])}">${fmtAvg(p.pbaa)}</td>
+      <td class="num ${cls(p.contact,[82,77,72])}">${p.contact.toFixed(1)}%</td>
+      <td class="num ${cls(p.hitProb,[74,68,62])}">${p.hitProb.toFixed(1)}%</td>
+      <td class="num">${p.fairOdds>0?"+":""}${p.fairOdds}</td>
+      <td class="num ${cls(p.hitScore,[85,75,65])}">${p.hitScore.toFixed(1)}</td>
+      <td class="num ${cls(p.confScore,[90,75,55])}">${p.confScore}</td>
+    </tr>
+  `).join("");
+
+  document.querySelectorAll("[data-pin]").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const p=players.find(x=>x.id===Number(btn.dataset.pin));
+      p.pinned=!p.pinned;render();
+    });
+  });
+  count.textContent=`Showing ${rows.length} of ${players.length} hitters`;
+}
+
+document.querySelectorAll("th[data-key]").forEach(th=>{
+  th.addEventListener("click",()=>{
+    const key=th.dataset.key;
+    if(key==="pinned") return;
+    if(sortKey===key) sortDir*=-1; else {sortKey=key;sortDir=-1}
+    render();
+  });
+});
+
+[search,teamFilter,handFilter].forEach(el=>el.addEventListener("input",render));
+hitRange.addEventListener("input",()=>{hitRangeLabel.textContent=hitRange.value+"%";render()});
+document.getElementById("reset").addEventListener("click",()=>{
+  search.value="";teamFilter.value="";handFilter.value="";hitRange.value=50;hitRangeLabel.textContent="50%";
+  sortKey="hitProb";sortDir=-1;players.forEach(p=>p.pinned=false);render();
+});
+
+const tooltip=document.getElementById("tooltip");
+document.querySelectorAll("[data-tip]").forEach(el=>{
+  el.addEventListener("mouseenter",e=>{
+    tooltip.textContent=el.dataset.tip;tooltip.style.opacity=1;
+  });
+  el.addEventListener("mousemove",e=>{
+    tooltip.style.left=(e.clientX+14)+"px";tooltip.style.top=(e.clientY+14)+"px";
+  });
+  el.addEventListener("mouseleave",()=>tooltip.style.opacity=0);
+});
+
+render();
+</script>
+</body>
+</html>
