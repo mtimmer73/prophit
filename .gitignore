@@ -770,3 +770,8 @@ outputs/grades/*ledger*.json
 outputs/grades/graded_ledger.json
 outputs/grades/*graded_ledger*.json
 outputs/grades/*ledger*.json
+
+# PropHit grading raw ledgers can exceed GitHub's 100 MB file limit
+outputs/grades/graded_ledger.json
+outputs/grades/*graded_ledger*.json
+outputs/grades/*ledger*.json
