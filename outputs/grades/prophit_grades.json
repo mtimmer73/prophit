@@ -1,0 +1,24 @@
+[
+  {
+    "rank": 23,
+    "player": "Jordan Walker",
+    "team": "STL",
+    "opp": "WSH",
+    "projected_hits": 1.303,
+    "projected_total_bases": 0.0,
+    "projected_hr": 0.283,
+    "lineup_spot": 4.0,
+    "grade_date": "2026-08-27",
+    "graded_at": "2026-08-27T21:07:07.777636+00:00",
+    "actual_player_name": "Jordan Walker",
+    "actual_hits": 2,
+    "actual_at_bats": 4,
+    "actual_team": "STL",
+    "game_pk": 823014,
+    "line": 0.5,
+    "result": "HIT",
+    "is_hit": true,
+    "grader_version": "replacement-1.1",
+    "result_id": "2026-08-27:jordan_walker:stl"
+  }
+]
