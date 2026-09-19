@@ -4,9 +4,11 @@ on:
   workflow_dispatch:
 
   schedule:
-    # Runs daily. Adjust later if needed.
-    - cron: "5 15 * * *"
-
+    # 7:05 AM Eastern during daylight saving time
+    - cron: "5 11 * * *"
+    # Hourly, 11:05 AM–10:05 PM Eastern during daylight saving time
+    - cron: "5 15-23,0-2 * * *"
+    
 permissions:
   contents: write
   pages: write
