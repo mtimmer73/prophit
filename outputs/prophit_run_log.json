@@ -1,14 +1,5 @@
 [
   {
-    "run_timestamp_et": "2026-07-18 12:22:46 PM",
-    "target_date": "2026-07-18",
-    "players": 384,
-    "confirmed_starters": 72,
-    "real_split_rows": 384,
-    "thin_real_split_rows": 1,
-    "locked_rows": 0
-  },
-  {
     "run_timestamp_et": "2026-07-19 12:05:15 PM",
     "target_date": "2026-07-19",
     "players": 318,
@@ -898,5 +889,14 @@
     "real_split_rows": 105,
     "thin_real_split_rows": 0,
     "locked_rows": 0
+  },
+  {
+    "run_timestamp_et": "2026-09-30 03:54:45 PM",
+    "target_date": "2026-09-30",
+    "players": 93,
+    "confirmed_starters": 36,
+    "real_split_rows": 93,
+    "thin_real_split_rows": 0,
+    "locked_rows": 18
   }
 ]
