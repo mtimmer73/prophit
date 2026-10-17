@@ -1,15 +1,15 @@
 {
   "meta": {
     "model_name": "PropHit",
-    "last_model_run_et": "10/17/2026 01:23 AM ET",
-    "last_model_run_iso": "2026-10-17T01:23:04.867016-04:00",
+    "last_model_run_et": "10/17/2026 10:12 AM ET",
+    "last_model_run_iso": "2026-10-17T10:12:04.823109-04:00",
     "run_type": "manual_or_scheduled",
     "freeze_rule": "Started games remain frozen at their pregame projection."
   },
   "players": [
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 802415,
       "player": "Chandler Simpson",
@@ -180,7 +180,7 @@
         "team": "TB",
         "opp": "CLE",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": 0.12,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -244,17 +244,17 @@
       "row_key": "2026-10-17|849816|802415",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 650490,
       "player": "Yandy D\u00edaz",
@@ -425,7 +425,7 @@
         "team": "TB",
         "opp": "CLE",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": 0.12,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -490,17 +490,17 @@
       "row_key": "2026-10-17|849816|650490",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 691406,
       "player": "Junior Caminero",
@@ -671,7 +671,7 @@
         "team": "TB",
         "opp": "CLE",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": 0.12,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -736,17 +736,17 @@
       "row_key": "2026-10-17|849816|691406",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 689414,
       "player": "Liam Hicks",
@@ -917,7 +917,7 @@
         "team": "TB",
         "opp": "CLE",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": 0.12,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -982,17 +982,17 @@
       "row_key": "2026-10-17|849816|689414",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 666018,
       "player": "Jonathan Aranda",
@@ -1163,7 +1163,7 @@
         "team": "TB",
         "opp": "CLE",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": 0.12,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -1227,17 +1227,17 @@
       "row_key": "2026-10-17|849816|666018",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 663743,
       "player": "Nick Fortes",
@@ -1408,7 +1408,7 @@
         "team": "TB",
         "opp": "CLE",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": 0.12,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -1473,17 +1473,17 @@
       "row_key": "2026-10-17|849816|663743",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 676356,
       "player": "Jonny DeLuca",
@@ -1654,7 +1654,7 @@
         "team": "TB",
         "opp": "CLE",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": 0.12,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -1718,17 +1718,17 @@
       "row_key": "2026-10-17|849816|676356",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 680757,
       "player": "Steven Kwan",
@@ -1899,7 +1899,7 @@
         "team": "CLE",
         "opp": "TB",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": -0.03,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -1963,17 +1963,17 @@
       "row_key": "2026-10-17|849816|680757",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 800050,
       "player": "Chase DeLauter",
@@ -2144,7 +2144,7 @@
         "team": "CLE",
         "opp": "TB",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": -0.03,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -2206,17 +2206,17 @@
       "row_key": "2026-10-17|849816|800050",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 666176,
       "player": "Jo Adell",
@@ -2387,7 +2387,7 @@
         "team": "CLE",
         "opp": "TB",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": -0.03,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -2452,17 +2452,17 @@
       "row_key": "2026-10-17|849816|666176",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 663993,
       "player": "Nathaniel Lowe",
@@ -2633,7 +2633,7 @@
         "team": "CLE",
         "opp": "TB",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": -0.03,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -2695,17 +2695,17 @@
       "row_key": "2026-10-17|849816|663993",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 677587,
       "player": "Brayan Rocchio",
@@ -2876,7 +2876,7 @@
         "team": "CLE",
         "opp": "TB",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": -0.03,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -2941,17 +2941,17 @@
       "row_key": "2026-10-17|849816|677587",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 810938,
       "player": "Ben Williamson",
@@ -3122,7 +3122,7 @@
         "team": "TB",
         "opp": "CLE",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": 0.12,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -3185,17 +3185,17 @@
       "row_key": "2026-10-17|849816|810938",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 608070,
       "player": "Jos\u00e9 Ram\u00edrez",
@@ -3366,7 +3366,7 @@
         "team": "CLE",
         "opp": "TB",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": -0.03,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -3431,17 +3431,17 @@
       "row_key": "2026-10-17|849816|608070",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 683953,
       "player": "Travis Bazzana",
@@ -3612,7 +3612,7 @@
         "team": "CLE",
         "opp": "TB",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": -0.03,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -3678,17 +3678,17 @@
       "row_key": "2026-10-17|849816|683953",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 682657,
       "player": "Angel Mart\u00ednez",
@@ -3859,7 +3859,7 @@
         "team": "CLE",
         "opp": "TB",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": -0.03,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -3922,17 +3922,17 @@
       "row_key": "2026-10-17|849816|682657",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 622761,
       "player": "Jorge Mateo",
@@ -4103,7 +4103,7 @@
         "team": "TB",
         "opp": "CLE",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": 0.12,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -4166,17 +4166,17 @@
       "row_key": "2026-10-17|849816|622761",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 680700,
       "player": "Richie Palacios",
@@ -4347,7 +4347,7 @@
         "team": "TB",
         "opp": "CLE",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": 0.12,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -4410,17 +4410,17 @@
       "row_key": "2026-10-17|849816|680700",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 670764,
       "player": "Taylor Walls",
@@ -4591,7 +4591,7 @@
         "team": "TB",
         "opp": "CLE",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": 0.12,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -4654,17 +4654,17 @@
       "row_key": "2026-10-17|849816|670764",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 656775,
       "player": "Cedric Mullins",
@@ -4835,7 +4835,7 @@
         "team": "TB",
         "opp": "CLE",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": 0.12,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -4901,17 +4901,17 @@
       "row_key": "2026-10-17|849816|656775",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 672275,
       "player": "Patrick Bailey",
@@ -5082,7 +5082,7 @@
         "team": "CLE",
         "opp": "TB",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": -0.03,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -5147,17 +5147,17 @@
       "row_key": "2026-10-17|849816|672275",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 683748,
       "player": "Victor Mesa Jr.",
@@ -5328,7 +5328,7 @@
         "team": "TB",
         "opp": "CLE",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": 0.12,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -5394,17 +5394,17 @@
       "row_key": "2026-10-17|849816|683748",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 595978,
       "player": "Austin Hedges",
@@ -5575,7 +5575,7 @@
         "team": "CLE",
         "opp": "TB",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": -0.03,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -5639,17 +5639,17 @@
       "row_key": "2026-10-17|849816|595978",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 668723,
       "player": "Ryan Vilade",
@@ -5820,7 +5820,7 @@
         "team": "TB",
         "opp": "CLE",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": 0.12,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -5884,17 +5884,17 @@
       "row_key": "2026-10-17|849816|668723",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 681807,
       "player": "David Fry",
@@ -6065,7 +6065,7 @@
         "team": "CLE",
         "opp": "TB",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": -0.03,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -6130,17 +6130,17 @@
       "row_key": "2026-10-17|849816|681807",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 694197,
       "player": "Angel Genao",
@@ -6311,7 +6311,7 @@
         "team": "CLE",
         "opp": "TB",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": -0.03,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -6375,17 +6375,17 @@
       "row_key": "2026-10-17|849816|694197",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     },
     {
       "date": "2026-10-17",
-      "game_time_et": "8:00 PM",
+      "game_time_et": "8:08 PM",
       "game_pk": 849816,
       "player_id": 690984,
       "player": "Petey Halpin",
@@ -6556,7 +6556,7 @@
         "team": "CLE",
         "opp": "TB",
         "game_pk": 849816,
-        "game_time_et": "8:00 PM"
+        "game_time_et": "8:08 PM"
       },
       "home_away_pa_adjustment": -0.03,
       "projected_pa_base_lineup": 3.3200000000000003,
@@ -6622,11 +6622,11 @@
       "row_key": "2026-10-17|849816|690984",
       "game_started": false,
       "projection_status": "LIVE_REFRESH",
-      "last_refreshed_et": "2026-10-17 01:23:04 AM",
+      "last_refreshed_et": "2026-10-17 10:12:04 AM",
       "run_scope": "full_day_freeze_started_update_upcoming_et",
       "run_rule": "Full-day board: all projected players remain visible. Games that have started are frozen from the last saved pregame projection. Only games that have not started are refreshed on reruns.",
       "run_date_et": "2026-10-17",
-      "run_as_of_et": "2026-10-17T01:23:04.643002-04:00",
+      "run_as_of_et": "2026-10-17T10:12:04.635284-04:00",
       "model_refresh_window_et": "Hourly from 11:00 AM through 10:00 PM Eastern Time",
       "started_or_ineligible_games_preserved_from_freeze_count": 0
     }
