@@ -1,6 +1,6 @@
 {
-  "generated_at": "2026-10-25 19:52:00 ET",
-  "published_at": "2026-10-25 19:52:00 ET",
+  "generated_at": "2026-10-25 23:30:27 ET",
+  "published_at": "2026-10-25 23:30:27 ET",
   "model": "PropHit live MLB hits model",
   "mode": "live_json",
   "source_file": "data/prophit_all_players.json",
@@ -452,7 +452,7 @@
           "hit_rate": 100.0
         }
       ],
-      "last_updated": "2026-10-25 19:51:58 ET"
+      "last_updated": "2026-10-25 23:30:25 ET"
     }
   },
   "history": [
