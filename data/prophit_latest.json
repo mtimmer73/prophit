@@ -1,8 +1,8 @@
 {
   "meta": {
     "model_name": "PropHit",
-    "last_model_run_et": "10/29/2026 02:47 AM ET",
-    "last_model_run_iso": "2026-10-29T02:47:49.643300-04:00",
+    "last_model_run_et": "10/29/2026 01:24 PM ET",
+    "last_model_run_iso": "2026-10-29T13:24:00.652434-04:00",
     "run_type": "manual_or_scheduled",
     "freeze_rule": "Started games remain frozen at their pregame projection."
   },
